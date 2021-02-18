@@ -8,7 +8,19 @@
 </head>
 <body>
 	<%-- <jsp:include page=""></jsp:include> <!-- header --> --%>
-
+	<header>
+		<div id="login">
+			<a href="#">사이트 이름</a>
+			<input type="text" placeholder="찾고싶은 식당이나 지역을 검색하세요.">
+			<figure class="right">
+				<figcaption> 
+					<p><a href="#">로그인</a> | <a href="#">회원가입</a></p>
+				</figcaption>
+			</figure>
+		</div>
+	</header>
+	
+	
 	<div id="container">
 		<h1>회원가입</h1>
 		<form action="register.do" method="post">
@@ -29,5 +41,13 @@
 	</div>
 
 	<%-- <jsp:include page=""></jsp:include> <!-- footer --> --%>
+		<footer class="clear">
+		<ul>
+			<li>대충 대표 이름</li>
+			<li>전화번호 010-0000-0000</li>
+			<li>이메일 asdasdasd@sadasd.com</li>
+			
+		</ul>
+	</footer>
 </body>
 </html>
