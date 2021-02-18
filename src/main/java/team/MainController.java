@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MainController {
-  
 	@RequestMapping("/")
+	public String main() {
+		return "main";
+	}
+  
+	@RequestMapping("/login")
 	public String membership(HttpServletRequest request) {
 		return "login";
 	}
@@ -19,9 +23,5 @@ public class MainController {
 		return "register";
 	}
 	
-	@RequestMapping("/main")
-	public String main() {
-		return "main";
-	}
 
 }
