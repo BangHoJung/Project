@@ -12,5 +12,6 @@ public class TestClass {
 		System.out.println("동희테스트3");System.out.println("동희테스트444s44");
 		System.out.println("동희테스트3");System.out.println("동희테스트3");
 		System.out.println("이게마지막이길!ㅇ!?!?");
+		System.out.println("push test");
 	}
 }
