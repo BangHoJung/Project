@@ -17,6 +17,6 @@ public class TestClass {
 		System.out.println("push test3");
 		System.out.println("master - 1155 수정");
 		System.out.println("master - 1200 수정");
-		System.out.println("push test 4");
+		System.out.println("final push test");
 	}
 }
