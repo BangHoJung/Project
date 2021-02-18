@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style type="text/css">
+	#container{
+	width: 1200px;
+	height:600px;
+	margin:0 auto;
+	text-align: center;
+	}
+	form{
+		display: inline-block;
+		margin-top:100px;
+	}
+</style>
+<body>
+	<div id="container">
+		<h1>회원가입</h1>
+		<form action="register.do" method="post">
+			<label>아이디 <input type="text" name="id"></label>			
+			<label>암호 <input type="password" name="pass"></label>			
+			<label>이름 <input type="text" name="name"></label>			
+			<label>연락처 <input type="text" name="tel"></label>			
+			<label>주소 <input type="text" name="addr"></label>			
+			<label>선호하는 음식 카테고리
+				<select>
+					<option>한식</option>
+					<option>양식</option>
+					<option>중식</option>
+				</select>
+		 	</label>
+			<button type="submit">확인</button>
+		</form>
+	</div>
+
+</body>
+</html>
