@@ -133,4 +133,48 @@
 	footer ul{
 		list-style-type: none;
 	}
+	#container{
+	width: 700px;
+	margin:0 auto;
+	padding: 100px 50%;
+	text-align: center;
+	}
+	#container form{
+		margin-top:100px;
+	}
+	.background{
+ margin: 0 auto;
+ margin-top: 200px;
+ margin-bottom:200px;
+ width: 400px;
+ text-align:  center;
+ border: 1px solid #D5D5D5;
+ position: relative;
+ 
+}
+h3{
+text-align: center;
+margin: 30px;
+}
+.id, .pass {
+width: 300px;
+height: 40px;
+margin: 5px;
+border: none;
+border-bottom: 1px solid #D5D5D5;
+
+} 
+
+.btn{
+ width: 200px;
+ height: 50px;
+ margin: 10px;
+}
+.member{
+position: absolute;
+left: 10px;
+}
+.Find{
+text-align: right;
+}
 	
