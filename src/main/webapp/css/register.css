@@ -13,7 +13,7 @@
 		border: 1px solid black;
 		border-radius: 30px;
 	}
-	@media (max-width:600px){ /*가로 너비가 600px 이하*/
+	@media (max-width:1023px){ /*가로 너비가 1023px 이하 */
     #container {
     	width: 200px;
 		padding: 50%;
@@ -21,4 +21,4 @@
 		padding: 100px 50%;
 		text-align: center;
 	}
-}
+	}
