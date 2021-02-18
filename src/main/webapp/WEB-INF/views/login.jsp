@@ -1,68 +1,50 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="pc.css" media="screen and (min-width:1024px)">
-
+<meta charset="UTF-8">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>ë©”ì¸í˜ì´ì§€Â€</title>
 <style type="text/css">
-.background{
- margin: 0 auto;
- margin-top: 200px;
- width: 400px;
- text-align:  center;
- border: 1px solid #D5D5D5;
- position: relative;
- 
-}
-h3{
-text-align: center;
-margin: 30px;
-}
-.id, .pass {
-width: 300px;
-height: 40px;
-margin: 5px;
-border: none;
-border-bottom: 1px solid #D5D5D5;
+	*{
+		margin:0;
+		padding:0;
+	}
 
-} 
-
-.btn{
- width: 200px;
- height: 50px;
- margin: 10px;
-}
-.member{
-position: absolute;
-left: 10px;
-}
-.Find{
-text-align: right;
-}
 </style>
+<link rel="stylesheet" href="../css/pc2.css" media="screen and (max-width:1023px)">
+<link rel="stylesheet" href="../css/pc.css" media="screen and (min-width:1024px)">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#pop").html($(window).width());
+		$(window).resize(function() {
+			$("#pop").html($(window).width());
+		});		
+	});
+	
+
+</script>
 </head>
 <body>
+ <jsp:include page="header.jsp"></jsp:include>
 <div class="container col-xs-">
 <div class="background">
  
- <h3>Ãë¾÷½ÃÄÑ Á¶¸¦ ÀÌ¿ëÇÏ°í ½ÍÀ¸½Å°¡¿ä?¤¾¤¾</h3>
+ <h3>ì·¨ì—…ì‹œì¼œ ì¡°ë¥¼ ì´ìš©í•˜ê³  ì‹¶ìœ¼ì‹ ê°€ìš”?ã…ã…</h3>
  
  <form action="login">
 
-  <input type="text" name="id"  placeholder="¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" class="id" > <br>
- <input type="password" name="pass"  placeholder="ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" class="pass"> <br>
- <button type="submit" class="btn">·Î±×ÀÎ</button>
+  <input type="text" name="id"  placeholder="ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”" class="id" > <br>
+ <input type="password" name="pass"  placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”" class="pass"> <br>
+ <button type="submit" class="btn">ë¡œê·¸ì¸</button>
  
- <p class="member"> <a href="#"> È¸¿ø°¡ÀÔ </a></p>    <p class="Find"> <a href="#">¾ÆÀÌµğ Ã£±â </a>| <a href="#"> ºñ¹Ğ¹øÈ£ Ã£±â </a></p>
+ <p class="member"> <a href="register"> íšŒì›ê°€ì… </a></p>    <p class="Find"> <a href="#">ì•„ì´ë”” ì°¾ê¸° </a>| <a href="#"> ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° </a></p>
  </form>
  
 </div>
 </div>
+<jsp:include page="footer.jsp"></jsp:include> 
 </body>
 </html>

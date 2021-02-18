@@ -34,7 +34,7 @@
 			<input type="text" placeholder="찾고싶은 식당이나 지역을 검색하세요.">
 			<figure class="right">
 				<figcaption> 
-					<p><a href="#">로그인</a> | <a href="#">회원가입</a></p>
+					<p><a href="login">로그인</a> | <a href="register">회원가입</a></p>
 				</figcaption>
 			</figure>
 		</div>
@@ -49,7 +49,7 @@
 		</nav>
 		<div id="carousel" class="clear">
 			<a href="#">&lt;&lt;</a>
-			<img src="resource/img/house1.jpg">					
+			<img src="https://cdn.pixabay.com/photo/2014/10/19/20/59/hamburger-494706_960_720.jpg">					
 			<a href="#">&gt;&gt;</a>					
 		</div>
 		<div id="theme">
