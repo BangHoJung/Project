@@ -16,6 +16,8 @@ public class TestClass {
 		System.out.println("push test3");
 		System.out.println("master - 1155 수정");
 		System.out.println("master - 1200 수정");
+		System.out.println("final push test");
+		System.out.println("진짜 마지막 테스트");
 		System.out.println("나연2343");
 	}
 }
