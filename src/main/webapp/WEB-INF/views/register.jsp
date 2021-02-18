@@ -1,13 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" type="text/css" href="/css/register.css">
 </head>
 <body>
-	<jsp:include page=""></jsp:include> <!-- header -->
+	<%-- <jsp:include page=""></jsp:include> <!-- header --> --%>
 
 	<div id="container">
 		<h1>회원가입</h1>
@@ -28,6 +28,6 @@
 		</form>
 	</div>
 
-	<jsp:include page=""></jsp:include> <!-- footer -->
+	<%-- <jsp:include page=""></jsp:include> <!-- footer --> --%>
 </body>
 </html>

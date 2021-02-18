@@ -13,6 +13,15 @@ public class MainController {
 	public String membership(HttpServletRequest request) {
 		return "login";
 	}
-public class MainController {
+	
+	@RequestMapping("/register")
+	public String register() {
+		return "register";
+	}
+	
+	@RequestMapping("/main")
+	public String main() {
+		return "main";
+	}
 
 }
