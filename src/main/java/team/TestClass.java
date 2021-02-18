@@ -9,7 +9,6 @@ public class TestClass {
 		System.out.println("nayeon");
 		System.out.println("김형석");
 		System.out.println("동희");
-		System.out.println("동희테스트3");System.out.println("동희테스트444s44");
 		System.out.println("동희테스트3");System.out.println("동희테스트3");
 		System.out.println("이게마지막이길!ㅇ!?!?");
 		System.out.println("push test");
@@ -19,5 +18,6 @@ public class TestClass {
 		System.out.println("master - 1200 수정");
 		System.out.println("final push test");
 		System.out.println("진짜 마지막 테스트");
+		System.out.println("나연2343");
 	}
 }
