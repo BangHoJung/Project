@@ -8,5 +8,6 @@ public class TestClass {
 		System.out.println("nayeon");
 		System.out.println("김형석");
 		System.out.println("동희");
+		System.out.println("동희테스트2");
 	}
 }
