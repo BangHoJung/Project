@@ -14,5 +14,6 @@ public class TestClass {
 		System.out.println("이게마지막이길!ㅇ!?!?");
 		System.out.println("push test");
 		System.out.println("push test2");
+		System.out.println("push test3");
 	}
 }
