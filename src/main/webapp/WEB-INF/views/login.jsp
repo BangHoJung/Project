@@ -12,6 +12,28 @@
 		padding:0;
 	}
 
+} 
+
+.btn{
+ width: 200px;
+ height: 50px;
+ margin: 10px;
+}
+.member{
+position: absolute;
+left: 10px;
+}
+.Find{
+text-align: right;
+}
+
+ :hover,:visited{
+color: black;
+text-decoration: none;
+}
+:active {
+	text-decoration: none;
+}
 </style>
 <link rel="stylesheet" href="../css/pc2.css" media="screen and (max-width:1023px)">
 <link rel="stylesheet" href="../css/pc.css" media="screen and (min-width:1024px)">
