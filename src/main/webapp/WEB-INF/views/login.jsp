@@ -45,6 +45,14 @@ left: 10px;
 .Find{
 text-align: right;
 }
+
+ :hover,:visited{
+color: black;
+text-decoration: none;
+}
+:active {
+	text-decoration: none;
+}
 </style>
 </head>
 <body>
