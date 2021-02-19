@@ -30,8 +30,8 @@ public class MemberService {
 		return mapper.selectAddress(map);
 	}
 	
-	public int insertMember(MemberDTO memberDTO) {
-		int count = mapper.insertMember(memberDTO);
+	public int registerAction(MemberDTO dto) {
+		int count = mapper.insertMember(dto);
 		return count;
 	}
 
