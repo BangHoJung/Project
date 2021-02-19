@@ -29,6 +29,11 @@ public class MemberService {
 	       map.put("addressNo", addressNo);
 		return mapper.selectAddress(map);
 	}
+	
+	public int insertMember(MemberDTO memberDTO) {
+		int count = mapper.insertMember(memberDTO);
+		return count;
+	}
 
 	
 	

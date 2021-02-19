@@ -3,13 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.mapper.MemberMapper">
-	<select id="loginMember" parameterType="map"
-		resultType="team.dto.MemberDTO">
+	<select id="loginMember" parameterType="map" resultType="member">
 		select * from member where member_id=#{id} and member_pass=#{pass}
 	</select>
-	<select id="selectAddress" parameterType="map"
-		resultType="String">
-		select address_text from member_address where address_member_id=#{id} and
+	<select id="selectAddress" parameterType="map" resultType="String">
+		select address_text from member_address where address_member_id=#{id} and 
 		address_no=#{addressNo}
 	</select>
 </mapper>
