@@ -39,7 +39,7 @@
 			<a href="main" id="logo"><img src="https://cdn.pixabay.com/photo/2013/10/07/10/30/eat-191902_960_720.jpg"></a>
 			<input type="text" placeholder="찾고싶은 식당이나 지역을 검색하세요." >
 			<div class="right">
-					<p><a href="login">로그인</a> | <a href="register">회원가입</a></p>
+					<p><a href="login">로그인</a> | <a href="register">회원가입</a></p>
 			</div>
 		</div>
 	</header>
