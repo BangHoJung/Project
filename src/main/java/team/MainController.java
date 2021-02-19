@@ -81,7 +81,7 @@ public class MainController {
 		int count = 0;
 		JSONObject obj = new JSONObject();
 		
-		MemberDTO dto = new MemberDTO(id, pass, name, tel, 0, addrNo, category);
+		MemberDTO dto = new MemberDTO(id, pass, name, tel, 0, addrNo, category, count);
 		count = memberService.insertMember(dto);
 		return null;
 		

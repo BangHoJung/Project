@@ -23,7 +23,7 @@
 	
 	<div id="container">
 		<h1>회원가입</h1>
-		<form action="register.do" method="post">
+		<form action="registerAction.do" method="post">
 			<label>아이디 <input type="text" name="id"></label>	   <br>			
 			<label>암호 <input type="password" name="pass"></label>   <br>		
 			<label>이름 <input type="text" name="name"></label>	   <br>	
