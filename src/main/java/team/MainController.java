@@ -36,33 +36,34 @@ public class MainController {
     }
 
     @RequestMapping("/loginAction.do")
-    public String loginAction(HttpServletRequest request,HttpSession session) {
-        System.out.println("login.do");
-        String id = request.getParameter("id");
-        System.out.println("id: "+id);
-        String pass = request.getParameter("pass");
-        System.out.println("pass: "+pass);
-        MemberDTO dto = new MemberDTO();
-        dto = memberService.loginMember(id,pass);
-        if(dto.getId() != null) {
-            String addr = memberService.selectAddress(dto.getId(),dto.getAddressNo());
-            System.out.println("member에 저장된:"+addr);
-            session.setAttribute("login", true);
-            session.setAttribute("id", dto.getId());
-            session.setAttribute("name", dto.getName());
-            session.setAttribute("tel",dto.getTel());
-            session.setAttribute("address",addr);
-            session.setAttribute("point",dto.getPoint());
-            session.setAttribute("grade",dto.getGrade());
-            System.out.println("로그인 성공");
-            return "main";
-        }
-        else {
-            session.setAttribute("login", false);
-            System.out.println("로그인 실패");
-        }
-        return "login";
-    }
+    public String login(HttpServletRequest request,HttpSession session) {
+		System.out.println("login.do");
+		String id = request.getParameter("id");
+		System.out.println("id: "+id);
+		String pass = request.getParameter("pass");
+		System.out.println("pass: "+pass);
+		try {	
+		MemberDTO dto = memberService.loginMember(id,pass);
+		if(dto.getMember_id() != null) {
+			String addr = memberService.selectAddress(dto.getMember_id(),dto.getMember_addressNo());
+			System.out.println("member에 저장된:"+addr);
+			session.setAttribute("login", true);
+			session.setAttribute("id", dto.getMember_id());
+			session.setAttribute("name", dto.getMember_name());
+			session.setAttribute("tel",dto.getMember_tel());
+			session.setAttribute("address",addr);
+			session.setAttribute("point",dto.getMember_point());
+			session.setAttribute("grade",dto.getMember_grade());
+			session.setAttribute("category",dto.getMember_category());
+			System.out.println("로그인 성공");
+			return "main";
+		}
+		}catch (NullPointerException e) {
+			session.setAttribute("login", false);
+			System.out.println("로그인 실패");
+		}
+		return "login";
+	}
 	
 	@RequestMapping("/registerView.do")
 	public String registerView() {

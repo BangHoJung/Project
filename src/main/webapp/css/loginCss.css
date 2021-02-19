@@ -30,14 +30,19 @@ border-bottom: 1px solid gray;
 width: 300px;
 height: 60px;
 }
-.member> :link, .Find > :link{
+ .Find > :link{
 color: black;
 text-decoration: none;
 }
-.member> :hover, .Find > :hover {
+.member> :link{
+	color: black;
+text-decoration: none;
+}
+ .Find > :hover {
 text-decoration: none;
 	color: gray;
 }
+
 
 .btn:active{
 background-color: #BDBDBD
@@ -69,9 +74,7 @@ justify-content: center;
 }
 }
 @media screen and (max-width: 768px){
-.col-md-6{
 
-}
 .Total{
 border: none;
 }
