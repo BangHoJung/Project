@@ -7,39 +7,36 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>메인페이지</title>
 
-
-<!-- 제이쿼리 -->
-
 <!-- login css 경로 -->
 <link rel="stylesheet" href="css/loginCss.css" type="text/css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- 제이쿼리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-
 <script type="text/javascript">
-$(function name() {
+$(function () {
 	
 	$("#idbtn").click(function () {
 		
-		 if($("#id").val().trim() == null ){
+		 if($("#id").val().trim() == "" ){
              alert("아이디를 입력해주세요");
-		 }else if($("#id").val())
-		 
-		 if($("#pass").val().trim() == null ){
+		 }
+		 else if($("#pass").val().trim() == "" ){
              alert("비빌번호를 입력해주세요 입력해주세요");
          }
 		 
-		if( $("#id").val().trim() &&  $("#pass").val().trim() == null )
-		alert("아이디와 비밀번호를 입력해주세요")
 	});
-
-
-		
+	
 })
 
 </script>
+
+
+
+
+
 
 </head>
 <body>
@@ -58,11 +55,12 @@ $(function name() {
 <div class="Total">
  <h3>취업시켜 조를 이용하고 싶으신가요?</h3>
 
-  <input type="text" name="id"  placeholder="아이디를 입력해주세요" class="id"  maxlength='10' > <br>
- <input type="password" name="pass"  placeholder="비밀번호를 입력해주세요" class="pass" maxlength='14'> <br>
+  <input type="text" name="id"  placeholder="아이디를 입력해주세요" class="id"  maxlength='10' id="id"> <br>
+ <input type="password" name="pass"  placeholder="비밀번호를 입력해주세요" class="pass" maxlength='14' id="pass" > <br>
  <button type="button" class="btn" id="idbtn" >로그인</button>
+ 
  <div class="click">
- <p class="member"> <a href="register"> 회원가입 </a></p>  <p class="Find"> <a href="#">아이디 찾기 </a>| <a href="#"> 비밀번호 찾기 </a></p>
+ <p class="member"><a href="register">회원가입 </a></p>  <p class="Find"> <a href="#">아이디 찾기 </a>| <a href="#"> 비밀번호 찾기 </a></p>
  </div>
  
 
