@@ -28,16 +28,22 @@
 </script>
 </head>
 <body>
-	<header>
+	<<header>
 		<div id="login">
-			<a href="#">사이트 이름</a>
-			<input type="text" placeholder="찾고싶은 식당이나 지역을 검색하세요.">
-			<figure class="right">
-				<figcaption> 
-					<p><a href="#">로그인</a> | <a href="#">회원가입</a></p>
-				</figcaption>
-			</figure>
+			<a href="main" id="logo"><img src="https://cdn.pixabay.com/photo/2013/10/07/10/30/eat-191902_960_720.jpg"></a>
+			<input type="text" placeholder="찾고싶은 식당이나 지역을 검색하세요." >
+			<div class="right">
+					<p><a href="login">로그인</a> | <a href="register">회원가입</a></p>
+			</div>
 		</div>
 	</header>
+		<nav>
+			<ul>
+				<li><a href="#">업체 소개</a></li>
+				<li><a href="#">이용안내</a></li>
+				<li><a href="#">공지사항</a></li>
+				<li><a href="#">Q&A</a></li>
+			</ul>
+		</nav>
 </body>
 </html>
