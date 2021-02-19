@@ -13,6 +13,6 @@ public interface MemberMapper {
 
 	public String selectAddress(HashMap<String, Object> map);
 
-	int insertMember(MemberDTO memberDTO);
+	int insertMember(MemberDTO dto);
  
 }

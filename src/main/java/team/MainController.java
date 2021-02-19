@@ -78,13 +78,11 @@ public class MainController {
 		String tel = request.getParameter("tel");
 		int addrNo = Integer.parseInt(request.getParameter("addrNo"));
 		String category = request.getParameter("category");
-		int count = 0;
-		JSONObject obj = new JSONObject();
 		
-		MemberDTO dto = new MemberDTO(id, pass, name, tel, 0, addrNo, category);
-		count = memberService.insertMember(dto);
-		return null;
-		
+		MemberDTO dto = new MemberDTO(id, pass, name, tel, 0, addrNo, category, 0);
+		memberService.registerAction(dto);
+
+		return "main";
 	}
 	
 	@RequestMapping("/store_registerView.do")
