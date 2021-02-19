@@ -39,6 +39,7 @@ public class MainController {
 		MemberDTO dto = new MemberDTO(id, pass, name, tel, grade, addrNo, category);
 		count = service.insertMember(dto);
 		return null;
+		
 	}
 	
 
