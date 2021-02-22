@@ -31,8 +31,6 @@
 				<th class="writer">작성자</th>
 				<th class="date">작성일</th>
 				<th>조회수</th>
-				<th><a href="main.do?mode=blike">좋아요</a></th><!-- 좋아요 클릭하면 좋아요를 많이 받은 순서대로 출력 -->
-				<th><a href="main.do?mode=bhate">싫어요</a></th>
 			</tr>
 		<%--데이터 없어서 ㅎ --%>
 		<%-- <c:if test="${requestScope.list ==null}">
@@ -52,8 +50,6 @@
 				<td>${dto.writer}</td>
 				<td>${dto.bDate }</td>
 				<td>${dto.bCount }</td>
-				<td>${dto.bLike }</td>
-				<td>${dto.bHate }</td>
 			</tr>
 		</c:forEach>
 			<%--demo --%>
@@ -63,8 +59,6 @@
 				<td>writer</td>
 				<td>date</td>
 				<td>count</td>
-				<td>like</td>
-				<td>hate</td>
 			
 			</tr>
 			<tr>
@@ -73,8 +67,6 @@
 				<td>writer</td>
 				<td>date</td>
 				<td>count</td>
-				<td>like</td>
-				<td>hate</td>
 			
 			</tr>
 			<tr>
@@ -83,8 +75,6 @@
 				<td>writer</td>
 				<td>date</td>
 				<td>count</td>
-				<td>like</td>
-				<td>hate</td>
 			
 			</tr>
 			<tr>
@@ -93,8 +83,6 @@
 				<td>writer</td>
 				<td>date</td>
 				<td>count</td>
-				<td>like</td>
-				<td>hate</td>
 			
 			</tr>
 			<tr>
@@ -103,8 +91,6 @@
 				<td>writer</td>
 				<td>date</td>
 				<td>count</td>
-				<td>like</td>
-				<td>hate</td>
 			
 			</tr>
 		  <tr>

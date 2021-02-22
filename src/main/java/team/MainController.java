@@ -184,6 +184,11 @@ public class MainController {
 		return "main";
 	}
 	
+	@RequestMapping("qnaView.do")
+	public String qnaView() {
+		return "qna";
+	}
+	
    @RequestMapping("adminMessageView.do")
    public String adminMessageView() {
 	   return "admin_message";
