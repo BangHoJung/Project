@@ -273,10 +273,7 @@ public class MainController {
 		bos.close();
 	}
 	
-	@RequestMapping("qnaView.do")
-	public String qnaView() {
-		return "qna";
-	}
+
 	
    @RequestMapping("adminMessageView.do")
    public String adminMessageView() {

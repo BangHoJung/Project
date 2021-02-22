@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name='viewport' content='width=device-width, initial-scale=1'>
+<!-- <meta name='viewport' content='width=device-width, initial-scale=1'> -->
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/mypage.css" type="text/css">
 <!-- 부트스트랩 -->
@@ -24,7 +24,7 @@
 <div class="top">
 
 <div class="hader">
-<h2 class="title">My Page</h2>
+<h2 class="title">taste factory</h2>
 <div class="locomotion"> <p class="logout"> <a href="#">로그아웃</a></p></div>
 </div>
 
@@ -42,21 +42,21 @@
 <div class="pointtotal">
  <div class="point">
  <img alt="" src="img/momo.png" class="pointimg">
- fdsfdsfs
+  <p> 적립금</p>
  </div>
  <div class="point">
  <img alt="" src="img/momo.png" class="pointimg">
- fdsfdsfs
+ <p> 적립금</p>
  </div>
  <div class="point">
  <img alt="" src="img/momo.png" class="pointimg">
- fdsfdsfs
+ <p> 적립금</p>
  </div>
  </div>
 </div>
 </div>
 
-<div class="bady">
+<div class="body">
 <div class="menulist">
 <ul>
 <li class="list"> <a href="#">회원정보 수정</a> </li>
@@ -69,8 +69,52 @@
 </ul>
 </div>
 
-<div class="main"> 
-<h3 class="maintitle">menu</h3>
+<div class="container">
+<div class="row"> 
+<div class="col-xs-12">
+
+<h3 class="maintitle"> 1:1문의하기  </h3>
+<p class="see">  &lt; <a href="#"> 더보기 </a> > </p>
+<table class="table">
+
+<tr>
+<th>가게1</th>
+<th>가게2</th>
+<th>가게3</th>
+<th>가게4</th>
+</tr>
+
+<tr>
+<td>가게1</td>
+<td>가게2</td>
+<td>가게3</td>
+<td>가게4</td>
+</tr>
+
+</table>
+
+
+<h3 class="maintitle"> 나의 리뷰</h3>
+<p class="see">  &lt; <a href="#"> 더보기 </a> > </p>
+<table class="table">
+
+
+<tr>
+<th>가게1</th>
+<th>가게2</th>
+<th>가게3</th>
+<th>가게4</th>
+</tr>
+
+<tr>
+<td>가게1</td>
+<td>가게2</td>
+<td>가게3</td>
+<td>가게4</td>
+</tr>
+
+</table>
+<h3 class="maintitle"> 위키리스트 </h3>
 <p class="see">  &lt; <a href="#"> 더보기 </a> > </p>
 <table class="table">
 <tr>
@@ -88,27 +132,8 @@
 </tr>
 
 </table>
-
-
-<h3 class="maintitle">menu</h3>
- <p class="see">  &lt; <a href="#"> 더보기 </a> > </p>
-<table class="table">
-<tr>
-<th>가게1</th>
-<th>가게2</th>
-<th>가게3</th>
-<th>가게4</th>
-</tr>
-
-<tr>
-<td>가게1</td>
-<td>가게2</td>
-<td>가게3</td>
-<td>가게4</td>
-</tr>
-
 </table>
-<h3 class="maintitle">menu</h3>
+<h3 class="maintitle"> 나의 정보 </h3>
 <p class="see">  &lt; <a href="#"> 더보기 </a> > </p>
 <table class="table">
 <tr>
@@ -126,10 +151,11 @@
 </tr>
 
 </table>
- 
+</div>
+</div>
+ </div>
  </div>
 
-</div>
  </form>
 </body>
 </html>
