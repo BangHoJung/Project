@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.mapper.StoreMapper">
 	<insert id="storeRegister" parameterType="store">
-		INSERT INTO store VALUES (#{store_id},#{store_name},#{store_addr},#{store_license},#{store_member_id},#{store_time},#{store_introduce},#{store_tel},#{store_category});
+		INSERT INTO store VALUES (#{store_id},#{store_name},#{store_addr},#{store_license},#{store_member_id},#{store_time},#{store_introduce},#{store_tel},#{store_category},#{store_code},#{store_file})
 	</insert>
+	
+	<select id="selectStoreDTO" parameterType="String" resultType="store">
+		SELECT s.*,(SELECT category_name FROM category where category_no = s.store_category) category_name FROM store s WHERE store_id = #{store_id}
+	</select>
 </mapper>

@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+ * {
+ 	margin:0;
+ 	padding:0;
+ }
+ 
+ .container {
+ 	margin: 0 auto;
+ 	text-align:center;
+ 	border: 2px solid black;
+ 	width:600px;
+ 	font-size:large;
+ 	margin-top:50px;
+ 	padding:50px;
+ }
+ 
+ h2 {
+ 	padding:20px 0px;
+ 	text-align: left;
+ }
+ 
+ table {
+ 	border:1px solid black;
+ 	border-collapse:collapse;
+ 	width:500px;
+ 	margin:30px 0px;
+ }
+ 
+ th {
+ 	border:1px solid gray;
+ 	background-color: silver;
+ 	width:150px;
+ 	height: 80px;
+ }
+ td {
+ 	border:1px solid gray;
+ 	width:350px;
+ }
+ 
+ .must {
+ 	border:1px solid black;
+ 	border-radius:10px;
+ 	margin-bottom:50px;
+ 	width:70%;
+ 	font: bold;
+ }
+ 
+ .must button {
+ 	margin: 0px 20px;
+ }
+ 
+ input {
+ 	display:inline-block;
+ 	width:80%;
+ 	padding:5px;
+ }
+ 
+ .tel {
+ 	width:100px;
+ }
+ 
+ .add {
+ 	border:1px solid black;
+ 	border-radius:10px;
+ 	margin-bottom:50px;
+ }
+ pre {
+ 	font-size:15px;
+ 	background-color: white;
+ 	height: 80px;
+ }

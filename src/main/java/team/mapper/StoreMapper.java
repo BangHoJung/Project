@@ -8,5 +8,7 @@ import team.dto.StoreDTO;
 public interface StoreMapper {
 
 	int storeRegister(StoreDTO dto);
+
+	StoreDTO selectStoreDTO(String store_id);
 	
 }
