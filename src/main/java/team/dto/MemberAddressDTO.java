@@ -9,6 +9,17 @@ public class MemberAddressDTO {
 
 	}
 
+	
+	
+	public MemberAddressDTO(String address_Member_Id, int address_No, String address_Text) {
+		super();
+		this.address_Member_Id = address_Member_Id;
+		this.address_No = address_No;
+		this.address_Text = address_Text;
+	}
+
+
+
 	public String getAddress_Member_Id() {
 		return address_Member_Id;
 	}
