@@ -39,6 +39,7 @@
 	}
 	
 	#logo img {
+		margin-top:5px;
 		width: 100px ;
 		height: 70px;
 		float: left;
@@ -149,19 +150,24 @@
 	}
 	#board_container{
 		height: 600px;
-		/* background-color: lime; */
+	}
+	#board_container h3{ 
+		width: 800px;
+		margin:0 auto;
 	}
 	.board{
+		width:800px;
 		margin:20px auto;
 		border-collapse: collapse;
 	}
 	.board th, .board td{
 		padding: 10px;
 		text-align: center;
+		font-size: 10px;
 	}
 	.board th{
-		border-top : 2px solid black;
-		border-bottom : 2px solid black;
+		border-top : 1px solid gray;
+		border-bottom : 2px solid gray;
 	}
 	.board th a{
 		text-decoration: none;
@@ -169,12 +175,15 @@
 	
 	}
 	.board td{
-		border-top : 1px solid black;
-		border-bottom : 1px solid black;
+		border-top : 1px solid gray;
+		border-bottom : 1px solid gray;
 	}
 	.board tr:last-child > td {
 		border-bottom : 2px solid black;
 	}
+	.bno{
+		width: 50px;
+		}
 	.title{
 		width:400px;	
 		
@@ -192,7 +201,7 @@
 	.page_bar a:link,.page_bar a:visited {
 		color:black;
 		text-decoration: none;
-		font-size : 18px;
+		font-size : 12px;
 		margin-left: 10px;
 		margin-right: 10px;
 	}
@@ -204,7 +213,37 @@
 		position:absolute;
 		right:0px;
 	}
-	
+	.notice_container{
+		width: 1000px;
+	}
+	.notice_container h3{
+		margin:0 auto;
+		width: 600px;
+	}
+	.notice_container table{
+		margin:0 auto;
+		width: 600px;
+		border: 1px solid #e8e8e8
+	}
+	.notice_container td{
+		width: 500px;
+		height:50px;
+		padding:10px;
+		font-size:10px;
+		border-bottom: 1px solid #e8e8e8
+	}
+	.introduce_container{
+		width: 800px;
+		margin: 0 auto;
+		font-size: 15px;
+		border: 1px solid #e8e8e8;
+		padding: 20px;
+		box-sizing: border-box;
+	}
+	#introduce_title{
+		width: 800px;
+		margin: 0 auto;
+	}
 	footer {
 		padding: 20px 40px;
 		width: 1000px;
@@ -215,4 +254,5 @@
 	
 	footer ul {
 		list-style-type: none;
+		font-size: 10px;
 	}
