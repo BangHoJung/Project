@@ -6,12 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>관리자가 보낸 메세지를 받는 함</title>
-<style type="text/css">
- tr,td,th{
-  border: 1px solid black;
- }
-</style>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/user_message_mobile.css" media="screen and (max-width:768px)">
+<link rel="stylesheet" href="css/user_message_pc.css" media="screen and (min-width:769px)">
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script>
 if(${requestScope.deleteComplete == false}){alert("삭제를 실패했습니다.");}
@@ -44,9 +44,13 @@ $(function () {
 </script>
 </head>
 <body>
-<c:set var="page" value="${sessionScope.page}" scope="page" />
+<div class="container">
+<h1>내 쪽지함</h1>
 <form id="frm" method="get">
-   <table>
+
+   <table class="table table-hover table-bordered">
+
+<thead>   
  <tr>
    <td>
      <input type="checkbox" name="deleteAll" id="deleteAll">
@@ -61,11 +65,14 @@ $(function () {
       상태
    </th>
  </tr>
+ </thead>
+ <tbody>
+ <c:set var="page" value="${sessionScope.page}" scope="page" />
  <c:if test="${requestScope.message == null}">
-     <td colspan="3">쪽지가 없습니다</td>
+     <td colspan="4">쪽지가 없습니다</td>
  </c:if>
     <c:forEach var="list" items="${requestScope.message}">
-        <tr>
+        <tr class="message_items">
            <td><input type="checkbox" name="delete" value="${list.message_no}"></td>
            <td>관리자</td>
            <td><a href="messageDetailView.do?no=${list.message_no}&pageNo=${page.currentPage}">${list.message_title}</a></td>
@@ -79,8 +86,11 @@ $(function () {
            </c:choose>
         </tr>
     </c:forEach>
-    <tr>
-		<td colspan="4">
+    </tbody>
+    <tfoot>
+    <tr class="page_bar">
+		<td colspan="4" class="page_bar_items">
+         <button type="button" id="btn_delete" class="btn btn-success">삭제하기</button>
 			<c:if test="${page.previousPageGroup }">
 				<a href="userMessageView.do?pageNo=${page.startPageOfPageGroup-1}">◀</a>
 			</c:if>		
@@ -89,7 +99,10 @@ $(function () {
 				<a href="userMessageView.do?pageNo=1">1</a>					
            </c:if>
 		   <c:if test="${i!=0}">
-				<a href="userMessageView.do?pageNo=${i}">${i}</a>					
+				<a href="userMessageView.do?pageNo=${i}" id="link${i}">${i}</a>					
+		      <script type="text/javascript">
+		       if(${page.currentPage}==${i}){$("#link${i}").css("color", "red");}
+		      </script>
            </c:if>					
 			</c:forEach>
 		<c:if test="${page.nextPageGroup }">
@@ -97,8 +110,10 @@ $(function () {
 		 </c:if>
 		</td>
 	</tr>
+	</tfoot>
 </table>
-  <button type="button" id="btn_delete">삭제하기</button>
+
 </form>
+</div>
 </body>
 </html>
