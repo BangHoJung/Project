@@ -24,6 +24,9 @@ public class PaggingVO {
 		this.pageOfContentCount = pageOfContentCount;
 	}
 	
+	public PaggingVO(int count, int page) {
+	}
+
 	public int getCurrentPage() {
 		return currentPage;
 	}

@@ -24,7 +24,11 @@
 			$("#pop").html($(window).width());
 		});		
 	});
-	
+	$(function(){
+		$("#random").click(function(){
+			alert('추천 메뉴는 ooo입니다');
+		})
+	})
 
 </script>
 </head>
@@ -37,7 +41,8 @@
 			</div>
 			<div class="right">
 				<c:if test="${sessionScope.login != null && sessionScope.login == true}">
-			<p> ${sessionScope.name } 님이 로그인 하셨습니다. | <a href="#">마이페이지</a></p>
+			<p> ${sessionScope.name } 님이 로그인 하셨습니다. | <a href="#">마이페이지</a><br>
+			<a href="/loguot.do">로그아웃</a></p>
 			</c:if>
 			<c:if test="${sessionScope.login == null || sessionScope.login == false}">
 					<p><a href="/loginView.do">로그인</a> | <a href="/registerView.do">회원가입</a></p>
