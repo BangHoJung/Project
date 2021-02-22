@@ -16,25 +16,31 @@
 		margin-left: 200px;
 		margin-top: 20px;
 		padding: 10px;
+		border: 1px solid #fa0050;
+		border-radius: 20px;
 	}
 	
 	#login input {
 		width: 300px;
-		height: 30px;
+		height: 20px;
 		box-sizing: border-box;
 		border: none;
-		border-bottom: 1px solid black;
 	}
 	
 	#login .search button {
 		margin-left: 5px; width : 50px;
-		height: 30px;
+		height: 20px;
 		box-sizing: border-box;
 		width: 50px;
+		border: none;
+		background-color: white;
+		color: gray;
+		font-weight: bold;
 	}
 	
 	#logo img {
-		width: 100px;
+		margin-top:5px;
+		width: 100px ;
 		height: 70px;
 		float: left;
 	}
@@ -60,8 +66,9 @@
 	}
 	
 	nav {
-		background-color: #e8e8e8;
+		background-color:#fa0050;
 		margin-bottom: 20px;
+		height: 50px;
 	}
 	
 	nav>ul {
@@ -76,33 +83,40 @@
 	
 	nav a:link, nav a:visited {
 		width: 100px;
-		height: 40px;
-		padding: 10px 0px;
+		height: 50px;
+		padding: 15px 0px;
 		font-size: 15px;
 		line-height: 20px;
 		text-align: center;
 		box-sizing: border-box;
 		display: inline-block;
 		text-decoration: none;
-		color: black;
+		color:white;
 	}
 	
 	nav button {
 		width: 100px;
-		height: 30px;
-		margin-top: 5px;
+		margin-right:10px;
+		font-size:15px;
+		font-weight:bold;
+		height: 50px;
+		background-color: #fa0050;
+		color: white;
+		border: none;
 	}
 	
 	#theme {
 		box-sizing: border-box;
 		width: 1000px;
 		margin-bottom: 30px;
+		color: gray;
+		
 	}
 	
 	#theme div {
 		width: 1000px;
 		float: left;
-		border: 1px solid black;
+		border: 1px solid gray;
 	}
 	
 	#theme figure {
@@ -111,7 +125,8 @@
 		height: 250px;
 		margin: 40px;
 		text-align: center;
-		border: 1px solid black;
+		border: 1px solid gray;
+		color: gray;
 	}
 	
 	.slider {
@@ -133,7 +148,102 @@
 		bottom: 20px;
 		width: 100%;
 	}
+	#board_container{
+		height: 600px;
+	}
+	#board_container h3{ 
+		width: 800px;
+		margin:0 auto;
+	}
+	.board{
+		width:800px;
+		margin:20px auto;
+		border-collapse: collapse;
+	}
+	.board th, .board td{
+		padding: 10px;
+		text-align: center;
+		font-size: 10px;
+	}
+	.board th{
+		border-top : 1px solid gray;
+		border-bottom : 2px solid gray;
+	}
+	.board th a{
+		text-decoration: none;
+		color: black;
 	
+	}
+	.board td{
+		border-top : 1px solid gray;
+		border-bottom : 1px solid gray;
+	}
+	.board tr:last-child > td {
+		border-bottom : 2px solid black;
+	}
+	.bno{
+		width: 50px;
+		}
+	.title{
+		width:400px;	
+		
+	}
+	.writer{
+		width:150px;	
+	}
+	.date{
+		width:200px;
+	}
+	.page_bar{
+		position:relative;
+		text-align: center;
+	}
+	.page_bar a:link,.page_bar a:visited {
+		color:black;
+		text-decoration: none;
+		font-size : 12px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	.page_bar a:hover{
+		font-weight: bold;
+		color:red;
+	}
+	.btn_writer{
+		position:absolute;
+		right:0px;
+	}
+	.notice_container{
+		width: 1000px;
+	}
+	.notice_container h3{
+		margin:0 auto;
+		width: 600px;
+	}
+	.notice_container table{
+		margin:0 auto;
+		width: 600px;
+		border: 1px solid #e8e8e8
+	}
+	.notice_container td{
+		width: 500px;
+		height:50px;
+		padding:10px;
+		font-size:10px;
+		border-bottom: 1px solid #e8e8e8
+	}
+	.introduce_container{
+		width: 800px;
+		margin: 0 auto;
+		font-size: 15px;
+		border: 1px solid #e8e8e8;
+		padding: 20px;
+		box-sizing: border-box;
+	}
+	#introduce_title{
+		width: 800px;
+		margin: 0 auto;
+	}
 	footer {
 		padding: 20px 40px;
 		width: 1000px;
@@ -144,4 +254,5 @@
 	
 	footer ul {
 		list-style-type: none;
+		font-size: 10px;
 	}

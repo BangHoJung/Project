@@ -13,9 +13,13 @@ public class StoreDTO {
 	private String store_introduce;
 	private String store_tel;
 	private int store_category;
+	private int store_code;
+	private String store_file;
+	private String category_name;
 	
 	public StoreDTO(String store_id, String store_name, String store_addr, String store_license, String store_member_id,
-			String store_time, String store_introduce, String store_tel, int store_category) {
+			String store_time, String store_introduce, String store_tel, int store_category, int store_code,
+			String store_file, String category_name) {
 		super();
 		this.store_id = store_id;
 		this.store_name = store_name;
@@ -26,8 +30,27 @@ public class StoreDTO {
 		this.store_introduce = store_introduce;
 		this.store_tel = store_tel;
 		this.store_category = store_category;
+		this.store_code = store_code;
+		this.store_file = store_file;
+		this.category_name = category_name;
 	}
-
+	
+	public StoreDTO(String store_id, String store_name, String store_addr, String store_license,String store_member_id,
+			String store_time, String store_introduce, String store_tel, int store_category, int store_code,String store_file) {
+		super();
+		this.store_id = store_id;
+		this.store_name = store_name;
+		this.store_addr = store_addr;
+		this.store_license = store_license;
+		this.store_member_id = store_member_id;
+		this.store_time = store_time;
+		this.store_introduce = store_introduce;
+		this.store_tel = store_tel;
+		this.store_category = store_category;
+		this.store_code = store_code;
+		this.store_file = store_file;
+	}
+	
 	public String getStore_id() {
 		return store_id;
 	}
@@ -99,16 +122,40 @@ public class StoreDTO {
 	public void setStore_category(int store_category) {
 		this.store_category = store_category;
 	}
+	
+	public int getStore_code() {
+		return store_code;
+	}
 
+	public void setStore_code(int store_code) {
+		this.store_code = store_code;
+	}
+	
+	public String getStore_file() {
+		return store_file;
+	}
+
+	public void setStore_file(String store_file) {
+		this.store_file = store_file;
+	}
+	
+	public String getCategory_name() {
+		return category_name;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
 	@Override
 	public String toString() {
 		return "StoreDTO [store_id=" + store_id + ", store_name=" + store_name + ", store_addr=" + store_addr
 				+ ", store_license=" + store_license + ", store_member_id=" + store_member_id + ", store_time="
 				+ store_time + ", store_introduce=" + store_introduce + ", store_tel=" + store_tel + ", store_category="
-				+ store_category + "]";
+				+ store_category + ", store_code=" + store_code + ", store_file=" + store_file
+				+ ", category_name=" + category_name + "]";
 	}
 	
 	
-	
+
 	
 }

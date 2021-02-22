@@ -19,4 +19,8 @@ public class StoreService {
 		System.out.println(dto.toString());
 		int count = storeMapper.storeRegister(dto);
 	}
+
+	public StoreDTO selectStoreDTO(String store_id) {
+		return storeMapper.selectStoreDTO(store_id);
+	}
 }

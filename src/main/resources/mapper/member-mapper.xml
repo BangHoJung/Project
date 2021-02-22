@@ -10,4 +10,27 @@
 		select address_text from member_address where address_member_id=#{id} and 
 		address_no=#{addressNo}
 	</select>
+	<select id="selectMember" parameterType="String" resultType="String">
+	 select member_id from member where member_id=#{id}
+	</select>
+	<insert id="registerMember" parameterType="team.dto.MemberDTO">
+	  insert into member values (#{member_id},#{member_pass},#{member_name},#{member_tel},#{member_grade},#{member_addressNo},#{member_category},#{member_point})
+	</insert>
+	<insert id="registerAddress" parameterType="team.dto.MemberAddressDTO">
+	 insert into member_address values (#{address_Member_Id},#{address_No},#{address_Text})
+	</insert>
+	<select id="selectUserMessageList" parameterType="map" resultType="team.dto.MessageDTO">
+select message_no,message_member_id,message_title,message_content,message_date,message_status from (select ceil(rownum/10) as page,message_no,message_member_id,message_title,message_content,message_date,message_status from (select message_no,message_member_id,message_title,message_content,message_date,message_status  from message where message_member_id=#{id} order by message_status)) where page=#{pageNo} </select>
+	<select id="selectUserMessage" parameterType="int" resultType="team.dto.MessageDTO">
+	select * from message where message_no=#{no}
+	</select>
+	<update id="updateMessageStatus" parameterType="map">
+	  update message set message_status=1 where message_no=#{no} and message_member_id=#{id} 
+	</update>
+	<delete id="deleteMessage" parameterType="map">
+	  delete from message where message_no=#{no} and message_member_id=#{id}
+	</delete>
+	<select id="selectMessageCount" parameterType="String" resultType="int">
+	 select count(*) from message where message_member_id=#{id}
+	</select>
 </mapper>
