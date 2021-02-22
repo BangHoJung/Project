@@ -43,7 +43,7 @@
 		<c:forEach var="dto" items="${requestScope.list }">
 			<tr>
 				<td>${dto.bno }</td>
-				<td><a href="boardView.do?bno=${dto.bno }"> ${dto.title }
+				<td><a href="qnaView.do?bno=${dto.bno }"> ${dto.title }
 					<c:if test="${dto.cCount > 0 }">
 						[${dto.cCount}]
 					</c:if>
@@ -98,15 +98,15 @@
 			<td colspan="7">
 					<div class="page_bar">
 						<c:if test="${pagging.previousPageGroup }">
-							<a href="index.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
+							<a href="qna.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
 						</c:if>
 						<c:forEach var="i" begin="${pagging.startPageOfPageGroup}" 
 						end="${pagging.endPageOfPageGroup}">
-							<a href="index.do?pageNo=${i }">${ i}</a>
+							<a href="qna.do?pageNo=${i }">${ i}</a>
 						</c:forEach>
 					
 						<c:if test="${pagging.nextPageGroup }">
-							<a href="index.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
+							<a href="qna.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
 						</c:if>
 						<a href="boardWriteView.do" class="btn_writer">글쓰기</a>
 					</div>
