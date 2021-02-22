@@ -1,6 +1,10 @@
 package team;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
@@ -139,6 +145,7 @@ public class MainController {
         }
 		return null;
 	}
+	
 	@RequestMapping("/checkID.do")
 	public String checkID(HttpServletRequest request,HttpServletResponse response) {
 		String id= request.getParameter("id");
@@ -175,29 +182,100 @@ public class MainController {
 	}
 	
 	
-	@RequestMapping("/store_registerView.do")
+	@RequestMapping("/storeRegisterView.do")
 	public String storeRegisterView() {
 		return "store_register";
 	}
 	
-	@RequestMapping("/store_registerAction.do")
-	public String storeRegisterAction(HttpServletRequest request, HttpSession session) {
+	@RequestMapping("/storeRegisterAction.do")
+	public String storeRegisterAction(HttpServletRequest request,MultipartHttpServletRequest mqRequest) {
 //		String member_id = (String) session.getAttribute("id");
-		String member_id = "testId";
+		String member_id = "admin";
 		String name = request.getParameter("name");
-		String tel = request.getParameter("tel");
+		String tel = request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
 		String addr = request.getParameter("addr");
 		String license = request.getParameter("license");
+		MultipartFile mf = mqRequest.getFile("file");
 		String time = request.getParameter("time");
-		if(time == null) time = "";
+		if(time == null) time = " ";
 		String introduce = request.getParameter("introduce");
-		if(introduce == null) introduce = "";
+		if(introduce == null) introduce = " ";
 		int category = Integer.parseInt(request.getParameter("category"));
-		String store_id = (String) session.getAttribute("id") + "_" + license;
+		String store_id = name + "_" + license;
 		
-		storeService.storeRegister(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category));
+		System.out.println("mf :"+mf);
+		
+		String path = "C:\\fileupload\\"+store_id+"\\";
+		File pathFile=null;
+		try {
+			String originalFileName = mf.getOriginalFilename();
+			long fileSize = mf.getSize();
+			System.out.println("originalFileName : " + originalFileName);
+			System.out.println("fileSize : " + fileSize);
+			File parentPath = new File(path);
+			if(!parentPath.exists()) parentPath.mkdirs();
+			
+			//파일 업로드
+			pathFile = new File(path + originalFileName);
+			mf.transferTo(pathFile);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		storeService.storeRegister(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,path+pathFile.getName()));
 		
 		return "main";
+	}
+	
+	@RequestMapping("storeCheckView.do")
+	public String storeCheckView(HttpServletRequest request) {
+//		String store_id = request.getParameter("store_id");
+		String store_id = "3_3";
+		StoreDTO dto = storeService.selectStoreDTO(store_id);
+		System.out.println(dto.toString());
+		
+		request.setAttribute("dto", dto);
+		 
+		return "store_check";
+	}
+	
+	@RequestMapping("file_download.do")
+	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//다운로드 할 파일명
+		String fileName = request.getParameter("fileName");
+		String writer = request.getParameter("writer");
+		//다운로드할 파일 전체 경로
+		String path = "C:\\fileupload\\"+writer+"\\"+fileName;
+		File file = new File(path);
+		FileInputStream fis = new FileInputStream(file);
+		
+		fileName = URLEncoder.encode(fileName,"utf-8");
+		
+		//다운로드시 나타낼 기본파일명
+		response.setHeader("Content-Disposition", "attachment;fileName="+fileName);
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setContentLengthLong(file.length());
+		
+		//사용자에게 파일을 전송
+		BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+		//버퍼 생성
+		byte[] buffer = new byte[1024*1024];
+		
+		while(true) {
+			int size = fis.read(buffer); // 읽어온 바이트수
+			if(size == -1) {
+				break;
+			}
+			bos.write(buffer,0,size);
+			bos.flush();
+		}
+		
+		fis.close();
+		bos.close();
+	}
+	
+	@RequestMapping("qnaView.do")
+	public String qnaView() {
+		return "qna";
 	}
 	
    @RequestMapping("adminMessageView.do")
