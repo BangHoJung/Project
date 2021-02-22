@@ -5,13 +5,14 @@
  	padding:0;
  }
  
- .container {
+ #container {
  	margin: 0 auto;
  	text-align:center;
  	border: 2px solid black;
- 	width:500px;
+ 	width:900px;
  	font-size:large;
  	margin-top:50px;
+ 	padding:50px;
  }
  
  h2 {
@@ -20,10 +21,9 @@
  }
  
  table {
- 	border:1px solid black;
  	border-collapse:collapse;
- 	width:700px;
  	margin:30px 0px;
+ 	width:90%;
  }
  
  th {
@@ -41,7 +41,6 @@
  	border:1px solid black;
  	border-radius:10px;
  	margin-bottom:50px;
- 	width:70%;
  	font: bold;
  }
  
@@ -77,4 +76,10 @@
  	font-size: 30px;
  	width:300px;
  	height: 100px;
+ }
+ 
+ select {
+ 	padding:10px;
+ 	font-size:20px;
+ 	float:left;
  }

@@ -58,10 +58,6 @@ public class MainController {
 	public String guide() {
 		return "guide";
 	}
-	@RequestMapping("/qnaView.do")
-	public String qnaView() {
-		return "qna";
-	}
 
     @RequestMapping("/loginAction.do")
     public String login(HttpServletRequest request,HttpSession session) {
@@ -221,7 +217,7 @@ public class MainController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		storeService.storeRegister(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,path+pathFile.getName()));
+		storeService.storeRegister(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,pathFile.getName()));
 		
 		return "main";
 	}
@@ -229,7 +225,7 @@ public class MainController {
 	@RequestMapping("storeCheckView.do")
 	public String storeCheckView(HttpServletRequest request) {
 //		String store_id = request.getParameter("store_id");
-		String store_id = "3_3";
+		String store_id = "식당이름_1";
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		System.out.println(dto.toString());
 		
@@ -238,42 +234,31 @@ public class MainController {
 		return "store_check";
 	}
 	
-	@RequestMapping("file_download.do")
-	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		//다운로드 할 파일명
-		String fileName = request.getParameter("fileName");
-		String writer = request.getParameter("writer");
-		//다운로드할 파일 전체 경로
-		String path = "C:\\fileupload\\"+writer+"\\"+fileName;
-		File file = new File(path);
-		FileInputStream fis = new FileInputStream(file);
+	@RequestMapping("storeCheckConfirm.do")
+	public String storeCheckConfirm(HttpServletRequest request) {
+		String store_id = request.getParameter("store_id");
+		String title ="안녕하세요 관리자 입니다.";
+		String content="식당 등록 신청 건에 대하여 승인요청이 완료되었습니다.마이페이지에서 메뉴 등록 신청서를 작성해주시기 바랍니다.\n";
+		StoreDTO dto = storeService.selectStoreDTO(store_id);
+		// 식당 등록 신청한 사용자에게 승인결과 전송
+//		memberService.sendMessage(dto.getStore_member_id(),title,content);
+		int count = storeService.updateStoreCode(store_id,1);
 		
-		fileName = URLEncoder.encode(fileName,"utf-8");
-		
-		//다운로드시 나타낼 기본파일명
-		response.setHeader("Content-Disposition", "attachment;fileName="+fileName);
-		response.setHeader("Content-Transfer-Encoding", "binary");
-		response.setContentLengthLong(file.length());
-		
-		//사용자에게 파일을 전송
-		BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
-		//버퍼 생성
-		byte[] buffer = new byte[1024*1024];
-		
-		while(true) {
-			int size = fis.read(buffer); // 읽어온 바이트수
-			if(size == -1) {
-				break;
-			}
-			bos.write(buffer,0,size);
-			bos.flush();
-		}
-		
-		fis.close();
-		bos.close();
+		return "store_check";
 	}
 	
-
+	@RequestMapping("storeCheckReject.do")
+	public String storeCheckReject(HttpServletRequest request) {
+		String store_id = request.getParameter("store_id");
+		String title ="안녕하세요 관리자 입니다.";
+		String content="식당 등록 신청 건에 대하여 승인요청이 거절되었습니다.\n자세한 내용을 원하시면 문의사항에 등록해주시기 바랍니다.";
+		StoreDTO dto = storeService.selectStoreDTO(store_id);
+		// 식당 등록 신청한 사용자에게 승인결과 전송
+//		memberService.sendMessage(dto.getStore_member_id(),title,content);
+		int count = storeService.deleteStoreDTO(store_id);
+		
+		return "store_check";
+  }
 	
    @RequestMapping("adminMessageView.do")
    public String adminMessageView() {
@@ -351,5 +336,40 @@ public class MainController {
 	   }
 	   return "user_message";
    }
+   
+   @RequestMapping("file_download.do")
+	public void fileDownload(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//다운로드 할 파일명
+		String fileName = request.getParameter("fileName");
+		String writer = request.getParameter("writer");
+		//다운로드할 파일 전체 경로
+		String path = "C:\\fileupload\\"+writer+"\\"+fileName;
+		File file = new File(path);
+		FileInputStream fis = new FileInputStream(file);
+		
+		fileName = URLEncoder.encode(fileName,"utf-8");
+		
+		//다운로드시 나타낼 기본파일명
+		response.setHeader("Content-Disposition", "attachment;fileName="+fileName);
+		response.setHeader("Content-Transfer-Encoding", "binary");
+		response.setContentLengthLong(file.length());
+		
+		//사용자에게 파일을 전송
+		BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
+		//버퍼 생성
+		byte[] buffer = new byte[1024*1024];
+		
+		while(true) {
+			int size = fis.read(buffer); // 읽어온 바이트수
+			if(size == -1) {
+				break;
+			}
+			bos.write(buffer,0,size);
+			bos.flush();
+		}
+		
+		fis.close();
+		bos.close();
+	}
 } 
 	   
