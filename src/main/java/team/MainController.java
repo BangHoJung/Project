@@ -258,14 +258,7 @@ public class MainController {
 		int count = storeService.deleteStoreDTO(store_id);
 		
 		return "store_check";
-	}
-	
-	
-	
-	@RequestMapping("qnaView.do")
-	public String qnaView() {
-		return "qna";
-	}
+  }
 	
    @RequestMapping("adminMessageView.do")
    public String adminMessageView() {

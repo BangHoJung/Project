@@ -9,6 +9,7 @@ display: flex;
 justify-content: space-between;
 
 }
+
 .title{
 font-weight: bold;
 color:white;
@@ -83,13 +84,11 @@ flex-direction: column;
 justify-content: center;
 font-size: 150%;
 }
-.bady{
-display:flex;
-justify-content: center;
-gap: 3%;
-margin-top: 2%;
-}
+.menulist{
 
+float: left;
+
+}
 .maintitle{
 
 margin: 0px;
@@ -105,18 +104,34 @@ margin-bottom: 1%;
  text-decoration: none;
  }
 
-.main{
-box-sizing: border-box;
-width: 1400px;
-}
 .Balance{
 color: white;
 }
 .see{
 float:right;
-	
 }
+.see > a{
+	color: black;
+}
+.see > a:hover {
+	text-decoration: none;
+	color: gray;
+}
+.menulist > ul{
+	margin: 0px;
+	padding: 0px;
+}
+.body{
+	display: flex;
+	justify-content: space-around;
+	margin-top: 2%;
+}
+@media screen and (max-width: 1200px){
+
+}
+
 @media screen and (max-width: 992px){
+	
 .logout{
 display: none;
 }
@@ -126,17 +141,42 @@ height: 150px;
 }
 .menulist{
 border: none;
-margin: 0 auto;
+text-align: center;
+float: none;
+display: flex;
+justify-content: center;
+
+
 }
-.main{
+
+ul{
+	margin: 0 auto;
+	text-align: center;
+	
+}
+.bady{
+	width: 70%;
+	margin: 0 auto;
+	
+	
+}
+.container{
 display: none;
-margin: 0 auto;
+
+
 }
 .list{
 border: none;
-width: 100%;
-font-size: 200%;
+width: 400px;
+font-size: 25px;
+border-bottom: 1px solid black;
 
+}
+
+.menulist{
+	text-align: center;
+	margin: 0 auto;
+	width: 1000px;
 }
 
 .total{
@@ -149,6 +189,7 @@ padding-top: 0px;
 
 }
 @media screen and (max-width: 768px){
+	
 .loginimg{
 width: 100px;
 height: 100px;
@@ -159,7 +200,10 @@ font-size: 200%;
 .grade{
 font-size: 150%;
 }
-
+.list{
+	font-size: 20px;
+	
+}
 .pointimg{
 width: 50%;
 height: 50%;
