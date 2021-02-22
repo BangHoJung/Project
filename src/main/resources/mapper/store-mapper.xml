@@ -10,4 +10,12 @@
 	<select id="selectStoreDTO" parameterType="String" resultType="store">
 		SELECT s.*,(SELECT category_name FROM category where category_no = s.store_category) category_name FROM store s WHERE store_id = #{store_id}
 	</select>
+	
+	<update id="updateStoreCode" parameterType="HashMap">
+		UPDATE store SET store_code=#{store_code} WHERE store_id=#{store_id}
+	</update>
+	
+	<delete id="deleteStoreDTO" parameterType="String">
+		DELETE FROM store WHERE store_id=#{store_id}
+	</delete>
 </mapper>

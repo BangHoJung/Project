@@ -20,32 +20,30 @@
 </head>
 <body>
 
-	<div class="container">
+	<div id="container">
 		<h1>식당 등록 확인 페이지</h1><br>
 		<div>
 			<h2>식당 필수 정보</h2>
 			<table class="must">
 				<tr>
 					<th>식당 이름</th>
-					<td><input type="text" readonly value="${dto.store_name }"></td>
+					<td><p>${dto.store_name }</p></td>
 				</tr>
 				<tr>
 					<th>식당 대표 전화번호</th>
-					<td>
-						<input type="text" readonly value="${dto.store_tel }">
-					</td>
+					<td><p>${dto.store_tel }</p></td>
 				</tr>
 				<tr>
 					<th>식당 주소</th>
-					<td><input type="text" readonly value="${dto.store_addr }"></td>
+					<td><p>${dto.store_addr }</p></td>
 				</tr>
 				<tr>
 					<th>사업자등록번호</th>
-					<td><input type="text" readonly value="${dto.store_license }"></td>
+					<td><p>${dto.store_license }</p></td>
 				</tr>
 				<tr>
-					<th>사업자등록증 첨부</th>
-					<td><input type="file" readonly value="${dto.store_file }"></td>
+					<th>사업자등록증</th>
+					<td><p><a href="file_download.do?writer=${dto.store_id}&fileName=${dto.store_file}">${dto.store_file}</a></p></td>
 				</tr>
 			</table>
 			<h2>식당 상세 정보(선택)</h2>
@@ -64,6 +62,8 @@
 				</tr>
 			</table>
 		</div>
+		<a href="storeCheckConfirm.do?store_id=${dto.store_id }">식당 등록 승인</a> 
+		<a href="storeCheckReject.do?store_id=${dto.store_id }">식당 등록 거절</a>
 	</div>
 </body>
 </html>
