@@ -1,0 +1,168 @@
+.top{
+width: 100%;
+background-color: #FA0050;
+}
+.hader{
+margin:0 auto;
+text-align: center;
+display: flex;
+justify-content: space-between;
+
+}
+.title{
+font-weight: bold;
+color:white;
+padding-left: 3%;
+}
+
+.logout > a{
+color: white;
+}
+.logout {
+margin-top: 10px;
+font-size: 17px;
+padding-right: 5%;
+width: 100px;
+}
+
+.profile{
+display: flex;
+flex-direction: row;
+}
+.loginimg{
+width: 200px;
+height: 200px;
+border-radius: 100%;
+}
+
+.pointtotal{
+display: flex;
+justify-content: space-around;
+gap: 10%;
+padding-left: 10px;
+}
+
+.pointimg{
+width: 70px;
+height: 70px;
+}
+
+.total{
+display: flex;
+justify-content: space-around;
+gap: 15%;
+
+}
+.point{
+display: flex;
+flex-direction: column;
+padding-top: 60px;
+color: white;
+}
+.name{
+font-weight: bold;
+font-size: 250%;
+margin-top: 10%;
+color: white;
+}
+.grade{
+font-weight: bold;
+font-size: 30px;
+color: white;
+}
+
+
+
+.list{
+width: 200px;
+height: 60px;
+list-style-type: none;
+text-align: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+font-size: 150%;
+}
+.bady{
+display:flex;
+justify-content: center;
+gap: 3%;
+margin-top: 2%;
+}
+
+.maintitle{
+
+margin: 0px;
+margin-bottom: 1%;
+}
+
+
+ .list > a{
+  color: black;
+ }
+ .list > a:hover{
+ color: gray;
+ text-decoration: none;
+ }
+
+.main{
+box-sizing: border-box;
+width: 1400px;
+}
+.Balance{
+color: white;
+}
+.see{
+float:right;
+	
+}
+@media screen and (max-width: 992px){
+.logout{
+display: none;
+}
+.loginimg{
+width: 150px;
+height: 150px;
+}
+.menulist{
+border: none;
+margin: 0 auto;
+}
+.main{
+display: none;
+margin: 0 auto;
+}
+.list{
+border: none;
+width: 100%;
+font-size: 200%;
+
+}
+
+.total{
+display: flex;
+flex-direction: column;
+}
+.point{
+padding-top: 0px;
+}
+
+}
+@media screen and (max-width: 768px){
+.loginimg{
+width: 100px;
+height: 100px;
+}
+.name{
+font-size: 200%;
+}
+.grade{
+font-size: 150%;
+}
+
+.pointimg{
+width: 50%;
+height: 50%;
+}
+
+}
