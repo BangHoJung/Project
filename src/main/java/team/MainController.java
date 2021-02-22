@@ -46,6 +46,22 @@ public class MainController {
     public String loginView() {
         return "login";
     }
+	@RequestMapping("/notice.do")
+	public String notice() {
+		return "notice";
+	}
+	@RequestMapping("/introduce.do")
+	public String introduce() {
+		return "introduce";
+	}
+	@RequestMapping("/guide.do")
+	public String guide() {
+		return "guide";
+	}
+	@RequestMapping("/qnaView.do")
+	public String qnaView() {
+		return "qna";
+	}
 
     @RequestMapping("/loginAction.do")
     public String login(HttpServletRequest request,HttpSession session) {
