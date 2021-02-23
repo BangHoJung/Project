@@ -40,8 +40,10 @@ public class MainController {
 	public String main() {
 		return "main";
 	}
-	
-	
+	@RequestMapping("/myPageView.do")
+	public String myPageView() {
+		return "mypage";
+	}
 	@RequestMapping("/loginView.do")
     public String loginView() {
         return "login";
@@ -97,7 +99,7 @@ public class MainController {
 		session.invalidate();
 		return "main";
 	}
-     
+    
 	@RequestMapping("/registerView.do")
 	public String registerView() {
 		return "register";
@@ -126,9 +128,12 @@ public class MainController {
         System.out.println(category);
         String checkID =memberService.selectMember(id);
         if(checkID !=null) {
-        	System.out.println("회원가입 실패");
-        	request.getSession().setAttribute("registerSuccess",false);
-        	return "register";
+        	try {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("회원가입이 실패했습니다");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
         }
         else {
         	MemberDTO dto = new MemberDTO(id,pass,name,tel,0,1,category,0);
@@ -137,9 +142,13 @@ public class MainController {
         		MemberAddressDTO addr = new MemberAddressDTO(id, 1, address);
         		int addrCount=memberService.registerAddress(addr);
         		if(addrCount !=0) {
-        			request.getSession().setAttribute("registerSuccess", true);
-        			return "login";
-        		}
+        			   try {
+               			response.setContentType("text/html;charset=utf-8");
+       					response.getWriter().write("회원가입이 성공했습니다");
+       				} catch (IOException e) {
+       					e.printStackTrace();
+       				}
+               		}
         	
         	}
         }
@@ -225,10 +234,6 @@ public class MainController {
 		
 		return "main";
 	}
-	@RequestMapping("/myPageView.do")
-	public String myPageView() {
-		return"mypage";
-	}
 	
 	@RequestMapping("storeCheckView.do")
 	public String storeCheckView(HttpServletRequest request) {
@@ -268,16 +273,6 @@ public class MainController {
 		return "store_check";
   }
 	
-	@RequestMapping("menuRegisterView.do")
-	public String menuRegisterView() {
-		return "menu_register";
-	}
-	
-	@RequestMapping("menuRegisterAction.do")
-	public String menuRegisterAction(HttpServletRequest request) {
-		return "menu_register";
-	}
-	
    @RequestMapping("adminMessageView.do")
    public String adminMessageView() {
 	   return "admin_message";
@@ -313,6 +308,7 @@ public class MainController {
 		   request.setAttribute("content",dto.getMessage_content());
 		   request.setAttribute("date",dto.getMessage_date());
 		   request.setAttribute("pageNo",pageNo);
+		   request.setAttribute("message_no", no);
 		   return "message_detail_view";
 	   }
 	   else{
