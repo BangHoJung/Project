@@ -19,8 +19,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
 import team.dto.MessageDTO;
+import team.dto.QnaDTO;
 import team.dto.StoreDTO;
 import team.service.MemberService;
+import team.service.QnaService;
 import team.service.StoreService;
 import team.vo.PaggingVO;
 
@@ -28,13 +30,16 @@ import team.vo.PaggingVO;
 public class MainController {
 	private MemberService memberService;
 	private StoreService storeService;
+	private QnaService qnaService;
 	
-	
-	public MainController(MemberService memberService, StoreService storeService) {
+
+	public MainController(MemberService memberService, StoreService storeService, QnaService qnaService) {
 		super();
 		this.memberService = memberService;
 		this.storeService = storeService;
+		this.qnaService = qnaService;
 	}
+
 
 	@RequestMapping("/")
 	public String main() {
@@ -59,10 +64,32 @@ public class MainController {
 		return "guide";
 	}
 	@RequestMapping("/qnaView.do")
-	public String qnaView() {
+	public String qnaView(HttpServletRequest request) {
+		int page=1; int pageOfContentCount =20;
+		//페이지 셋팅
+		if(request.getParameter("pageNo") != null)
+			page = Integer.parseInt(request.getParameter("pageNo"));
+		System.out.println(page);
+		List<QnaDTO> list = qnaService.selectQnaList(page);//글목록 읽어옴
+		int count = qnaService.selectCount();
+		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
+		request.setAttribute("list", list);
+		request.setAttribute("pagging", vo);
+		System.out.println(list.toString());
 		return "qna";
 	}
-
+	@RequestMapping("/qnaDetailView.do")
+	public String qnaDetailView(HttpServletRequest request) {
+		int qno= 0;
+		if(request.getParameter("qno") != null)
+			qno = Integer.parseInt(request.getParameter("qno"));
+		else
+			qno = (int)request.getAttribute("qno");
+		QnaDTO dto = qnaService.selectQna(qno);
+		
+		request.setAttribute("qna", dto);
+		return "qna_detail_view";
+	}
     @RequestMapping("/loginAction.do")
     public String login(HttpServletRequest request,HttpSession session) {
 		System.out.println("login.do");

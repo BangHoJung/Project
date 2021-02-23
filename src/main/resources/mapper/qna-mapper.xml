@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="team.mapper.QnaMapper">
+	<select id="selectQnaList" parameterType="int" resultType="team.dto.QnaDTO">
+		select QNA_NO,QNA_MEMBER_ID,QNA_TITLE,QNA_DATE from (select ceil(rownum/20) as pagenum,QNA_NO,QNA_MEMBER_ID,QNA_TITLE,QNA_CONTENT,QNA_DATE from qna) where pagenum = #{page} 	
+	</select>
+	<select id="selectCount" resultType="int">
+		select count(*) from qna
+	</select>
+	<select id="selectQna" parameterType="int" resultType="team.dto.QnaDTO">
+		select * from qna where qna_no = #{qno}
+	</select>
+</mapper>
