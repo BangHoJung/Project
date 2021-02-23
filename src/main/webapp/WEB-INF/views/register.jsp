@@ -6,7 +6,10 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" type="text/css" href="/css/register.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/register_mobile.css" media="screen and (max-width:767px)">
+<link rel="stylesheet" href="css/register_pc.css" media="screen and (min-width:768px)">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	function getPostcode() {
@@ -201,48 +204,46 @@ $(function () {
 		if($("input:checkbox[name=category]:checked").length==0){alert("카테고리는 최소 한개는 선택해야됩니다.");return false;};	
 		if(!(id == prevID)){alert("아이디 중복체크는 필수로 해야됩니다.");return false;}
 		$("#frm_register").submit();
-		
+	});
+	$("#btn_cansel").click(function() {		
+           location.href="/";
 	});
 });
 </script>
 </head>
 <body>
-
-	<%-- <jsp:include page=""></jsp:include> <!-- header --> --%>
-	<div id="container">
-		<h1>회원가입</h1>
+	<div class="container">
+		<h1 class="title">Taste Factory</h1>
 		<form action="registerAction.do" method="post" id="frm_register">
-		<label>아이디 <input type="text" name="id" id="id" placeholder="아이디는 필수 항목입니다." maxlength="14" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').replace(/(\..*)\./g, '$1');"></label><input type="button" value="아아디 중복체크" onclick="check_Duplication_ID()"><input type="text" style="display:none;" readonly id="btn_check_result" value="0"><input type="text" style="display:none;" readonly id="prev_id" name="prev_id" value="" readonly><br>
+		<span>아이디</span><br><input type="text" name="id" id="id" placeholder="아이디는 필수 항목입니다." maxlength="14" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').replace(/(\..*)\./g, '$1');"><input type="button" class="btn" value="아아디 중복체크" onclick="check_Duplication_ID()"><input type="text" style="display:none;" readonly id="btn_check_result" value="0"><input type="text" style="display:none;" readonly id="prev_id" name="prev_id" value="" readonly><br>
 		<p id="id_form_check"></p> 
-		<label>암호<input type="password" name="pass" id="pass" placeholder="암호는 필수 항목입니다." maxlength="20"></label><br>
+		<span>암호</span><br><input type="password" name="pass" id="pass" placeholder="암호는 필수 항목입니다." maxlength="20"><br>
 		<p id="pass_form_check"></p> 
-		<label>이름<input type="text" name="name" id="name" placeholder="이름은 필수 항목입니다." oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"></label><br>
-	<p id="name_form_check"></p>
-	연락처 <input type="text" name="tel1" id="tel1" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">-<input type="text" name="tel2" maxlength="4" id="tel2"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">-<input type="text" name="tel3" id="tel3" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><span style="color: gray;">(연락처는 필수 항목입니다)</span><br>
+		<span>이름</span><br><input type="text" name="name" id="name" placeholder="이름은 필수 항목입니다." oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"><br>
+	    <p id="name_form_check"></p>
+	     <span>전화번호</span><br><input type="text" name="tel1" placeholder="연락처는 필수 항목입니다" id="tel1" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"><span class="dash">―</span><input type="text" name="tel2" maxlength="4" id="tel2"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><span class="dash">―</span><input type="text" name="tel3" id="tel3" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><br>
 			<p id="tel_form_check"></p>
-			주소 <input type="text" id="postcode" placeholder="우편번호" readonly>
-			<input type="button" onclick="getPostcode()"value="우편번호 찾기" id="getPost"><br> 
-			<input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" size="60"><br>
+			<span>주소</span><br><input type="text" id="postcode" placeholder="우편번호" readonly>
+			<input type="button" onclick="getPostcode()"value="우편번호 찾기" class="btn" id="getPost"><br> 
+			<input type="text" name="roadAddress" id="roadAddress" class="roadAddress" placeholder="도로명주소" size="60"><br>
 			<input type="hidden" id="jibunAddress" placeholder="지번주소" size="60"> 
 			<span id="guide" style="color: #999; display: none"></span> 
-			<input type="text" name="detailAddress" id="detailAddress" placeholder="상세주소" size="60"><br>
+			<input type="text" name="detailAddress" id="detailAddress" class="detailAddress" placeholder="상세주소" size="60"><br>
 			<input type="hidden" id="extraAddress" placeholder="참고항목"size="60"> 
 			<input type="hidden" id="engAddress" placeholder="영문주소" size="60"><br> 
-				<b>선호하는 음식 카테고리</b>
+				<b><span>선호하는 음식 카테고리</span></b><br>
 				 ※ 카테고리는 최대 3개까지 선택 가능합니다<br><br>
-				<input type="checkbox" name="category" value="#한식">한식
-				<input type="checkbox" name="category" value="#양식">양식
-				<input type="checkbox" name="category" value="#일식">일식
-				<input type="checkbox" name="category" value="#중식">중식
-				<input type="checkbox" name="category" value="#패스트푸드">패스트푸드
-				<input type="checkbox" name="category" value="#찜.탕">찜.탕
-				<input type="checkbox" name="category" value="#디저트">디저트
-				<input type="checkbox" name="category" value="#치킨">치킨
-				<input type="checkbox" name="category" value="#피자">피자
-			<br><br><button id="btn_register">회원가입</button>
+				<input type="checkbox" name="category" value="#한식"><span class="category">한식</span>
+				<input type="checkbox" name="category" value="#양식"><span class="category">양식</span>
+				<input type="checkbox" name="category" value="#일식"><span class="category">일식</span>
+				<input type="checkbox" name="category" value="#중식"><span class="category">중식</span>
+				<input type="checkbox" name="category" value="#패스트푸드"><span class="category">패스트푸드</span><br>
+				<input type="checkbox" name="category" value="#찜.탕"><span class="category">찜.탕</span>
+				<input type="checkbox" name="category" value="#디저트"><span class="category">디저트</span>
+				<input type="checkbox" name="category" value="#치킨"><span class="category">치킨</span>
+				<input type="checkbox" name="category" value="#피자"><span class="category">피자</span>
+			<br><br><button id="btn_register" class="btn">회원가입</button>&ensp;<button type="button" id="btn_cansel" class="btn">취소</button>
 		</form>
 	</div>
-
-	<%-- <jsp:include page=""></jsp:include> <!-- footer --> --%>
 </body>
 </html>
