@@ -27,90 +27,43 @@
 	<h3>Q&A</h3>
 		<table class="board">
 			<tr>
-				<th class="bno">글번호</th>
+				<th class="qno">글번호</th>
 				<th class="title">제목</th>
 				<th class="writer">작성자</th>
 				<th class="date">작성일</th>
-				<th>조회수</th>
 			</tr>
-		<%--데이터 없어서 ㅎ --%>
-		<%-- <c:if test="${requestScope.list ==null}">
-			<script>
-				location.href="main.do?pageNo=1";
-				
-			</script>
-		</c:if> --%>
 		<c:forEach var="dto" items="${requestScope.list }">
 			<tr>
-				<td>${dto.bno }</td>
-				<td><a href="qnaView.do?bno=${dto.bno }"> ${dto.title }
-					<c:if test="${dto.cCount > 0 }">
+				<td>${dto.qna_no}</td>
+				<td><a href="qnaDetailView.do?qno=${dto.qna_no}"> ${dto.qna_title}
+					<%-- <c:if test="${dto.cCount > 0 }">
 						[${dto.cCount}]
-					</c:if>
+					</c:if> --%>
 				</a></td>
-				<td>${dto.writer}</td>
-				<td>${dto.bDate }</td>
-				<td>${dto.bCount }</td>
+				<td>${dto.qna_member_id}</td>
+				<td>${dto.qna_date}</td>
 			</tr>
 		</c:forEach>
-			<%--demo --%>
-			<tr>
-				<td>bno</td>
-				<td>title</td>
-				<td>writer</td>
-				<td>date</td>
-				<td>count</td>
 			
-			</tr>
-			<tr>
-				<td>bno</td>
-				<td>title</td>
-				<td>writer</td>
-				<td>date</td>
-				<td>count</td>
-			
-			</tr>
-			<tr>
-				<td>bno</td>
-				<td>title</td>
-				<td>writer</td>
-				<td>date</td>
-				<td>count</td>
-			
-			</tr>
-			<tr>
-				<td>bno</td>
-				<td>title</td>
-				<td>writer</td>
-				<td>date</td>
-				<td>count</td>
-			
-			</tr>
-			<tr>
-				<td>bno</td>
-				<td>title</td>
-				<td>writer</td>
-				<td>date</td>
-				<td>count</td>
-			
-			</tr>
 		  <tr>
 			<td colspan="7">
 					<div class="page_bar">
 						<c:if test="${pagging.previousPageGroup }">
-							<a href="qna.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
+							<a href="qnaView.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
 						</c:if>
 						<c:forEach var="i" begin="${pagging.startPageOfPageGroup}" 
 						end="${pagging.endPageOfPageGroup}">
-							<a href="qna.do?pageNo=${i }">${ i}</a>
+							<a href="qnaView.do?pageNo=${i }">${ i}</a>
 						</c:forEach>
 					
 						<c:if test="${pagging.nextPageGroup }">
-							<a href="qna.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
+							<a href="qnaView.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
 						</c:if>
-						<a href="boardWriteView.do" class="btn_writer">글쓰기</a>
+						<a href="qnaWriteView.do" class="btn_writer">글쓰기</a>
 					</div>
+					</td>
 			</tr>
+			
 		</table>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
