@@ -65,6 +65,17 @@ public class MainController {
 	public String guide() {
 		return "guide";
 	}
+	@RequestMapping("/memberUpdateView.do")
+    public String memberupdate(HttpSession session) {
+		
+		  /*
+		  session.getAttribute("pass");
+		  session.getAttribute("category");
+		  session.getAttribute("tel");
+		  MemberDTO dto = memberService.loginMember(pass,category,tel);
+		*/
+		  return"member_update";
+		}
 	@RequestMapping("/insertUpdateAddressView.do")
 	public String insertUpdateAddressView() {
 		return "insert_update_address_view";
