@@ -28,51 +28,9 @@ $(function () {
 </script>
 </head>
 <body>
-<div class="top">
-<div class="hader">
-<h2 class="title">taste factory</h2>
-<div class="locomotion"> <p class="logout"> <a href="#">로그아웃</a></p></div>
-</div>
-
-<div  class="total">
-
-<div class="profile">
-<img alt="" src="img/login.png" class="loginimg">
-<div class="fosizs">
-<p class="name">${sessionScope.id}님</p> 
-<p class="grade">적립 포인트</p>
-<p class="Balance">14.222point</p>
-</div>
-</div>
-
-<div class="pointtotal">
- <div class="point">
- <img alt="" src="img/momo.png" class="pointimg">
-  <p> 적립금</p>
- </div>
- <div class="point">
- <img alt="" src="img/momo.png" class="pointimg">
- <p> 적립금</p>
- </div>
- <div class="point">
- <img alt="" src="img/momo.png" class="pointimg">
- <p> 적립금</p>
- </div>
- </div>
-</div>
-</div>
+<jsp:include page="/templete/mypage_header.jsp"></jsp:include>
 <div class="body">
-<div class="menulist">
-<ul>
-<li class="list"> <a href="#">회원정보 수정</a> </li>
-<li class="list"><a href="#">1:1문의 하기</a></li>
-<li class="list"><a href="#">업체 정보 등록</a></li>
-<li class="list"><a href="#">공지사항</a></li>
-<li class="list"><a href="#">위키리스트</a></li>
-<li class="list"><a href="#">나의 리뷰</a></li>
-<li class="list"><a href="userMessageView.do">쪽지함</a></li>
-</ul>
-</div>
+<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
 <div class="container">
 <hr>
 <b>보낸 사람</b>&ensp;관리자<br>

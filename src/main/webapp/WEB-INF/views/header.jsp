@@ -41,7 +41,7 @@
 			</div>
 			<div class="right">
 				<c:if test="${sessionScope.login != null && sessionScope.login == true}">
-			<p> ${sessionScope.name } 님이 로그인 하셨습니다. | <a href="#">마이페이지</a><br>
+			<p> ${sessionScope.name } 님이 로그인 하셨습니다. | <a href="myPageView.do">마이페이지</a><br>
 			<a href="/loguot.do">로그아웃</a></p>
 			</c:if>
 			<c:if test="${sessionScope.login == null || sessionScope.login == false}">

@@ -19,7 +19,6 @@
 <script type="text/javascript">
 $(function () {
 	if(${sessionScope.login == false}){alert("아이디와 암호를 확인해주세요");};
-	if(${sessionScope.registerSuccess == true}){alert("회원가입이 성공했습니다");};
 	
 	$("#btn_login").click(function () {
 		event.preventDefault();
