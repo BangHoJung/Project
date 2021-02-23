@@ -33,41 +33,13 @@
 							extraRoadAddr += (extraRoadAddr !== '' ? ', '
 									+ data.buildingName : data.buildingName);
 						}
-						// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-						if (extraRoadAddr !== '') {
-							extraRoadAddr = ' (' + extraRoadAddr + ')';
-						}
 
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
 						//document.getElementById('postcode').value = data.zonecode;
 						//document.getElementById("roadAddress").value = roadAddr;
 						document.getElementById("addr").value = data.jibunAddress;
-
-						// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-						if (roadAddr !== '') {
-							document.getElementById("extraAddress").value = extraRoadAddr;
-						} else {
-							document.getElementById("extraAddress").value = '';
-						}
-
 						var guideTextBox = document.getElementById("guide");
-						// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-						if (data.autoRoadAddress) {
-							var expRoadAddr = data.autoRoadAddress
-									+ extraRoadAddr;
-							guideTextBox.innerHTML = '(예상 도로명 주소 : '
-									+ expRoadAddr + ')';
-							guideTextBox.style.display = 'block';
-
-						} else if (data.autoJibunAddress) {
-							var expJibunAddr = data.autoJibunAddress;
-							guideTextBox.innerHTML = '(예상 지번 주소 : '
-									+ expJibunAddr + ')';
-							guideTextBox.style.display = 'block';
-						} else {
-							guideTextBox.innerHTML = '';
-							guideTextBox.style.display = 'none';
-						}
+						guideTextBox.style.display = 'block';
 					}
 				}).open();
 	}
@@ -107,27 +79,28 @@
 				<table class="must">
 					<tr>
 						<th>식당 이름</th>
-						<td><input type="text" name="name" placeholder="식당 상호명을 입력해주세요"></td>
+						<td><input type="text" name="name" placeholder="식당 상호명을 입력해주세요" oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"></td>
 					</tr>
 					<tr>
 						<th>식당 대표 전화번호</th>
 						<td>
-							<input type="text" name="tel1" class="tel"> - 
-							<input type="text" name="tel2" class="tel"> -
-							<input type="text" name="tel3" class="tel">
+							<input type="text" name="tel1" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> - 
+							<input type="text" name="tel2" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> -
+							<input type="text" name="tel3" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 						</td>
 					</tr>
 					<tr>
 						<th>식당 주소</th>
 						<td>
 							<!-- <input type="text" name="addr" placeholder="식당 지번주소를 입력해주세요"> -->
-							<input type="button" onclick="getPostcode()"value="주소 찾기" id="getPost"><br>
-							<input type="text" id="addr" readonly size="60" placeholder="지번주소"> 
+							<input type="button" onclick="getPostcode()" value="주소 찾기" id="getPost"><br>
+							<input type="text" id="addr" readonly size="60" placeholder="지번주소">
+							<span id="guide" style="color: #999; display: none"></span> 
 						</td>
 					</tr>
 					<tr>
 						<th>사업자등록번호</th>
-						<td><input type="text" name="license" placeholder="사업자등록번호를 입력해주세요"></td>
+						<td><input type="text" name="license" placeholder="사업자등록번호를 입력해주세요" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
 					</tr>
 					<tr>
 						<th>사업자등록증 첨부</th>
