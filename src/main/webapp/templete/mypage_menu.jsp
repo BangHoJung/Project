@@ -67,6 +67,7 @@ float:right;
 <li class="list"><a href="#">공지사항</a></li>
 <li class="list"><a href="#">위키리스트</a></li>
 <li class="list"><a href="#">나의 리뷰</a></li>
+<li class="list"><a href="insertUpdateAddressView.do">나의 주소</a></li>
 <li class="list"><a href="userMessageView.do">쪽지함</a></li>
 </ul>
 </div>
