@@ -158,6 +158,7 @@ public class MainController {
 				e.printStackTrace();
 			}
 		}
+		
 		else {
 			
 		 String checkID =memberService.selectMember(id);
