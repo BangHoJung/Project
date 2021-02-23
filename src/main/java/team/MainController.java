@@ -65,6 +65,17 @@ public class MainController {
 	public String guide() {
 		return "guide";
 	}
+	@RequestMapping("/memberUpdateView.do")
+    public String memberupdate(HttpSession session) {
+		
+		  /*
+		  session.getAttribute("pass");
+		  session.getAttribute("category");
+		  session.getAttribute("tel");
+		  MemberDTO dto = memberService.loginMember(pass,category,tel);
+		*/
+		  return"member_update";
+		}
 	@RequestMapping("/qnaView.do")
 	public String qnaView(HttpServletRequest request) {
 		int page=1; int pageOfContentCount =20;

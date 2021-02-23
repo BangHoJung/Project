@@ -24,7 +24,7 @@
 <div class="top">
 
 <div class="hader">
-<h2 class="title">taste factory</h2>
+<h2 class="title"> <a href="/" class="a" style="color: white;"> taste factory</a> </h2>
 <div class="locomotion"> <p class="logout"> <a href="logout.do">로그아웃</a></p></div>
 </div>
 
@@ -58,7 +58,7 @@
 <div class="body">
 <div class="menulist">
 <ul>
-<li class="list"> <a href="#">회원정보 수정</a> </li>
+<li class="list"> <a href="memberUpdateView.do">회원정보 수정</a> </li>
 <li class="list"><a href="#">1:1문의 하기</a></li>
 <li class="list"><a href="#">업체 정보 등록</a></li>
 <li class="list"><a href="#">공지사항</a></li>
@@ -71,7 +71,6 @@
 <div class="container">
 <div class="row"> 
 <div class="col-xs-12">
-
 <h3 class="maintitle"> 1:1문의하기  </h3>
 <p class="see">  &lt; <a href="#"> 더보기 </a> > </p>
 <table class="table">

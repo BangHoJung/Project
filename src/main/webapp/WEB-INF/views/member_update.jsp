@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- <meta name='viewport' content='width=device-width, initial-scale=1'> -->
+ <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/mypage.css" type="text/css">
 <!-- 부트스트랩 -->
@@ -14,70 +14,106 @@
 
 <!-- 제이쿼리 -->
 <script src="lib/js/jquery-3.5.1.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
-	function getPostcode() {
-		new daum.Postcode(
-				{
-					oncomplete : function(data) {
-						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-						// 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
-						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-						var roadAddr = data.roadAddress; // 도로명 주소 변수
-						var extraRoadAddr = ''; // 참고 항목 변수
+<script type="text/javascript">
+$(function () {
+	if(${sessionScope.registerSuccess == false}){alert("회원가입이 실패했습니다");};
+	$("#btn_check_result").blur();
+	
+	var result=$("#tel").val();
+	var tel=result.split("-");
+	
+	$("#tel1").val(tel[0]);
+	$("#tel2").val(tel[1]);
+	$("#tel3").val(tel[2]);
+	
+	
+    
+	$("#pass").keyup(function() {
+		var length = $("#pass").val().trim().length
+		if(length<6){
+			$("#pass_form_check").css("color", "red");
+			$("#pass_form_check").html("암호는 6자리 이상 입력해주세요");
+		}
+		else{
+			$("#pass_form_check").css("color", "blue");
+			$("#pass_form_check").html("사용가능한 형식입니다");
+		}
+	});
+	$("#tel1").keyup(function() {
+		var length = $("#tel1").val().trim().length
+		if(length<2){
+			$("#tel_form_check").css("color", "red");
+			$("#tel_form_check").html("잘못된 형식입니다.<br>예) 02-333-1111, 010-1111-1234 , 0507-1111-1111");
+		}
+		else{
+			$("#tel_form_check").css("color", "blue");
+			$("#tel_form_check").html("사용가능한 형식입니다");
+		}
+	});
+	$("#tel2").keyup(function() {
+		var length = $("#tel2").val().trim().length
+		if(length<3){
+			$("#tel_form_check").css("color", "red");
+			$("#tel_form_check").html("잘못된 형식입니다.<br>예) 02-333-1111, 010-1111-1234 , 0507-1111-1111");
+		}
+		else{
+			$("#tel_form_check").css("color", "blue");
+			$("#tel_form_check").html("사용가능한 형식입니다");
+		}
+	});
+	$("#tel3").keyup(function() {
+		var length = $("#tel3").val().trim().length
+		if(length<4){
+			$("#tel_form_check").css("color", "red");
+			$("#tel_form_check").html("잘못된 형식입니다.<br>예) 02-333-1111, 010-1111-1234 , 0507-1111-1111");
+		}
+		else{
+			$("#tel_form_check").css("color", "blue");
+			$("#tel_form_check").html("사용가능한 형식입니다");
+		}
+	});
+	$("#name").keyup(function() {
+		var length = $("#name").val().trim().length
+		if(length==0){
+			$("#name_form_check").css("color", "red");
+			$("#name_form_check").html("한글로 입력해주세요");
+		}
+		else{
+			$("#name_form_check").html("");
+		}
+	});		
+	$("input:checkbox[name=category]").click(function() {
+   var count = $("input:checkbox[name=category]:checked").length;
+		if(count==3){
+          $("input:checkbox:not(:checked)").attr("disabled", "disabled");
+         }else {
+           $("input[name=category]:checkbox").removeAttr("disabled");
+          }
+	});	
+	$("#btn_register").click(function() {
+	 var prevID=$("input:text[name=prev_id]").val()
+	 var id=$("input:text[name=id]").val();
+		event.preventDefault();
 
-						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-						// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-						if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-							extraRoadAddr += data.bname;
-						}
-						// 건물명이 있고, 공동주택일 경우 추가한다.
-						if (data.buildingName !== '' && data.apartment === 'Y') {
-							extraRoadAddr += (extraRoadAddr !== '' ? ', '
-									+ data.buildingName : data.buildingName);
-						}
-						
-						// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-						if (extraRoadAddr !== '') {
-							extraRoadAddr = ' (' + extraRoadAddr + ')';
-						}
+		if($("#pass").val().trim().length == 0){alert("암호를 입력해주세요");$("#pass").focus();return false;};
+		if($("#pass").val().trim().length < 6){alert("암호는 6글자이상 입력해주세요");$("#pass").focus();return false;};
+		if($("#name").val().trim().length == 0){alert("이름을 입력해주세요");$("#name").focus();return false;};
+		if($("#tel1").val().trim().length == 0){alert("연락처를 입력해주세요");$("#tel1").focus();return false;};
+		if($("#tel1").val().trim().length<2){alert("전화번호 형식에 맞는 연락처를 입력해주세요                     예)031-388-8474 010-1111-1111");$("#tel1").focus();return false;}
+		if($("#tel2").val().trim().length == 0){alert("연락처를 입력해주세요");$("#tel2").focus();return false;};
+		if($("#tel2").val().trim().length<3){alert("전화번호 형식에 맞는 연락처를 입력해주세요                     예)031-388-8474 010-1111-1111");$("#tel2").focus();return false;}
+		if($("#tel3").val().trim().length == 0){alert("연락처를 입력해주세요");$("#tel3").focus();return false;};
+		if($("#tel3").val().trim().length<4){alert("전화번호 형식에 맞는 연락처를 입력해주세요                     예)031-388-8474 010-1111-1111");$("#tel3").focus();return false;}
+		if($("#postcode").val().length == 0){alert("주소는 필수항목입니다.");$("#getPost").click();return false;};
+		if($("input:checkbox[name=category]:checked").length==0){alert("카테고리는 최소 한개는 선택해야됩니다.");return false;};	
+		$("#frm_register").submit();
+	});
+	$("#btn_cansel").click(function() {		
+           location.href="/";
+	});
+});
 
-						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						document.getElementById('postcode').value = data.zonecode;
-						document.getElementById("roadAddress").value = roadAddr;
-						document.getElementById("jibunAddress").value = data.jibunAddress;
-
-						document.getElementById("engAddress").value = data.addressEnglish;
-
-						// 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
-						if (roadAddr !== '') {
-							document.getElementById("extraAddress").value = extraRoadAddr;
-						} else {
-							document.getElementById("extraAddress").value = '';
-						}
-
-						var guideTextBox = document.getElementById("guide");
-						// 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-						if (data.autoRoadAddress) {
-							var expRoadAddr = data.autoRoadAddress
-									+ extraRoadAddr;
-							guideTextBox.innerHTML = '(예상 도로명 주소 : '
-									+ expRoadAddr + ')';
-							guideTextBox.style.display = 'block';
-
-						} else if (data.autoJibunAddress) {
-							var expJibunAddr = data.autoJibunAddress;
-							guideTextBox.innerHTML = '(예상 지번 주소 : '
-									+ expJibunAddr + ')';
-							guideTextBox.style.display = 'block';
-						} else {
-							guideTextBox.innerHTML = '';
-							guideTextBox.style.display = 'none';
-						}
-					}
-				}).open();
-	}
 </script>
 <style type="text/css">
 
@@ -90,12 +126,15 @@ border: 1px solid black;
 </style>
 </head>
 <body>
+<input type="text" style="display: none;" id="tel" value="${sessionScope.tel}">
+
 <form action="mypage.do" method="post">
 
 <div class="top">
 
 <div class="hader">
-<h2 class="title">taste factory</h2>
+<h2 class="title"> <a href="/" class="a" style=" color: white;">taste factory</a></h2>
+
 <div class="locomotion"> <p class="logout"> <a href="logout.do">로그아웃</a></p></div>
 </div>
 
@@ -147,25 +186,18 @@ border: 1px solid black;
 <hr>
 </div>
 
-
-
-<form action="memBer_Update.do" method="post">
-		 <span>아이디</span><br><input type="text" name="id" id="id" placeholder="${sessionScope.id }" disabled> <span>아이디는 수정 할수 없습니다</span> <br>
+<form action="memberUpdateView.do" method="post">
+		 <span>아이디</span><br><input type="text" name="id" id="id" placeholder="${sessionScope.id}" disabled> <span>아이디는 수정 할수 없습니다</span> <br>
 		 <p id="id_form_check"></p> 
-		 <span>변경 하실 암호를 입력해주세요</span><br><input type="password" name="pass" id="pass" placeholder="암호는 필수 항목입니다." maxlength="20"><br>
+		 <span>암호 입력</span><br><input type="password" name="pass" id="pass" placeholder="변경 할 비밀번호" maxlength="20"><br>
 		 <p id="pass_form_check"></p> 
-		 <span>이름</span><br><input type="text" name="name" id="name" placeholder="이름은 필수 항목입니다." oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"><br>
+		 <span>이름</span><br><input VALUE="${sessionScope.name}" type="text" name="name" id="name"  oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"><br>
 	     <p id="name_form_check"></p>
-	     <span>전화번호</span><br><input type="text" name="tel1" placeholder="연락처는 필수 항목입니다" id="tel1" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"><span class="dash">―</span><input type="text" name="tel2" maxlength="4" id="tel2"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><span class="dash">―</span><input type="text" name="tel3" id="tel3" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><br>
+	     <span>전화번호</span><br><input type="text" name="tel1" placeholder="연락처는 필수 항목입니다" id="tel1" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+	     <span class="dash">―</span><input type="text" name="tel2" maxlength="4" id="tel2"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><span class="dash">―</span>
+	     <input type="text" name="tel3" id="tel3" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><br>
 			<p id="tel_form_check"></p>
-			<span>주소</span><br><input type="text" id="postcode" placeholder="우편번호" readonly>
-			<input type="button" onclick="getPostcode()"value="우편번호 찾기" class="btn" id="getPost"><br> 
-			<input type="text" name="roadAddress" id="roadAddress" class="roadAddress" placeholder="도로명주소" size="60"><br>
-			<input type="hidden" id="jibunAddress" placeholder="지번주소" size="60"> 
-			<span id="guide" style="color: #999; display: none"></span> 
-			<input type="text" name="detailAddress" id="detailAddress" class="detailAddress" placeholder="상세주소" size="60"><br>
-			<input type="hidden" id="extraAddress" placeholder="참고항목"size="60"> 
-			<input type="hidden" id="engAddress" placeholder="영문주소" size="60"><br> 				
+					
 				<b><span>변경하실 음식 카테고리</span></b><br>
 				
 				 ※ 카테고리는 최대 3개까지 선택 가능합니다<br><br>
