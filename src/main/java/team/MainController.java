@@ -264,6 +264,16 @@ public class MainController {
 		return "store_check";
   }
 	
+	@RequestMapping("menuRegisterView.do")
+	public String menuRegisterView() {
+		return "menu_register";
+	}
+	
+	@RequestMapping("menuRegisterAction.do")
+	public String menuRegisterAction(HttpServletRequest request) {
+		return "menu_register";
+	}
+	
    @RequestMapping("adminMessageView.do")
    public String adminMessageView() {
 	   return "admin_message";
