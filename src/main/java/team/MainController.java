@@ -46,7 +46,10 @@ public class MainController {
 		return "main";
 	}
 	
-	
+	 @RequestMapping("/memBer_Update.do")
+	  public String memberupdate() {
+		  return "member_update";
+	  }
 	@RequestMapping("/loginView.do")
     public String loginView() {
         return "login";
@@ -185,6 +188,7 @@ public class MainController {
 				e.printStackTrace();
 			}
 		}
+		
 		else {
 			
 		 String checkID =memberService.selectMember(id);
