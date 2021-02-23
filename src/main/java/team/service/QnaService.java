@@ -30,5 +30,13 @@ public class QnaService {
 		return qnaMapper.selectQna(qno);
 	}
 
+	public int newQno() {
+		return qnaMapper.newQno();
+	}
+
+	public int insertQna(QnaDTO qnaDTO) {
+		return qnaMapper.insertQna(qnaDTO);
+	}
+
 	
 }
