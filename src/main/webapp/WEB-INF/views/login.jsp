@@ -47,12 +47,12 @@ $(function () {
 <div class="col-md-6" id="pon"> 
 <strong>더 이상 고민하지 마세요</strong> <br>
 <p>너무 많아진 식당 믿지 못할 맛집추천 최고의 리뷰로 정해드리겠습니다</p> <br>
-<img src="/img/loginimg2.jpg">
+<img src="/img/lolo.png">
 
 </div>
 <div class="col-md-6">
 <div class="Total">
- <h3>취업시켜 조를 이용하고 싶으신가요?</h3>
+ <h3 class="title">Taste Factory</h3>
 <form action="loginAction.do" id="frm_login" method="post">
  <input type="text" name="id"  placeholder="아이디를 입력해주세요" class="id"  maxlength='14' id="id"> <br>
  <input type="password" name="pass"  placeholder="비밀번호를 입력해주세요" class="pass" maxlength='20' id="pass"> <br>

@@ -225,6 +225,10 @@ public class MainController {
 		
 		return "main";
 	}
+	@RequestMapping("/myPageView.do")
+	public String myPageView() {
+		return"mypage";
+	}
 	
 	@RequestMapping("storeCheckView.do")
 	public String storeCheckView(HttpServletRequest request) {
