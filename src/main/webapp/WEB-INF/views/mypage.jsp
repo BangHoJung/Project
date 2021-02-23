@@ -25,11 +25,10 @@
 
 <div class="hader">
 <h2 class="title">taste factory</h2>
-<div class="locomotion"> <p class="logout"> <a href="#">로그아웃</a></p></div>
+<div class="locomotion"> <p class="logout"> <a href="logout.do">로그아웃</a></p></div>
 </div>
 
 <div  class="total">
-
 <div class="profile">
 <img alt="" src="img/login.png" class="loginimg">
 <div class="fosizs">

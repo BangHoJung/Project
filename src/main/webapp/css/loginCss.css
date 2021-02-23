@@ -6,10 +6,13 @@
  margin: 30px 0px;
  border: none;
  text-decoration: none;
+ color: white;
+ background-color: #FA0050;
 }
-h3{
-margin:  60px 30px;
-
+.Total > .title{
+margin:  30px 30px;
+font-size: 30px;
+color: #FA0050;
 }
 
 .container{
@@ -30,19 +33,14 @@ border-bottom: 1px solid gray;
 width: 300px;
 height: 60px;
 }
- .Find > :link{
+.member> :link, .Find > :link{
 color: black;
 text-decoration: none;
 }
-.member> :link{
-	color: black;
-text-decoration: none;
-}
- .Find > :hover {
+.member> :hover, .Find > :hover {
 text-decoration: none;
 	color: gray;
 }
-
 
 .btn:active{
 background-color: #BDBDBD
