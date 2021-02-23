@@ -65,6 +65,10 @@ public class MainController {
 	public String guide() {
 		return "guide";
 	}
+	@RequestMapping("/insertUpdateAddressView.do")
+	public String insertUpdateAddressView() {
+		return "insert_update_address_view";
+	}
 	@RequestMapping("/qnaView.do")
 	public String qnaView(HttpServletRequest request) {
 		int page=1; int pageOfContentCount =20;
