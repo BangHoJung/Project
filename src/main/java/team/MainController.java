@@ -188,9 +188,9 @@ public class MainController {
 	}
 	
 	@RequestMapping("/storeRegisterAction.do")
-	public String storeRegisterAction(HttpServletRequest request,MultipartHttpServletRequest mqRequest) {
-//		String member_id = (String) session.getAttribute("id");
-		String member_id = "admin";
+	public String storeRegisterAction(HttpServletRequest request,MultipartHttpServletRequest mqRequest, HttpSession session) {
+		String member_id = (String) session.getAttribute("id");
+//		String member_id = "admin";
 		String name = request.getParameter("name");
 		String tel = request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
 		String addr = request.getParameter("addr");
@@ -233,7 +233,7 @@ public class MainController {
 	@RequestMapping("storeCheckView.do")
 	public String storeCheckView(HttpServletRequest request) {
 //		String store_id = request.getParameter("store_id");
-		String store_id = "식당이름_1";
+		String store_id = "3_3";
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		System.out.println(dto.toString());
 		
