@@ -372,7 +372,7 @@ public class MainController {
 		BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
 		//버퍼 생성
 		byte[] buffer = new byte[1024*1024];
-		
+		 
 		while(true) {
 			int size = fis.read(buffer); // 읽어온 바이트수
 			if(size == -1) {
