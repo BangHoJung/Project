@@ -97,7 +97,7 @@ public class MainController {
 		session.invalidate();
 		return "main";
 	}
-    
+     
 	@RequestMapping("/registerView.do")
 	public String registerView() {
 		return "register";

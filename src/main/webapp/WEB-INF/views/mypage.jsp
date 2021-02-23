@@ -131,7 +131,6 @@
 </tr>
 
 </table>
-</table>
 <h3 class="maintitle"> 나의 정보 </h3>
 <p class="see">  &lt; <a href="#"> 더보기 </a> > </p>
 <table class="table">
