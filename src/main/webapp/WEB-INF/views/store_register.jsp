@@ -94,7 +94,7 @@
 						<td>
 							<!-- <input type="text" name="addr" placeholder="식당 지번주소를 입력해주세요"> -->
 							<input type="button" onclick="getPostcode()" value="주소 찾기" id="getPost"><br>
-							<input type="text" id="addr" readonly size="60" placeholder="지번주소">
+							<input type="text" name="addr" id="addr" readonly size="60" placeholder="지번주소">
 							<span id="guide" style="color: #999; display: none"></span> 
 						</td>
 					</tr>

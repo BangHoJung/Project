@@ -21,6 +21,7 @@ import team.dto.MemberDTO;
 import team.dto.MessageDTO;
 import team.dto.QnaDTO;
 import team.dto.StoreDTO;
+import team.dto.StoreMenuDTO;
 import team.service.MemberService;
 import team.service.QnaService;
 import team.service.StoreService;
@@ -242,7 +243,7 @@ public class MainController {
 		System.out.println("mf :"+mf);
 		
 		String path = "C:\\fileupload\\"+store_id+"\\";
-		File pathFile=null;
+		File pathFile = null;
 		try {
 			String originalFileName = mf.getOriginalFilename();
 			long fileSize = mf.getSize();
@@ -257,7 +258,7 @@ public class MainController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		storeService.storeRegister(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,pathFile.getName()));
+		storeService.registerStore(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,pathFile.getName()));
 		
 		return "main";
 	}
@@ -306,7 +307,46 @@ public class MainController {
 	}
 	
 	@RequestMapping("menuRegisterAction.do")
-	public String menuRegisterAction(HttpServletRequest request) {
+	public String menuRegisterAction(MultipartHttpServletRequest mprequest,HttpServletRequest request) {
+//		String store_id = request.getParameter("store_id");
+		System.out.println("menuRegisterAction.do");
+		String store_id = "시익다앙_22";
+		String[] names = request.getParameterValues("menu_name");
+		String[] prices =  request.getParameterValues("menu_price");
+		List<MultipartFile> fileList = mprequest.getFiles("file");
+		String path = "C:\\fileupload\\"+store_id+"\\menu\\";
+		
+		for(int i=0;i<names.length;i++) {
+			String menu_name = names[i];
+			int menu_price = Integer.parseInt(prices[i]);
+			MultipartFile mf = fileList.get(i);
+			
+			
+			String menu_photo = mf.getOriginalFilename();
+			long fileSize = mf.getSize();
+			if(fileSize > 0) {
+				System.out.println("originalFileName : " + menu_photo);
+				System.out.println("fileSize : " + fileSize);
+				File parentPath = new File(path);
+				if(!parentPath.exists()) parentPath.mkdirs();
+				
+				//파일 업로드
+				File pathFile = new File(path + menu_photo);
+				try {
+					mf.transferTo(pathFile);
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+			}
+			else {
+				menu_photo="";
+			}
+			
+			storeService.registerMenu(new StoreMenuDTO(store_id, menu_name, menu_price, menu_photo));
+			
+			
+		}
+		
 		return "menu_register";
 	}
 	
