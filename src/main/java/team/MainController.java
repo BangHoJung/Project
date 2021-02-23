@@ -58,6 +58,10 @@ public class MainController {
 	public String guide() {
 		return "guide";
 	}
+	@RequestMapping("/qnaView.do")
+	public String qnaView() {
+		return "qna";
+	}
 
     @RequestMapping("/loginAction.do")
     public String login(HttpServletRequest request,HttpSession session) {
