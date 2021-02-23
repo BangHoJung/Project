@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+h1{
+ margin-bottom: 30px;	
+}
+span{
+ color: #FA0050;
+ font-weight: bold;
+ font-size: 15px;
+}
+.title{
+ color:  #FA0050;
+}
+.dash{
+	font-weight: bold;
+	color: black;
+	margin: 0 5px;
+}
+.btn{
+ background-color: #FA0050;
+ width: 150px;
+ color: white;
+ padding: 4px 12px;
+ border: none;
+ margin-left: 5px;
+ }
+.category{
+ display:inline-block;
+ margin-left: 5px;
+ width: 100px;
+ text-align: center;
+}
+#btn_register{
+	margin-left: 150px;
+}
+#btn_cansel,#btn_register{
+	margin-top: 100px;
+}
