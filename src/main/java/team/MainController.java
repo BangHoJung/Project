@@ -107,6 +107,21 @@ public class MainController {
 		request.setAttribute("qna", dto);
 		return "qna_detail_view";
 	}
+	@RequestMapping("/qnaWrite.do")
+	public String qnaWrite() {
+		return "qna_write";
+	}
+	@RequestMapping("/qnaWriteAction.do")
+	public String boardWriteAction(MultipartHttpServletRequest request) {
+		int qna_no = qnaService.newQno();
+		String qna_title = request.getParameter("qna_title");
+		String qna_member_id= request.getParameter("qna_member_id");
+		String qna_content = request.getParameter("qna_content");
+		qnaService.insertQna(new QnaDTO(qna_no, qna_title, qna_member_id, qna_content));
+		request.setAttribute("qno", qna_no);
+		return "qna_view";
+		
+	}
     @RequestMapping("/loginAction.do")
     public String login(HttpServletRequest request,HttpSession session) {
 		System.out.println("login.do");

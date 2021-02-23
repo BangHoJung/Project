@@ -59,7 +59,7 @@
 						<c:if test="${pagging.nextPageGroup }">
 							<a href="qnaView.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
 						</c:if>
-						<a href="qnaWriteView.do" class="btn_writer">글쓰기</a>
+						<a href="/qnaWrite.do" class="btn_writer">글쓰기</a>
 					</div>
 					</td>
 			</tr>

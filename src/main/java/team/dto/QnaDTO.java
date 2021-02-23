@@ -27,13 +27,13 @@ public class QnaDTO {
 		this.qna_response = qna_response;
 		this.qna_response_date = qna_response_date;
 	}
-	//QnA조회용
-	public QnaDTO(int qna_no, String qna_member_id, String qna_title, String qna_date) {
+	//작성용
+	public QnaDTO(int qna_no, String qna_member_id, String qna_title, String qna_content) {
 		super();
 		this.qna_no = qna_no;
 		this.qna_member_id = qna_member_id;
 		this.qna_title = qna_title;
-		this.qna_date = qna_date;
+		this.qna_content = qna_content;
 	}
 	public int getQna_no() {
 		return qna_no;

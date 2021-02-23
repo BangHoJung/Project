@@ -238,6 +238,42 @@
 		width:500px;
 		border-collapse: collapse;
 	}
+	.qna_write_container a{
+		text-decoration: none;
+		color: black;
+	}
+	.qna_write_container{
+		width:800px;
+		margin:20px auto;
+		border-collapse: collapse;
+	
+	}
+	.qna_write_container button{
+		width: 50px;
+		height: 30px;
+	}
+	.qna_write_container th{
+		width:100px;
+		border-collapse: collapse;
+	}
+	.qna_write_container tr{
+		margin: 20px;
+		border-collapse: collapse;
+		height: 50px;
+	}
+	.qna_write_container td{
+		width:500px;
+		border-collapse: collapse;
+	}
+	.qna_write_container textarea{
+		width:500px;
+		height:100px;
+		resize: none;		
+	}
+	.qna_write_container input{
+		width:500px;
+		height: 20px;
+	}
 	.notice_container{
 		width: 1000px;
 	}

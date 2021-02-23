@@ -16,6 +16,10 @@ public interface QnaMapper {
 
 	QnaDTO selectQna(int qno);
 
+	int newQno();
+
+	int insertQna(QnaDTO qnaDTO);
+
 
 
 	
