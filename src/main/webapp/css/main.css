@@ -148,9 +148,6 @@
 		bottom: 20px;
 		width: 100%;
 	}
-	#board_container{
-		height: 600px;
-	}
 	#board_container h3{ 
 		width: 800px;
 		margin:0 auto;
@@ -163,16 +160,22 @@
 	.board th, .board td{
 		padding: 10px;
 		text-align: center;
-		font-size: 10px;
+		font-size: 12px;
 	}
 	.board th{
 		border-top : 1px solid gray;
 		border-bottom : 2px solid gray;
 	}
 	.board th a{
+		color: black;
+	}
+	.board a{
 		text-decoration: none;
 		color: black;
-	
+	}
+	.board a:hover{
+		color: gray;
+		font-weight:bold; 
 	}
 	.board td{
 		border-top : 1px solid gray;
@@ -181,7 +184,7 @@
 	.board tr:last-child > td {
 		border-bottom : 2px solid black;
 	}
-	.bno{
+	.qno{
 		width: 50px;
 		}
 	.title{
@@ -212,6 +215,28 @@
 	.btn_writer{
 		position:absolute;
 		right:0px;
+	}
+	.qna_datail_view_container{
+		width:800px;
+		margin:20px auto;
+		border-collapse: collapse;
+	}
+	.qna_datail_view_container th{
+		width:100px;
+		border-collapse: collapse;
+	}
+	.qna_datail_view_container tr{
+		margin: 20px;
+		border-collapse: collapse;
+		height: 50px;
+	}
+	.qna_datail_view_container #content{
+		height:200px;
+		width: 200px ;
+	}
+	.qna_datail_view_container td{
+		width:500px;
+		border-collapse: collapse;
 	}
 	.notice_container{
 		width: 1000px;
