@@ -105,7 +105,6 @@
 	}
 	
 $(function () {
-	if(${sessionScope.registerSuccess == false}){alert("회원가입이 실패했습니다");};
 	$("#btn_check_result").blur();
 	$("#prev_id").blur();
 	$("#id").keyup(function() {
@@ -188,7 +187,6 @@ $(function () {
 	$("#btn_register").click(function() {
 	 var prevID=$("input:text[name=prev_id]").val()
 	 var id=$("input:text[name=id]").val();
-		event.preventDefault();
 		if($("#id").val().trim().length == 0){alert("아이디를 입력해주세요");$("#id").focus();return false;};
 		if($("#id").val().trim().length < 4){alert("아이디는 4글자이상 입력해주세요");$("#id").focus();return false;};
 		if($("#pass").val().trim().length == 0){alert("암호를 입력해주세요");$("#pass").focus();return false;};
@@ -203,7 +201,28 @@ $(function () {
 		if($("#postcode").val().length == 0){alert("주소는 필수항목입니다.");$("#getPost").click();return false;};
 		if($("input:checkbox[name=category]:checked").length==0){alert("카테고리는 최소 한개는 선택해야됩니다.");return false;};	
 		if(!(id == prevID)){alert("아이디 중복체크는 필수로 해야됩니다.");return false;}
-		$("#frm_register").submit();
+		var data=$("#frm_register").serialize();
+		$.ajax({
+			data: data,
+			url: "registerAction.do",
+			method: "post",
+			success:function(d){
+				console.log(d);
+				var result = d.toString();
+				if(result.trim()==""){
+					alert("잘못된 접근방법입니다.")
+		        	location.href="registerView.do";
+				}
+				else if(result=="회원가입이 성공했습니다"){
+		        	alert(result);
+		        	location.href="loginView.do";
+		        }
+		        else{
+		        	alert(result);
+		        	location.href="registerView.do";
+		        }
+				}	
+		  });			
 	});
 	$("#btn_cansel").click(function() {		
            location.href="/";
@@ -214,7 +233,7 @@ $(function () {
 <body>
 	<div class="container">
 		<h1 class="title">Taste Factory</h1>
-		<form action="registerAction.do" method="post" id="frm_register">
+		<form id="frm_register">
 		<span>아이디</span><br><input type="text" name="id" id="id" placeholder="아이디는 필수 항목입니다." maxlength="14" oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '').replace(/(\..*)\./g, '$1');"><input type="button" class="btn" value="아아디 중복체크" onclick="check_Duplication_ID()"><input type="text" style="display:none;" readonly id="btn_check_result" value="0"><input type="text" style="display:none;" readonly id="prev_id" name="prev_id" value="" readonly><br>
 		<p id="id_form_check"></p> 
 		<span>암호</span><br><input type="password" name="pass" id="pass" placeholder="암호는 필수 항목입니다." maxlength="20"><br>
@@ -242,7 +261,7 @@ $(function () {
 				<input type="checkbox" name="category" value="#디저트"><span class="category">디저트</span>
 				<input type="checkbox" name="category" value="#치킨"><span class="category">치킨</span>
 				<input type="checkbox" name="category" value="#피자"><span class="category">피자</span>
-			<br><br><button id="btn_register" class="btn">회원가입</button>&ensp;<button type="button" id="btn_cansel" class="btn">취소</button>
+			<br><br><button type="button" id="btn_register" class="btn">회원가입</button>&ensp;<button type="button" id="btn_cansel" class="btn">취소</button>
 		</form>
 	</div>
 </body>
