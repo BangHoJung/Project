@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <link rel="stylesheet" href="../css/pc2.css" media="screen and (max-width:1023px)">
-<link rel="stylesheet" href="../css/main.css" media="screen and (min-width:1024px)">
+<link rel="stylesheet" href="../css/nav.css" media="screen and (min-width:1024px)">
 <script type="text/javascript">
 	$(function(){
 		$("#pop").html($(window).width());

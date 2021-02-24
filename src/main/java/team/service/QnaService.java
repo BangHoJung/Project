@@ -38,5 +38,9 @@ public class QnaService {
 		return qnaMapper.insertQna(qnaDTO);
 	}
 
+	public int updateQna(QnaDTO qnaDTO) {
+		return qnaMapper.updateQna(qnaDTO);
+	}
+
 	
 }

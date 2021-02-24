@@ -22,18 +22,12 @@
 	</script>
 </head>
 <body>
-<c:if test="${sessionScope.login == null || sessionScope.login == false  }">
-		<c:set var="page" target="${sessionScope }" value="${pageContext.request.requestURI}${pageContext.request.queryString }" property="resultPage" scope="session"/>
-		${pageContext.request.requestURI}${pageContext.request.queryString }
-		<script>
-			alert("로그인을 하셔야 이용할수 있습니다.");
-			location.href="loginView.do";
-		</script>
-	</c:if>
+
+	
 	<jsp:include page="header.jsp"></jsp:include>
-		<div class="qna_write_container">
-		<h3>Q&A작성</h3>
-		<form action="qnaWriteAction.do" method="post">
+		<div class="qna_update_container">
+		<h3>Q&A 수정</h3>
+		<form action="qnaUpdateAction.do" method="post">
 			<table>
 				<tr>
 					<th>제목</th>
@@ -50,9 +44,9 @@
 					<th style="vertical-align: top;">내용</th><td><textarea name="qna_content"></textarea></td>
 				</tr>
 				<tr>
-					<th><a href="qnaView.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">목록보기</a></th>
+					<th><a href="qnaView.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">취소</a></th>
 					<td style="text-align: right;">
-						<button type="submit" class="btn">글쓰기</button>
+						<a href="/qnaUpdateAction.do" class="btn">수정</a>
 					</td>
 				</tr>
 			</table>

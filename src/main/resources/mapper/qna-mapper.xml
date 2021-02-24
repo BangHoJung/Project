@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.mapper.QnaMapper">
 	<select id="selectQnaList" parameterType="int" resultType="team.dto.QnaDTO">
-		select QNA_NO,QNA_MEMBER_ID,QNA_TITLE,QNA_DATE from (select ceil(rownum/20) as pagenum,QNA_NO,QNA_MEMBER_ID,QNA_TITLE,QNA_CONTENT,QNA_DATE from qna) where pagenum = #{page} 	
+		select QNA_NO,QNA_MEMBER_ID,QNA_TITLE,QNA_DATE from (select ceil(rownum/20) as pagenum,QNA_NO,QNA_MEMBER_ID,QNA_TITLE,QNA_CONTENT,QNA_DATE from qna order by qna_no desc) where pagenum= #{page} 
 	</select>
 	<select id="selectCount" resultType="int">
 		select count(*) from qna
@@ -18,4 +18,7 @@
 	<insert id="insertQna" parameterType="team.dto.QnaDTO">
 		insert into qna(qna_no, qna_title, qna_member_id, qna_content) values(#{qna_no},#{qna_title},#{qna_member_id},#{qna_content})
 	</insert>
+	<update id="updateQna" parameterType="team.dto.QnaDTO" >
+		update qna set  qna_no= #{qna_no},qna_member_id= #{qna_member_id}, qna_title= #{qna_title},qna_content= #{qna_content} where qna_no = #{qna_no}
+	</update>
 </mapper>
