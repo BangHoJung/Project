@@ -595,14 +595,6 @@ public class MainController {
 		fis.close();
 		bos.close();
 	}
-   @RequestMapping("insertMemberAddressAction.do")
-	public String insertMemberAddressAction(HttpServletRequest request) {
-	   int no = Integer.parseInt(request.getParameter("no"));
-	   System.out.println(no);
-	   String address = request.getParameter("address");
-	   System.out.println(address);
-	   return null;
-   }
    
 /*광고>>>-----------------------------------------------------------------------------------------------------*/   
    
