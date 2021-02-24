@@ -27,6 +27,12 @@ public MemberDTO(String member_id, String member_pass, String member_name, Strin
 	this.member_category = member_category;
 	this.member_point = member_point;
 }
+public MemberDTO(String member_id, String member_name, String member_tel, String member_category) {
+	this.member_id = member_id;
+	this.member_name = member_name;
+	this.member_tel = member_tel;
+	this.member_category = member_category;
+}
 public String getMember_id() {
 	return member_id;
 }

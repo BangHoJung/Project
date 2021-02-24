@@ -139,23 +139,35 @@ $(function () {
 </script>
 <style type="text/css">
 .body{
-text-align: center;
+text-align: left;
 margin: 0 auto;
+
+
 }
 .main{
-text-align:center;
+
 margin: 0 auto;
+
 }
 .in{
 margin: 0 auto;
-border: 1px solid black;
+
+padding-left: 37%;
+
 }
-.id, .namee, .titletel {
+.id, .namee, .titletel, .cate {
 font-size: 25px;
+margin: 2%;
 }
 
-table, td, tr{
-border: 1px solid black;
+
+.tel1, .tel2, .tel3{
+width: 5%;
+text-align: center;
+
+}
+@media screen and (max-width: 768px){
+
 }
 </style>
 
@@ -165,45 +177,34 @@ border: 1px solid black;
 <input type="text" style="display: none;" value="${sessionScope.category}" id="category">
 <jsp:include page="/templete/mypage_header.jsp"></jsp:include>
 <div class="body ">
-<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
+
+
+<jsp:include  page="/templete/mypage_menu.jsp"></jsp:include>
 <div class="container main">
 <!-- id="frm_update" -->
-<form action="memberUpdateAction.do" method="post" id="frm_update " class="in">
-		 <table>
-		 <tr> <td>
-		 <span class="id" >아이디</span>
-		</td>
-		</tr>
-		<tr>
-		<td>
-		<input type="text" name="id" id="id" placeholder="${sessionScope.id}" readonly>
-		</td>
-		</tr>
-		<tr> <td>
+<form action="memberUpdateAction.do" method="post" id="frm_update" class="in">
+		
+		 <span class="id" >아이디</span> <br>
+		
+		<input type="text" name="id" id="id"  value="${sessionScope.id}" readonly>
+	
 		 <span>아이디는 수정 할수 없습니다</span>
-		 </td>
-		 </tr>
+		
 		 
-		 <tr> <td>
+		 
 		 <p id="pass_form_check"></p> 
 		 <span class="namee">이름</span><br><input VALUE="${sessionScope.name}" type="text" name="name" id="name"  oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"><br>
-	     </td>
-	     </tr>
-	     <tr>
-	     <td>
+	   
 	     <p id="name_form_check"></p>
-	     <span class="titletel">전화번호</span><br><input type="text" name="tel1" placeholder="연락처는 필수 항목입니다" id="tel1" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-	     <span class="dash">―</span><input type="text" name="tel2" maxlength="4" id="tel2"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><span class="dash">―</span>
-	     <input type="text" name="tel3" id="tel3" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><br>
-			</td>
-			</tr>
-			<tr>
-			<td>
+	     <span class="titletel">전화번호</span><br><input class="tel1" type="text" name="tel1" placeholder="연락처는 필수 항목입니다" id="tel1" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+	     <span class="dash">―</span><input class="tel2" type="text" name="tel2" maxlength="4" id="tel2"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><span class="dash">―</span>
+	     <input  class="tel3" type="text" name="tel3" id="tel3" maxlength="4"  oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"><br>
+		
 			<p id="tel_form_check"></p>
 					
-				<b><span>변경하실 음식 카테고리</span></b><br>
+			<span class="cate">변경하실 음식 카테고리</span><br>
 				
-				 ※ 카테고리는 최대 3개까지 선택 가능합니다<br><br>
+				<p style="color: #FA0050; margin-top: 1%;"> ※ 카테고리는 최대 3개까지 선택 가능합니다</p>
 				<input type="checkbox" name="category" id="category1" value="#한식"><span class="category">한식</span>
 				<input type="checkbox" name="category" id="category2" value="#양식"><span class="category">양식</span>
 				<input type="checkbox" name="category" id="category3" value="#일식"><span class="category">일식</span>
@@ -214,9 +215,8 @@ border: 1px solid black;
 				<input type="checkbox" name="category" id="category8" value="#치킨"><span class="category">치킨</span>
 				<input type="checkbox" name="category" id="category9" value="#피자"><span class="category">피자</span>
 			<br><br><button id="btn_update" class="btn">수정</button>&ensp;<button type="button" id="btn_cansel" class="btn">취소</button>
-                </td>
-                 </tr>
- </table>
+          
+ 
  </form>
 
 

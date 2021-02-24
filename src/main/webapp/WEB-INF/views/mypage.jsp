@@ -21,52 +21,11 @@
 <body>
 <form action="mypage.do" method="post">
 
-<div class="top">
-
-<div class="hader">
-<h2 class="title"> <a href="/" class="a" style="color: white;"> taste factory</a> </h2>
-<div class="locomotion"> <p class="logout"> <a href="logout.do">로그아웃</a></p></div>
-</div>
-
-<div  class="total">
-<div class="profile">
-<img alt="" src="img/login.png" class="loginimg">
-<div class="fosizs">
-<p class="name">닉네임</p> 
-<p class="grade">Lv.등급</p>
-<p class="Balance">다음등급까지 14.222point남으셨습니다</p>
-</div>
-</div>
-
-<div class="pointtotal">
- <div class="point">
- <img alt="" src="img/momo.png" class="pointimg">
-  <p> 적립금</p>
- </div>
- <div class="point">
- <img alt="" src="img/momo.png" class="pointimg">
- <p> 적립금</p>
- </div>
- <div class="point">
- <img alt="" src="img/momo.png" class="pointimg">
- <p> 적립금</p>
- </div>
- </div>
-</div>
-</div>
+<jsp:include page="/templete/mypage_header.jsp"></jsp:include>
 
 <div class="body">
-<div class="menulist">
-<ul>
-<li class="list"> <a href="memberUpdateView.do">회원정보 수정</a> </li>
-<li class="list"><a href="#">1:1문의 하기</a></li>
-<li class="list"><a href="#">업체 정보 등록</a></li>
-<li class="list"><a href="#">공지사항</a></li>
-<li class="list"><a href="#">위키리스트</a></li>
-<li class="list"><a href="#">나의 리뷰</a></li>
-<li class="list"><a href="#">쪽지함</a></li>
-</ul>
-</div>
+
+<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
 
 <div class="container">
 <div class="row"> 
@@ -150,9 +109,8 @@
 </table>
 </div>
 </div>
- </div>
- </div>
-
+</div>
+</div>
  </form>
 </body>
 </html>

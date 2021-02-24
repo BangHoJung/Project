@@ -33,7 +33,7 @@ public interface MemberMapper {
 	public int deleteMessage(HashMap<String, Object> map);
 
 	public int selectMessageCount(String id);
-
+	public int memberUpdateAction(MemberDTO memberDTO);
 
 
 
