@@ -35,7 +35,7 @@
 				<tr>
 					<th>작성자</th>
 					<td>
-						${requestScope.qna.qna_member_id}			
+						${sessionScope.name}			
 					</td>
 				</tr>
 				<tr>
@@ -61,7 +61,7 @@
 					</th>
 					<td style="text-align: right;">
 					<c:if test="${sessionScope.id == requestScope.qna.qna_member_id}">
-						<a href="/qnaUpdate.do" class="btn">수정</a>
+						<a href="/qnaUpdateView.do?qna_no=${requestScope.qna.qna_no}" class="btn">수정</a>
 						<a href="#" class="btn">삭제</a>
 					</c:if>
 						

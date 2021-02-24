@@ -35,7 +35,7 @@
 		<c:forEach var="dto" items="${requestScope.list }">
 			<tr>
 				<td>${dto.qna_no}</td>
-				<td><a href="qnaDetailView.do?qno=${dto.qna_no}"> ${dto.qna_title}
+				<td><a href="qnaDetailView.do?qna_no=${dto.qna_no}"> ${dto.qna_title}
 					<%-- <c:if test="${dto.cCount > 0 }">
 						[${dto.cCount}]
 					</c:if> --%>
