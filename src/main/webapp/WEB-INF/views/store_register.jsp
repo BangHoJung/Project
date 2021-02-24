@@ -71,68 +71,72 @@
 </head>
 <body>
 
-	<div id="container">
-		<h1>식당 정보 등록 페이지</h1>
-		<div>
-			<form action="storeRegisterAction.do" enctype="multipart/form-data" method="post">
-				<h2>식당 필수 정보</h2>
-				<table class="must">
-					<tr>
-						<th>식당 이름</th>
-						<td><input type="text" name="name" placeholder="식당 상호명을 입력해주세요" oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"></td>
-					</tr>
-					<tr>
-						<th>식당 대표 전화번호</th>
-						<td>
-							<input type="text" name="tel1" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> - 
-							<input type="text" name="tel2" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> -
-							<input type="text" name="tel3" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
-						</td>
-					</tr>
-					<tr>
-						<th>식당 주소</th>
-						<td>
-							<!-- <input type="text" name="addr" placeholder="식당 지번주소를 입력해주세요"> -->
-							<input type="button" onclick="getPostcode()" value="주소 찾기" id="getPost"><br>
-							<input type="text" name="addr" id="addr" readonly size="60" placeholder="지번주소">
-							<span id="guide" style="color: #999; display: none"></span> 
-						</td>
-					</tr>
-					<tr>
-						<th>사업자등록번호</th>
-						<td><input type="text" name="license" placeholder="사업자등록번호를 입력해주세요" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
-					</tr>
-					<tr>
-						<th>사업자등록증 첨부</th>
-						<td>
-							<input type="file" name="file" value="파일 선택">
-						</td>
-					</tr>
-				</table>
-				<h2>식당 상세 정보(선택)</h2>
-				<table class="add">
-					<tr>
-						<th>식당 영업시간</th>
-						<td><textarea rows="" cols="" name="time" placeholder="식당 영업시간을 입력해주세요"></textarea></td>
-					</tr>
-					<tr>
-						<th>식당 소개</th>
-						<td><textarea rows="" cols="" name="introduce" placeholder="식당 소개글을 입력해주세요"></textarea></td>
-					</tr>
-					<tr>
-						<th>카테고리</th>
-						<td>
-							<select name="category">
-								<option value="0">카테고리</option>
-								<option value="1">한식</option>
-								<option value="2">중식</option>
-								<option value="3">일식</option>
-							</select>
-						</td>
-					</tr>
-				</table>
-				<button type="submit" id="btn_register">식당 등록</button>
-			</form>
+	<jsp:include page="/templete/mypage_header.jsp"></jsp:include>
+	<div class="body">
+		<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
+		<div class="container">
+			<h1>식당 정보 등록 페이지</h1>
+			<div>
+				<form action="storeRegisterAction.do" enctype="multipart/form-data" method="post">
+					<h2>식당 필수 정보</h2>
+					<table class="must">
+						<tr>
+							<th>식당 이름</th>
+							<td><input type="text" name="name" placeholder="식당 상호명을 입력해주세요" oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"></td>
+						</tr>
+						<tr>
+							<th>식당 대표 전화번호</th>
+							<td>
+								<input type="text" name="tel1" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> - 
+								<input type="text" name="tel2" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> -
+								<input type="text" name="tel3" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+							</td>
+						</tr>
+						<tr>
+							<th>식당 주소</th>
+							<td>
+								<!-- <input type="text" name="addr" placeholder="식당 지번주소를 입력해주세요"> -->
+								<input type="button" onclick="getPostcode()" value="주소 찾기" id="getPost"><br>
+								<input type="text" name="addr" id="addr" readonly size="60" placeholder="지번주소">
+								<span id="guide" style="color: #999; display: none"></span> 
+							</td>
+						</tr>
+						<tr>
+							<th>사업자등록번호</th>
+							<td><input type="text" name="license" placeholder="사업자등록번호를 입력해주세요" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+						</tr>
+						<tr>
+							<th>사업자등록증 첨부</th>
+							<td>
+								<input type="file" name="file" value="파일 선택">
+							</td>
+						</tr>
+					</table>
+					<h2>식당 상세 정보(선택)</h2>
+					<table class="add">
+						<tr>
+							<th>식당 영업시간</th>
+							<td><textarea rows="" cols="" name="time" placeholder="식당 영업시간을 입력해주세요"></textarea></td>
+						</tr>
+						<tr>
+							<th>식당 소개</th>
+							<td><textarea rows="" cols="" name="introduce" placeholder="식당 소개글을 입력해주세요"></textarea></td>
+						</tr>
+						<tr>
+							<th>카테고리</th>
+							<td>
+								<select name="category">
+									<option value="0">카테고리</option>
+									<option value="1">한식</option>
+									<option value="2">중식</option>
+									<option value="3">일식</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+					<button type="submit" id="btn_register">식당 등록</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </body>

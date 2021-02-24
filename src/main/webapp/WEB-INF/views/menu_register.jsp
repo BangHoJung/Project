@@ -18,7 +18,7 @@
 			console.log($("tbody").children().siblings().first().val());
 			$("tbody").children().first().before("<tr><td><input type=\"text\" name=\"menu_name\" placeholder=\"메뉴 이름 입력\" ></td>"
 			 + "<td><input type=\"text\" name=\"menu_price\" placeholder=\"메뉴 가격 입력\" ></td>"
-			 + "<td><input type=\"file\" name=\"menu_photo\" value=\"없음\"></td>");
+			 + "<td><input type=\"file\" name=\"menu_photo\"></td>");
 			
 			//$("input[name='menu_name']").attr("oninput","this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');");
 			//$("input[name='menu_price']").attr("oninput","this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');");
@@ -33,7 +33,7 @@
 				if($(item).val() == null || $(item).val() == "") {
 					alert("모든 메뉴 이름을 정확히 입력해주세요");
 					event.preventDefault();
-					return false;
+					return;
 				}
 			});
 			
@@ -41,7 +41,7 @@
 				if($(item).val() == null || $(item).val() == "") {
 					alert("모든 메뉴 가격을 정확히 입력해주세요");
 					event.preventDefault()
-					return false;
+					return;
 				}
 			});
 			
@@ -70,7 +70,7 @@
 						<tr>
 							<td><input type="text" name="menu_name" placeholder="메뉴 이름 입력" oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"></td>
 							<td><input type="text" name="menu_price" placeholder="메뉴 가격 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
-							<td><input type="file" name="menu_photo" value="없음"></td>
+							<td><input type="file" name="menu_photo"></td>
 						</tr>
 					</tbody>
 				</table>

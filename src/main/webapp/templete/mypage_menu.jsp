@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +64,14 @@ float:right;
 <ul>
 <li class="list"> <a href="#">회원정보 수정</a> </li>
 <li class="list"><a href="#">1:1문의 하기</a></li>
-<li class="list"><a href="#">업체 정보 등록</a></li>
+<c:choose>
+	<c:when test="${sessionScope.grade == 1}">
+		<li class="list"><a href="storeRegisterView.do">식당 정보 등록</a></li>
+	</c:when>
+	<c:otherwise>
+		<li class="list"><a href="storeCheckListView.do">식당 등록 신청 조회</a></li>
+	</c:otherwise>
+</c:choose>
 <li class="list"><a href="#">공지사항</a></li>
 <li class="list"><a href="#">위키리스트</a></li>
 <li class="list"><a href="#">나의 리뷰</a></li>
