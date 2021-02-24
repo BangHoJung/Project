@@ -5,10 +5,9 @@
  	padding:0;
  }
  
- #container {
+ .container {
  	margin: 0 auto;
  	text-align:center;
- 	border: 2px solid black;
  	width:900px;
  	font-size:large;
  	margin-top:50px;
@@ -72,7 +71,11 @@
  
  #btn_register {
  	display:inline-block;
- 	padding:5px;
+ 	background-color: #FA0050;
+ 	color:white;
+ 	border:none;
+ 	border-radius:15px;
+ 	padding:10px;
  	font-size: 30px;
  	width:300px;
  	height: 100px;

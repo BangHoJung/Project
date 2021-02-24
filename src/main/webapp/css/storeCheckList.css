@@ -1,0 +1,20 @@
+@charset "UTF-8";
+* {
+	margin:0;
+	padding:0;
+}
+
+.wrapper {
+	width:800px;
+}
+
+
+th {
+	font-size: 20px;
+	background-color: silver;
+}
+
+td {
+	font-size:16px;
+}
+

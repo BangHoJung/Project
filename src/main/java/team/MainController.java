@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -321,20 +322,25 @@ public class MainController {
 		return "main";
 	}
 	
+	@RequestMapping("storeCheckListView.do")
+	public String storeCheckListView(HttpServletRequest request, HttpSession session) {
+		List<StoreDTO> list = storeService.selectStoreListCode(0);
+		request.setAttribute("list", list);
+		return "store_check_list";
+	}
+	
 	@RequestMapping("storeCheckView.do")
-	public String storeCheckView(HttpServletRequest request) {
-//		String store_id = request.getParameter("store_id");
-		String store_id = "식당이름_1";
+	public String storeCheckView(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		String store_id = "시익다앙_22";
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		System.out.println(dto.toString());
-		
 		request.setAttribute("dto", dto);
 		 
 		return "store_check";
 	}
 	
 	@RequestMapping("storeCheckConfirm.do")
-	public String storeCheckConfirm(HttpServletRequest request) {
+	public String storeCheckConfirm(HttpServletRequest request, HttpSession session) {
 		String store_id = request.getParameter("store_id");
 		String title ="안녕하세요 관리자 입니다.";
 		String content="식당 등록 신청 건에 대하여 승인요청이 완료되었습니다.마이페이지에서 메뉴 등록 신청서를 작성해주시기 바랍니다.\n";
@@ -343,12 +349,12 @@ public class MainController {
 //		memberService.sendMessage(dto.getStore_member_id(),title,content);
 		int count = storeService.updateStoreCode(store_id,1);
 		
-		return "store_check";
+		return "main";
 	}
 	
 	@RequestMapping("storeCheckReject.do")
-	public String storeCheckReject(HttpServletRequest request) {
-		String store_id = request.getParameter("store_id");
+	public String storeCheckReject(HttpServletRequest request, HttpSession session) {
+		String store_id = storeService.selectStoreID((String)session.getAttribute("id"));
 		String title ="안녕하세요 관리자 입니다.";
 		String content="식당 등록 신청 건에 대하여 승인요청이 거절되었습니다.\n자세한 내용을 원하시면 문의사항에 등록해주시기 바랍니다.";
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
@@ -371,41 +377,42 @@ public class MainController {
 		String store_id = "시익다앙_22";
 		String[] names = request.getParameterValues("menu_name");
 		String[] prices =  request.getParameterValues("menu_price");
-		List<MultipartFile> fileList = mprequest.getFiles("file");
+		List<MultipartFile> fileList = mprequest.getFiles("menu_photo");
+		ArrayList<String> fList = new ArrayList<String>();
 		String path = "C:\\fileupload\\"+store_id+"\\menu\\";
 		
 		for(int i=0;i<names.length;i++) {
 			String menu_name = names[i];
 			int menu_price = Integer.parseInt(prices[i]);
-			MultipartFile mf = fileList.get(i);
-			
-			
-			String menu_photo = mf.getOriginalFilename();
-			long fileSize = mf.getSize();
-			if(fileSize > 0) {
-				System.out.println("originalFileName : " + menu_photo);
-				System.out.println("fileSize : " + fileSize);
-				File parentPath = new File(path);
-				if(!parentPath.exists()) parentPath.mkdirs();
-				
-				//파일 업로드
-				File pathFile = new File(path + menu_photo);
-				try {
-					mf.transferTo(pathFile);
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
-				}
-			}
-			else {
-				menu_photo="";
-			}
-			
-			storeService.registerMenu(new StoreMenuDTO(store_id, menu_name, menu_price, menu_photo));
-			
-			
+			storeService.registerMenu(new StoreMenuDTO(store_id, menu_name, menu_price, ""));
 		}
-		
-		return "menu_register";
+		for(MultipartFile mf : fileList) {
+			long fileSize = mf.getSize();
+			if(fileSize == 0) continue;
+			String originalFileName = mf.getOriginalFilename();
+			System.out.println("originalFileName : " + originalFileName);
+			System.out.println("fileSize : " + fileSize);
+			
+			String[] fileName = originalFileName.trim().split("[.]");
+			System.out.println("length : " + fileName.length);
+			System.out.println("이름 : " + fileName[0] + " , 자료형  : " + fileName[1]);
+			if(!fileName[1].trim().toLowerCase().equals("jpg") && !fileName[1].trim().toLowerCase().equals("png")) continue;
+			
+			File parentPath = new File(path);
+			if(!parentPath.exists()) parentPath.mkdirs();
+			
+			//파일 업로드
+			String menu_name = fileName[0].trim();
+			int count = storeService.updateMenuPhoto(store_id,menu_name,originalFileName);
+			File pathFile = new File(path + originalFileName);
+			try {
+				mf.transferTo(pathFile);
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return "main";
 	}
 	
    @RequestMapping("adminMessageView.do")

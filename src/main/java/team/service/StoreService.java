@@ -1,6 +1,7 @@
 package team.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -41,5 +42,21 @@ public class StoreService {
 	public int registerMenu(StoreMenuDTO storeMenuDTO) {
 		return storeMapper.registerMenu(storeMenuDTO);
 		
+	}
+
+	public String selectStoreID(String member_id) {
+		return storeMapper.selectStoreID(member_id);
+	}
+
+	public List<StoreDTO> selectStoreListCode(int store_code) {
+		return storeMapper.selectStoreListCode(store_code);
+	}
+
+	public int updateMenuPhoto(String store_id, String menu_name, String originalFileName) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("store_id", store_id);
+		map.put("menu_name", menu_name);
+		map.put("menu_photo", originalFileName);
+		return storeMapper.updateMenuPhoto(map);
 	}
 }
