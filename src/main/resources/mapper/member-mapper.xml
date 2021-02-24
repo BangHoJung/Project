@@ -8,7 +8,7 @@
 	</select>
 	<select id="selectMemberAddress" parameterType="map" resultType="String">
 		select address_text from member_address where address_member_id=#{id} and 
-		address_no=#{addressNo}
+		address_status=#{address_status}
 	</select>
 	<select id="selectMember" parameterType="String" resultType="String">
 	 select member_id from member where member_id=#{id}
