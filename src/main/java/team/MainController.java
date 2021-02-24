@@ -110,28 +110,34 @@ public class MainController {
 	@RequestMapping("/qnaDetailView.do")
 	public String qnaDetailView(HttpServletRequest request) {
 		int qno= 0;
-		if(request.getParameter("qno") != null)
-			qno = Integer.parseInt(request.getParameter("qno"));
+		if(request.getParameter("qna_no") != null)
+			qno = Integer.parseInt(request.getParameter("qna_no"));
 		else
-			qno = (int)request.getAttribute("qno");
+			qno = (int)request.getAttribute("qna_no");
 		QnaDTO dto = qnaService.selectQna(qno);
 		
 		request.setAttribute("qna", dto);
 		return "qna_detail_view";
 	}
-	@RequestMapping("/qnaUpdate.do")
-	public String qnaUpdate() {
+	@RequestMapping("/qnaUpdateView.do")
+	public String qnaUpdate(HttpServletRequest request) {
+		int qna_no = Integer.parseInt(request.getParameter("qna_no"));
+		QnaDTO dto = qnaService.selectQna(qna_no);
+		request.setAttribute("qna_no", qna_no);
+		request.setAttribute("qna", dto);
+		System.out.println("qna_no : "+qna_no);
 		return "qna_update";
 	}
 	@RequestMapping("/qnaUpdateAction.do")
 	public String qnaUpdateAction(HttpServletRequest request) {
-		int qna_no= (int) request.getSession().getAttribute("qna_no");
-		String qna_member_id = (String) request.getSession().getAttribute("qna_member_id");
+		int qna_no= Integer.parseInt(request.getParameter("qna_no"));
 		String qna_title = request.getParameter("qna_title");
 		String qna_content= request.getParameter("qna_content");
-		qnaService.updateQna(new QnaDTO(qna_no,qna_member_id,qna_title,qna_content));
+		qnaService.updateQna(new QnaDTO(qna_no,qna_title,qna_content));
 		
-		return "qna";
+		QnaDTO dto = qnaService.selectQna(qna_no);
+		request.setAttribute("qna", dto);
+		return "qna_detail_view";
 	}
 	@RequestMapping("/qnaWrite.do")
 	public String qnaWrite() {
@@ -140,9 +146,8 @@ public class MainController {
 	@RequestMapping("/qnaWriteAction.do")
 	public String boardWriteAction(HttpServletRequest request) {
 		int qna_no = qnaService.newQno();
-		String qna_title = request.getParameter("qna_title");
 		String qna_member_id= request.getParameter("qna_member_id");
-		System.out.println(qna_member_id);
+		String qna_title = request.getParameter("qna_title");
 		String qna_content = request.getParameter("qna_content");
 		qnaService.insertQna(new QnaDTO(qna_no, qna_member_id,qna_title,qna_content));
 		QnaDTO dto = qnaService.selectQna(qna_no);

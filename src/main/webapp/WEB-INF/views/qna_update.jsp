@@ -28,25 +28,26 @@
 		<div class="qna_update_container">
 		<h3>Q&A 수정</h3>
 		<form action="qnaUpdateAction.do" method="post">
+			<input type="hidden" name="qna_no" value="${requestScope.qna.qna_no }">
 			<table>
 				<tr>
 					<th>제목</th>
-					<td><input type="text" name="qna_title"></td>
+					<td><input type="text" name="qna_title" value="${ requestScope.qna.qna_title }"></td>
 				</tr>
 				<tr>
 					<th>작성자</th>
 					<td>
-						<input type="hidden" name="qna_member_id" value="${sessionScope.id }">
-						${sessionScope.id }
+						${sessionScope.name }
 					</td>
 				</tr>
 				<tr>
-					<th style="vertical-align: top;">내용</th><td><textarea name="qna_content"></textarea></td>
+					<th style="vertical-align: top;">내용</th><td><textarea name="qna_content" >${ requestScope.qna.qna_content }</textarea></td>
 				</tr>
 				<tr>
 					<th><a href="qnaView.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">취소</a></th>
 					<td style="text-align: right;">
-						<a href="/qnaUpdateAction.do" class="btn">수정</a>
+						<button class="btn" type="submit">수정</button>
+						<!-- <a href="#" class="btn" type="submit">수정</a> -->
 					</td>
 				</tr>
 			</table>

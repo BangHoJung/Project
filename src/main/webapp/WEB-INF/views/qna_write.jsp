@@ -43,7 +43,7 @@
 					<th>작성자</th>
 					<td>
 						<input type="hidden" name="qna_member_id" value="${sessionScope.id }">
-						${sessionScope.id }
+						${sessionScope.name }
 					</td>
 				</tr>
 				<tr>

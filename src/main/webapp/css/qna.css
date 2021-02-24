@@ -259,7 +259,7 @@ header {
 		font-size: 20px;
 		font-weight: bold;
 	}
-	.qna_write_container .qna_update_container table{
+	.qna_update_container table{
 		width: 600px;
 		border: 1px solid #e8e8e8;
 		margin: 0 auto;
@@ -269,7 +269,7 @@ header {
 		border: 1px solid #e8e8e8;
 		margin: 0 auto;
 	}
-	.qna_write_container .qna_update_container{
+	.qna_update_container{
 		width:800px;
 		margin:20px auto;
 		border-collapse: collapse;
@@ -281,7 +281,7 @@ header {
 		border-collapse: collapse;
 		font-size: 12px;
 	}
-	.qna_write_container .qna_update_container button{
+	.qna_update_container button{
 		width: 50px;
 		height: 30px;
 	}
@@ -289,7 +289,7 @@ header {
 		width: 50px;
 		height: 30px;
 	}
-	.qna_write_container .qna_update_container th{
+	.qna_update_container th{
 		width:100px;
 		border-collapse: collapse;
 		font-weight: bold;
@@ -299,7 +299,7 @@ header {
 		border-collapse: collapse;
 		font-weight: bold;
 	}
-	.qna_write_container .qna_update_container tr{
+	.qna_update_container tr{
 		margin: 20px;
 		border-collapse: collapse;
 		height: 50px;
@@ -309,7 +309,7 @@ header {
 		border-collapse: collapse;
 		height: 50px;
 	}
-	.qna_write_container .qna_update_container td{
+	.qna_update_container td{
 		width:500px;
 		border-collapse: collapse;
 	}
@@ -317,7 +317,7 @@ header {
 		width:500px;
 		border-collapse: collapse;
 	}
-	.qna_write_container .qna_update_container textarea{
+	.qna_update_container textarea{
 		width:400px;
 		height:100px;
 		resize: none;		
@@ -329,7 +329,7 @@ header {
 		resize: none;		
 		border: 1px solid gray;
 	}
-	.qna_write_container .qna_update_container input{
+	.qna_update_container input{
 		border:none;
 		width:400px;
 		height: 30px;

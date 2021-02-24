@@ -19,6 +19,6 @@
 		insert into qna(qna_no, qna_title, qna_member_id, qna_content) values(#{qna_no},#{qna_title},#{qna_member_id},#{qna_content})
 	</insert>
 	<update id="updateQna" parameterType="team.dto.QnaDTO" >
-		update qna set  qna_no= #{qna_no},qna_member_id= #{qna_member_id}, qna_title= #{qna_title},qna_content= #{qna_content} where qna_no = #{qna_no}
+		update qna set  qna_no= #{qna_no}, qna_title= #{qna_title},qna_content= #{qna_content} where qna_no = #{qna_no}
 	</update>
 </mapper>
