@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>마이페이지 헤더</title>
 <style>
+
  @media (min-width: 769px) {
   .container {
     width: 1170px;
@@ -14,6 +15,12 @@
      .top{
 width: 100%;
 background-color: #FA0050;
+}
+.title > .main:link{
+color: white;
+}
+.title{
+color: white;
 }
 .hader{
 margin:0 auto;
@@ -100,6 +107,9 @@ height: 50%;
 width: 100%;
 background-color: #FA0050;
 }
+.title > .main:link{
+color: white;
+}
 .hader{
 margin:0 auto;
 text-align: center;
@@ -150,6 +160,7 @@ width: 80%;
 color: white;
 font-size: 100%;
 }
+
 }
 @media (max-width: 414px){
    .container{
@@ -179,8 +190,8 @@ font-size: 30% !important;
 <body>
 <div class="top">
 <div class="hader">
-<h2 class="title">taste factory</h2>
-<div class="locomotion"> <p class="logout"> <a href="#">로그아웃</a></p></div>
+<h2 class="title"> <a class="main" href="/"> taste factory </a></h2>
+<div class="locomotion"> <p class="logout"> <a href="/logout.do">로그아웃</a></p></div>
 </div>
 
 <div  class="total">
