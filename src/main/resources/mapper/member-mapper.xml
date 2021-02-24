@@ -33,4 +33,7 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	<select id="selectMessageCount" parameterType="String" resultType="int">
 	 select count(*) from message where message_member_id=#{id}
 	</select>
+	<update id="memberUpdateAction" parameterType="team.dto.MemberDTO">
+	update member set member_name=#{member_name},member_tel=#{member_tel},member_category=#{member_category} where member_id=#{member_id}
+	</update>
 </mapper>

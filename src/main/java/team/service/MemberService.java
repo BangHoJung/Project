@@ -79,7 +79,10 @@ public class MemberService {
 		return mapper.selectMessageCount(id);
 	}
 
-
+	public int memberUpdateAction(MemberDTO memberDTO) {
+		return mapper.memberUpdateAction(memberDTO);
+		
+	}
  
 
 

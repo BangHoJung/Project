@@ -68,25 +68,42 @@ public class MainController {
 		return "guide";
 	}
 	@RequestMapping("/memberUpdateAction.do")
-    public String memberUpdateAction(HttpServletRequest requset) {
-	/*	String id = requset.getParameter("id");
+    public String memberUpdateAction(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
+		
+		String id = request.getParameter("id");
 		System.out.println(id);
-		String pass = requset.getParameter("pass");
-		System.out.println(pass);
-		String name = requset.getParameter("name");
+		
+		String name = request.getParameter("name");
 		System.out.println(name);
-		String tel = requset.getParameter("tel1")+"-";
-		 tel += requset.getParameter("tel2")+"-";
-		 tel += requset.getParameter("tel3");
-		 System.out.println(tel);
+		
+		String tel = request.getParameter("tel1")+"-";
+		tel += request.getParameter("tel2")+"-";
+		tel += request.getParameter("tel3");
+		System.out.println(tel);
+		 
 		 String category="";
-		 String [] arr = requset.getParameterValues("category");
+		 String [] arr = request.getParameterValues("category");
          for (int i = 0; i < arr.length; i++) {
-			category +=arr[i].toString();
-		}*/
-		  
+		category +=arr[i].toString();
+      }  
+         int count=memberService.memberUpdateAction(new MemberDTO(id,name,tel,category ));
+        	if(count !=0) {
+        		System.out.println("수정 성공");
+        		session.setAttribute("id", id);
+    			session.setAttribute("name",name );
+    			session.setAttribute("tel",tel);
+        		session.setAttribute("category",category);
+        	}
+        	else {
+        		System.out.println("수정 실패");
+        	}     
 		  return"main";
 		}
+	
+	@RequestMapping("memberUpdateView.do")
+	public String memberUpdateView() {
+		return "member_update";
+	}
 	
 	@RequestMapping("/insertUpdateAddressView.do")
 	public String insertUpdateAddressView() {
