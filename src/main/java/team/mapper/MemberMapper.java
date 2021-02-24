@@ -14,7 +14,7 @@ public interface MemberMapper {
 
 	public MemberDTO loginMember(HashMap<String, Object> map);
 
-	public String selectAddress(HashMap<String, Object> map);
+	public String selectMemberAddress(HashMap<String, Object> map);
 
 	int insertMember(MemberDTO dto);
 	
@@ -22,7 +22,7 @@ public interface MemberMapper {
 
 	public int registerMember(MemberDTO dto);
 
-	public int registerAddress(MemberAddressDTO addr);
+	public int registerMemberAddress(MemberAddressDTO addr);
 
 	public List<MessageDTO> selectUserMessageList(HashMap<String, Object> map);
 
@@ -33,9 +33,12 @@ public interface MemberMapper {
 	public int deleteMessage(HashMap<String, Object> map);
 
 	public int selectMessageCount(String id);
+	
 	public int memberUpdateAction(MemberDTO memberDTO);
 
+	public List<MemberAddressDTO> selectMemberAllAddress(String id);
 
+	public int deleteMemberAddress(HashMap<String, Object> map);
 
     
 }

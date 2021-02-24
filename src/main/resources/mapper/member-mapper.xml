@@ -6,7 +6,7 @@
 	<select id="loginMember" parameterType="map" resultType="member">
 		select * from member where member_id=#{id} and member_pass=#{pass}
 	</select>
-	<select id="selectAddress" parameterType="map" resultType="String">
+	<select id="selectMemberAddress" parameterType="map" resultType="String">
 		select address_text from member_address where address_member_id=#{id} and 
 		address_no=#{addressNo}
 	</select>
@@ -14,10 +14,10 @@
 	 select member_id from member where member_id=#{id}
 	</select>
 	<insert id="registerMember" parameterType="team.dto.MemberDTO">
-	  insert into member values (#{member_id},#{member_pass},#{member_name},#{member_tel},#{member_grade},#{member_addressNo},#{member_category},#{member_point})
+	  insert into member values (#{member_id},#{member_pass},#{member_name},#{member_tel},#{member_grade},#{member_category},#{member_point})
 	</insert>
-	<insert id="registerAddress" parameterType="team.dto.MemberAddressDTO">
-	 insert into member_address values (#{address_Member_Id},#{address_No},#{address_Text})
+	<insert id="registerMemberAddress" parameterType="team.dto.MemberAddressDTO">
+	 insert into member_address values (#{address_Member_Id},#{address_Text},#{address_status})
 	</insert>
 	<select id="selectUserMessageList" parameterType="map" resultType="team.dto.MessageDTO">
 select message_no,message_member_id,message_title,message_content,message_date,message_status from (select ceil(rownum/10) as page,message_no,message_member_id,message_title,message_content,message_date,message_status from (select message_no,message_member_id,message_title,message_content,message_date,message_status  from message where message_member_id=#{id} order by message_status)) where page=#{pageNo} </select>
@@ -36,4 +36,10 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	<update id="memberUpdateAction" parameterType="team.dto.MemberDTO">
 	update member set member_name=#{member_name},member_tel=#{member_tel},member_category=#{member_category} where member_id=#{member_id}
 	</update>
+	<select id="selectMemberAllAddress" parameterType="String" resultType="team.dto.MemberAddressDTO">
+	   select * from member_address where address_member_id=#{id} 
+	</select>
+	<delete id="deleteMemberAddress" parameterType="map">
+	   delete from member_address where address_text=#{address} and address_member_id=#{id}
+	</delete>
 </mapper>

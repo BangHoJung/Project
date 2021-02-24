@@ -1,6 +1,5 @@
 package team.service;
 
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,11 +26,11 @@ public class MemberService {
        map.put("pass", pass);
        return mapper.loginMember(map); 
 	}
-	public String selectAddress(String id, int addressNo) {
+	public String selectMemberAddress(String id, int address_status) {
 		 HashMap<String, Object> map = new HashMap<String, Object>();
 	       map.put("id", id);
-	       map.put("addressNo", addressNo);
-		return mapper.selectAddress(map);
+	       map.put("address_status", address_status);
+		return mapper.selectMemberAddress(map);
 	}
 	//회원가입 중복확인.
 	public String selectMember(String id) {
@@ -43,9 +42,9 @@ public class MemberService {
 		return count;		
 	}
 
-	public int registerAddress(MemberAddressDTO addr) {
+	public int registerMemberAddress(MemberAddressDTO addr) {
        		int count=0;
-       		count = mapper.registerAddress(addr);
+       		count = mapper.registerMemberAddress(addr);
        		return count;
 	}
 
@@ -83,8 +82,16 @@ public class MemberService {
 		return mapper.memberUpdateAction(memberDTO);
 		
 	}
- 
+	public List<MemberAddressDTO> selectMemberAllAddress(String id) {
+		return mapper.selectMemberAllAddress(id);
+	}
 
+	public int deleteMemberAddress(String address,String id) {
+		 HashMap<String, Object> map = new HashMap<String, Object>();
+	      map.put("no", address);
+	      map.put("id",id);
+		return mapper.deleteMemberAddress(map);
+	}
 
 
 	

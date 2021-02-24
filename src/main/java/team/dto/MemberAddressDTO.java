@@ -2,23 +2,19 @@ package team.dto;
 
 public class MemberAddressDTO {
 	private String address_Member_Id;
-	private int address_No;
 	private String address_Text;
+	private int address_status;
 
 	public MemberAddressDTO() {
 
 	}
 
-	
-	
-	public MemberAddressDTO(String address_Member_Id, int address_No, String address_Text) {
+	public MemberAddressDTO(String address_Member_Id, String address_Text, int address_status) {
 		super();
 		this.address_Member_Id = address_Member_Id;
-		this.address_No = address_No;
 		this.address_Text = address_Text;
+		this.address_status = address_status;
 	}
-
-
 
 	public String getAddress_Member_Id() {
 		return address_Member_Id;
@@ -27,15 +23,6 @@ public class MemberAddressDTO {
 	public void setAddress_Member_Id(String address_Member_Id) {
 		this.address_Member_Id = address_Member_Id;
 	}
-
-	public int getAddress_No() {
-		return address_No;
-	}
-
-	public void setAddress_No(int address_No) {
-		this.address_No = address_No;
-	}
-
 	public String getAddress_Text() {
 		return address_Text;
 	}
@@ -44,12 +31,18 @@ public class MemberAddressDTO {
 		this.address_Text = address_Text;
 	}
 
-	@Override
-	public String toString() {
-		return "MemberAddressDTO [address_Member_Id=" + address_Member_Id + ", address_No=" + address_No
-				+ ", address_Text=" + address_Text + "]";
+	public int getAddress_status() {
+		return address_status;
 	}
 
+	public void setAddress_status(int address_status) {
+		this.address_status = address_status;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberAddressDTO [address_Member_Id=" + address_Member_Id + ", address_Text=" + address_Text + ", address_status=" + address_status + "]";
+	}
     
 	
 }
