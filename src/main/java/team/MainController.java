@@ -66,17 +66,27 @@ public class MainController {
 	public String guide() {
 		return "guide";
 	}
-	@RequestMapping("/memberUpdateView.do")
-    public String memberupdate(HttpSession session) {
-		
-		  /*
-		  session.getAttribute("pass");
-		  session.getAttribute("category");
-		  session.getAttribute("tel");
-		  MemberDTO dto = memberService.loginMember(pass,category,tel);
-		*/
-		  return"member_update";
+	@RequestMapping("/memberUpdateAction.do")
+    public String memberUpdateAction(HttpServletRequest requset) {
+	/*	String id = requset.getParameter("id");
+		System.out.println(id);
+		String pass = requset.getParameter("pass");
+		System.out.println(pass);
+		String name = requset.getParameter("name");
+		System.out.println(name);
+		String tel = requset.getParameter("tel1")+"-";
+		 tel += requset.getParameter("tel2")+"-";
+		 tel += requset.getParameter("tel3");
+		 System.out.println(tel);
+		 String category="";
+		 String [] arr = requset.getParameterValues("category");
+         for (int i = 0; i < arr.length; i++) {
+			category +=arr[i].toString();
+		}*/
+		  
+		  return"main";
 		}
+	
 	@RequestMapping("/insertUpdateAddressView.do")
 	public String insertUpdateAddressView() {
 		return "insert_update_address_view";

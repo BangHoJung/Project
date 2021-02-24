@@ -61,7 +61,7 @@ float:right;
 <body>
 <div class="menulist">
 <ul>
-<li class="list"> <a href="#">회원정보 수정</a> </li>
+<li class="list"> <a href="memberUpdateAction.do">회원정보 수정</a> </li>
 <li class="list"><a href="#">1:1문의 하기</a></li>
 <li class="list"><a href="#">업체 정보 등록</a></li>
 <li class="list"><a href="#">공지사항</a></li>
