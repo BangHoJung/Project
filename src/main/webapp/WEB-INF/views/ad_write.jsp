@@ -9,26 +9,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+
+	<jsp:include page="header.jsp"></jsp:include>
+
 	<div class="ad_write_container">
 		<h2>광고신청</h2>
 			<form action="AdWriteAction.do" method="post">
 				<table>
 					<tr>
-						<th>제목</th>
-					<td>
-						<input type="text" name="ad_title">
-					</td>
-					</tr>
-					<tr>
 						<th>작성자</th>
 						<td>
+							<input type="hidden" name="writer" value="${sessionScope.ad_store_id }">
 							${sessionScope.ad_store_id }			
 						</td>
 					</tr>
 					<tr id="content">
 						<th style="vertical-align: top;">내용</th>
 						<td>
-							<textarea name="ad_content"></textarea>
+							<textarea name="ad_comment"></textarea>
 						</td>
 					</tr>
 					<!-- 첨부 파일 -->
@@ -43,11 +41,14 @@
 					
 					
 					<tr>
-						<th><a href="" class="btn">목록보기</a></th>
+						<td><a href="javascript:history.back();" class="btn">뒤로가기</a></td>
 						<td style="text-align: right;">	<button>작성완료</button></td>
 					</tr>
 				</table>
 			</form>
 		</div>
+		
+		<jsp:include page="footer.jsp"></jsp:include>
+		
 </body>
 </html>

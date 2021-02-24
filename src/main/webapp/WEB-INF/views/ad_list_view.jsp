@@ -9,20 +9,24 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+	
+	<jsp:include page="header.jsp"></jsp:include>
+	
 	<div id="ad_list_container">
 		<table>
 			<tr>
 				<th>글번호</th>
-				<th>제목</th>
 				<th>작성자</th>
 			</tr>
 			<c:forEach var="dto" items="${sessionScope.list }">
 				<td>${dto.ad_no}</td>
-				<td><a href="AdDetailView.do?ad=${dto.ad_no}"> ${dto.ad_title}</a></td>
 				<td>${dto.ad_store_id}</td>
 			</c:forEach>
 			
 		</table>
 	</div>
+	
+	<jsp:include page="footer.jsp"></jsp:include>
+	
 </body>
 </html>
