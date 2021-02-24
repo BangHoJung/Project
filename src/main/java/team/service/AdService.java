@@ -27,13 +27,11 @@ public class AdService {
 	}
 	
 	public void addCount(int ad_no) {
-		// TODO Auto-generated method stub
-		
+		mapper.addCount(ad_no);
 	}
 	
 	public AdDTO selectAd(int ad_no) {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.selectAd(ad_no);
 	}
 	
 	public int newAd_no() {

@@ -1,0 +1,16 @@
+@charset "UTF-8";
+	#ad_write_container{
+		width: 1000px;
+		margin: 0 auto;
+		padding:0;
+	}
+	h2{
+		width:600px;
+		margin:0 auto;
+	}
+	#ad_write_container table{
+		width:600px;
+		border-collapse: collapse;
+		margin:0 auto;
+	}
+	
