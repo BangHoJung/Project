@@ -28,6 +28,10 @@
 						${requestScope.ad_comment }
 					</td>
 				</tr>
+				
+				<!-- 첨부파일 view 기능 추가 -->
+				
+				
 				<tr>
 					<th><a href="javascript:history.back();" class="btn">목록보기</a></th>
 					<td style="text-align: right;">

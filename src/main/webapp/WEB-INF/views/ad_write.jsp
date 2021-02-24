@@ -7,12 +7,13 @@
 <meta charset="UTF-8">
 <title>광고 신청</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../css/ad_write_view.css">
 </head>
 <body>
 
 	<jsp:include page="header.jsp"></jsp:include>
 
-	<div class="ad_write_container">
+	<div id="ad_write_container">
 		<h2>광고신청</h2>
 			<form action="AdWriteAction.do" method="post">
 				<table>
@@ -29,7 +30,7 @@
 							<textarea name="ad_comment"></textarea>
 						</td>
 					</tr>
-					<!-- 첨부 파일 -->
+					<!-- 첨부 파일 
 					<tr>
 						<td colspan="2" id="file_form">
 							<p><input type="file" name="ad_file"> 
@@ -38,7 +39,7 @@
 							<p><input type="file" name="ad_file"></p>
 						</td>
 					</tr>
-					
+					-->
 					
 					<tr>
 						<td><a href="javascript:history.back();" class="btn">뒤로가기</a></td>

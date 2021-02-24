@@ -16,13 +16,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.view.RedirectView;
 
+import team.dto.AdDTO;
 import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
 import team.dto.MessageDTO;
 import team.dto.QnaDTO;
 import team.dto.StoreDTO;
 import team.dto.StoreMenuDTO;
+import team.service.AdService;
 import team.service.MemberService;
 import team.service.QnaService;
 import team.service.StoreService;
@@ -33,13 +36,15 @@ public class MainController {
 	private MemberService memberService;
 	private StoreService storeService;
 	private QnaService qnaService;
-	
+	private AdService adService;
 
-	public MainController(MemberService memberService, StoreService storeService, QnaService qnaService) {
+	public MainController(MemberService memberService, StoreService storeService, QnaService qnaService,
+			AdService adService) {
 		super();
 		this.memberService = memberService;
 		this.storeService = storeService;
 		this.qnaService = qnaService;
+		this.adService = adService;
 	}
 	
 	
@@ -535,5 +540,68 @@ public class MainController {
 	   System.out.println(address);
 	   return null;
    }
+   
+/*광고>>>-----------------------------------------------------------------------------------------------------*/   
+   
+   @RequestMapping("/AdListView.do")
+	public String adList(HttpServletRequest request) {
+		int page = 1;
+		//페이지 셋팅
+		if(request.getParameter("pageNo") != null)
+			page = Integer.parseInt(request.getParameter("pageNo"));
+		List<AdDTO> list = adService.selectAdList(page); //글목록 읽어옴 
+		int count = adService.selectCount();
+		PaggingVO vo = new PaggingVO(count, page);
+		request.setAttribute("list", list);
+		request.setAttribute("pagging", vo);
+		System.out.println(list.toString());
+		return "ad_list_view";
+	}
+   
+   @RequestMapping("/AdView.do")
+	public String boardView(HttpServletRequest request) {
+		//게시글 하나 읽음
+		//1. request에서 게시글 번호 읽어옴
+		int ad_no = 0;
+		if(request.getParameter("ad_no") != null)
+			ad_no = Integer.parseInt(request.getParameter("ad_no"));
+		else
+			ad_no = (int)request.getAttribute("ad_no");
+		//1-1. 해당 게시글 조회수 증가
+		adService.addCount(ad_no);
+		//2. DB 해당 게시글 정보 읽어옴
+		AdDTO dto = adService.selectAd(ad_no);
+				// 첨부파일 로드 부분 필요
+		//3. request에 BoardDTO 저장
+		request.setAttribute("ad", dto);
+		//request.setAttribute("file", );	<< 첨부파일 로드 필요
+		
+		return "ad_detail_view";
+	}
+   
+   @RequestMapping("/AdWriteView.do")
+	public String adWriteView() {
+		return "ad_write_view";
+	}
+   
+   @RequestMapping("/AdWriteAction.do")
+	public RedirectView adWriteAction(MultipartHttpServletRequest request) {
+		//글번호 먼저 발급
+		int ad_no = adService.newAd_no();
+		
+		String ad_store_id = request.getParameter("");
+		int ad_status = Integer.parseInt(request.getParameter(""));
+		String ad_comment = request.getParameter("");
+		adService.insertAd(new AdDTO(ad_no, ad_store_id, ad_status, ad_comment));
+		request.setAttribute("ad_no", ad_no);
+		
+					//파일 첨부기능 작성 필요 
+		
+		return new RedirectView("adView.do?ad_no="+ad_no);
+	}
+   
+   
+/*-----------------------------------------------------------------------------------------------------<<<광고*/ 
+   
 } 
 	   

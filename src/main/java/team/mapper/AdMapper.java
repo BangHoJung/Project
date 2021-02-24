@@ -11,6 +11,8 @@ public interface AdMapper {
 
 	List<AdDTO> selectAdList(int page);
 	int selectCount();
+	void addCount(int ad_no);
+	AdDTO selectAd(int ad_no);
 	int newAd_no();
 	int insertAd(AdDTO dto);
 }
