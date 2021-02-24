@@ -46,7 +46,7 @@ $(function () {
 <div class="col-md-6" id="pon"> 
 <strong>더 이상 고민하지 마세요</strong> <br>
 <p>너무 많아진 식당 믿지 못할 맛집추천 최고의 리뷰로 정해드리겠습니다</p> <br>
-<img src="/img/loginimg2.jpg">
+<img src="/img/lolo.jpg">
 
 </div>
 <div class="col-md-6">
