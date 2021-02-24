@@ -1,0 +1,360 @@
+@charset "UTF-8";
+body {
+		width: 1000px;
+		margin: 0 auto;
+		padding:0;
+	}
+header {
+		width: 1000px;
+		height: 80px;
+		position: relative;
+	}
+	
+	#login .search {
+		position: absolute;
+		margin-left: 200px;
+		margin-top: 20px;
+		padding: 10px;
+		border: 1px solid #fa0050;
+		border-radius: 20px;
+	}
+	
+	#login input {
+		width: 300px;
+		height: 20px;
+		box-sizing: border-box;
+		border: none;
+	}
+	
+	#login .search button {
+		margin-left: 5px; width : 50px;
+		height: 20px;
+		box-sizing: border-box;
+		width: 50px;
+		border: none;
+		background-color: white;
+		color: gray;
+		font-weight: bold;
+	}
+	
+	#logo img {
+		margin-top:5px;
+		width: 100px ;
+		height: 70px;
+		float: left;
+	}
+	
+	#login p {
+		margin-top: 40px;
+		font-weight: bold;
+		font-size: 12px;
+		color: gray;
+	}
+	
+	#login a:link, #login a:visited {
+		color: gray;
+		text-decoration: none;
+	}
+	
+	.clear {
+		clear: both;
+	}
+	
+	.right {
+		float: right;
+	}
+	
+	nav {
+		background-color:#fa0050;
+		margin-bottom: 20px;
+		height: 50px;
+	}
+	
+	nav>ul {
+		list-style-type: none;
+		display: inline-block;
+		font-size: 0px;
+	}
+	
+	nav>ul>li {
+		display: inline-block;
+	}
+	
+	nav a:link, nav a:visited {
+		width: 100px;
+		height: 50px;
+		padding: 15px 0px;
+		font-size: 15px;
+		line-height: 20px;
+		text-align: center;
+		box-sizing: border-box;
+		display: inline-block;
+		text-decoration: none;
+		color:white;
+	}
+	
+	nav button {
+		width: 100px;
+		margin-right:10px;
+		font-size:15px;
+		font-weight:bold;
+		height: 50px;
+		background-color: #fa0050;
+		color: white;
+		border: none;
+	}
+	
+	
+	
+	
+	
+	
+	
+	#board_container h3{ 
+		width: 800px;
+		margin:0 auto;
+	}
+	.board{
+		width:800px;
+		margin:20px auto;
+		border-collapse: collapse;
+	}
+	.board th, .board td{
+		padding: 10px;
+		text-align: center;
+		font-size: 12px;
+	}
+	.board th{
+		border-top : 1px solid gray;
+		border-bottom : 2px solid gray;
+	}
+	.board th a{
+		color: black;
+	}
+	.board a{
+		text-decoration: none;
+		color: black;
+	}
+	.board a:hover{
+		color: gray;
+		font-weight:bold; 
+	}
+	.board td{
+		border-top : 1px solid gray;
+		border-bottom : 1px solid gray;
+	}
+	.board tr:last-child > td {
+		border-bottom : 2px solid black;
+	}
+	.qno{
+		width: 50px;
+		}
+	.title{
+		width:400px;	
+		
+	}
+	.writer{
+		width:150px;	
+	}
+	.date{
+		width:200px;
+	}
+	.page_bar{
+		position:relative;
+		text-align: center;
+	}
+	.page_bar a:link,.page_bar a:visited {
+		color:black;
+		text-decoration: none;
+		font-size : 12px;
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+	.page_bar a:hover{
+		font-weight: bold;
+		color:red;
+	}
+	.btn_writer{
+		position:absolute;
+		right:0px;
+	}
+	
+	
+	.qna_detail_view_container{
+		width:800px;
+		margin:20px auto;
+		border-collapse: collapse;
+	}
+	.qna_detail_view_container table{
+		width:600px;
+		margin:0 auto;
+		box-sizing: border-box;
+	}
+	.qna_detail_view_container #form th{
+		width:100px;
+		border:1px solid #e8e8e8;
+		font-size: 13px;
+		font-weight: bold;
+	}
+	.qna_detail_view_container #form td{
+		font-size: 12px;
+		width:500px;
+		border:1px solid #e8e8e8;
+		padding-left: 10px;
+	}
+	.qna_detail_view_container tr{
+		margin: 20px;
+		height: 30px;
+	}
+	.qna_detail_view_container #form{
+		border-collapse: collapse;
+		margin-top:20px;
+	}
+	.qna_detail_view_container #content{
+		height:200px;
+		width: 200px ;
+		padding-left: 20px;
+	}
+	.qna_detail_view_container #btn td{
+		width:500px;
+	}
+	.btn{
+		text-decoration: none;
+		background-color: #e8e8e8;
+		width: 80px;
+		display: inline-block;
+		padding:5px 0px;
+		font-weight:normal;
+		text-align:center;
+		color : black;
+		font-size:14px;
+		box-sizing: border-box;
+		margin-top:10px;
+	}
+	.btn:hover{
+		background-color: #282828;
+		color:#FFFFFF
+	}
+	.qna_detail_view_container a{
+		text-decoration: none;
+		color: black;
+	}
+	
+	
+	.qna_write_container a{
+		text-decoration: none;
+		color: black;
+	}
+	.qna_update_container h3{
+		color: black;
+		width: 800px;
+		margin-bottom:20px;
+		font-size: 20px;
+		font-weight: bold;
+	}
+	.qna_write_container  h3{
+		color: black;
+		width: 800px;
+		margin-bottom:20px;
+		font-size: 20px;
+		font-weight: bold;
+	}
+	.qna_write_container .qna_update_container table{
+		width: 600px;
+		border: 1px solid #e8e8e8;
+		margin: 0 auto;
+	}
+	.qna_write_container  table{
+		width: 600px;
+		border: 1px solid #e8e8e8;
+		margin: 0 auto;
+	}
+	.qna_write_container .qna_update_container{
+		width:800px;
+		margin:20px auto;
+		border-collapse: collapse;
+		font-size: 12px;
+	}
+	.qna_write_container {
+		width:800px;
+		margin:20px auto;
+		border-collapse: collapse;
+		font-size: 12px;
+	}
+	.qna_write_container .qna_update_container button{
+		width: 50px;
+		height: 30px;
+	}
+	.qna_write_container  button{
+		width: 50px;
+		height: 30px;
+	}
+	.qna_write_container .qna_update_container th{
+		width:100px;
+		border-collapse: collapse;
+		font-weight: bold;
+	}
+	.qna_write_container th{
+		width:100px;
+		border-collapse: collapse;
+		font-weight: bold;
+	}
+	.qna_write_container .qna_update_container tr{
+		margin: 20px;
+		border-collapse: collapse;
+		height: 50px;
+	}
+	.qna_write_container tr{
+		margin: 20px;
+		border-collapse: collapse;
+		height: 50px;
+	}
+	.qna_write_container .qna_update_container td{
+		width:500px;
+		border-collapse: collapse;
+	}
+	.qna_write_container  td{
+		width:500px;
+		border-collapse: collapse;
+	}
+	.qna_write_container .qna_update_container textarea{
+		width:400px;
+		height:100px;
+		resize: none;		
+		border: 1px solid gray;
+	}
+	.qna_write_container  textarea{
+		width:400px;
+		height:100px;
+		resize: none;		
+		border: 1px solid gray;
+	}
+	.qna_write_container .qna_update_container input{
+		border:none;
+		width:400px;
+		height: 30px;
+		border-bottom: 1px solid gray;
+	}
+	.qna_write_container input{
+		border:none;
+		width:400px;
+		height: 30px;
+		border-bottom: 1px solid gray;
+	}
+	
+	
+	
+	
+	footer {
+		padding: 20px 40px;
+		width: 1000px;
+		box-sizing: border-box;
+		background-color: rgb(192, 192, 192);
+		margin: 0 auto;
+		margin-top: 50px;
+	}
+	
+	footer ul {
+		list-style-type: none;
+		font-size: 10px;
+	}

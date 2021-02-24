@@ -1,12 +1,10 @@
 @charset "UTF-8";
-
-	body {
+body {
 		width: 1000px;
 		margin: 0 auto;
 		padding:0;
 	}
-	
-	header {
+header {
 		width: 1000px;
 		height: 80px;
 		position: relative;
@@ -106,50 +104,63 @@
 		border: none;
 	}
 	
-	#theme {
+	
+	
+	
+	
+	
+	.notice_container{
+		width: 1000px;
+	}
+	.notice_container h3{
+		margin:0 auto;
+		width: 600px;
+		margin-bottom: 20px;
+	}
+	.notice_container table{
+		margin:0 auto;
+		width: 600px;
+		border: 1px solid #e8e8e8
+	}
+	.notice_container td{
+		width: 500px;
+		height:50px;
+		padding:10px;
+		font-size:12px;
+		border-bottom: 1px solid #e8e8e8
+	}
+	.introduce_container{
+		width: 600px;
+		margin: 0 auto;
+		font-size: 15px;
+		border: 1px solid #e8e8e8;
+		padding: 20px;
 		box-sizing: border-box;
-		width: 1000px;
-		margin-bottom: 30px;
-		color: gray;
-		
+		margin-bottom:50px;
 	}
-	
-	#theme div {
-		width: 1000px;
-		float: left;
-		border: 1px solid gray;
+	#introduce_title{
+		width: 600px;
+		margin: 0 auto;
 	}
-	
-	#theme figure {
-		float: left;
-		width: 150px;
-		height: 250px;
-		margin: 40px;
-		text-align: center;
-		border: 1px solid gray;
-		color: gray;
+	#guide_container{
+		width:600px;
+		margin:0 auto;
+		margin-top: 50px;
 	}
-	
-	.slider {
-		margin-bottom: 30px;
+	#guide_container h2{
+		margin:10px;
+		padding: 2px;
 	}
-	
-	.slider img {
-		width: 100%;
-		height: 500px;
+	#guide_container p{
+		font-size: 12px;
+		margin:10px;
 	}
-	
-	.bx-wrapper {
-		box-shadow: none;
-		border: none;
+	#guide_container hr{
+		margin:30px;
 	}
-	
-	.bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
-		position: absolute;
-		bottom: 20px;
-		width: 100%;
+	#guide_container img{
+		width: 600px;
 	}
-
 	footer {
 		padding: 20px 40px;
 		width: 1000px;

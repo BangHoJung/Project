@@ -52,8 +52,8 @@
 	</header>
 		<nav>
 			<ul>
-				<li><a href="/introduce.do">업체 소개</a></li>
 				<li><a href="/guide.do">이용안내</a></li>
+				<li><a href="/introduce.do">업체 소개</a></li>
 				<li><a href="/notice.do">공지사항</a></li>
 				<li><a href="/qnaView.do">Q&A</a></li>
 			</ul>
