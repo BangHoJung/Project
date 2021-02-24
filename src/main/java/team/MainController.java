@@ -91,7 +91,7 @@ public class MainController {
          for (int i = 0; i < arr.length; i++) {
 		category +=arr[i].toString();
       }  
-         int count=memberService.memberUpdateAction(new MemberDTO(id,name,tel,category ));
+         int count=memberService.memberUpdateAction(new MemberDTO(id,name,tel,category));
         	if(count !=0) {
         		System.out.println("수정 성공");
         		session.setAttribute("id", id);
@@ -111,7 +111,10 @@ public class MainController {
 	}
 	
 	@RequestMapping("/insertUpdateAddressView.do")
-	public String insertUpdateAddressView() {
+	public String insertUpdateAddressView(HttpSession session) {
+		String id = (String)session.getAttribute("id");
+		List<MemberAddressDTO> list =memberService.selectMemberAllAddress(id);
+		session.setAttribute("list",list);
 		return "insert_update_address_view";
 	}
 	@RequestMapping("/qnaView.do")
@@ -186,10 +189,11 @@ public class MainController {
 		System.out.println("id: "+id);
 		String pass = request.getParameter("pass");
 		System.out.println("pass: "+pass);
+		int address_status =1;
 		try {	
 		MemberDTO dto = memberService.loginMember(id,pass);
 		if(dto.getMember_id() != null) {
-			String addr = memberService.selectAddress(dto.getMember_id(),dto.getMember_addressNo());
+			String addr = memberService.selectMemberAddress(dto.getMember_id(),address_status);
 			System.out.println("member에 저장된 주소:"+addr);
 			session.setAttribute("login", true);
 			session.setAttribute("id", dto.getMember_id());
@@ -250,11 +254,11 @@ public class MainController {
 			}
         }
         else {
-        	MemberDTO dto = new MemberDTO(id,pass,name,tel,0,1,category,0);
+        	MemberDTO dto = new MemberDTO(id,pass,name,tel,0,category,0);
         	int count=memberService.registerMember(dto);
         	if(count !=0) {
-        		MemberAddressDTO addr = new MemberAddressDTO(id, 1, address);
-        		int addrCount=memberService.registerAddress(addr);
+        		MemberAddressDTO addr = new MemberAddressDTO(id,address,1);
+        		int addrCount=memberService.registerMemberAddress(addr);
         		if(addrCount !=0) {
         			   try {
                			response.setContentType("text/html;charset=utf-8");
@@ -661,6 +665,37 @@ public class MainController {
    
    
 /*-----------------------------------------------------------------------------------------------------<<<광고*/ 
-   
+   @RequestMapping("/insertMemberAddressAction.do")
+	public String insertMemberAddressAction(HttpServletRequest request,HttpSession session) {
+	   String id= (String)session.getAttribute("id");
+	   System.out.println(id);
+	   String address = request.getParameter("address");
+	   System.out.println(address);
+	   MemberAddressDTO dto = new MemberAddressDTO(id,address,0);
+	   int count=memberService.registerMemberAddress(dto);
+	   if(count !=0) {
+		   System.out.println("추가 성공");
+	   }
+	   else {
+		  System.out.println("추가 실패");
+	   }
+	   return null;
+   }
+@RequestMapping("/deleteAddressAction.do")
+public String deleteAddressAction(HttpServletRequest request,HttpSession session) {
+	String id=(String)session.getAttribute("id"); 
+	String address= request.getParameter("address");
+	System.out.println(address);
+	int deletecount = memberService.deleteMemberAddress(address,id);
+	if(deletecount !=0) {
+		System.out.println("삭제 성공");
+		  List<MemberAddressDTO> list =memberService.selectMemberAllAddress(id);
+		  session.setAttribute("list",list);
+		}
+	else {
+		System.out.println("삭제 실패");
+	}
+	return "insert_update_address_view";
+  }
 } 
 	   

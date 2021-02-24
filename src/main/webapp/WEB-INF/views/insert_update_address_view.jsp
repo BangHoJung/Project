@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,9 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	function getPostcode() {
+                       var index=document.getElementsByName("roadAddress").length;
+                       alert(index);
+		               if(index==5){alert("주소는 최대 5개까지 추가 가능합니다.");return false;} 	   
 		new daum.Postcode(
 				{
 					oncomplete : function(data) {
@@ -36,27 +40,72 @@
 						}
 
 						// 우편번호와 추가 주소 정보를 해당 필드에 넣는다.
-                        $(".container").append("<input type=text name='roadAddress' value='"+roadAddr+"' readonly><br>");
+                        $(".container").find("table").append("<tr><td><input type='text' name='roadAddress' value='"+roadAddr+"' readonly></td><td><button type='button' id='btn_deletePost'>삭제</button></td><td><button type='button' id='btn_selectPost'>선택</button></td></tr>");
+					    //여기에 데이버 베이스 연결 들어가야됨
+                     var data="address="+roadAddr;
+                     $.ajax({
+                    	  url : "insertMemberAddressAction.do",
+                    	  data : data,
+                    	  method : "post",
+                    	  success:function(d){
+                    		  console.log(d);
+                    	  }
+                       });    
 					}
 				}).open();
-		      var index=document.getElementsByName("roadAddress").length;
-		     alert(index);
-	}
+	        }
 	$(function () {
-		
+	  if(${sessionScope.login ==null} || ${sessionScope.login==false}){alert("잘못된 접근방법입니다.");location.href="loginView.do";}
+       $(document).on("click","#btn_deletePost",function() {
+	       //클릭시 버튼이 위치한 tr 인덱스 출력 0부터 시작
+    	   var address=$(this).parent().parent().find("input").val();   
+    	   location.href="deleteAddressAction.do?address="+address;
+       });	
+	
 	});
 </script>
-
+<style type="text/css">
+ tr,td{
+  border: 1px solid black;
+ }
+</style>
 </head>
 <body>
   <jsp:include page="/templete/mypage_header.jsp"></jsp:include>
   <div class="body">
   <jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
    <div class="container">
-      <span>내 주소</span><br>
-			<input type="button" onclick="getPostcode()" value="추가하기" class="btn" id="getPost"><br> 
-            <input type="text" value="${sessionScope.address}" name="roadAddress" readonly><br>		
+      <span>내 주소</span><input type="button" onclick="getPostcode()" value="추가하기" class="btn" id="getPost"><br> 
+         <form id="frm_postUpdate">
+         <table>
+         <c:forEach var="address" items="${sessionScope.list}">
+            <c:choose>
+             <c:when test="${address.address_status ==1}">
+               <tr>
+                <td>
+            <input type="text" value="${address.address_Text}" name="roadAddress" readonly>
+                </td>
+                </tr>
+             </c:when>
+             <c:otherwise>
+              <tr>
+                <td>
+            <input type="text" value="${address.address_Text}" name="roadAddress" readonly>
+                </td>
+                <td>
+            <button type="button" id="btn_deletePost">삭제</button>
+                </td>
+                <td>
+            <button type="button" id="btn_selectPost">선택</button>
+               </td>		
+              </tr>
+             </c:otherwise>
+            </c:choose>
+         </c:forEach>
+         </table>
+         </form>
    </div> 
   </div>
 </body>
+        
 </html>
