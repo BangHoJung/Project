@@ -66,6 +66,39 @@
 			}
 			
 		});
+		
+		$("#plus").click(function() {
+			console.log($("#menu_table tbody").children().siblings().first().val());
+			$("#menu_table tbody").children().first().before("<tr><td><input type=\"text\" name=\"menu_name\" placeholder=\"메뉴 이름 입력\" ></td>"
+			 + "<td><input type=\"text\" name=\"menu_price\" placeholder=\"메뉴 가격 입력\" ></td>"
+			 + "<td><input type=\"file\" name=\"menu_photo\"></td>");
+			
+			//$("input[name='menu_name']").attr("oninput","this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');");
+			//$("input[name='menu_price']").attr("oninput","this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');");
+		});
+		
+		$("#minus").click(function() {
+			$("#menu_table tbody").children().siblings().first().remove();
+		});
+		
+		$("#submit").click(function(event) {
+			$.each($("input[name='menu_name']"), function(index,item) {
+				if($(item).val() == null || $(item).val() == "") {
+					alert("모든 메뉴 이름을 정확히 입력해주세요");
+					event.preventDefault();
+					return;
+				}
+			});
+			
+			$.each($("input[name='menu_price']"), function(index,item) {
+				if($(item).val() == null || $(item).val() == "") {
+					alert("모든 메뉴 가격을 정확히 입력해주세요");
+					event.preventDefault()
+					return;
+				}
+			});
+			
+		});
 	});
 </script>
 </head>
@@ -75,9 +108,9 @@
 	<div class="body">
 		<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
 		<div class="container">
-			<h1>식당 정보 등록 페이지</h1>
-			<div>
-				<form action="storeRegisterAction.do" enctype="multipart/form-data" method="post">
+			<form action="storeRegisterAction.do" enctype="multipart/form-data" method="post">
+				<h1>식당 정보 등록 페이지</h1>
+				<div id="layout">
 					<h2>식당 필수 정보</h2>
 					<table class="must">
 						<tr>
@@ -134,9 +167,28 @@
 							</td>
 						</tr>
 					</table>
+					<h2>식당 메뉴 정보</h2>
+					<%-- <input type="hidden" name="store_id" value="${store_id}"> --%>
+					<button id="plus" type="button">메뉴 추가</button> <button id="minus" type="button">메뉴 삭제</button><br>
+					<table id="menu_table">
+						<thead>
+						<tr>
+							<th>메뉴 이름(한글)</th>
+							<th>메뉴 가격(숫자)</th>
+							<th>메뉴 사진</th>
+						</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><input type="text" name="menu_name" placeholder="메뉴 이름 입력" oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"></td>
+								<td><input type="text" name="menu_price" placeholder="메뉴 가격 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
+								<td><input type="file" name="menu_photo"></td>
+							</tr>
+						</tbody>
+					</table>
 					<button type="submit" id="btn_register">식당 등록</button>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </body>

@@ -319,6 +319,44 @@ public class MainController {
 		}
 		storeService.registerStore(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,pathFile.getName()));
 		
+		String[] names = request.getParameterValues("menu_name");
+		String[] prices =  request.getParameterValues("menu_price");
+		List<MultipartFile> fileList = mqRequest.getFiles("menu_photo");
+		ArrayList<String> fList = new ArrayList<String>();
+		path = "C:\\fileupload\\"+store_id+"\\menu\\";
+		
+		for(int i=0;i<names.length;i++) {
+			String menu_name = names[i];
+			int menu_price = Integer.parseInt(prices[i]);
+			storeService.registerMenu(new StoreMenuDTO(store_id, menu_name, menu_price, ""));
+		}
+		for(MultipartFile mf2 : fileList) {
+			long fileSize = mf2.getSize();
+			if(fileSize == 0) continue;
+			String originalFileName = mf2.getOriginalFilename();
+			System.out.println("originalFileName : " + originalFileName);
+			System.out.println("fileSize : " + fileSize);
+			
+			String[] fileName = originalFileName.trim().split("[.]");
+			System.out.println("length : " + fileName.length);
+			System.out.println("이름 : " + fileName[0] + " , 자료형  : " + fileName[1]);
+			if(!fileName[1].trim().toLowerCase().equals("jpg") && !fileName[1].trim().toLowerCase().equals("png")) continue;
+			
+			File parentPath = new File(path);
+			if(!parentPath.exists()) parentPath.mkdirs();
+			
+			//파일 업로드
+			String menu_name = fileName[0].trim();
+			int count = storeService.updateMenuPhoto(store_id,menu_name,originalFileName);
+			pathFile = new File(path + originalFileName);
+			try {
+				mf2.transferTo(pathFile);
+			} catch (IllegalStateException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		return "main";
 	}
 	
@@ -330,8 +368,8 @@ public class MainController {
 	}
 	
 	@RequestMapping("storeCheckView.do")
-	public String storeCheckView(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		String store_id = "시익다앙_22";
+	public String storeCheckView(HttpServletRequest request, HttpServletResponse response) {
+		String store_id = request.getParameter("store_id");
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		System.out.println(dto.toString());
 		request.setAttribute("dto", dto);
@@ -370,50 +408,49 @@ public class MainController {
 		return "menu_register";
 	}
 	
-	@RequestMapping("menuRegisterAction.do")
-	public String menuRegisterAction(MultipartHttpServletRequest mprequest,HttpServletRequest request) {
-//		String store_id = request.getParameter("store_id");
-		System.out.println("menuRegisterAction.do");
-		String store_id = "시익다앙_22";
-		String[] names = request.getParameterValues("menu_name");
-		String[] prices =  request.getParameterValues("menu_price");
-		List<MultipartFile> fileList = mprequest.getFiles("menu_photo");
-		ArrayList<String> fList = new ArrayList<String>();
-		String path = "C:\\fileupload\\"+store_id+"\\menu\\";
-		
-		for(int i=0;i<names.length;i++) {
-			String menu_name = names[i];
-			int menu_price = Integer.parseInt(prices[i]);
-			storeService.registerMenu(new StoreMenuDTO(store_id, menu_name, menu_price, ""));
-		}
-		for(MultipartFile mf : fileList) {
-			long fileSize = mf.getSize();
-			if(fileSize == 0) continue;
-			String originalFileName = mf.getOriginalFilename();
-			System.out.println("originalFileName : " + originalFileName);
-			System.out.println("fileSize : " + fileSize);
-			
-			String[] fileName = originalFileName.trim().split("[.]");
-			System.out.println("length : " + fileName.length);
-			System.out.println("이름 : " + fileName[0] + " , 자료형  : " + fileName[1]);
-			if(!fileName[1].trim().toLowerCase().equals("jpg") && !fileName[1].trim().toLowerCase().equals("png")) continue;
-			
-			File parentPath = new File(path);
-			if(!parentPath.exists()) parentPath.mkdirs();
-			
-			//파일 업로드
-			String menu_name = fileName[0].trim();
-			int count = storeService.updateMenuPhoto(store_id,menu_name,originalFileName);
-			File pathFile = new File(path + originalFileName);
-			try {
-				mf.transferTo(pathFile);
-			} catch (IllegalStateException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return "main";
-	}
+//	@RequestMapping("menuRegisterAction.do")
+//	public String menuRegisterAction(MultipartHttpServletRequest mprequest,HttpServletRequest request) {
+////		String store_id = request.getParameter("store_id");
+//		System.out.println("menuRegisterAction.do");
+//		String[] names = request.getParameterValues("menu_name");
+//		String[] prices =  request.getParameterValues("menu_price");
+//		List<MultipartFile> fileList = mprequest.getFiles("menu_photo");
+//		ArrayList<String> fList = new ArrayList<String>();
+//		String path = "C:\\fileupload\\"+store_id+"\\menu\\";
+//		
+//		for(int i=0;i<names.length;i++) {
+//			String menu_name = names[i];
+//			int menu_price = Integer.parseInt(prices[i]);
+//			storeService.registerMenu(new StoreMenuDTO(store_id, menu_name, menu_price, ""));
+//		}
+//		for(MultipartFile mf : fileList) {
+//			long fileSize = mf.getSize();
+//			if(fileSize == 0) continue;
+//			String originalFileName = mf.getOriginalFilename();
+//			System.out.println("originalFileName : " + originalFileName);
+//			System.out.println("fileSize : " + fileSize);
+//			
+//			String[] fileName = originalFileName.trim().split("[.]");
+//			System.out.println("length : " + fileName.length);
+//			System.out.println("이름 : " + fileName[0] + " , 자료형  : " + fileName[1]);
+//			if(!fileName[1].trim().toLowerCase().equals("jpg") && !fileName[1].trim().toLowerCase().equals("png")) continue;
+//			
+//			File parentPath = new File(path);
+//			if(!parentPath.exists()) parentPath.mkdirs();
+//			
+//			//파일 업로드
+//			String menu_name = fileName[0].trim();
+//			int count = storeService.updateMenuPhoto(store_id,menu_name,originalFileName);
+//			File pathFile = new File(path + originalFileName);
+//			try {
+//				mf.transferTo(pathFile);
+//			} catch (IllegalStateException | IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		return "main";
+//	}
 	
    @RequestMapping("adminMessageView.do")
    public String adminMessageView() {
