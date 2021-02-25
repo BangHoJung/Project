@@ -17,7 +17,7 @@
 
 	
 	<div class="body">
-		<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
+	<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
 		<div class="container">
 		<h2>광고신청</h2>
 			<form action="AdWriteAction.do" method="post">
@@ -32,7 +32,7 @@
 					<tr id="content">
 						<th style="vertical-align: top;">내용</th>
 						<td>
-							<textarea name="ad_comment"></textarea>
+							<textarea name="ad_content"></textarea>
 						</td>
 					</tr>
 					<!-- 첨부 파일 
@@ -48,7 +48,7 @@
 					
 					<tr>
 						<td><a href="javascript:history.back();" class="btn">뒤로가기</a></td>
-						<td style="text-align: right;">	<button>작성완료</button></td>
+						<td style="text-align: right;">	<button class="btn">작성완료</button></td>
 					</tr>
 				</table>
 			</form>
