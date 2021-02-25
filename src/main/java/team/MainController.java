@@ -46,7 +46,11 @@ public class MainController {
 		this.qnaService = qnaService;
 		this.adService = adService;
 	}
-	
+	@RequestMapping("storeView.do")
+	public String storeview() {
+		
+		return "store_view";
+	}
 	
 	@RequestMapping("/")
 	public String main() {
