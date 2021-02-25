@@ -62,7 +62,7 @@ float:right;
 <body>
 <div class="menulist">
 <ul>
-<li class="list"> <a href="memberUpdateAction.do">회원정보 수정</a> </li>
+<li class="list"> <a href="memberUpdateView.do">회원정보 수정</a> </li>
 <li class="list"><a href="#">1:1문의 하기</a></li>
 <c:choose>
 	<c:when test="${sessionScope.grade == 1}">
