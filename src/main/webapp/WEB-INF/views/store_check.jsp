@@ -14,7 +14,10 @@
 
 <script type="text/javascript">
 	$(function() {
-		
+		$(".add a").click(function() {
+			console.log($(this));
+			$(this).siblings("span").toggle();
+		});
 	});
 </script>
 </head>
@@ -50,6 +53,13 @@
 				</table>
 				<h2>식당 상세 정보(선택)</h2>
 				<table class="add">
+					<tr>
+						<th>식당 대표 사진</th>
+						<td>
+							<p><a href="#none">${dto.store_photo} 이미지 보기</a>
+							<span><img src="image_load.do?writer=${dto.store_id }&fileName=${dto.store_photo}"></span></p>
+						</td>
+					</tr>
 					<tr>
 						<th>식당 영업시간</th>
 						<td><pre>${dto.store_time }</pre></td>

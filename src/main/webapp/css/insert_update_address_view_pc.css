@@ -1,0 +1,44 @@
+@charset "UTF-8";
+ html { 
+ font-size:10px; 
+ }
+
+.table input{
+	border: none;
+	width: 100%;
+}
+.table input:focus {
+	outline:none;
+}
+
+.table td:nth-child(2), .table td:nth-child(3), .table tr , .table {
+	border: none;
+}
+.table>tbody>tr>td{
+	padding: 11px 0 0;
+	height: 30px;
+	}
+.table>tbody>tr>td:nth-child(1){
+	padding-bottom: 11px;
+}
+.table>tbody>tr>td:nth-child(2),.table>tbody>tr>td:nth-child(3){
+	padding-top: 0;
+}
+.btn{
+ background-color: #FA0050;	
+ color: white;
+ margin-top: 5px;
+ padding-bottom:8px;
+ width: 100%;
+}
+h1{
+	display: inline-block;
+}
+#getPost{
+	width: 20%;
+	margin-top: 0;
+	margin-bottom: 2rem;
+	margin-left: 3rem;
+	margin-right: 0;
+}
+

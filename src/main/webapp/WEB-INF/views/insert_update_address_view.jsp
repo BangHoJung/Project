@@ -5,15 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>내 주소</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="css/insert_update_address_view_mobile.css" media="screen and (max-width:768px)">
+<link rel="stylesheet" href="css/insert_update_address_view_pc.css" media="screen and (min-width:769px)">
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
 	function getPostcode() {
                        var index=document.getElementsByName("roadAddress").length;
-                       alert(index);
 		               if(index==5){alert("주소는 최대 5개까지 추가 가능합니다.");return false;} 	   
 		new daum.Postcode(
 				{
@@ -40,7 +42,6 @@
 						}
 
 						// 우편번호와 추가 주소 정보를 해당 필드에 넣는다.
-                        $(".container").find("table").append("<tr><td><input type='text' name='roadAddress' value='"+roadAddr+"' readonly></td><td><button type='button' id='btn_deletePost'>삭제</button></td><td><button type='button' id='btn_selectPost'>선택</button></td></tr>");
 					    //여기에 데이버 베이스 연결 들어가야됨
                      var data="address="+roadAddr;
                      $.ajax({
@@ -48,43 +49,47 @@
                     	  data : data,
                     	  method : "post",
                     	  success:function(d){
-                    		  console.log(d);
+                    		  var result=d;
+                    		  if(!(result=="중복된 주소입니다."))
+                              $(".container").find("table").append("<tr><td><input type='text' name='roadAddress' value='"+roadAddr+"' readonly></td><td><button type='button' id='btn_deletePost' class='btn'>삭제</button></td><td><button type='button' id='btn_choicePost' class='btn'>선택</button></td></tr>");
+                    		  else
+                    			  alert(result);
                     	  }
                        });    
 					}
 				}).open();
 	        }
 	$(function () {
-	  if(${sessionScope.login ==null} || ${sessionScope.login==false}){alert("잘못된 접근방법입니다.");location.href="loginView.do";}
-       $(document).on("click","#btn_deletePost",function() {
+	if(${sessionScope.login ==null} || ${sessionScope.login==false}){alert("잘못된 접근방법입니다.");location.href="loginView.do";}
+       $("input").blur();
+	   $(document).on("click","#btn_deletePost",function() {
 	       //클릭시 버튼이 위치한 tr 인덱스 출력 0부터 시작
     	   var address=$(this).parent().parent().find("input").val();   
     	   location.href="deleteAddressAction.do?address="+address;
        });	
+       $(document).on("click","#btn_choicePost",function() {
+    	   var address=$(this).parent().parent().find("input").val();   
+    	   location.href="choiceAddressAction.do?address="+address;
+       });
+                	
 	
 	});
 </script>
-<style type="text/css">
- tr,td{
-  border: 1px solid black;
- }
-</style>
 </head>
 <body>
   <jsp:include page="/templete/mypage_header.jsp"></jsp:include>
   <div class="body">
   <jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
    <div class="container">
-      <span>내 주소</span><input type="button" onclick="getPostcode()" value="추가하기" class="btn" id="getPost"><br> 
-         <form id="frm_postUpdate">
-         <table>
+     <div><h1>내 주소</h1><input type="button" onclick="getPostcode()" value="추가하기" class="btn" id="getPost"></div>
+         <table class="table table-bordered">
          <c:forEach var="address" items="${sessionScope.list}">
             <c:choose>
              <c:when test="${address.address_status ==1}">
                <tr>
                 <td>
             <input type="text" value="${address.address_Text}" name="roadAddress" readonly>
-                </td>
+                </td>		
                 </tr>
              </c:when>
              <c:otherwise>
@@ -93,19 +98,18 @@
             <input type="text" value="${address.address_Text}" name="roadAddress" readonly>
                 </td>
                 <td>
-            <button type="button" id="btn_deletePost">삭제</button>
+            <button type="button" id="btn_deletePost" class="btn">삭제</button>
                 </td>
                 <td>
-            <button type="button" id="btn_selectPost">선택</button>
+            <button type="button" id="btn_choicePost" class="btn">선택</button>
                </td>		
               </tr>
              </c:otherwise>
             </c:choose>
          </c:forEach>
          </table>
-         </form>
+         </div>
    </div> 
-  </div>
 </body>
         
 </html>
