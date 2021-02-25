@@ -3,11 +3,13 @@ package team;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -501,6 +503,26 @@ public class MainController {
 		return "store_check";
   }
 	
+	@RequestMapping("reviewRegisterView.do")
+	public String reviewRegisterView(HttpServletRequest request, HttpSession session) {
+//		String store_id = request.getParameter("store_id");
+		String store_id = "ㅇㅇㅇ_22";
+		
+		StoreDTO dto = storeService.selectStoreDTO(store_id);
+		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
+		System.out.println("menuList : " + menuList.toString());
+		
+		request.setAttribute("store", dto);
+		request.setAttribute("menuList", menuList);
+		return "review_register";
+	}
+	
+	@RequestMapping("reviewRegisterAction.do")
+	public String reviewRegisterAction() {
+		
+		return "main";
+	}
+	
 	@RequestMapping("menuRegisterView.do")
 	public String menuRegisterView() {
 		return "menu_register";
@@ -617,6 +639,35 @@ public class MainController {
 		
 		fis.close();
 		bos.close();
+	}
+   
+   @RequestMapping("image_load.do")
+	public String imageLoad(HttpServletRequest request, HttpServletResponse response) {
+		String writer = request.getParameter("writer");
+		String fileName = request.getParameter("fileName");
+		String type = fileName.substring(fileName.lastIndexOf(".")+1);
+		
+		response.setContentType("image/"+type);
+		File path = new File("C:\\fileupload\\"+writer+"\\"+fileName);
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			ServletOutputStream sos = response.getOutputStream();
+			
+			byte[] buffer = new byte[1024*1024];
+			while(true) {
+				int size = fis.read(buffer);
+				if(size == -1) break;
+				sos.write(buffer,0,size);
+				sos.flush();
+			}
+			sos.close();
+			fis.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
    
 /*광고>>>-----------------------------------------------------------------------------------------------------*/   
