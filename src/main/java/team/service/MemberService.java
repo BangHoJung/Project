@@ -88,7 +88,7 @@ public class MemberService {
 
 	public int deleteMemberAddress(String address,String id) {
 		 HashMap<String, Object> map = new HashMap<String, Object>();
-	      map.put("no", address);
+	      map.put("address", address);
 	      map.put("id",id);
 		return mapper.deleteMemberAddress(map);
 	}

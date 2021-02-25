@@ -688,6 +688,7 @@ public String choiceAddress(HttpServletRequest request,HttpSession session) {
 	System.out.println(address);
 	int count=memberService.choiceMemberAddress(address,id);
 	if(count !=0) {
+		session.setAttribute("address", address);
 		System.out.println("메인 주소 선택 성공");
 		 memberService.notChoiceMemberAddress(address,id);
 		 List<MemberAddressDTO> list =memberService.selectMemberAllAddress(id);
