@@ -7,22 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-<link rel="stylesheet" href="../css/pc2.css" media="screen and (max-width:1023px)">
-<link rel="stylesheet" href="../css/qna.css" media="screen and (min-width:1024px)">
+<link rel="stylesheet" href="../css/qna_write.css" media="screen and (min-width:1024px)">
 <script type="text/javascript">
 	$(function(){
-		$("#pop").html($(window).width());
-		$(window).resize(function() {
-			$("#pop").html($(window).width());
-		});		
-	});
-
-	</script>
+		$("#random").click(function(){
+			alert('추천 메뉴는 ooo입니다');
+		})
+	})
+</script>
 </head>
 <body>
-<c:if test="${sessionScope.login == null || sessionScope.login == false  }">
+	<c:if test="${sessionScope.login == null || sessionScope.login == false  }">
 		<c:set var="page" target="${sessionScope }" value="${pageContext.request.requestURI}${pageContext.request.queryString }" property="resultPage" scope="session"/>
 		${pageContext.request.requestURI}${pageContext.request.queryString }
 		<script>
@@ -31,7 +26,7 @@
 		</script>
 	</c:if>
 	<jsp:include page="header.jsp"></jsp:include>
-		<div class="qna_write_container">
+	<div class="qna_write_container">
 		<h3>Q&A작성</h3>
 		<form action="qnaWriteAction.do" method="post">
 			<table>
