@@ -40,6 +40,15 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	   select * from member_address where address_member_id=#{id} 
 	</select>
 	<delete id="deleteMemberAddress" parameterType="map">
-	   delete from member_address where address_text=#{address} and address_member_id=#{id}
+	   delete from member_address where address_text=#{address} and address_member_id=#{id} and address_status not in(1)
 	</delete>
+		<update id="choiceMemberAddress" parameterType="map">
+	   update member_address set address_status = 1 where address_text=#{address} and address_member_id=#{id}
+	</update>
+	<update id="notChoiceMemberAddress" parameterType="map">
+	   update member_address set address_status = 0 where address_text not in(#{address}) and address_member_id=#{id}
+	</update>
+	<select id="selectMemeberAddressCheck" parameterType="map" resultType="String">
+	  select address_text from member_address where address_text=#{address} and address_member_id=#{id}
+	</select>
 </mapper>

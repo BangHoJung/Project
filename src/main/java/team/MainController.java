@@ -329,6 +329,7 @@ public class MainController {
 		if(introduce == null) introduce = " ";
 		int category = Integer.parseInt(request.getParameter("category"));
 		String store_id = name + "_" + license;
+		MultipartFile photo = mqRequest.getFile("photo");
 		
 		System.out.println("mf :"+mf);
 		
@@ -348,7 +349,29 @@ public class MainController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		storeService.registerStore(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,pathFile.getName()));
+		
+		File photoFile = null;
+		try {
+			String photoFileName = photo.getOriginalFilename();
+			long fileSize = photo.getSize();
+			if(fileSize == 0) {
+				photoFile = new File("");
+			}
+			else {
+				System.out.println("photoFileName : " + photoFileName);
+				System.out.println("fileSize : " + fileSize);
+				File parentPath = new File(path);
+				if(!parentPath.exists()) parentPath.mkdirs();
+				
+				//파일 업로드
+				photoFile = new File(path + photoFileName);
+				photo.transferTo(photoFile);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("photoFile : " + photoFile.getName());
+		storeService.registerStore(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,pathFile.getName(),photoFile.getName()));
 		
 		String[] names = request.getParameterValues("menu_name");
 		String[] prices =  request.getParameterValues("menu_price");
@@ -438,50 +461,6 @@ public class MainController {
 	public String menuRegisterView() {
 		return "menu_register";
 	}
-	
-//	@RequestMapping("menuRegisterAction.do")
-//	public String menuRegisterAction(MultipartHttpServletRequest mprequest,HttpServletRequest request) {
-////		String store_id = request.getParameter("store_id");
-//		System.out.println("menuRegisterAction.do");
-//		String[] names = request.getParameterValues("menu_name");
-//		String[] prices =  request.getParameterValues("menu_price");
-//		List<MultipartFile> fileList = mprequest.getFiles("menu_photo");
-//		ArrayList<String> fList = new ArrayList<String>();
-//		String path = "C:\\fileupload\\"+store_id+"\\menu\\";
-//		
-//		for(int i=0;i<names.length;i++) {
-//			String menu_name = names[i];
-//			int menu_price = Integer.parseInt(prices[i]);
-//			storeService.registerMenu(new StoreMenuDTO(store_id, menu_name, menu_price, ""));
-//		}
-//		for(MultipartFile mf : fileList) {
-//			long fileSize = mf.getSize();
-//			if(fileSize == 0) continue;
-//			String originalFileName = mf.getOriginalFilename();
-//			System.out.println("originalFileName : " + originalFileName);
-//			System.out.println("fileSize : " + fileSize);
-//			
-//			String[] fileName = originalFileName.trim().split("[.]");
-//			System.out.println("length : " + fileName.length);
-//			System.out.println("이름 : " + fileName[0] + " , 자료형  : " + fileName[1]);
-//			if(!fileName[1].trim().toLowerCase().equals("jpg") && !fileName[1].trim().toLowerCase().equals("png")) continue;
-//			
-//			File parentPath = new File(path);
-//			if(!parentPath.exists()) parentPath.mkdirs();
-//			
-//			//파일 업로드
-//			String menu_name = fileName[0].trim();
-//			int count = storeService.updateMenuPhoto(store_id,menu_name,originalFileName);
-//			File pathFile = new File(path + originalFileName);
-//			try {
-//				mf.transferTo(pathFile);
-//			} catch (IllegalStateException | IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//		}
-//		return "main";
-//	}
 	
    @RequestMapping("adminMessageView.do")
    public String adminMessageView() {
@@ -657,19 +636,30 @@ public class MainController {
    
    
 /*-----------------------------------------------------------------------------------------------------<<<광고*/ 
+   //수정 2021-02-25
    @RequestMapping("/insertMemberAddressAction.do")
-	public String insertMemberAddressAction(HttpServletRequest request,HttpSession session) {
+	public String insertMemberAddressAction(HttpServletRequest request,HttpSession session,HttpServletResponse response) {
 	   String id= (String)session.getAttribute("id");
 	   System.out.println(id);
 	   String address = request.getParameter("address");
 	   System.out.println(address);
+	   String checkAddress= memberService.selectMemeberAddressCheck(id, address);
+	   if(checkAddress == null) {
 	   MemberAddressDTO dto = new MemberAddressDTO(id,address,0);
 	   int count=memberService.registerMemberAddress(dto);
 	   if(count !=0) {
-		   System.out.println("추가 성공");
+		   System.out.println("주소 추가 성공");   
+	   }else {
+		   System.out.println("주소 추가 실패");
+	   }
 	   }
 	   else {
-		  System.out.println("추가 실패");
+		   try {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("중복된 주소입니다.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	   }
 	   return null;
    }
@@ -689,5 +679,24 @@ public String deleteAddressAction(HttpServletRequest request,HttpSession session
 	}
 	return "insert_update_address_view";
   }
+//수정 2021-02-25
+@RequestMapping("/choiceAddressAction.do")
+public String choiceAddress(HttpServletRequest request,HttpSession session) {
+	String id=(String)session.getAttribute("id"); 
+	System.out.println(id);
+	String address=request.getParameter("address");
+	System.out.println(address);
+	int count=memberService.choiceMemberAddress(address,id);
+	if(count !=0) {
+		System.out.println("메인 주소 선택 성공");
+		 memberService.notChoiceMemberAddress(address,id);
+		 List<MemberAddressDTO> list =memberService.selectMemberAllAddress(id);
+		 session.setAttribute("list",list);
+	}
+	else {
+		System.out.println("메인 주소 선택 실패");
+	}
+	return "insert_update_address_view";
+}
 } 
 	   

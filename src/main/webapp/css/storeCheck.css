@@ -92,3 +92,12 @@
  	margin-right:80px;
  }
  
+ .add span {
+ 	display: none;
+ }
+ 
+ .add img {
+ 	width:200px;
+ 	height: 150px;
+ }
+ 
