@@ -124,7 +124,7 @@ public class MainController {
 		if(request.getParameter("pageNo") != null)
 			page = Integer.parseInt(request.getParameter("pageNo"));
 		System.out.println(page);
-		List<QnaDTO> list = qnaService.selectQnaList(page);//글목록 읽어옴
+		List<QnaDTO> list = qnaService.selectQnaList(page);
 		int count = qnaService.selectCount();
 		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
 		request.setAttribute("list", list);
@@ -140,7 +140,6 @@ public class MainController {
 		else
 			qno = (int)request.getAttribute("qna_no");
 		QnaDTO dto = qnaService.selectQna(qno);
-		
 		request.setAttribute("qna", dto);
 		return "qna_detail_view";
 	}
@@ -176,11 +175,52 @@ public class MainController {
 		String qna_content = request.getParameter("qna_content");
 		qnaService.insertQna(new QnaDTO(qna_no, qna_member_id,qna_title,qna_content));
 		QnaDTO dto = qnaService.selectQna(qna_no);
-		
 		request.setAttribute("qna", dto);
 		request.setAttribute("qno", qna_no);
 		return "qna_detail_view";
-		
+	}
+	@RequestMapping("/qnaDeleteAction.do")
+	public String qnaDeleteAction(HttpServletRequest request) {
+		int qna_no= Integer.parseInt(request.getParameter("qna_no"));
+		int page =1;
+		int pageOfContentCount = 20;
+		int count = qnaService.selectCount();
+		qnaService.deleteQna(qna_no); 
+		List<QnaDTO> list = qnaService.selectQnaList(page);
+		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
+		request.setAttribute("pagging", vo);
+		request.setAttribute("list", list);
+		return "qna";
+	}
+	@RequestMapping("/qnaAnswerView.do")
+	public String qnaAnswerView(HttpServletRequest request) {
+		int qna_no=Integer.parseInt(request.getParameter("qna_no"));
+		QnaDTO dto = qnaService.selectQna(qna_no);
+		request.setAttribute("qna", dto);
+		return "qna_answer";
+	}
+	@RequestMapping("/qnaAnswerDetailView.do")
+	public String qnaAnswerDetailView(HttpServletRequest request) {
+		int qna_no=Integer.parseInt(request.getParameter("qna_no"));
+		QnaDTO dto = qnaService.selectQna(qna_no);
+		request.setAttribute("qna", dto);
+		return "qna_answer_detail_view";
+	}
+	@RequestMapping("/qnaAnswerAction.do")
+	public String qnaAnswerAction(HttpServletRequest request) {
+		int qna_no=Integer.parseInt(request.getParameter("qna_no"));
+		String qna_response = request.getParameter("qna_response");
+		qnaService.qnaAnswer(new QnaDTO(qna_no,qna_response));
+		QnaDTO dto = qnaService.selectQna(qna_no);
+		int page =1;
+		int pageOfContentCount = 20;
+		int count = qnaService.selectCount();
+		List<QnaDTO> list = qnaService.selectQnaList(page);
+		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
+		request.setAttribute("pagging", vo);
+		request.setAttribute("list", list);
+		request.setAttribute("qna", dto);
+		return "qna";
 	}
     @RequestMapping("/loginAction.do")
     public String login(HttpServletRequest request,HttpSession session) {

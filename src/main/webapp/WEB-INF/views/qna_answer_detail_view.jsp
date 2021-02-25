@@ -24,7 +24,7 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 		<div class="qna_detail_view_container">
-			<h3>Q&A</h3>
+			<h3>Q&A답변</h3>
 			<table id="form">
 					<tr>
 					<th>제목</th>
@@ -35,18 +35,18 @@
 				<tr>
 					<th>작성자</th>
 					<td>
-						${requestScope.qna.qna_member_id }
+						관리자			
 					</td>
 				</tr>
 				<tr>
 					<th>작성일</th>
 					<td>
-						${requestScope.qna.qna_date }
+						${requestScope.qna.qna_response_date }
 					</td>
 				</tr>
 				<tr >
 					<td colspan="2" id="content">
-						${requestScope.qna.qna_content }
+						${requestScope.qna.qna_response }
 					</td>
 				</tr>
 				
@@ -54,23 +54,9 @@
 			</table>
 			<table id="btn">
 				<tr>
-					<th>
-					<c:if test="${sessionScope.grade == '2'}">
-						<c:if test="${requestSope.qna.qna_response == null}">
-						<a href="/qnaAnswerView.do?qna_no=${requestScope.qna.qna_no }" class="btn">답변하기</a>
-						</c:if>
-					</c:if>
-					</th>
-					<td style="text-align: right;">
-					<c:if test="${sessionScope.id == requestScope.qna.qna_member_id}">
-						<a href="/qnaUpdateView.do?qna_no=${requestScope.qna.qna_no}" class="btn">수정</a>
-						<a href="/qnaDeleteAction?qna_no=${requestScope.qna.qna_no }" class="btn">삭제</a>
-					</c:if>
-						
-					</td>
+					<td><a href="qnaView.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">목록보기</a></td>
 				</tr>
-			</table>
-			
+			</table>				
 		</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

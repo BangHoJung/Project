@@ -22,6 +22,10 @@ public interface QnaMapper {
 
 	int updateQna(QnaDTO qnaDTO);
 
+	int deleteQna(int qna_no);
+
+	int qnaAnswer(QnaDTO qnaDTO);
+
 
 
 	
