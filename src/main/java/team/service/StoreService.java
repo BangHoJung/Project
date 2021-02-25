@@ -59,4 +59,8 @@ public class StoreService {
 		map.put("menu_photo", originalFileName);
 		return storeMapper.updateMenuPhoto(map);
 	}
+
+	public List<StoreMenuDTO> selectStoreMenuList(String store_id) {
+		return storeMapper.selectStoreMenuList(store_id);
+	}
 }

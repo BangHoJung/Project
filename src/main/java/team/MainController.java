@@ -3,11 +3,13 @@ package team;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -46,7 +48,11 @@ public class MainController {
 		this.qnaService = qnaService;
 		this.adService = adService;
 	}
-	
+	@RequestMapping("storeView.do")
+	public String storeview() {
+		
+		return "store_view";
+	}
 	
 	@RequestMapping("/")
 	public String main() {
@@ -124,7 +130,7 @@ public class MainController {
 		if(request.getParameter("pageNo") != null)
 			page = Integer.parseInt(request.getParameter("pageNo"));
 		System.out.println(page);
-		List<QnaDTO> list = qnaService.selectQnaList(page);//글목록 읽어옴
+		List<QnaDTO> list = qnaService.selectQnaList(page);
 		int count = qnaService.selectCount();
 		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
 		request.setAttribute("list", list);
@@ -140,7 +146,6 @@ public class MainController {
 		else
 			qno = (int)request.getAttribute("qna_no");
 		QnaDTO dto = qnaService.selectQna(qno);
-		
 		request.setAttribute("qna", dto);
 		return "qna_detail_view";
 	}
@@ -176,11 +181,52 @@ public class MainController {
 		String qna_content = request.getParameter("qna_content");
 		qnaService.insertQna(new QnaDTO(qna_no, qna_member_id,qna_title,qna_content));
 		QnaDTO dto = qnaService.selectQna(qna_no);
-		
 		request.setAttribute("qna", dto);
 		request.setAttribute("qno", qna_no);
 		return "qna_detail_view";
-		
+	}
+	@RequestMapping("/qnaDeleteAction.do")
+	public String qnaDeleteAction(HttpServletRequest request) {
+		int qna_no= Integer.parseInt(request.getParameter("qna_no"));
+		int page =1;
+		int pageOfContentCount = 20;
+		int count = qnaService.selectCount();
+		qnaService.deleteQna(qna_no); 
+		List<QnaDTO> list = qnaService.selectQnaList(page);
+		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
+		request.setAttribute("pagging", vo);
+		request.setAttribute("list", list);
+		return "qna";
+	}
+	@RequestMapping("/qnaAnswerView.do")
+	public String qnaAnswerView(HttpServletRequest request) {
+		int qna_no=Integer.parseInt(request.getParameter("qna_no"));
+		QnaDTO dto = qnaService.selectQna(qna_no);
+		request.setAttribute("qna", dto);
+		return "qna_answer";
+	}
+	@RequestMapping("/qnaAnswerDetailView.do")
+	public String qnaAnswerDetailView(HttpServletRequest request) {
+		int qna_no=Integer.parseInt(request.getParameter("qna_no"));
+		QnaDTO dto = qnaService.selectQna(qna_no);
+		request.setAttribute("qna", dto);
+		return "qna_answer_detail_view";
+	}
+	@RequestMapping("/qnaAnswerAction.do")
+	public String qnaAnswerAction(HttpServletRequest request) {
+		int qna_no=Integer.parseInt(request.getParameter("qna_no"));
+		String qna_response = request.getParameter("qna_response");
+		qnaService.qnaAnswer(new QnaDTO(qna_no,qna_response));
+		QnaDTO dto = qnaService.selectQna(qna_no);
+		int page =1;
+		int pageOfContentCount = 20;
+		int count = qnaService.selectCount();
+		List<QnaDTO> list = qnaService.selectQnaList(page);
+		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
+		request.setAttribute("pagging", vo);
+		request.setAttribute("list", list);
+		request.setAttribute("qna", dto);
+		return "qna";
 	}
     @RequestMapping("/loginAction.do")
     public String login(HttpServletRequest request,HttpSession session) {
@@ -457,6 +503,26 @@ public class MainController {
 		return "store_check";
   }
 	
+	@RequestMapping("reviewRegisterView.do")
+	public String reviewRegisterView(HttpServletRequest request, HttpSession session) {
+//		String store_id = request.getParameter("store_id");
+		String store_id = "ㅇㅇㅇ_22";
+		
+		StoreDTO dto = storeService.selectStoreDTO(store_id);
+		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
+		System.out.println("menuList : " + menuList.toString());
+		
+		request.setAttribute("store", dto);
+		request.setAttribute("menuList", menuList);
+		return "review_register";
+	}
+	
+	@RequestMapping("reviewRegisterAction.do")
+	public String reviewRegisterAction() {
+		
+		return "main";
+	}
+	
 	@RequestMapping("menuRegisterView.do")
 	public String menuRegisterView() {
 		return "menu_register";
@@ -575,6 +641,35 @@ public class MainController {
 		bos.close();
 	}
    
+   @RequestMapping("image_load.do")
+	public String imageLoad(HttpServletRequest request, HttpServletResponse response) {
+		String writer = request.getParameter("writer");
+		String fileName = request.getParameter("fileName");
+		String type = fileName.substring(fileName.lastIndexOf(".")+1);
+		
+		response.setContentType("image/"+type);
+		File path = new File("C:\\fileupload\\"+writer+"\\"+fileName);
+		try {
+			FileInputStream fis = new FileInputStream(path);
+			ServletOutputStream sos = response.getOutputStream();
+			
+			byte[] buffer = new byte[1024*1024];
+			while(true) {
+				int size = fis.read(buffer);
+				if(size == -1) break;
+				sos.write(buffer,0,size);
+				sos.flush();
+			}
+			sos.close();
+			fis.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+   
 /*광고>>>-----------------------------------------------------------------------------------------------------*/   
    
    @RequestMapping("/AdListView.do")
@@ -688,6 +783,7 @@ public String choiceAddress(HttpServletRequest request,HttpSession session) {
 	System.out.println(address);
 	int count=memberService.choiceMemberAddress(address,id);
 	if(count !=0) {
+		session.setAttribute("address", address);
 		System.out.println("메인 주소 선택 성공");
 		 memberService.notChoiceMemberAddress(address,id);
 		 List<MemberAddressDTO> list =memberService.selectMemberAllAddress(id);

@@ -42,5 +42,13 @@ public class QnaService {
 		return qnaMapper.updateQna(qnaDTO);
 	}
 
-	
+	public int deleteQna(int qna_no) {
+		return qnaMapper.deleteQna(qna_no);
+		
+	}
+
+	public int qnaAnswer(QnaDTO qnaDTO) {
+		return qnaMapper.qnaAnswer(qnaDTO);
+		
+	}
 }

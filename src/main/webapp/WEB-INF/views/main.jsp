@@ -12,7 +12,9 @@
 		margin:0;
 		padding:0;
 	}
-
+.img{
+width: 100%;
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
@@ -79,7 +81,8 @@
 		<div class="figure">
 		<figure>
 			<figcaption>
-			figure
+			<a href="storeView.do"><img  src="img/bakery/bakery1.jpg" class="img"></a>
+			베이커리 식당
 			</figcaption>
 		</figure>
 		<figure>
