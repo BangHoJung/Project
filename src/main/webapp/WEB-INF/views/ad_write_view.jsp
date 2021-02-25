@@ -8,12 +8,17 @@
 <title>광고 신청</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../css/ad_write_view.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 </head>
 <body>
 
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="/templete/mypage_header.jsp"></jsp:include>
 
-	<div id="ad_write_container">
+	
+	<div class="body">
+		<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
+		<div class="container">
 		<h2>광고신청</h2>
 			<form action="AdWriteAction.do" method="post">
 				<table>
@@ -48,8 +53,7 @@
 				</table>
 			</form>
 		</div>
-		
-		<jsp:include page="footer.jsp"></jsp:include>
+	</div>	
 		
 </body>
 </html>
