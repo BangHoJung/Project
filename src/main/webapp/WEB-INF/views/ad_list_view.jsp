@@ -13,9 +13,12 @@
 </head>
 <body>
 	
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="/templete/mypage_header.jsp"></jsp:include>
+
 	
-	<div id="ad_list_container">
+	<div class="body">
+		<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
+		<div class="container">
 		<table>
 			<tr>
 				<th>글번호</th>
@@ -48,6 +51,7 @@
 					</div>
 			</tr>
 		</table>
+		</div>
 	</div>
 	
 	<jsp:include page="footer.jsp"></jsp:include>
