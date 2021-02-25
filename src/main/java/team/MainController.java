@@ -48,14 +48,26 @@ public class MainController {
 		this.qnaService = qnaService;
 		this.adService = adService;
 	}
-	@RequestMapping("storeView.do")
-	public String storeview() {
+	@RequestMapping("storedetailView.do")
+	public String storeview(HttpServletRequest request) {
+		String store_id = request.getParameter("store_id");
+		System.out.println(store_id);
+		StoreDTO dto = storeService.selectStoreDTO(store_id);
+		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
+		System.out.println(menuList.toString());
+		String store_tel = request.getParameter("store_tel");
+		System.out.println(store_tel);
 		
-		return "store_view";
+		
+		
+		
+		return "store_detail_view";
 	}
 	
 	@RequestMapping("/")
-	public String main() {
+	public String main(HttpServletRequest request) {
+		StoreDTO dto = storeService.selectStoreDTO("한번해보자구_111111");
+		request.setAttribute("dto",dto);
 		return "main";
 	}
 	@RequestMapping("/myPageView.do")
@@ -71,7 +83,7 @@ public class MainController {
 		return "notice";
 	}
 	@RequestMapping("/introduce.do")
-	public String introduce() {
+	public String introduce() { 
 		return "introduce";
 	}
 	@RequestMapping("/guide.do")
