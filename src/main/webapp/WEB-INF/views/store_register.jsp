@@ -141,12 +141,16 @@
 						<tr>
 							<th>사업자등록증 첨부</th>
 							<td>
-								<input type="file" name="file" value="파일 선택">
+								<input type="file" name="file">
 							</td>
 						</tr>
 					</table>
 					<h2>식당 상세 정보(선택)</h2>
 					<table class="add">
+						<tr>
+							<th>식당 대표사진</th>
+							<td><input type="file" name="photo"></td>
+						</tr>
 						<tr>
 							<th>식당 영업시간</th>
 							<td><textarea rows="" cols="" name="time" placeholder="식당 영업시간을 입력해주세요"></textarea></td>
