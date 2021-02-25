@@ -43,6 +43,12 @@ public class QnaDTO {
 		this.qna_title = qna_title;
 		this.qna_content = qna_content;
 	}
+	//답변용
+	public QnaDTO(int qna_no, String qna_response) {
+		this.qna_no= qna_no;
+		this.qna_response= qna_response;
+		
+	}
 	public int getQna_no() {
 		return qna_no;
 	}

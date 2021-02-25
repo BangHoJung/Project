@@ -34,15 +34,24 @@
 			</tr>
 		<c:forEach var="dto" items="${requestScope.list }">
 			<tr>
-				<td>${dto.qna_no}</td>
-				<td><a href="qnaDetailView.do?qna_no=${dto.qna_no}"> ${dto.qna_title}
-					<%-- <c:if test="${dto.cCount > 0 }">
-						[${dto.cCount}]
-					</c:if> --%>
+				<td >${dto.qna_no}</td>
+				<td id="qna"><a href="qnaDetailView.do?qna_no=${dto.qna_no}"> ${dto.qna_title}
 				</a></td>
-				<td>${dto.qna_member_id}</td>
-				<td>${dto.qna_date}</td>
+				<td >${dto.qna_member_id}</td>
+				<td >${dto.qna_date}</td>
 			</tr>
+					<c:if test="${dto.qna_response != null }">
+			<tr>
+				<td style="display: hidden"></td>
+				<td id="qna_answer">
+					<a href="/qnaAnswerDetailView.do?qna_no=${dto.qna_no}">
+						└ RE : ${dto.qna_title }
+					</a>
+				</td>
+				<td>관리자</td>
+				<td>${dto.qna_response_date}</td>
+			</tr>
+					</c:if>
 		</c:forEach>
 			
 		  <tr>
