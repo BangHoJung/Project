@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/insert_update_address_view_pc.css" media="screen and (min-width:769px)">
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
+<script> 
 	function getPostcode() {
                        var index=document.getElementsByName("roadAddress").length;
 		               if(index==5){alert("주소는 최대 5개까지 추가 가능합니다.");return false;} 	   
