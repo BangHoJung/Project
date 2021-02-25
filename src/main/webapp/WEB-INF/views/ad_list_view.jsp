@@ -17,7 +17,7 @@
 
 	
 	<div class="body">
-		<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
+	<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
 		<div class="container">
 		<table>
 			<tr>

@@ -1,16 +1,53 @@
 @charset "UTF-8";
-	#ad_write_container{
-		width: 1000px;
+	.container{
+		width: 780px;
 		margin: 0 auto;
 		padding:0;
 	}
 	h2{
-		width:600px;
+		width:780px;
 		margin:0 auto;
+		padding: 10px 10px;
 	}
-	#ad_write_container table{
-		width:600px;
-		border-collapse: collapse;
-		margin:0 auto;
+	table{
+		width:700px;
+		padding: 20px;
+		border: 1px solid black; 
+	}
+	th{
+		width:100px ;
+		text-align: center !important;
+		font-size: 16px;
+	}
+	td{
+		width: 600px;
+		padding:5px;
+		height: 40px;
+	}
+	#content{
+		padding: 10px 0px;
+	}
+	textarea {
+		width: 600px;
+		height: 300px;
+		resize: none;
+		box-sizing: border-box;
+	}
+	.btn{
+		text-decoration: none;
+		background-color: #e8e8e8;
+		width: 80px;
+		display: inline-block;
+		padding:5px 0px;
+		font-weight:normal;
+		border : 1px solid #585858;
+		text-align:center;
+		color : black;
+		font-size:14px;
+		box-sizing: border-box;
+	}
+	.btn:hover{
+		background-color: #282828;
+		color:#FFFFFF
 	}
 	
