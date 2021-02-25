@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="team.mapper.StoreMapper">
 	<insert id="registerStore" parameterType="store">
-		INSERT INTO store VALUES (#{store_id},#{store_name},#{store_addr},#{store_license},#{store_member_id},#{store_time},#{store_introduce},#{store_tel},#{store_category},#{store_code},#{store_file})
+		INSERT INTO store VALUES (#{store_id},#{store_name},#{store_addr},#{store_license},#{store_member_id},#{store_time},#{store_introduce},#{store_tel},#{store_category},#{store_code},#{store_file},#{store_photo})
 	</insert>
 	<insert id="registerMenu" parameterType="menu">
 		INSERT INTO store_menu VALUES (SEQ_MENU.NEXTVAL,#{menu_store_id},#{menu_name},#{menu_price},#{menu_photo})
@@ -21,6 +21,9 @@
 	</select>
 	<select id="selectStoreListCode" parameterType="int" resultType="store">
 		SELECT * FROM store WHERE store_code = #{store_code}
+	</select>
+	<select id="selectStoreMenuList" parameterMap="String" resultType="menu">
+		SELECT * FROM store_menu WHERE menu_store_id = #{store_id}
 	</select>
 	
 	<update id="updateStoreCode" parameterType="HashMap">
