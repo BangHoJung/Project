@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,6 +61,7 @@ width: 100px;
 <div class="col-md-12">
 
   <span class="glyphicon glyphicon-star btn-warning"  aria-hidden="true"></span> 
+  <p> 4.5점 </p> <p>${requestscoP}</p>
 
 </div>
  </div>
@@ -86,7 +88,7 @@ width: 100px;
  <th>
  전화번호 
  </th>	
- <td colspan="2">02-3454-2001 
+ <td colspan="2">
  </td>
  </tr>
  <tr>
@@ -144,7 +146,7 @@ width: 100px;
 해물 로스
 </td>
 <td>
-35,000원
+${menu.menu_price }
 </td>
 
 </tr>
@@ -156,7 +158,7 @@ width: 100px;
 해물 로스
 </td>
 <td>
-35,000원
+${menu.menu_price }
 </td>
 
 </tr>

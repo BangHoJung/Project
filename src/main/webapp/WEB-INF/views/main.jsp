@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ page import="team.dto.StoreDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,8 +82,9 @@ width: 100%;
 		<div class="figure">
 		<figure>
 			<figcaption>
-			<a href="storeView.do"><img  src="img/bakery/bakery1.jpg" class="img"></a>
-			베이커리 식당
+			<a href="storedetailView.do?store_id=${requestScope.dto.store_id}"><img  src="img/bakery/bakery1.jpg" class="img"></a>
+		<a href="#">${requestScope.dto.store_name}</a>
+	
 			</figcaption>
 		</figure>
 		<figure>
