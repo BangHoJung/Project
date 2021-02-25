@@ -22,7 +22,7 @@
 	<select id="selectStoreListCode" parameterType="int" resultType="store">
 		SELECT * FROM store WHERE store_code = #{store_code}
 	</select>
-	<select id="selectStoreMenuList" parameterMap="String" resultType="menu">
+	<select id="selectStoreMenuList" parameterType="String" resultType="menu">
 		SELECT * FROM store_menu WHERE menu_store_id = #{store_id}
 	</select>
 	

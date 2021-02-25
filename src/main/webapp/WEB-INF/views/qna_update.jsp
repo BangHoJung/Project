@@ -7,25 +7,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-<link rel="stylesheet" href="../css/pc2.css" media="screen and (max-width:1023px)">
-<link rel="stylesheet" href="../css/qna.css" media="screen and (min-width:1024px)">
+<link rel="stylesheet" href="../css/qna_update.css" media="screen and (min-width:1024px)">
 <script type="text/javascript">
 	$(function(){
-		$("#pop").html($(window).width());
-		$(window).resize(function() {
-			$("#pop").html($(window).width());
-		});		
-	});
-
-	</script>
+		$("#random").click(function(){
+			alert('추천 메뉴는 ooo입니다');
+		})
+	})
+</script>
 </head>
 <body>
-
-	
 	<jsp:include page="header.jsp"></jsp:include>
-		<div class="qna_update_container">
+	<div class="qna_update_container">
 		<h3>Q&A 수정</h3>
 		<form action="qnaUpdateAction.do" method="post">
 			<input type="hidden" name="qna_no" value="${requestScope.qna.qna_no }">
@@ -47,7 +40,6 @@
 					<th><a href="qnaView.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">취소</a></th>
 					<td style="text-align: right;">
 						<button class="btn" type="submit">수정</button>
-						<!-- <a href="#" class="btn" type="submit">수정</a> -->
 					</td>
 				</tr>
 			</table>

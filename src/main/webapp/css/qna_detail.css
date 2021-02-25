@@ -1,0 +1,61 @@
+@charset "UTF-8";
+	.qna_detail_container{
+		width:800px;
+		margin:20px auto;
+		border-collapse: collapse;
+	}
+	.qna_detail_container table{
+		width:600px;
+		margin:0 auto;
+		box-sizing: border-box;
+	}
+	.qna_detail_container #form th{
+		width:100px;
+		border:1px solid #e8e8e8;
+		font-size: 13px;
+		font-weight: bold;
+	}
+	.qna_detail_container #form td{
+		font-size: 12px;
+		width:500px;
+		border:1px solid #e8e8e8;
+		padding-left: 10px;
+	}
+	.qna_detail_container tr{
+		margin: 20px;
+		height: 30px;
+	}
+	.qna_detail_container #form{
+		border-collapse: collapse;
+		margin-top:20px;
+	}
+	.qna_detail_container #content{
+		height:200px;
+		width: 200px ;
+		padding-left: 20px;
+	}
+	.qna_detail_container #btn td{
+		width:500px;
+	}
+	.btn{
+		text-decoration: none;
+		background-color: #e8e8e8;
+		width: 80px;
+		display: inline-block;
+		padding:5px 0px;
+		font-weight:normal;
+		text-align:center;
+		color : black;
+		font-size:14px;
+		box-sizing: border-box;
+		margin-top:10px;
+	}
+	.btn:hover{
+		background-color: #282828;
+		color:#FFFFFF
+	}
+	.qna_detail_container a{
+		text-decoration: none;
+		color: black;
+	}
+	

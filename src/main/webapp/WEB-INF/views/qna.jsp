@@ -7,24 +7,23 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-<link rel="stylesheet" href="../css/pc2.css" media="screen and (max-width:1023px)">
 <link rel="stylesheet" href="../css/qna.css" media="screen and (min-width:1024px)">
 <script type="text/javascript">
 	$(function(){
-		$("#pop").html($(window).width());
-		$(window).resize(function() {
-			$("#pop").html($(window).width());
-		});		
-	});
+		if(${requestScope.deleteAction == true}){
+			alert("삭제 성공!!");
+			}
+		$("#random").click(function(){
+			alert('추천 메뉴는 ooo입니다');
+		})
+	})
 
 	</script>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div id="board_container">
-	<h3>Q&A</h3>
+		<h3>Q&A</h3>
 		<table class="board">
 			<tr>
 				<th class="qno">글번호</th>
@@ -34,13 +33,13 @@
 			</tr>
 		<c:forEach var="dto" items="${requestScope.list }">
 			<tr>
-				<td >${dto.qna_no}</td>
-				<td id="qna"><a href="qnaDetailView.do?qna_no=${dto.qna_no}"> ${dto.qna_title}
+				<td class="qno">${dto.qna_no}</td>
+				<td class="title" id="qna"><a href="qnaDetailView.do?qna_no=${dto.qna_no}"> ${dto.qna_title}
 				</a></td>
-				<td >${dto.qna_member_id}</td>
+				<td class="writer">${dto.qna_member_id}</td>
 				<td >${dto.qna_date}</td>
 			</tr>
-					<c:if test="${dto.qna_response != null }">
+		<c:if test="${dto.qna_response != null }">
 			<tr>
 				<td style="display: hidden"></td>
 				<td id="qna_answer">
@@ -51,28 +50,24 @@
 				<td>관리자</td>
 				<td>${dto.qna_response_date}</td>
 			</tr>
-					</c:if>
+		</c:if>
 		</c:forEach>
-			
-		  <tr>
-			<td colspan="7">
+		    <tr>
+				<td colspan="7">
 					<div class="page_bar">
 						<c:if test="${pagging.previousPageGroup }">
 							<a href="qnaView.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
 						</c:if>
-						<c:forEach var="i" begin="${pagging.startPageOfPageGroup}" 
-						end="${pagging.endPageOfPageGroup}">
+						<c:forEach var="i" begin="${pagging.startPageOfPageGroup}" end="${pagging.endPageOfPageGroup}">
 							<a href="qnaView.do?pageNo=${i }">${ i}</a>
 						</c:forEach>
-					
 						<c:if test="${pagging.nextPageGroup }">
 							<a href="qnaView.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
 						</c:if>
 						<a href="/qnaWrite.do" class="btn_writer">글쓰기</a>
 					</div>
-					</td>
+				</td>
 			</tr>
-			
 		</table>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>

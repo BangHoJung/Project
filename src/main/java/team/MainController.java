@@ -163,10 +163,18 @@ public class MainController {
 		int qna_no= Integer.parseInt(request.getParameter("qna_no"));
 		String qna_title = request.getParameter("qna_title");
 		String qna_content= request.getParameter("qna_content");
-		qnaService.updateQna(new QnaDTO(qna_no,qna_title,qna_content));
-		
+		int count = qnaService.updateQna(new QnaDTO(qna_no,qna_title,qna_content));
 		QnaDTO dto = qnaService.selectQna(qna_no);
 		request.setAttribute("qna", dto);
+		if(count != 0) {
+		    System.out.println("수정 성공");
+			request.setAttribute("QnAupdateSuccess",true);
+		}
+		else {
+			System.out.println("수정 실패");
+			request.setAttribute("QnAupdateSuccess",false);
+		}
+			
 		return "qna_detail_view";
 	}
 	@RequestMapping("/qnaWrite.do")
@@ -191,7 +199,10 @@ public class MainController {
 		int page =1;
 		int pageOfContentCount = 20;
 		int count = qnaService.selectCount();
-		qnaService.deleteQna(qna_no); 
+		int act =qnaService.deleteQna(qna_no); 
+		if(act != 0) {
+			request.setAttribute("deleteAction", true);
+		}
 		List<QnaDTO> list = qnaService.selectQnaList(page);
 		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
 		request.setAttribute("pagging", vo);

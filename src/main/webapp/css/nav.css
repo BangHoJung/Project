@@ -1,114 +1,25 @@
 @charset "UTF-8";
-body {
-		width: 1000px;
-		margin: 0 auto;
+	*{
+		margin:0;
 		padding:0;
 	}
-header {
+	body {
 		width: 1000px;
-		height: 80px;
-		position: relative;
+		margin: 0 auto;
 	}
-	
-	#login .search {
-		position: absolute;
-		margin-left: 200px;
-		margin-top: 20px;
-		padding: 10px;
-		border: 1px solid #fa0050;
-		border-radius: 20px;
-	}
-	
-	#login input {
-		width: 300px;
-		height: 20px;
-		box-sizing: border-box;
-		border: none;
-	}
-	
-	#login .search button {
-		margin-left: 5px; width : 50px;
-		height: 20px;
-		box-sizing: border-box;
-		width: 50px;
-		border: none;
-		background-color: white;
-		color: gray;
-		font-weight: bold;
-	}
-	
-	#logo img {
-		margin-top:5px;
-		width: 100px ;
-		height: 70px;
-		float: left;
-	}
-	
-	#login p {
-		margin-top: 40px;
-		font-weight: bold;
-		font-size: 12px;
-		color: gray;
-	}
-	
-	#login a:link, #login a:visited {
-		color: gray;
-		text-decoration: none;
-	}
-	
-	.clear {
-		clear: both;
-	}
-	
-	.right {
-		float: right;
-	}
-	
-	nav {
-		background-color:#fa0050;
-		margin-bottom: 20px;
-		height: 50px;
-	}
-	
-	nav>ul {
-		list-style-type: none;
-		display: inline-block;
-		font-size: 0px;
-	}
-	
-	nav>ul>li {
-		display: inline-block;
-	}
-	
-	nav a:link, nav a:visited {
-		width: 100px;
-		height: 50px;
-		padding: 15px 0px;
+	.introduce_container{
+		width: 600px;
+		margin: 0 auto;
 		font-size: 15px;
-		line-height: 20px;
-		text-align: center;
+		border: 1px solid #e8e8e8;
+		padding: 20px;
 		box-sizing: border-box;
-		display: inline-block;
-		text-decoration: none;
-		color:white;
+		margin-bottom:50px;
 	}
-	
-	nav button {
-		width: 100px;
-		margin-right:10px;
-		font-size:15px;
-		font-weight:bold;
-		height: 50px;
-		background-color: #fa0050;
-		color: white;
-		border: none;
+	#introduce_title{
+		width: 600px;
+		margin: 0 auto;
 	}
-	
-	
-	
-	
-	
-	
 	.notice_container{
 		width: 1000px;
 	}
@@ -129,19 +40,6 @@ header {
 		font-size:12px;
 		border-bottom: 1px solid #e8e8e8
 	}
-	.introduce_container{
-		width: 600px;
-		margin: 0 auto;
-		font-size: 15px;
-		border: 1px solid #e8e8e8;
-		padding: 20px;
-		box-sizing: border-box;
-		margin-bottom:50px;
-	}
-	#introduce_title{
-		width: 600px;
-		margin: 0 auto;
-	}
 	#guide_container{
 		width:600px;
 		margin:0 auto;
@@ -160,17 +58,4 @@ header {
 	}
 	#guide_container img{
 		width: 600px;
-	}
-	footer {
-		padding: 20px 40px;
-		width: 1000px;
-		box-sizing: border-box;
-		background-color: rgb(192, 192, 192);
-		margin: 0 auto;
-		margin-top: 50px;
-	}
-	
-	footer ul {
-		list-style-type: none;
-		font-size: 10px;
 	}
