@@ -92,7 +92,27 @@ public class MemberService {
 	      map.put("id",id);
 		return mapper.deleteMemberAddress(map);
 	}
-
+    //수정 2021-02-25
+	public int choiceMemberAddress(String address, String id) {
+		 HashMap<String, Object> map = new HashMap<String, Object>();
+	      map.put("address", address);
+	      map.put("id",id);
+		return mapper.choiceMemberAddress(map);
+	}
+	//수정 2021-02-25
+	public int notChoiceMemberAddress(String address, String id) {
+		 HashMap<String, Object> map = new HashMap<String, Object>();
+	      map.put("address", address);
+	      map.put("id",id);
+		return mapper.notChoiceMemberAddress(map);
+	}
+    //수정 2021-02-25
+	public String selectMemeberAddressCheck(String id, String address) {
+		 HashMap<String, Object> map = new HashMap<String, Object>();
+	      map.put("address", address);
+	      map.put("id",id);
+		return mapper.selectMemeberAddressCheck(map);
+	}
 
 	
 	

@@ -39,6 +39,11 @@ public interface MemberMapper {
 	public List<MemberAddressDTO> selectMemberAllAddress(String id);
 
 	public int deleteMemberAddress(HashMap<String, Object> map);
+    //수정 2021-02-25
+	public int choiceMemberAddress(HashMap<String, Object> map);
+	//수정 2021-02-25
+	public int notChoiceMemberAddress(HashMap<String, Object> map);
+	//수정 2021-02-25
+	public String selectMemeberAddressCheck(HashMap<String, Object> map);
 
-    
 }

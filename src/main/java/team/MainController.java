@@ -657,19 +657,30 @@ public class MainController {
    
    
 /*-----------------------------------------------------------------------------------------------------<<<광고*/ 
+   //수정 2021-02-25
    @RequestMapping("/insertMemberAddressAction.do")
-	public String insertMemberAddressAction(HttpServletRequest request,HttpSession session) {
+	public String insertMemberAddressAction(HttpServletRequest request,HttpSession session,HttpServletResponse response) {
 	   String id= (String)session.getAttribute("id");
 	   System.out.println(id);
 	   String address = request.getParameter("address");
 	   System.out.println(address);
+	   String checkAddress= memberService.selectMemeberAddressCheck(id, address);
+	   if(checkAddress == null) {
 	   MemberAddressDTO dto = new MemberAddressDTO(id,address,0);
 	   int count=memberService.registerMemberAddress(dto);
 	   if(count !=0) {
-		   System.out.println("추가 성공");
+		   System.out.println("주소 추가 성공");   
+	   }else {
+		   System.out.println("주소 추가 실패");
+	   }
 	   }
 	   else {
-		  System.out.println("추가 실패");
+		   try {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("중복된 주소입니다.");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	   }
 	   return null;
    }
@@ -689,5 +700,24 @@ public String deleteAddressAction(HttpServletRequest request,HttpSession session
 	}
 	return "insert_update_address_view";
   }
+//수정 2021-02-25
+@RequestMapping("/choiceAddressAction.do")
+public String choiceAddress(HttpServletRequest request,HttpSession session) {
+	String id=(String)session.getAttribute("id"); 
+	System.out.println(id);
+	String address=request.getParameter("address");
+	System.out.println(address);
+	int count=memberService.choiceMemberAddress(address,id);
+	if(count !=0) {
+		System.out.println("메인 주소 선택 성공");
+		 memberService.notChoiceMemberAddress(address,id);
+		 List<MemberAddressDTO> list =memberService.selectMemberAllAddress(id);
+		 session.setAttribute("list",list);
+	}
+	else {
+		System.out.println("메인 주소 선택 실패");
+	}
+	return "insert_update_address_view";
+}
 } 
 	   
