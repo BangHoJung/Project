@@ -14,6 +14,15 @@ public class StoreMenuDTO {
 	public StoreMenuDTO() {
 		super();
 	}
+	//모든 데이터 생성자
+	public StoreMenuDTO(String menu_id, String menu_store_id, String menu_name, int menu_price, String menu_photo) {
+		super();
+		this.menu_id = menu_id;
+		this.menu_store_id = menu_store_id;
+		this.menu_name = menu_name;
+		this.menu_price = menu_price;
+		this.menu_photo = menu_photo;
+	}
 
 	public StoreMenuDTO(String menu_store_id, String menu_name, int menu_price, String menu_photo) {
 		super();

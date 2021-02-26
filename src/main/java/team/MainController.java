@@ -25,6 +25,7 @@ import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
 import team.dto.MessageDTO;
 import team.dto.QnaDTO;
+import team.dto.ReviewDTO;
 import team.dto.StoreDTO;
 import team.dto.StoreMenuDTO;
 import team.service.AdService;
@@ -528,8 +529,8 @@ public class MainController {
 	
 	@RequestMapping("reviewRegisterView.do")
 	public String reviewRegisterView(HttpServletRequest request, HttpSession session) {
-//		String store_id = request.getParameter("store_id");
-		String store_id = "식당하하_222";
+		String store_id = request.getParameter("store_id");
+//		String store_id = "식당하하_222";
 		
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
@@ -541,19 +542,56 @@ public class MainController {
 	}
 	
 	@RequestMapping("reviewRegisterAction.do")
-	public String reviewRegisterAction(HttpServletRequest request) {
-		int review_score_menu = Integer.parseInt(request.getParameter("review_score_menu"));
-		int review_score_price = Integer.parseInt(request.getParameter("review_score_price"));
-		int review_score_service = Integer.parseInt(request.getParameter("review_score_service"));
-		
+	public String reviewRegisterAction(MultipartHttpServletRequest mqrequest, HttpServletRequest request, HttpSession session,HttpServletResponse response) {
+		String review_store_id = request.getParameter("store_id");
+		String review_member_id = (String) session.getAttribute("id");
+		String review_content = request.getParameter("review_content");
+		int review_menu_id = Integer.parseInt(request.getParameter("menu_id"));
+		int review_score_menu = Integer.parseInt(request.getParameter("review_score_menu"))+1;
+		int review_score_price = Integer.parseInt(request.getParameter("review_score_price"))+1;
+		int review_score_service = Integer.parseInt(request.getParameter("review_score_service"))+1;
+		MultipartFile photo = mqrequest.getFile("photo");
+		String review_id = review_member_id+"_"+review_menu_id;
 		System.out.println(review_score_menu+ "," +review_score_price + "," +review_score_service);
-		return "main";
+		
+		String path = "C:\\fileupload\\"+review_store_id+"\\"+review_member_id+"\\";
+		File photoFile = null;
+		try {
+			String photoFileName = photo.getOriginalFilename();
+			long fileSize = photo.getSize();
+			if(fileSize == 0) {
+				photoFile = new File("");
+			}
+			else {
+				System.out.println("photoFileName : " + photoFileName);
+				System.out.println("fileSize : " + fileSize);
+				File parentPath = new File(path);
+				if(!parentPath.exists()) parentPath.mkdirs();
+				
+				//파일 업로드
+				photoFile = new File(path + photoFileName);
+				photo.transferTo(photoFile);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("photoFile : " + photoFile.getName());
+		try {
+			memberService.registerReview(new ReviewDTO(review_id, review_member_id, review_store_id, review_content, review_score_service, review_score_price, review_menu_id, review_score_menu, photoFile.getName()));
+			return "main";
+		} catch(Exception e) {
+			if(e.getMessage().equals("exist")) {
+				try {
+					response.setContentType("text/html;charset=utf-8");
+					response.getWriter().write(("<script>alert('이미 후기를 등록한 메뉴입니다.다른메뉴를 선택해주세요');history.back();</script>"));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			return null;
+		}
 	}
 	
-	@RequestMapping("menuRegisterView.do")
-	public String menuRegisterView() {
-		return "menu_register";
-	}
 	
    @RequestMapping("adminMessageView.do")
    public String adminMessageView() {

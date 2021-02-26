@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
 import team.dto.MessageDTO;
+import team.dto.ReviewDTO;
 import team.mapper.MemberMapper;
 
 @Service
@@ -112,6 +113,17 @@ public class MemberService {
 	      map.put("address", address);
 	      map.put("id",id);
 		return mapper.selectMemeberAddressCheck(map);
+	}
+
+	public int registerReview(ReviewDTO reviewDTO) throws Exception {
+		int count = mapper.registerReview(reviewDTO);
+		if(count == 0) {
+			System.out.println("exist");
+			throw new Exception("exist");
+		}
+		else {
+			return count;
+		}
 	}
 
 	
