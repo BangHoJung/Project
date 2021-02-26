@@ -711,12 +711,14 @@ public class MainController {
    @RequestMapping("/AdListView.do")
 	public String adList(HttpServletRequest request) {
 		int page = 1;
+		int pageOfContentCount =10;
 		//페이지 셋팅
 		if(request.getParameter("pageNo") != null)
 			page = Integer.parseInt(request.getParameter("pageNo"));
+		System.out.println(page);
 		List<AdDTO> list = adService.selectAdList(page); //글목록 읽어옴 
 		int count = adService.selectCount();
-		PaggingVO vo = new PaggingVO(count, page);
+		PaggingVO vo = new PaggingVO(count, page, pageOfContentCount);
 		request.setAttribute("list", list);
 		request.setAttribute("pagging", vo);
 		System.out.println(list.toString());
@@ -724,7 +726,7 @@ public class MainController {
 	}
    
    @RequestMapping("/AdView.do")
-	public String boardView(HttpServletRequest request) {
+	public String adView(HttpServletRequest request) {
 		//게시글 하나 읽음
 		//1. request에서 게시글 번호 읽어옴
 		int ad_no = 0;
@@ -750,22 +752,20 @@ public class MainController {
 	}
    
    @RequestMapping("/AdWriteAction.do")
-	public RedirectView adWriteAction(MultipartHttpServletRequest request) {
-		//글번호 먼저 발급
+	public String adWriteAction(HttpServletRequest request) {
 		int ad_no = adService.newAd_no();
-		
-		String ad_store_id = request.getParameter("");
-		int ad_status = Integer.parseInt(request.getParameter(""));
-		String ad_comment = request.getParameter("");
-		adService.insertAd(new AdDTO(ad_no, ad_store_id, ad_status, ad_comment));
+		String ad_store_id = request.getParameter("ad_store_id");
+		int ad_status = Integer.parseInt(request.getParameter("ad_status"));
+		String ad_content = request.getParameter("ad_content");
+		adService.insertAd(new AdDTO(ad_no, ad_store_id, ad_status, ad_content));
+		AdDTO dto = adService.selectAd(ad_no);
+		//request.setAttribute("ad", dto);
 		request.setAttribute("ad_no", ad_no);
 		
 					//파일 첨부기능 작성 필요 
 		
-		return new RedirectView("adView.do?ad_no="+ad_no);
+		return "ad_detail_view";
 	}
-   
-   
 /*-----------------------------------------------------------------------------------------------------<<<광고*/ 
    //수정 2021-02-25
    @RequestMapping("/insertMemberAddressAction.do")

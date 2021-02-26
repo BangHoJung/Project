@@ -4,15 +4,15 @@ public class AdDTO {
 	private int ad_no;
 	private String ad_store_id;
 	private int ad_status;
-	private String ad_comment;
+	private String ad_content;
 	
 	
-	public AdDTO(int ad_no, String ad_store_id, int ad_status, String ad_comment) {
+	public AdDTO(int ad_no, String ad_store_id, int ad_status, String ad_content) {
 		super();
 		this.ad_no = ad_no;
 		this.ad_store_id = ad_store_id;
 		this.ad_status = ad_status;
-		this.ad_comment = ad_comment;
+		this.ad_content = ad_content;
 	}
 
 	public int getAd_no() {
@@ -39,18 +39,19 @@ public class AdDTO {
 		this.ad_status = ad_status;
 	}
 
-	public String getAd_comment() {
-		return ad_comment;
+
+	public String getAd_content() {
+		return ad_content;
 	}
 
-	public void setAd_comment(String ad_comment) {
-		this.ad_comment = ad_comment;
+	public void setAd_content(String ad_content) {
+		this.ad_content = ad_content;
 	}
 
 	@Override
 	public String toString() {
 		return "AdDTO [ad_no=" + ad_no + ", ad_store_id=" + ad_store_id + ", ad_status="
-				+ ad_status + ", ad_comment=" + ad_comment + "]";
+				+ ad_status + ", ad_content=" + ad_content + "]";
 	}
 
 	
