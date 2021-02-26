@@ -5,9 +5,17 @@
 <mapper namespace="team.mapper.QnaMapper">
 	<select id="selectQnaList" parameterType="int" resultType="team.dto.QnaDTO">
 		select * from (select ceil(rownum/20) as pagenum,QNA_NO,QNA_MEMBER_ID,QNA_TITLE,QNA_CONTENT,QNA_DATE,QNA_RESPONSE,QNA_RESPONSE_DATE from qna a order by qna_no desc) where pagenum= #{page} 
+	
+	</select>
+	<select id="selectMypageQnaList" parameterType="map" resultType="team.dto.QnaDTO">
+		select * from (select * from (select ceil(rownum/20) as pagenum,QNA_NO,QNA_MEMBER_ID,QNA_TITLE,QNA_CONTENT,QNA_DATE,QNA_RESPONSE,QNA_RESPONSE_DATE from qna a order by qna_no desc) where pagenum= #{page})
+		where qna_member_id = #{id} 
 	</select>
 	<select id="selectCount" resultType="int">
 		select count(*) from qna
+	</select>
+	<select id="selectMypageCount" parameterType="String" resultType="int">
+		select count(*) from qna where qna_member_id = #{id}
 	</select>
 	<select id="selectQna" parameterType="int" resultType="team.dto.QnaDTO">
 		select * from qna where qna_no = #{qno}

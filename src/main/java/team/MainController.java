@@ -138,16 +138,13 @@ public class MainController {
 	@RequestMapping("/qnaView.do")
 	public String qnaView(HttpServletRequest request) {
 		int page=1; int pageOfContentCount =20;
-		//페이지 셋팅
 		if(request.getParameter("pageNo") != null)
 			page = Integer.parseInt(request.getParameter("pageNo"));
-		System.out.println(page);
 		List<QnaDTO> list = qnaService.selectQnaList(page);
 		int count = qnaService.selectCount();
 		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
 		request.setAttribute("list", list);
 		request.setAttribute("pagging", vo);
-		System.out.println(list.toString());
 		return "qna";
 	}
 	@RequestMapping("/qnaDetailView.do")
@@ -250,6 +247,19 @@ public class MainController {
 		request.setAttribute("list", list);
 		request.setAttribute("qna", dto);
 		return "qna";
+	}
+	@RequestMapping("/qnaMypageView.do")
+	public String qnaMypageView(HttpServletRequest request, HttpSession session) {
+		int page=1; int pageOfContentCount =20;
+		if(request.getParameter("pageNo") != null)
+			page = Integer.parseInt(request.getParameter("pageNo"));
+		String id = (String) session.getAttribute("id");
+		List<QnaDTO> list = qnaService.selectMypageQnaList(page, id);
+		int count = qnaService.selectMypageCount(id);
+		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
+		request.setAttribute("list", list);
+		request.setAttribute("pagging", vo);
+		return "qna_mypage_view";
 	}
     @RequestMapping("/loginAction.do")
     public String login(HttpServletRequest request,HttpSession session) {

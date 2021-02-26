@@ -1,5 +1,6 @@
 package team.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -25,6 +26,11 @@ public interface QnaMapper {
 	int deleteQna(int qna_no);
 
 	int qnaAnswer(QnaDTO qnaDTO);
+
+
+	List<QnaDTO> selectMypageQnaList(HashMap<String, Object> map);
+
+	int selectMypageCount(String id);
 
 
 
