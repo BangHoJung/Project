@@ -53,11 +53,14 @@ public class MainController {
 		String store_id = request.getParameter("store_id");
 		System.out.println(store_id);
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
+		
 		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
 		System.out.println(menuList.toString());
 		String store_tel = request.getParameter("store_tel");
 		System.out.println(store_tel);
-		
+		request.setAttribute("menuList", menuList);
+		request.setAttribute("dto", dto);
+		System.out.println(dto.getStore_name());
 		
 		
 		
@@ -68,7 +71,13 @@ public class MainController {
 	public String main(HttpServletRequest request) {
 		StoreDTO dto = storeService.selectStoreDTO("한번해보자구_111111");
 		request.setAttribute("dto",dto);
+		System.out.println(dto.getStore_name());
+		System.out.println(dto.getStore_id());
+		System.out.println(dto.getStore_photo());
+		
+		
 		return "main";
+	
 	}
 	@RequestMapping("/myPageView.do")
 	public String myPageView() {
