@@ -529,7 +529,7 @@ public class MainController {
 	@RequestMapping("reviewRegisterView.do")
 	public String reviewRegisterView(HttpServletRequest request, HttpSession session) {
 //		String store_id = request.getParameter("store_id");
-		String store_id = "ㅇㅇㅇ_22";
+		String store_id = "식당하하_222";
 		
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
@@ -541,8 +541,12 @@ public class MainController {
 	}
 	
 	@RequestMapping("reviewRegisterAction.do")
-	public String reviewRegisterAction() {
+	public String reviewRegisterAction(HttpServletRequest request) {
+		int review_score_menu = Integer.parseInt(request.getParameter("review_score_menu"));
+		int review_score_price = Integer.parseInt(request.getParameter("review_score_price"));
+		int review_score_service = Integer.parseInt(request.getParameter("review_score_service"));
 		
+		System.out.println(review_score_menu+ "," +review_score_price + "," +review_score_service);
 		return "main";
 	}
 	
