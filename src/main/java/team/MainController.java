@@ -71,11 +71,11 @@ public class MainController {
 	
 	@RequestMapping("/")
 	public String main(HttpServletRequest request) {
-		StoreDTO dto = storeService.selectStoreDTO("한번해보자구_111111");
-		request.setAttribute("dto",dto);
-		System.out.println(dto.getStore_name());
-		System.out.println(dto.getStore_id());
-		System.out.println(dto.getStore_photo());
+// 		StoreDTO dto = storeService.selectStoreDTO("한번해보자구_111111");
+// 		request.setAttribute("dto",dto);
+// 		System.out.println(dto.getStore_name());
+// 		System.out.println(dto.getStore_id());
+// 		System.out.println(dto.getStore_photo());
 		
 		
 		return "main";
