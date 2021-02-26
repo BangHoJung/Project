@@ -14,8 +14,10 @@
 <script type="text/javascript">
 	$(function() {
 		$(".btn_menu").click( function() {
-			console.log($(this).val());
-			$("#menu").attr("visibility","visible");
+			console.log($(this).siblings("input").val());
+			$("input[name='menu_id']").val($(this).siblings("input").val());
+			$("#menu_id").html("선택 메뉴 : "+$(this).html())
+			$("#menu").css("display","inline-block");
 		});
 		
 		var menu = -1;
@@ -98,36 +100,38 @@
 			<h4>항목별 평점</h4>
 			<p>평가할 메뉴를 선택해주세요</p>
 			<c:forEach var="menu" items="${requestScope.menuList }">
-				<input type="hidden" name="menu_id" value="${menu.menu_id }">
-				<button type="button" class="btn_menu">${menu.menu_name }</button>
+				<span>
+					<input type="hidden" value="${menu.menu_id}">
+					<button type="button" class="btn_menu">${menu.menu_name }</button>
+				</span>
 			</c:forEach>
+			<input type="hidden" name="menu_id">
 			<br><br>
-			<p id="menu">
+			<p id="menu_id"></p>
+			<div id="menu">
 				메뉴 평가 : 
 				<span><c:forEach begin="1" end="5" var="index">
 					<a href="#none" ><img src="/img/starcheck.png"></a>
 				</c:forEach></span>
-			</p>
+			</div>
 			<input type="hidden" name="review_score_menu">
-			<p id="price">
+			<div id="price">
 				가격 평가 : 
 				<span><c:forEach begin="1" end="5" var="index">
 					<a href="#none"><img src="/img/starcheck.png"></a>
 				</c:forEach></span>
-			</p>
+			</div>
 			<input type="hidden" name="review_score_price">
-			<p id="service">
+			<div id="service">
 				서비스 평가 : 
 				<span><c:forEach begin="1" end="5" var="index">
 					<a href="#none"><img src="/img/starcheck.png"></a>
 				</c:forEach></span>
-			</p>
+			</div>
 			<input type="hidden" name="review_score_service">
 			<hr>
 			<h4>방문 후기 작성</h4>
-			<textarea rows="" cols="" placeholder="음식,서비스,분위기,위생상태 등의 식당 방문 후기를 적어주세요">
-				
-			</textarea>
+			<textarea placeholder="음식,서비스,분위기,위생상태 등의 식당 방문 후기를 적어주세요" name="review_content"></textarea>
 			<hr>
 			<h4>후기 사진 등록</h4>
 			<p>직접 촬영한 메뉴,가게 인테리어 등의 사진을 등록해주세요</p>

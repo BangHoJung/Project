@@ -51,4 +51,7 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	<select id="selectMemeberAddressCheck" parameterType="map" resultType="String">
 	  select address_text from member_address where address_text=#{address} and address_member_id=#{id}
 	</select>
+	<insert id="registerReview" parameterType="review">
+		INSERT INTO review(review_id,review_member_id,review_store_id,review_content,review_score_service,review_score_price,review_menu_id,review_score_menu,review_photo) VALUES(#{review_id},#{review_member_id},#{review_store_id},#{review_content},#{review_score_service},#{review_score_price},#{review_menu_id},#{review_score_menu},#{review_photo})
+	</insert>
 </mapper>
