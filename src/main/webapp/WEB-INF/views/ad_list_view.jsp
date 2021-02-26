@@ -10,6 +10,18 @@
 <link rel="stylesheet" href="../css/ad_list_view.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+<style type="text/css">
+	.container{
+		width: 780px;
+		margin: 0 auto;
+		padding:0;
+	}
+	table{
+		width:700px;
+		padding: 20px;
+		border: 1px solid black; 
+	}
+</style>
 </head>
 <body>
 	
@@ -34,7 +46,7 @@
 				<td>${dto.ad_store_id}</td>
 			</c:forEach>
 			<tr>
-			<td colspan="7">
+			<td colspan="7">		<!-- 안나오뮤ㅠㅠㅠ -->
 					<div class="page_bar">
 						<c:if test="${pagging.previousPageGroup }">
 							<a href="index.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
@@ -47,7 +59,7 @@
 						<c:if test="${pagging.nextPageGroup }">
 							<a href="index.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
 						</c:if>
-						<a href="boardWriteView.do" class="btn_writer">글쓰기</a>
+						<a href="AdWriteView.do" class="btn_writer" >글쓰기</a>
 					</div>
 			</tr>
 		</table>
