@@ -20,31 +20,17 @@
 	<jsp:include page="header.jsp"></jsp:include>
 		<div class="notice_container">
 			<h3>공지사항</h3>
-			<table>
+	         <table>
+			   <c:forEach var="notice" items="${requestScope.list}">
 				<tr>
-					<td><p>[공지] Taste Factory 계정 사칭 주의 안내<br>
-					2021년 2월 12일 </p></td>
+					<td>
+					 ${notice.notice_no}
+				    </td>
+				    <td>
+				    <a href="noticeDetailView.do?notice_no=${notice.notice_no}">${notice.notice_title}</a>
+				    </td>
 				</tr>
-				<tr>
-					<td><p>[공지] Taste Factory 계정 사칭 주의 안내<br>
-					2021년 2월 12일 </p></td>
-				</tr>
-				<tr>
-					<td><p>[공지] Taste Factory 계정 사칭 주의 안내<br>
-					2021년 2월 12일 </p></td>
-				</tr>
-				<tr>
-					<td><p>[공지] Taste Factory 계정 사칭 주의 안내<br>
-					2021년 2월 12일 </p></td>
-				</tr>
-				<tr>
-					<td><p>[공지] Taste Factory 계정 사칭 주의 안내<br>
-					2021년 2월 12일 </p></td>
-				</tr>
-				<tr>
-					<td><p>[공지] Taste Factory 계정 사칭 주의 안내<br>
-					2021년 2월 12일 </p></td>
-				</tr>
+			   </c:forEach>
 			</table>
 		</div>
 	<jsp:include page="footer.jsp"></jsp:include>

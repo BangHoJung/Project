@@ -24,6 +24,7 @@ import team.dto.AdDTO;
 import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
 import team.dto.MessageDTO;
+import team.dto.NoticeDTO;
 import team.dto.QnaDTO;
 import team.dto.ReviewDTO;
 import team.dto.StoreDTO;
@@ -89,7 +90,12 @@ public class MainController {
         return "login";
     }
 	@RequestMapping("/notice.do")
-	public String notice() {
+	public String notice(HttpServletRequest request) {
+		List<NoticeDTO> list = memberService.selectAllNotice();
+		for(int i=0;i<list.size();i++) {
+			System.out.println(list.get(i).toString());
+		}
+		request.setAttribute("list", list);
 		return "notice";
 	}
 	@RequestMapping("/introduce.do")
@@ -877,6 +883,107 @@ public String choiceAddress(HttpServletRequest request,HttpSession session) {
 		System.out.println("메인 주소 선택 실패");
 	}
 	return "insert_update_address_view";
+}
+//수정 2021-02-26
+@RequestMapping("/memberPassUpdateCheckView.do")
+public String memberPassUpdateCheckView() {
+	return "member_pass_update_check_view";
+}
+@RequestMapping("/memberPassUpdateCheckAction.do")
+public String memberPassUpdateCheckAction(HttpServletRequest request,HttpServletResponse response) {
+	String id= request.getParameter("id");
+	System.out.println(id);
+	String pass = request.getParameter("pass");
+	System.out.println(pass);
+	MemberDTO dto=memberService.selectMemberPassCheck(id,pass);
+	if(dto == null) {
+		try {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("false");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	else {
+		try {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("true");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	return null;
+}
+@RequestMapping("/memberPassUpdateView.do")
+public String memberPassUpdateView() {
+	return "member_pass_update_view";
+}
+@RequestMapping("/memberPassUpdateAction.do")
+public String memberPassUpdateAction(HttpServletRequest request,HttpServletResponse response) {
+	String id= request.getParameter("id");
+	System.out.println(id);
+	String pass=request.getParameter("pass");
+	System.out.println(pass);
+	int count=memberService.updateMemberPass(id,pass);
+	if(count !=0) {
+		try {
+			System.out.println("수정완료");
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("true");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	else {
+		try {
+			System.out.println("수정 실패");
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("false");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	return null;
+}
+@RequestMapping("/adminNoticeWriteView.do")
+public String adminNoticeWriteView() {
+	return "notice_write_view";
+}
+@RequestMapping("/adminNoticeWriteAction.do")
+public String adminNoticeWriteAction(HttpServletRequest request,HttpServletResponse response) {
+	String title = request.getParameter("title");
+	System.out.println(title);
+	String content =request.getParameter("content");
+    System.out.println(content);
+    int count=memberService.adminNoticeWrite(title,content);
+    if(count !=0) {
+    	try {
+    		System.out.println("작성 성공");
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("true");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    else {
+    	try {
+			System.out.println("작성 실패");
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write("false");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    	
+    }
+    return null;
+}
+@RequestMapping("/noticeDetailView.do")
+public String noticeDetailView(HttpServletRequest request) {
+	int notice_no=Integer.parseInt(request.getParameter("notice_no"));
+	System.out.println(notice_no);
+	NoticeDTO dto=memberService.selectNotice(notice_no);
+	System.out.println(dto.toString());
+	return "notice_detail_view";
 }
 } 
 	   
