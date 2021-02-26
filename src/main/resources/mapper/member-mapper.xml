@@ -51,4 +51,19 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	<select id="selectMemeberAddressCheck" parameterType="map" resultType="String">
 	  select address_text from member_address where address_text=#{address} and address_member_id=#{id}
 	</select>
+	<select id="selectMemberPassCheck" parameterType="map" resultType="team.dto.MemberDTO">
+	   select * from member where member_id=#{id} and member_pass=#{pass}
+	</select>
+	<update id="updateMemberPass" parameterType="map">
+	 update member set member_pass=#{pass} where member_id=#{id}
+	</update>
+	<insert id="adminNoticeWrite" parameterType="map">
+	  insert into notice values (notice_no_seq.nextval,#{title},#{content},sysdate)
+	</insert>
+	<select id="selectAllNotice" resultType="team.dto.NoticeDTO">
+	  select * from notice
+	</select>
+	<select id="selectNotice" parameterType="int" resultType="team.dto.NoticeDTO">
+	 select * from notice where notice_no=#{notice_no}
+	</select>
 </mapper>

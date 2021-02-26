@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
 import team.dto.MessageDTO;
+import team.dto.NoticeDTO;
 import team.mapper.MemberMapper;
 
 @Service
@@ -113,7 +114,35 @@ public class MemberService {
 	      map.put("id",id);
 		return mapper.selectMemeberAddressCheck(map);
 	}
+    //수정 2021-02-26
+	public MemberDTO selectMemberPassCheck(String id, String pass) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	      map.put("id", id);
+	      map.put("pass",pass);
+		return mapper.selectMemberPassCheck(map);
+	}
 
+	public int updateMemberPass(String id, String pass) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	      map.put("id", id);
+	      map.put("pass",pass);
+		return mapper.updateMemberPass(map);
+	}
+
+	public int adminNoticeWrite(String title, String content) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	      map.put("title",title);
+	      map.put("content",content);
+		return mapper.adminNoticeWrite(map);
+	}
+
+	public List<NoticeDTO> selectAllNotice() {
+		return mapper.selectAllNotice();
+	}
+
+	public NoticeDTO selectNotice(int notice_no) {
+		return mapper.selectNotice(notice_no);
+	}
 	
 	
 }

@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
 import team.dto.MessageDTO;
+import team.dto.NoticeDTO;
 
 @Mapper
 public interface MemberMapper {
@@ -45,5 +46,14 @@ public interface MemberMapper {
 	public int notChoiceMemberAddress(HashMap<String, Object> map);
 	//수정 2021-02-25
 	public String selectMemeberAddressCheck(HashMap<String, Object> map);
-
+	//수정 2021-02-26
+	public MemberDTO selectMemberPassCheck(HashMap<String, Object> map);
+	//수정 2021-02-26
+	public int updateMemberPass(HashMap<String, Object> map);
+	//수정 2021-02-26
+	public int adminNoticeWrite(HashMap<String, Object> map);
+	//수정 2021-02-26
+	public List<NoticeDTO> selectAllNotice();
+	//수정 2021-02-26
+	public NoticeDTO selectNotice(int notice_no);
 }
