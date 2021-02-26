@@ -5,9 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../css/qna_write.css" media="screen and (min-width:1024px)">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 <script type="text/javascript">
 	$(function(){
 		$("#random").click(function(){
@@ -25,7 +28,10 @@
 			location.href="loginView.do";
 		</script>
 	</c:if>
-	<jsp:include page="header.jsp"></jsp:include>
+	<jsp:include page="/templete/mypage_header.jsp"></jsp:include>
+	<div class="body">
+	<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
+	<div class="container">
 	<div class="qna_write_container">
 		<h3>Q&A작성</h3>
 		<form action="qnaWriteAction.do" method="post">
@@ -45,14 +51,14 @@
 					<th style="vertical-align: top;">내용</th><td><textarea name="qna_content"></textarea></td>
 				</tr>
 				<tr>
-					<th><a href="qnaView.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">목록보기</a></th>
-					<td style="text-align: right;">
+					<td colspan="2" >
 						<button type="submit" class="btn">글쓰기</button>
 					</td>
 				</tr>
 			</table>
 		</form>
+	  </div>
+	 </div>
 	</div>
-	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

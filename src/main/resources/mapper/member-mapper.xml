@@ -66,4 +66,7 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	<select id="selectNotice" parameterType="int" resultType="team.dto.NoticeDTO">
 	 select * from notice where notice_no=#{notice_no}
 	</select>
+	<insert id="registerReview" parameterType="review">
+		INSERT INTO review(review_id,review_member_id,review_store_id,review_content,review_score_service,review_score_price,review_menu_id,review_score_menu,review_photo) VALUES(#{review_id},#{review_member_id},#{review_store_id},#{review_content},#{review_score_service},#{review_score_price},#{review_menu_id},#{review_score_menu},#{review_photo})
+	</insert>
 </mapper>

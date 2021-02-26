@@ -36,8 +36,9 @@
 				<div class="figure">
 				<figure>
 					<figcaption>
-					<a href="storeView.do"><img  src="img/bakery/bakery1.jpg" class="img"></a>
-					베이커리 식당
+					<a href="storedetailView.do?store_id=${requestScope.dto.store_id}"><img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}" class="img"></a>
+					<p>${requestScope.dto.store_name}</p>
+					
 					</figcaption>
 				</figure>
 				<figure>

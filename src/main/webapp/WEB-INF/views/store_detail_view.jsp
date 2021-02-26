@@ -38,6 +38,18 @@ width: 300px;
 .pro{
 width: 100px;
 }
+.menu{
+padding: 2%;
+width: 100%;
+}
+.menulist{
+display:flex;
+flex-direction:row;
+padding:0px;
+width: 300px;
+left: 20%;
+}
+
 </style>
 </head>
 <body>
@@ -47,7 +59,7 @@ width: 100px;
 
 <div class="row midbody">
 <div class="col-md-4 main  ">
-<img alt="" src="img/bakery/bakery1.jpg" class="img" >
+<img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}" class="img">
 </div>
 <div class="col-md-4 main  ">
 <img alt="" src="img/bakery/bakery2.jpg" class="img">
@@ -61,7 +73,7 @@ width: 100px;
 <div class="col-md-12">
 
   <span class="glyphicon glyphicon-star btn-warning"  aria-hidden="true"></span> 
-  <p> 4.5점 </p> <p>${requestscoP}</p>
+  <span>4.5점</span>   <span> ${requestScope.dto.store_name}</span>
 
 </div>
  </div>
@@ -74,37 +86,26 @@ width: 100px;
  주소
  </th>
  <td colspan="2">
-  	서울특별시 강남구 삼성로81길 23  
+  	${requestScope.dto.store_addr}
  </td>
  </tr>
- <tr>
- <th>
- 지번 
- </th >
- <td colspan="2"> 서울시 강남구 대치동 901-65
- </td>
- </tr>
+ 
  <tr>
  <th>
  전화번호 
  </th>	
  <td colspan="2">
+ ${requestScope.dto.store_tel}
  </td>
  </tr>
  <tr>
  <th>
  음식  종류	
  </th>
- <td colspan="2">해산물 요리 </td>
+ <td colspan="2">  ${requestScope.dto.store_category}</td>
+ 
  </tr>
- <tr>
- <th>
- 가격대
- </th>
- <td>
-   만원-2만원
-   </td>  
- </tr>
+ 
  <tr>
  <th>
  주차 
@@ -118,17 +119,10 @@ width: 100px;
  영업시간
   	</th>
   	<td colspan="2">
-  	11:00 - 23:00  
+  	 ${requestScope.dto.store_time}
 </td>
  </tr>
- <tr>
- <th>
- 쉬는시간 
- </th>
- <td colspan="2">
- 14:00 - 17:00 
-</td>
-</tr>
+ 
 <tr>
 <th>
  휴일
@@ -142,12 +136,17 @@ width: 100px;
  <th>
  메뉴 
  </th>
+ <c:forEach var="menu" items="${requestScope.menuList}">
 <td>
-해물 로스
+  ${menu.menu_name}    
 </td>
+ </c:forEach>
+ 
+<c:forEach var="menu" items="${requestScope.menuList}">
 <td>
-${menu.menu_price }
+  ${menu.menu_price}    
 </td>
+ </c:forEach>
 
 </tr>
 <tr>
@@ -158,7 +157,7 @@ ${menu.menu_price }
 해물 로스
 </td>
 <td>
-${menu.menu_price }
+fdsfsdffsd
 </td>
 
 </tr>
@@ -168,8 +167,12 @@ ${menu.menu_price }
 </div>
 
 <div class="row midbody">
-<div class="col-md-12 main">
-메뉴 이미지 들어갈 공간
+<div class="col-md-12 menulist">
+<c:forEach var="menu" items="${menuList}">
+						<img src="menu_image_load.do?writer=${dto.store_id}&fileName=${menu.menu_photo}" class="menu">
+			</c:forEach>
+
+
 </div>
 </div>
 
@@ -184,19 +187,19 @@ ${menu.menu_price }
 <p>리뷰</p>
 </div>
 <div class=" col-md-offset-4  col-md-4  main" style="text-align: right;">
-<p>전체보기 좋아요보기</p>
+ <span> 전체보기 좋아요보기 </span> <button src="reviewRegisterView.do?store_id=${dto.store_id}"> 리뷰쓰기</button>
 </div>
 
 </div>
 
 <div class="row main">
-<div class="col-md-2 main">
+<div class="col-md-2 main" style="text-align: center;"> 
 <img alt="" src="img/momo.png" class="pro"> <br>
 <p>닉네임</p>
 </div>
 <div class="col-md-8 col-md-offset-2">
-<p>날짜 너주세여</p>
-맛있습니따
+ <span> 날짜 너주세여 </span> 
+<p>맛있습니다
 </div>
 </div>
 

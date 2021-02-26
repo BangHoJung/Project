@@ -9,6 +9,7 @@ import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
 import team.dto.MessageDTO;
 import team.dto.NoticeDTO;
+import team.dto.ReviewDTO;
 import team.mapper.MemberMapper;
 
 @Service
@@ -143,6 +144,16 @@ public class MemberService {
 	public NoticeDTO selectNotice(int notice_no) {
 		return mapper.selectNotice(notice_no);
 	}
-	
+	public int registerReview(ReviewDTO reviewDTO) throws Exception {
+		int count = mapper.registerReview(reviewDTO);
+		if(count == 0) {
+			System.out.println("exist");
+			throw new Exception("exist");
+		}
+		else {
+			return count;
+		}
+	}
+
 	
 }

@@ -28,6 +28,14 @@
 							${requestScope.ad_store_id}			
 						</td>
 					</tr>
+					<tr>
+						<td>
+						<c:choose>
+							<c:when test="${requestSope.ad_statuss==1}">승인</c:when>
+							<c:otherwise>미승인</c:otherwise>
+						</c:choose>
+						</td>
+					</tr>
 					<tr id="content">
 						<th style="vertical-align: top;">내용</th>
 						<td>

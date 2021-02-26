@@ -26,6 +26,7 @@ import team.dto.MemberDTO;
 import team.dto.MessageDTO;
 import team.dto.NoticeDTO;
 import team.dto.QnaDTO;
+import team.dto.ReviewDTO;
 import team.dto.StoreDTO;
 import team.dto.StoreMenuDTO;
 import team.service.AdService;
@@ -54,11 +55,14 @@ public class MainController {
 		String store_id = request.getParameter("store_id");
 		System.out.println(store_id);
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
+		
 		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
 		System.out.println(menuList.toString());
 		String store_tel = request.getParameter("store_tel");
 		System.out.println(store_tel);
-		
+		request.setAttribute("menuList", menuList);
+		request.setAttribute("dto", dto);
+		System.out.println(dto.getStore_name());
 		
 		
 		
@@ -69,7 +73,13 @@ public class MainController {
 	public String main(HttpServletRequest request) {
 		StoreDTO dto = storeService.selectStoreDTO("한번해보자구_111111");
 		request.setAttribute("dto",dto);
+		System.out.println(dto.getStore_name());
+		System.out.println(dto.getStore_id());
+		System.out.println(dto.getStore_photo());
+		
+		
 		return "main";
+	
 	}
 	@RequestMapping("/myPageView.do")
 	public String myPageView() {
@@ -144,16 +154,13 @@ public class MainController {
 	@RequestMapping("/qnaView.do")
 	public String qnaView(HttpServletRequest request) {
 		int page=1; int pageOfContentCount =20;
-		//페이지 셋팅
 		if(request.getParameter("pageNo") != null)
 			page = Integer.parseInt(request.getParameter("pageNo"));
-		System.out.println(page);
 		List<QnaDTO> list = qnaService.selectQnaList(page);
 		int count = qnaService.selectCount();
 		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
 		request.setAttribute("list", list);
 		request.setAttribute("pagging", vo);
-		System.out.println(list.toString());
 		return "qna";
 	}
 	@RequestMapping("/qnaDetailView.do")
@@ -256,6 +263,19 @@ public class MainController {
 		request.setAttribute("list", list);
 		request.setAttribute("qna", dto);
 		return "qna";
+	}
+	@RequestMapping("/qnaMypageView.do")
+	public String qnaMypageView(HttpServletRequest request, HttpSession session) {
+		int page=1; int pageOfContentCount =20;
+		if(request.getParameter("pageNo") != null)
+			page = Integer.parseInt(request.getParameter("pageNo"));
+		String id = (String) session.getAttribute("id");
+		List<QnaDTO> list = qnaService.selectMypageQnaList(page, id);
+		int count = qnaService.selectMypageCount(id);
+		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
+		request.setAttribute("list", list);
+		request.setAttribute("pagging", vo);
+		return "qna_mypage_view";
 	}
     @RequestMapping("/loginAction.do")
     public String login(HttpServletRequest request,HttpSession session) {
@@ -534,8 +554,8 @@ public class MainController {
 	
 	@RequestMapping("reviewRegisterView.do")
 	public String reviewRegisterView(HttpServletRequest request, HttpSession session) {
-//		String store_id = request.getParameter("store_id");
-		String store_id = "식당하하_222";
+		String store_id = request.getParameter("store_id");
+//		String store_id = "식당하하_222";
 		
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
@@ -547,19 +567,56 @@ public class MainController {
 	}
 	
 	@RequestMapping("reviewRegisterAction.do")
-	public String reviewRegisterAction(HttpServletRequest request) {
-		int review_score_menu = Integer.parseInt(request.getParameter("review_score_menu"));
-		int review_score_price = Integer.parseInt(request.getParameter("review_score_price"));
-		int review_score_service = Integer.parseInt(request.getParameter("review_score_service"));
-		
+	public String reviewRegisterAction(MultipartHttpServletRequest mqrequest, HttpServletRequest request, HttpSession session,HttpServletResponse response) {
+		String review_store_id = request.getParameter("store_id");
+		String review_member_id = (String) session.getAttribute("id");
+		String review_content = request.getParameter("review_content");
+		int review_menu_id = Integer.parseInt(request.getParameter("menu_id"));
+		int review_score_menu = Integer.parseInt(request.getParameter("review_score_menu"))+1;
+		int review_score_price = Integer.parseInt(request.getParameter("review_score_price"))+1;
+		int review_score_service = Integer.parseInt(request.getParameter("review_score_service"))+1;
+		MultipartFile photo = mqrequest.getFile("photo");
+		String review_id = review_member_id+"_"+review_menu_id;
 		System.out.println(review_score_menu+ "," +review_score_price + "," +review_score_service);
-		return "main";
+		
+		String path = "C:\\fileupload\\"+review_store_id+"\\"+review_member_id+"\\";
+		File photoFile = null;
+		try {
+			String photoFileName = photo.getOriginalFilename();
+			long fileSize = photo.getSize();
+			if(fileSize == 0) {
+				photoFile = new File("");
+			}
+			else {
+				System.out.println("photoFileName : " + photoFileName);
+				System.out.println("fileSize : " + fileSize);
+				File parentPath = new File(path);
+				if(!parentPath.exists()) parentPath.mkdirs();
+				
+				//파일 업로드
+				photoFile = new File(path + photoFileName);
+				photo.transferTo(photoFile);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("photoFile : " + photoFile.getName());
+		try {
+			memberService.registerReview(new ReviewDTO(review_id, review_member_id, review_store_id, review_content, review_score_service, review_score_price, review_menu_id, review_score_menu, photoFile.getName()));
+			return "main";
+		} catch(Exception e) {
+			if(e.getMessage().equals("exist")) {
+				try {
+					response.setContentType("text/html;charset=utf-8");
+					response.getWriter().write(("<script>alert('이미 후기를 등록한 메뉴입니다.다른메뉴를 선택해주세요');history.back();</script>"));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			return null;
+		}
 	}
 	
-	@RequestMapping("menuRegisterView.do")
-	public String menuRegisterView() {
-		return "menu_register";
-	}
 	
    @RequestMapping("adminMessageView.do")
    public String adminMessageView() {
@@ -708,12 +765,14 @@ public class MainController {
    @RequestMapping("/AdListView.do")
 	public String adList(HttpServletRequest request) {
 		int page = 1;
+		int pageOfContentCount =10;
 		//페이지 셋팅
 		if(request.getParameter("pageNo") != null)
 			page = Integer.parseInt(request.getParameter("pageNo"));
+		System.out.println(page);
 		List<AdDTO> list = adService.selectAdList(page); //글목록 읽어옴 
 		int count = adService.selectCount();
-		PaggingVO vo = new PaggingVO(count, page);
+		PaggingVO vo = new PaggingVO(count, page, pageOfContentCount);
 		request.setAttribute("list", list);
 		request.setAttribute("pagging", vo);
 		System.out.println(list.toString());
@@ -721,7 +780,7 @@ public class MainController {
 	}
    
    @RequestMapping("/AdView.do")
-	public String boardView(HttpServletRequest request) {
+	public String adView(HttpServletRequest request) {
 		//게시글 하나 읽음
 		//1. request에서 게시글 번호 읽어옴
 		int ad_no = 0;
@@ -747,22 +806,20 @@ public class MainController {
 	}
    
    @RequestMapping("/AdWriteAction.do")
-	public RedirectView adWriteAction(MultipartHttpServletRequest request) {
-		//글번호 먼저 발급
+	public String adWriteAction(HttpServletRequest request) {
 		int ad_no = adService.newAd_no();
-		
-		String ad_store_id = request.getParameter("");
-		int ad_status = Integer.parseInt(request.getParameter(""));
-		String ad_comment = request.getParameter("");
-		adService.insertAd(new AdDTO(ad_no, ad_store_id, ad_status, ad_comment));
+		String ad_store_id = request.getParameter("ad_store_id");
+		int ad_status = Integer.parseInt(request.getParameter("ad_status"));
+		String ad_content = request.getParameter("ad_content");
+		adService.insertAd(new AdDTO(ad_no, ad_store_id, ad_status, ad_content));
+		AdDTO dto = adService.selectAd(ad_no);
+		//request.setAttribute("ad", dto);
 		request.setAttribute("ad_no", ad_no);
 		
 					//파일 첨부기능 작성 필요 
 		
-		return new RedirectView("adView.do?ad_no="+ad_no);
+		return "ad_detail_view";
 	}
-   
-   
 /*-----------------------------------------------------------------------------------------------------<<<광고*/ 
    //수정 2021-02-25
    @RequestMapping("/insertMemberAddressAction.do")

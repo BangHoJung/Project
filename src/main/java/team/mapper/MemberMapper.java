@@ -9,6 +9,7 @@ import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
 import team.dto.MessageDTO;
 import team.dto.NoticeDTO;
+import team.dto.ReviewDTO;
 
 @Mapper
 public interface MemberMapper {
@@ -56,4 +57,6 @@ public interface MemberMapper {
 	public List<NoticeDTO> selectAllNotice();
 	//수정 2021-02-26
 	public NoticeDTO selectNotice(int notice_no);
+	public int registerReview(ReviewDTO reviewDTO);
+
 }
