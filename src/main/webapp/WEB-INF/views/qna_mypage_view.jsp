@@ -5,26 +5,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/qna.css" media="screen and (min-width:1024px)">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../css/qna.css" media="screen and (min-width:1024px)">
 <script type="text/javascript">
 	$(function(){
 		if(${requestScope.deleteAction == true}){
 			alert("삭제 성공!!");
 			}
-		$("#random").click(function(){
-			alert('추천 메뉴는 ooo입니다');
-		})
-	})
-
-	</script>
+		
+	});
+</script>
 </head>
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"></jsp:include>
 	<div id="board_container">
-		<h3>Q&A</h3>
-		<a href="qnaMypageView.do" id="myQna">내가 한 질문 보기</a>
+		<h3>1:1문의하기</h3>
 		<table class="board">
 			<tr>
 				<th class="qno">글번호</th>
@@ -57,13 +54,13 @@
 				<td colspan="7">
 					<div class="page_bar">
 						<c:if test="${pagging.previousPageGroup }">
-							<a href="qnaView.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
+							<a href="qnaMypageView.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
 						</c:if>
 						<c:forEach var="i" begin="${pagging.startPageOfPageGroup}" end="${pagging.endPageOfPageGroup}">
-							<a href="qnaView.do?pageNo=${i }">${ i}</a>
+							<a href="qnaMypageView.do?pageNo=${i }">${ i}</a>
 						</c:forEach>
 						<c:if test="${pagging.nextPageGroup }">
-							<a href="qnaView.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
+							<a href="qnaMypageView.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
 						</c:if>
 						<a href="/qnaWrite.do" class="btn_writer">글쓰기</a>
 					</div>
@@ -71,6 +68,6 @@
 			</tr>
 		</table>
 	</div>
-	<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

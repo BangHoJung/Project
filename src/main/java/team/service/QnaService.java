@@ -1,5 +1,6 @@
 package team.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -51,4 +52,16 @@ public class QnaService {
 		return qnaMapper.qnaAnswer(qnaDTO);
 		
 	}
+
+	public List<QnaDTO> selectMypageQnaList(int page, String id) {
+		 HashMap<String, Object> map = new HashMap<String, Object>();
+	       map.put("page", page);
+	       map.put("id", id);
+	       return qnaMapper.selectMypageQnaList(map); 
+	}
+
+	public int selectMypageCount(String id) {
+		return qnaMapper.selectMypageCount(id);
+	}
+
 }

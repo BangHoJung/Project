@@ -53,16 +53,14 @@
 	}
 	.btn{
 		text-decoration: none;
+		width:100px;
+		display:inline-block;
 		background-color: #e8e8e8;
-		width: 80px;
-		display: inline-block;
-		padding:5px 0px;
 		font-weight:normal;
-		text-align:center;
 		color : black;
-		font-size:14px;
-		box-sizing: border-box;
 		margin-top:10px;
+		margin-right:10px;
+		
 	}
 	.btn:hover{
 		background-color: #282828;
