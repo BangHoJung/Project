@@ -1,0 +1,177 @@
+@charset "UTF-8";
+
+ @media (min-width: 769px) {
+  .container {
+    width: 1170px;
+    position: relative;
+     }
+     .top{
+width: 100%;
+background-color: #FA0050;
+}
+.title > .main:hover{
+font-weight: bold;
+color:#BDBDBD;
+text-decoration: none;
+} 
+
+.title > .main{
+font-weight: bold;
+color:white;
+} 
+
+.hader{
+margin:0 auto;
+text-align: center;
+display: flex;
+justify-content: space-between;
+}
+.title{
+padding-left: 3%;
+}
+.logout > a{
+color: white;
+}
+.logout {
+margin-top: 10px;
+font-size: 17px;
+padding-right: 5%;
+width: 100px;
+}
+.profile{
+display: flex;
+flex-direction: row;
+}
+.loginimg{
+width: 200px;
+height: 200px;
+border-radius: 100%;
+}
+.pointtotal{
+display: flex;
+justify-content: space-around;
+gap: 10%;
+padding-left: 10px;
+}
+.pointimg{
+width: 70px;
+height: 70px;
+}
+.total{
+display: flex;
+justify-content: space-around;
+gap: 15%;
+}
+.point{
+display: flex;
+flex-direction: column;
+padding-top: 60px;
+color: white;
+}
+.name{
+font-weight: bold;
+font-size: 250%;
+margin-top: 10%;
+}
+.grade{
+font-weight: bold;
+font-size: 30px;
+}
+
+.Balance{
+color: white;
+}
+}
+@media (max-width: 768px){
+.loginimg{
+width: 100px;
+height: 100px;
+}
+.name{
+font-size: 200%;
+font-weight: bold;
+}
+.grade{
+font-size: 200%;
+font-weight: bold;
+}
+.pointimg{
+width: 50%;
+height: 50%;
+}
+.top{
+width: 100%;
+background-color: #FA0050;
+}
+
+.hader{
+margin:0 auto;
+text-align: center;
+display: flex;
+justify-content: space-between;
+}
+
+.logout > a{
+color: white;
+}
+.logout {
+margin-top: 10px;
+font-size: 17px;
+padding-right: 5%;
+width: 100px;
+}
+.profile{
+display: flex;
+flex-direction: row;
+}
+.pointtotal{
+display: flex;
+justify-content: space-around;
+gap: 10%;
+width: 50% !important;
+}
+.total{
+display: flex;
+justify-content: space-around;
+gap: 15%;
+}
+.point{
+display: flex;
+flex-direction: column;
+padding-top: 60px;
+color: white;
+}
+.point p{
+font-size: 100%;
+margin-top: 10px;
+}
+.Balance{
+width: 80%;
+color: white;
+font-size: 100%;
+}
+
+}
+@media (max-width: 414px){
+   .container{
+   width: 320px;
+   position: relative;
+  }
+ .point p{
+font-size: 70% !important;
+ }
+.loginimg{
+width: 64px !important;
+height: 64px !important;
+}
+.name{
+font-size: 100% !important;
+}
+.grade{
+font-size: 90% !important;
+}
+.Balance{
+width: 60px !important;
+font-size: 30% !important;
+}
+}

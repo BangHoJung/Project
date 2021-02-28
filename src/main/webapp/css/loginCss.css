@@ -39,11 +39,11 @@ border-bottom: 1px solid gray;
 width: 300px;
 height: 60px;
 }
-.member> :link, .Find > :link{
+.member> .m, .Find > .m{
 color: black;
 text-decoration: none;
 }
-.member> :hover, .Find > :hover {
+.member> .m:hover, .Find > .m:hover {
 text-decoration: none;
 	color: gray;
 }
