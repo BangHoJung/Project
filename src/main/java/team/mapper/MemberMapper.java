@@ -53,10 +53,28 @@ public interface MemberMapper {
 	public int updateMemberPass(HashMap<String, Object> map);
 	//수정 2021-02-26
 	public int adminNoticeWrite(HashMap<String, Object> map);
-	//수정 2021-02-26
-	public List<NoticeDTO> selectAllNotice();
+	//수정 2021-02-28
+	public List<NoticeDTO> selectAllNotice(int pageNo);
 	//수정 2021-02-26
 	public NoticeDTO selectNotice(int notice_no);
 	public int registerReview(ReviewDTO reviewDTO);
+    
+	//2021-02-28추가
+	public int selectNoticeCount();
 
+	public int adminNoticeDelete(int notice_no);
+
+	public int adminNoticeUpdate(HashMap<String, Object> map);
+
+	public List<ReviewDTO> adminSelectReportList(int pageNo);
+
+	public int adminSelectReportCount();
+
+	public ReviewDTO adminSelectReport(String review_id);
+
+	public int adminDeleteReportReview(String review_id);
+
+	public int adminCanselReportReview(String review_id);
+
+	public int sendMessage(MessageDTO message);
 }

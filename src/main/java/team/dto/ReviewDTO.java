@@ -20,6 +20,11 @@ public class ReviewDTO {
 		
 	}
 	
+	
+	public ReviewDTO() {
+		
+	}
+
 	//테이블 전체데이터 생성자
 	public ReviewDTO(String review_id, String review_member_id, String review_store_id, String review_content,
 			String review_date, int review_score_service, int review_score_price, int review_menu_no,
@@ -53,6 +58,16 @@ public class ReviewDTO {
 		this.review_score_menu = review_score_menu;
 		this.review_photo = review_photo;
 	}
+	  //리뷰 신고데이터 생성자
+		public ReviewDTO(String review_id, String review_member_id, String review_store_id, String review_content,
+				String review_photo) {
+			super();
+			this.review_id = review_id;
+			this.review_member_id = review_member_id;
+			this.review_store_id = review_store_id;
+			this.review_content = review_content;
+			this.review_photo = review_photo;
+		}
 
 	public String getReview_id() {
 		return review_id;
@@ -133,6 +148,13 @@ public class ReviewDTO {
 	public void setReview_photo(String review_photo) {
 		this.review_photo = review_photo;
 	}
+	public int getReport_status() {
+		return report_status;
+	}
+
+	public void setReport_status(int report_status) {
+		this.report_status = report_status;
+	}
 
 	public int getReview_report() {
 		return review_report;
@@ -150,6 +172,6 @@ public class ReviewDTO {
 				+ ", review_menu_no=" + review_menu_no + ", review_score_menu=" + review_score_menu + ", review_photo="
 				+ review_photo + ", review_report=" + review_report + "]";
 	}
-	
+
 	
 }
