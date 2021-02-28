@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <!-- <meta name='viewport' content='width=device-width, initial-scale=1'> -->
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/mypage_header.css" type="text/css">
 <link rel="stylesheet" href="css/mypage.css" type="text/css">
+
 <!-- 부트스트랩 -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">

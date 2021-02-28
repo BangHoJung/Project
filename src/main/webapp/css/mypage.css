@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .top{
 width: 100%;
 background-color: #FA0050;
@@ -10,11 +11,18 @@ justify-content: space-between;
 
 }
 
-.title{
+.title > .main:hover{
+font-weight: bold;
+color:#BDBDBD;
+text-decoration: none;
+} 
+
+
+.title > .main {
 font-weight: bold;
 color:white;
-padding-left: 3%;
-}
+} 
+
 
 .logout > a{
 color: white;
@@ -85,9 +93,7 @@ justify-content: center;
 font-size: 150%;
 }
 .menulist{
-
 float: left;
-
 }
 .maintitle{
 
@@ -126,9 +132,6 @@ float:right;
 	justify-content: space-around;
 	margin-top: 2%;
 }
-@media screen and (max-width: 1200px){
-
-}
 
 @media screen and (max-width: 992px){
 	
@@ -162,8 +165,6 @@ ul{
 }
 .container{
 display: none;
-
-
 }
 .list{
 border: none;
