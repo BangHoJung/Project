@@ -410,9 +410,9 @@ public class MainController {
 	}
 	
 	@RequestMapping("/storeRegisterAction.do")
-	public String storeRegisterAction(HttpServletRequest request,MultipartHttpServletRequest mqRequest) {
-//		String member_id = (String) session.getAttribute("id");
-		String member_id = "admin";
+	public String storeRegisterAction(HttpServletRequest request,MultipartHttpServletRequest mqRequest,HttpSession session) {
+		String member_id = (String) session.getAttribute("id");
+//		String member_id = "admin";
 		String name = request.getParameter("name");
 		String tel = request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
 		String addr = request.getParameter("addr");
@@ -422,7 +422,7 @@ public class MainController {
 		if(time == null) time = " ";
 		String introduce = request.getParameter("introduce");
 		if(introduce == null) introduce = " ";
-		int category = Integer.parseInt(request.getParameter("category"));
+		String category = request.getParameter("category");
 		String store_id = name + "_" + license;
 		MultipartFile photo = mqRequest.getFile("photo");
 		
@@ -466,7 +466,7 @@ public class MainController {
 			e.printStackTrace();
 		}
 		System.out.println("photoFile : " + photoFile.getName());
-		storeService.registerStore(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,pathFile.getName(),photoFile.getName()));
+		int count = storeService.registerStore(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,pathFile.getName(),photoFile.getName(),0));
 		
 		String[] names = request.getParameterValues("menu_name");
 		String[] prices =  request.getParameterValues("menu_price");
@@ -496,7 +496,7 @@ public class MainController {
 			
 			//파일 업로드
 			String menu_name = fileName[0].trim();
-			int count = storeService.updateMenuPhoto(store_id,menu_name,originalFileName);
+			count = storeService.updateMenuPhoto(store_id,menu_name,originalFileName);
 			pathFile = new File(path + originalFileName);
 			try {
 				mf2.transferTo(pathFile);
@@ -571,15 +571,15 @@ public class MainController {
 		String review_store_id = request.getParameter("store_id");
 		String review_member_id = (String) session.getAttribute("id");
 		String review_content = request.getParameter("review_content");
-		int review_menu_id = Integer.parseInt(request.getParameter("menu_id"));
+		int review_menu_no = Integer.parseInt(request.getParameter("menu_no"));
 		int review_score_menu = Integer.parseInt(request.getParameter("review_score_menu"))+1;
 		int review_score_price = Integer.parseInt(request.getParameter("review_score_price"))+1;
 		int review_score_service = Integer.parseInt(request.getParameter("review_score_service"))+1;
 		MultipartFile photo = mqrequest.getFile("photo");
-		String review_id = review_member_id+"_"+review_menu_id;
+		String review_id = review_member_id+"_"+review_menu_no;
 		System.out.println(review_score_menu+ "," +review_score_price + "," +review_score_service);
 		
-		String path = "C:\\fileupload\\"+review_store_id+"\\"+review_member_id+"\\";
+		String path = "C:\\fileupload\\"+review_member_id+"\\"+review_store_id+"\\";
 		File photoFile = null;
 		try {
 			String photoFileName = photo.getOriginalFilename();
@@ -602,7 +602,7 @@ public class MainController {
 		}
 		System.out.println("photoFile : " + photoFile.getName());
 		try {
-			memberService.registerReview(new ReviewDTO(review_id, review_member_id, review_store_id, review_content, review_score_service, review_score_price, review_menu_id, review_score_menu, photoFile.getName()));
+			memberService.registerReview(new ReviewDTO(review_id, review_member_id, review_store_id, review_content, review_score_service, review_score_price, review_menu_no, review_score_menu, photoFile.getName()));
 			return "main";
 		} catch(Exception e) {
 			if(e.getMessage().equals("exist")) {

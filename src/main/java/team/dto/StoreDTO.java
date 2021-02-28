@@ -12,15 +12,39 @@ public class StoreDTO {
 	private String store_time;
 	private String store_introduce;
 	private String store_tel;
-	private int store_category;
+	private String store_category;
 	private int store_code;
 	private String store_file;
-	private String category_name;
 	private String store_photo;
+	private int store_count;
+	
+	public StoreDTO() {
+		super();
+	}
+
+	//테이블 전체 데이터 생성자
+	public StoreDTO(String store_id, String store_name, String store_addr, String store_license, String store_member_id,
+			String store_time, String store_introduce, String store_tel, String store_category, int store_code,
+			String store_file, String store_photo, int store_count) {
+		super();
+		this.store_id = store_id;
+		this.store_name = store_name;
+		this.store_addr = store_addr;
+		this.store_license = store_license;
+		this.store_member_id = store_member_id;
+		this.store_time = store_time;
+		this.store_introduce = store_introduce;
+		this.store_tel = store_tel;
+		this.store_category = store_category;
+		this.store_code = store_code;
+		this.store_file = store_file;
+		this.store_photo = store_photo;
+		this.store_count = store_count;
+	}
 	
 	public StoreDTO(String store_id, String store_name, String store_addr, String store_license, String store_member_id,
-			String store_time, String store_introduce, String store_tel, int store_category, int store_code,
-			String store_file, String store_photo,String category_name) {
+			String store_time, String store_introduce, String store_tel, String store_category, String store_file,
+			String store_photo) {
 		super();
 		this.store_id = store_id;
 		this.store_name = store_name;
@@ -31,30 +55,10 @@ public class StoreDTO {
 		this.store_introduce = store_introduce;
 		this.store_tel = store_tel;
 		this.store_category = store_category;
-		this.store_code = store_code;
-		this.store_file = store_file;
-		this.category_name = category_name;
-		this.store_photo = store_photo;
-	}
-	
-	//DB 모든칼럼 매칭
-	public StoreDTO(String store_id, String store_name, String store_addr, String store_license,String store_member_id,
-			String store_time, String store_introduce, String store_tel, int store_category, int store_code,String store_file,String store_photo) {
-		super();
-		this.store_id = store_id;
-		this.store_name = store_name;
-		this.store_addr = store_addr;
-		this.store_license = store_license;
-		this.store_member_id = store_member_id;
-		this.store_time = store_time;
-		this.store_introduce = store_introduce;
-		this.store_tel = store_tel;
-		this.store_category = store_category;
-		this.store_code = store_code;
 		this.store_file = store_file;
 		this.store_photo = store_photo;
 	}
-	
+
 	public String getStore_id() {
 		return store_id;
 	}
@@ -119,14 +123,14 @@ public class StoreDTO {
 		this.store_tel = store_tel;
 	}
 
-	public int getStore_category() {
+	public String getStore_category() {
 		return store_category;
 	}
 
-	public void setStore_category(int store_category) {
+	public void setStore_category(String store_category) {
 		this.store_category = store_category;
 	}
-	
+
 	public int getStore_code() {
 		return store_code;
 	}
@@ -134,7 +138,7 @@ public class StoreDTO {
 	public void setStore_code(int store_code) {
 		this.store_code = store_code;
 	}
-	
+
 	public String getStore_file() {
 		return store_file;
 	}
@@ -142,15 +146,7 @@ public class StoreDTO {
 	public void setStore_file(String store_file) {
 		this.store_file = store_file;
 	}
-	
-	public String getCategory_name() {
-		return category_name;
-	}
 
-	public void setCategory_name(String category_name) {
-		this.category_name = category_name;
-	}
-	
 	public String getStore_photo() {
 		return store_photo;
 	}
@@ -159,18 +155,22 @@ public class StoreDTO {
 		this.store_photo = store_photo;
 	}
 
+	public int getStore_count() {
+		return store_count;
+	}
+
+	public void setStore_count(int store_count) {
+		this.store_count = store_count;
+	}
+
 	@Override
 	public String toString() {
 		return "StoreDTO [store_id=" + store_id + ", store_name=" + store_name + ", store_addr=" + store_addr
 				+ ", store_license=" + store_license + ", store_member_id=" + store_member_id + ", store_time="
 				+ store_time + ", store_introduce=" + store_introduce + ", store_tel=" + store_tel + ", store_category="
 				+ store_category + ", store_code=" + store_code + ", store_file=" + store_file + ", store_photo="
-				+ store_photo + "]";
+				+ store_photo + ", store_count=" + store_count + "]";
 	}
-
-	
-	
-	
 
 	
 }
