@@ -19,9 +19,9 @@ public class StoreService {
 		this.storeMapper = storeMapper;
 	}
 
-	public void registerStore(StoreDTO dto) {
+	public int registerStore(StoreDTO dto) {
 		System.out.println(dto.toString());
-		int count = storeMapper.registerStore(dto);
+		return storeMapper.registerStore(dto);
 	}
 
 	public StoreDTO selectStoreDTO(String store_id) {

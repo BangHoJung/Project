@@ -92,5 +92,7 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	</update>
 	<insert id="sendMessage" parameterType="team.dto.MessageDTO">
 	 insert into message values (message_no_seq.nextval,#{message_member_id},#{message_title},#{message_content},sysdate,0)
+	<insert id="registerReview" parameterType="review">
+		INSERT INTO review(review_id,review_member_id,review_store_id,review_content,review_score_service,review_score_price,review_menu_no,review_score_menu,review_photo) VALUES(#{review_id},#{review_member_id},#{review_store_id},#{review_content},#{review_score_service},#{review_score_price},#{review_menu_no},#{review_score_menu},#{review_photo})
 	</insert>
 </mapper>
