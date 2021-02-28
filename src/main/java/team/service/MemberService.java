@@ -137,8 +137,8 @@ public class MemberService {
 		return mapper.adminNoticeWrite(map);
 	}
 
-	public List<NoticeDTO> selectAllNotice() {
-		return mapper.selectAllNotice();
+	public List<NoticeDTO> selectAllNotice(int pageNo) {
+		return mapper.selectAllNotice(pageNo);
 	}
 
 	public NoticeDTO selectNotice(int notice_no) {
@@ -154,6 +154,45 @@ public class MemberService {
 			return count;
 		}
 	}
+	//2021-02-28 추가
+	public int selectNoticeCount() {
+		return mapper.selectNoticeCount();
+	}
 
+	public int adminNoticeDelete(int notice_no) {
+		return mapper.adminNoticeDelete(notice_no);
+	}
+
+	public int adminUpdateNotice(int notice_no, String notice_title, String notice_content) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	      map.put("notice_no",notice_no);
+	      map.put("notice_title",notice_title);
+	      map.put("notice_content", notice_content);
+		return mapper.adminNoticeUpdate(map);
+	}
+
+	public List<ReviewDTO> adminSelectReportList(int pageNo) {
+		return mapper.adminSelectReportList(pageNo);
+	}
+
+	public int adminSelectReportCount() {
+		return mapper.adminSelectReportCount();
+	}
+
+	public ReviewDTO adminSelectReport(String review_id) {
+		return mapper.adminSelectReport(review_id);
+	}
+
+	public int adminDeleteReportReview(String review_id) {
+		return mapper.adminDeleteReportReview(review_id);
+	}
+
+	public int adminCanselReportReview(String review_id) {
+		return mapper.adminCanselReportReview(review_id);
+	}
+
+	public int sendMessage(MessageDTO message) {
+		return mapper.sendMessage(message);
+	}
 	
 }

@@ -67,7 +67,7 @@ float:right;
 <li class="list"><a href="adminNoticeWriteView.do">공지사항 작성</a></li>
 <li class="list"> <a href="#"></a>광고 등록 신청 조회</li>
 <li class="list"><a href="storeCheckListView.do">식당 등록 신청 조회</a></li>
-<li class="list"><a href="#">신고 확인</a></li>
+<li class="list"><a href="adminReportCheckListView.do">신고 확인</a></li>
 </ul>
 </c:when>
 <c:otherwise>

@@ -14,11 +14,17 @@ public class ReviewDTO {
 	private int review_menu_id;
 	private int review_score_menu;
 	private String review_photo;
+	private int report_status;
 	
+	
+	public ReviewDTO() {
+		
+	}
+
 	//테이블 전체데이터 생성자
 	public ReviewDTO(String review_id, String review_member_id, String review_store_id, String review_content,
 			String review_date, int review_score_service, int review_score_price, int review_menu_id,
-			int review_score_menu, String review_photo) {
+			int review_score_menu, String review_photo,int report_status) {
 		super();
 		this.review_id = review_id;
 		this.review_member_id = review_member_id;
@@ -30,6 +36,7 @@ public class ReviewDTO {
 		this.review_menu_id = review_menu_id;
 		this.review_score_menu = review_score_menu;
 		this.review_photo = review_photo;
+		this.report_status =report_status;
 	}
 	
 	//리뷰 데이터 입력 생성자(Date 제외)
@@ -47,8 +54,16 @@ public class ReviewDTO {
 		this.review_score_menu = review_score_menu;
 		this.review_photo = review_photo;
 	}
-
-
+	  //리뷰 신고데이터 생성자
+		public ReviewDTO(String review_id, String review_member_id, String review_store_id, String review_content,
+				String review_photo) {
+			super();
+			this.review_id = review_id;
+			this.review_member_id = review_member_id;
+			this.review_store_id = review_store_id;
+			this.review_content = review_content;
+			this.review_photo = review_photo;
+		}
 
 
 	public String getReview_id() {
@@ -130,6 +145,13 @@ public class ReviewDTO {
 	public void setReview_photo(String review_photo) {
 		this.review_photo = review_photo;
 	}
+	public int getReport_status() {
+		return report_status;
+	}
+
+	public void setReport_status(int report_status) {
+		this.report_status = report_status;
+	}
 
 	@Override
 	public String toString() {
@@ -137,9 +159,9 @@ public class ReviewDTO {
 				+ review_store_id + ", review_content=" + review_content + ", review_date=" + review_date
 				+ ", review_score_service=" + review_score_service + ", review_score_price=" + review_score_price
 				+ ", review_menu_id=" + review_menu_id + ", review_score_menu=" + review_score_menu + ", review_photo="
-				+ review_photo + "]";
+				+ review_photo + ", report_status=" + report_status + "]";
 	}
-	
+
 	
 	
 	

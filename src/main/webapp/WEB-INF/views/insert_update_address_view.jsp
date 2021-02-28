@@ -77,6 +77,7 @@
 </script>
 </head>
 <body>
+<c:if test="${sessionScope.login==true}">
   <jsp:include page="/templete/mypage_header.jsp"></jsp:include>
   <div class="body">
   <jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
@@ -109,7 +110,7 @@
          </c:forEach>
          </table>
          </div>
-   </div> 
-</body>
-        
+   </div>
+</c:if>
+</body>  
 </html>
