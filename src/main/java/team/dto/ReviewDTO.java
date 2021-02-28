@@ -19,11 +19,6 @@ public class ReviewDTO {
 	public ReviewDTO() {
 		
 	}
-	
-	
-	public ReviewDTO() {
-		
-	}
 
 	//테이블 전체데이터 생성자
 	public ReviewDTO(String review_id, String review_member_id, String review_store_id, String review_content,
@@ -147,13 +142,6 @@ public class ReviewDTO {
 
 	public void setReview_photo(String review_photo) {
 		this.review_photo = review_photo;
-	}
-	public int getReport_status() {
-		return report_status;
-	}
-
-	public void setReport_status(int report_status) {
-		this.report_status = report_status;
 	}
 
 	public int getReview_report() {
