@@ -47,23 +47,56 @@
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$("#btn_register").click(function() {
+		$("form").on("submit",function(e) {
 			if($("input[name='name']").val().length == 0) {
-				alert("식당 상호명을 입력하세요");
+				alert("식당 이름을 입력하세요");
+				e.preventDefault();
 				return false;
 			}
-			else if($("input[name='tel']").val().length == 0) {
+			else if($("input[name='tel1']").val().length == 0 || $("input[name='tel2']").val().length == 0 || $("input[name='tel3']").val().length == 0) {
 				alert("식당 대표번호를 입력하세요");
+				e.preventDefault();
 				return false;
 			}
 			else if($("input[name='addr']").val().length == 0) {
 				alert("식당 지번주소를 입력하세요");
+				e.preventDefault();
 				return false;
 			}
 			else if($("input[name='license']").val().length == 0) {
 				alert("사업자등록번호를 입력하세요");
+				e.preventDefault();
 				return false;
 			}
+			else if($("input[name='file']").val().length == 0) {
+				alert("사업자등록증 파일을 첨부하세요");
+				e.preventDefault();
+				return false;
+			}
+			else if($("input[name='photo']").val().length == 0) {
+				alert("식당 대표사진을 첨부하세요");
+				e.preventDefault();
+				return false;
+			}
+			else {
+				$.each($("input[name='menu_name']"), function(index,item) {
+					if($(item).val() == null || $(item).val() == "") {
+						alert("모든 메뉴 이름을 정확히 입력해주세요");
+						e.preventDefault();
+						break;
+					}
+				});
+				
+				$.each($("input[name='menu_price']"), function(index,item) {
+					if($(item).val() == null || $(item).val() == "") {
+						alert("모든 메뉴 가격을 정확히 입력해주세요");
+						e.preventDefault()
+						break;
+					}
+				});
+			}
+			
+			
 			
 		});
 		
@@ -81,24 +114,6 @@
 			$("#menu_table tbody").children().siblings().first().remove();
 		});
 		
-		$("#submit").click(function(event) {
-			$.each($("input[name='menu_name']"), function(index,item) {
-				if($(item).val() == null || $(item).val() == "") {
-					alert("모든 메뉴 이름을 정확히 입력해주세요");
-					event.preventDefault();
-					return;
-				}
-			});
-			
-			$.each($("input[name='menu_price']"), function(index,item) {
-				if($(item).val() == null || $(item).val() == "") {
-					alert("모든 메뉴 가격을 정확히 입력해주세요");
-					event.preventDefault()
-					return;
-				}
-			});
-			
-		});
 	});
 </script>
 </head>
@@ -144,13 +159,13 @@
 								<input type="file" name="file">
 							</td>
 						</tr>
-					</table>
-					<h2>식당 상세 정보(선택)</h2>
-					<table class="add">
 						<tr>
 							<th>식당 대표사진</th>
 							<td><input type="file" name="photo"></td>
 						</tr>
+					</table>
+					<h2>식당 상세 정보(선택)</h2>
+					<table class="add">
 						<tr>
 							<th>식당 영업시간</th>
 							<td><textarea rows="" cols="" name="time" placeholder="식당 영업시간을 입력해주세요"></textarea></td>
@@ -163,10 +178,10 @@
 							<th>카테고리</th>
 							<td>
 								<select name="category">
-									<option value="0">카테고리</option>
-									<option value="1">한식</option>
-									<option value="2">중식</option>
-									<option value="3">일식</option>
+									<option value="카테고리">카테고리</option>
+									<option value="한식">한식</option>
+									<option value="중식">중식</option>
+									<option value="일식">일식</option>
 								</select>
 							</td>
 						</tr>

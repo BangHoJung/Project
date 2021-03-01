@@ -14,20 +14,21 @@
 <link rel="stylesheet" href="css/message_detail_view_pc.css" media="screen and (min-width:769px)">
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script>
-if(${requestScope.Invalid_access ==true}){alert("잘못된 접근입니다.");history.back();}
 $(function () {
+if(${requestScope.Invalid_access ==true}){alert("잘못된 접근입니다.");history.back();}
 	$("#btn_list_view").click(function() {
-		location.href="userMessageView.do?pageNo="+${requestScope.pageNo};
+		location.href="userMessageView.do?pageNo=${requestScope.pageNo}";
 	});
 	 $("#btn_delete").click(function() {       
 	         if(confirm("정보를 삭제하시겠습니까?")==true){
-	        	 location.href="deleteMessage.do?checkRow="+${requestScope.message_no};
+	        	 location.href="deleteMessage.do?checkRow=${requestScope.message_no}";
 	         }
 		 });
 });
 </script>
 </head>
 <body>
+<c:if test="${requestScope.Invalid_access==false}">
 <jsp:include page="/templete/mypage_header.jsp"></jsp:include>
 <div class="body">
 <jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
@@ -42,6 +43,7 @@ $(function () {
 <button type="button" id="btn_delete" class="btn">삭제하기</button>
 </div>
 </div>
+</c:if>
 </body>
 </html>
 

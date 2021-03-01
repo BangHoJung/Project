@@ -14,8 +14,10 @@
 <link rel="stylesheet" href="css/user_message_pc.css" media="screen and (min-width:769px)">
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script>
-if(${requestScope.deleteComplete == false}){alert("삭제를 실패했습니다.");}
+
 $(function () {
+	if(${sessionScope.login == null}||${sessionScope.login==false}){alert("잘못된 접근입니다.");history.back();}
+	if(${requestScope.deleteComplete == false}){alert("삭제를 실패했습니다.");}
 	 //최상단 체크박스 클릭
     $("#deleteAll").click(function(){
         //클릭되었으면
@@ -44,6 +46,7 @@ $(function () {
 </script>
 </head>
 <body>
+<c:if test="${sessionScope.login==true}">
 <jsp:include page="/templete/mypage_header.jsp"></jsp:include>
 <div class="body">
 <jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
@@ -118,5 +121,6 @@ $(function () {
 </form>
 </div>
 </div>
+</c:if>
 </body>
 </html>

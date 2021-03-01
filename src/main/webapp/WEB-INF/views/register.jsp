@@ -105,6 +105,7 @@
 	}
 	
 $(function () {
+	if(${sessionScope.login==true}){alert("잘못된 접근방법입니다.");history.back();}
 	$("#btn_check_result").blur();
 	$("#prev_id").blur();
 	$("#id").keyup(function() {
@@ -231,6 +232,7 @@ $(function () {
 </script>
 </head>
 <body>
+<c:if test="${sessionScope.login == null || sessionScope.login==false}">
 	<div class="container">
 		<h1 class="title">Taste Factory</h1>
 		<form id="frm_register">
@@ -264,5 +266,6 @@ $(function () {
 			<br><br><button type="button" id="btn_register" class="btn">회원가입</button>&ensp;<button type="button" id="btn_cansel" class="btn">취소</button>
 		</form>
 	</div>
+</c:if>
 </body>
 </html>
