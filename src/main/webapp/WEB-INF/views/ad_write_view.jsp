@@ -26,8 +26,8 @@
 					<tr>
 						<th>작성자</th>
 						<td>
-							<input type="hidden" name="ad_store_id" value="${sessionScope.advertisement.ad_store_id }">
-							${sessionScope.advertisement.ad_store_id }		
+							<input type="hidden" name="ad_store_id" value="${sessionScope.ad_store_id }">
+							${sessionScope.ad_store_id }		
 						</td>
 					</tr>
 					<tr id="content">
