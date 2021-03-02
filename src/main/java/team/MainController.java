@@ -1263,5 +1263,74 @@ public String adminCanselReportReview(HttpServletRequest request,HttpServletResp
 		}
 		return null;
 	}
+@RequestMapping("/mb")
+public String mobileMain() {
+	return "mobile_main";
+}
+@RequestMapping("/mbNotice.do")
+public String mbNotice(HttpServletRequest request) {
+	int pageNo = 1; int pageOfContentCount =20;
+	if(request.getParameter("pageNo") != null)
+		pageNo = Integer.parseInt(request.getParameter("pageNo"));
+	List<NoticeDTO> list = memberService.selectAllNotice(pageNo);
+	if(list.isEmpty()) {
+		request.setAttribute("noticeList", null);
+		return "mobile_notice";
+	}
+	else {
+		int count = memberService.selectNoticeCount();
+		PaggingVO vo = new PaggingVO(count, pageNo,pageOfContentCount);
+		request.setAttribute("noticeList", list);
+		request.setAttribute("page", vo);
+	}
+	return "mobile_notice";
+}
+@RequestMapping("/mbIntroduce.do")
+public String mbIntroduce() { 
+	return "mobile_introduce";
+}
+@RequestMapping("/mbGuide.do")
+public String mbGuide() {
+	return "mobile_guide";
+}
+@RequestMapping("/mbQnaView.do")
+public String mbQnaView(HttpServletRequest request) {
+	int page=1; int pageOfContentCount =20;
+	if(request.getParameter("pageNo") != null)
+		page = Integer.parseInt(request.getParameter("pageNo"));
+	List<QnaDTO> list = qnaService.selectQnaList(page);
+	int count = qnaService.selectCount();
+	PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
+	request.setAttribute("list", list);
+	request.setAttribute("pagging", vo);
+	return "mobile_qna";
+}
+@RequestMapping("/mbQnaWriteAction.do")
+public String mbBoardWriteAction(HttpServletRequest request) {
+	int qna_no = qnaService.newQno();
+	String qna_member_id= request.getParameter("qna_member_id");
+	String qna_title = request.getParameter("qna_title");
+	String qna_content = request.getParameter("qna_content");
+	qnaService.insertQna(new QnaDTO(qna_no, qna_member_id,qna_title,qna_content));
+	QnaDTO dto = qnaService.selectQna(qna_no);
+	request.setAttribute("qna", dto);
+	request.setAttribute("qno", qna_no);
+	return "mobile_qna_detail_view";
+}
+@RequestMapping("/mbQnaDetailView.do")
+public String mbQnaDetailView(HttpServletRequest request) {
+	int qno= 0;
+	if(request.getParameter("qna_no") != null)
+		qno = Integer.parseInt(request.getParameter("qna_no"));
+	else
+		qno = (int)request.getAttribute("qna_no");
+	QnaDTO dto = qnaService.selectQna(qno);
+	request.setAttribute("qna", dto);
+	return "mobile_qna_detail_view";
+}
+@RequestMapping("/mbQnaWrite.do")
+public String mbQnaWrite() {
+	return "mobile_qna_write";
+}
 } 
 	   
