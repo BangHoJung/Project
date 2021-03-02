@@ -71,7 +71,7 @@ $(function(){
 		<p>
 		본인 인증한 사용자들이 직접 작성한 솔직하고 상세한 맛집 후기들을 확인해보세요. <br>맛집에 대해서 궁금해할 모든 정보를 후기로 제공합니다.
 		</p>
-		<img src="https://postfiles.pstatic.net/MjAyMDA2MjNfMjA3/MDAxNTkyODk5Mzc3MDc4.86xK0CHvX8L1_7Eg0UAf1ZkZzVdDGN5LXB9EXykgxpQg.SUymoQoEe0yncpVlAkYCxzi6C8B5DJsJ4xvtWzvyL-gg.PNG.diningcode/%EB%8B%A4%EC%BD%94%ED%8F%89%EA%B0%80.png?type=w773">
+		<img src="/img/guide_img.png">
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

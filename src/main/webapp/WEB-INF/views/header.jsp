@@ -16,70 +16,92 @@
 		margin: 0 auto;
 		padding:0;
 	}
+	#header_box{
+		width: 1000px;
+		height: 30px;
+		background-color:#fa0050;
+	}
 	header {
 		width: 1000px;
-		height: 80px;
-		position: relative;
+		height: 60px;
 	}
 	
+	#logo img {
+		position:absolute;
+		margin-left:30px;
+		margin:10px;
+		height: 50px;
+	}
 	#login .search {
-		position: absolute;
-		margin-left: 200px;
+		position:absolute;
+		margin-left: 250px;
 		margin-top: 20px;
-		padding: 10px;
-		border: 1px solid #fa0050;
-		border-radius: 20px;
+		height: 40px;
+		padding-left:20px;
+		box-sizing: border-box;
+		color: gray;
+		border: 1px solid #e8e8e8;;
+		background-image: url("/img/search.png"); 
+		background-size:20px;
+		background-repeat: no-repeat;
+		background-position:5px;
 	}
 	
 	#login input {
+		background-color:none;;
 		width: 300px;
 		height: 20px;
 		box-sizing: border-box;
 		border: none;
+		margin:10px;
+		font-size: 12px;
 	}
 	
 	#login .search button {
-		margin-left: 5px; width : 50px;
-		height: 20px;
+		width : 80px;
+		height: 40px;
 		box-sizing: border-box;
-		width: 50px;
 		border: none;
-		background-color: white;
 		color: gray;
+		font-size:12px;
+	}
+	#login .search button:hover {
+		background-color: #fa0050;
+		color: white;
 		font-weight: bold;
 	}
-	
-	#logo img {
-		margin-top:5px;
-		width: 100px ;
-		height: 70px;
-		float: left;
-	}
-	
 	#login p {
-		margin-top: 40px;
+		margin-top: 25px;
+		margin-right:10px;
 		font-weight: bold;
 		font-size: 12px;
 		color: gray;
+		display: inline-block;
+		text-align: right;
 	}
 	
 	#login a:link, #login a:visited {
 		color: gray;
 		text-decoration: none;
 	}
-	
+	#login a:hover{
+		font-weight: bold;
+		color: #fa0050;
+	}
 	.clear {
 		clear: both;
 	}
-	
 	.right {
 		float: right;
 	}
 	
 	nav {
-		background-color:#fa0050;
-		margin-bottom: 20px;
-		height: 50px;
+		background-color:none;
+		margin: 30px 0;
+		margin-top:10px;
+		padding-left:50px;
+		height: 20px;
+		position: relative;
 	}
 	
 	nav>ul {
@@ -90,48 +112,47 @@
 	
 	nav>ul>li {
 		display: inline-block;
+		padding-left:10px;
 	}
 	
 	nav a:link, nav a:visited {
 		width: 100px;
 		height: 50px;
 		padding: 15px 0px;
-		font-size: 15px;
+		font-size: 12px;
 		line-height: 20px;
 		text-align: center;
 		box-sizing: border-box;
 		display: inline-block;
 		text-decoration: none;
-		color:white;
+		color:gray;
 	}
-	
+	nav a:hover{
+		font-weight: bold;
+		color: #fa0050;
+	}
 	nav button {
-		width: 100px;
-		margin-right:10px;
-		font-size:15px;
+		width: 50px;
+		font-size:12px;
 		font-weight:bold;
-		height: 50px;
-		background-color: #fa0050;
-		color: white;
+		color: gray;
 		border: none;
-	}
-	
-		margin:0;
-		padding:0;
+		margin-right:10px;
 	}
 </style>
 </head>
 <body>
+	<div id="header_box"></div>
 	<header>
 		<div id="login">
-			<a href="/" id="logo"><img src="/img/logo2.jpg"></a>
+			<a href="/" id="logo"><img src="/img/mainlogo2.png"></a>
 			<div class="search">
 				<input type="text" name="search" placeholder="찾고싶은 식당이나 지역을 검색하세요." ><button>검색</button>
 			</div>
 			<div class="right">
 				<c:if test="${sessionScope.login != null && sessionScope.login == true}">
-				<p> ${sessionScope.name } 님이 로그인 하셨습니다. | <a href="myPageView.do">마이페이지</a><br>
-				<a href="/logout.do">로그아웃</a></p>
+				<p> ${sessionScope.name } 님이 로그인 하셨습니다. <br>
+				<a href="myPageView.do">마이페이지</a> | <a href="/logout.do" id="logout">로그아웃</a></p>
 				</c:if>
 				<c:if test="${sessionScope.login == null || sessionScope.login == false}">
 				<p><a href="/loginView.do">로그인</a> | <a href="/registerView.do">회원가입</a></p>
@@ -146,7 +167,7 @@
 			<li><a href="/notice.do">공지사항</a></li>
 			<li><a href="/qnaView.do">Q&A</a></li>
 		</ul>
-		<button class="right" id="random">랜덤 메뉴 추천</button>
+		<button class="right" id="random">#</button>
 	</nav>
 </body>
 </html>

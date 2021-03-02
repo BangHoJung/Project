@@ -1,16 +1,10 @@
 @charset "UTF-8";
-	.qna_write_container a{
-		text-decoration: none;
-		color: black;
-	}
 	.qna_write_container  h3{
-		color: black;
 		width: 800px;
 		margin-bottom:20px;
-		font-size: 20px;
-		font-weight: bold;
+		margin-top: 50px;
 	}
-	.qna_write_container  table{
+	.qna_write_container  table {
 		width: 600px;
 		border: 1px solid #e8e8e8;
 		margin: 0 auto;
@@ -20,15 +14,14 @@
 		margin:20px auto;
 		border-collapse: collapse;
 		font-size: 12px;
+		color:   #454545;
 	}
-	.qna_write_container  button{
-		width: 50px;
-		height: 30px;
-	}
-	.qna_write_container th{
-		width:100px;
+	#inputTable th{
+		width:60px;
+		height:30px;
 		border-collapse: collapse;
 		font-weight: bold;
+		padding-left:10px;
 	}
 	.qna_write_container tr{
 		margin: 20px;
@@ -36,33 +29,41 @@
 		height: 50px;
 	}
 	.qna_write_container  td{
+		padding-left:10px;
 		width:500px;
 		border-collapse: collapse;
 	}
 	.qna_write_container  textarea{
-		width:400px;
+		width:500px;
 		height:100px;
 		resize: none;		
-		border: 1px solid gray;
+		border: 1px solid #e8e8e8;
+		margin-bottom: 10px;
 	}
 	.qna_write_container input{
 		border:none;
-		width:400px;
+		width:500px;
 		height: 30px;
-		border-bottom: 1px solid gray;
+		border-bottom: 1px solid #e8e8e8;
+	}
+	#btnTable{
+		border: none;
+		margin: 0 auto;
+		margin-top:10px;
+		padding:0;
 	}
 	.btn{
-		text-decoration: none;
 		width:100px;
-		display:inline-block;
+		height:30px;
+		float:right;
 		background-color: #e8e8e8;
 		font-weight:normal;
 		color : black;
-		margin-top:10px;
-		margin-right:10px;
-		
 	}
 	.btn:hover{
-		background-color: #282828;
-		color:#FFFFFF
+		background-color: gray;
+		color:white;
+	}
+	#btnRow{
+		height: 30px;
 	}

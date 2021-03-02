@@ -12,7 +12,10 @@
 	.img{
 	width: 100%;
 	}
-	
+	.slider img{
+		width:500px;
+		height: 300px;
+	}
 	#theme {
 		box-sizing: border-box;
 		width: 1000px;
@@ -52,7 +55,6 @@
 	}
 	
 	.bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
-		position: absolute;
 		bottom: 20px;
 		width: 100%;
 	}
