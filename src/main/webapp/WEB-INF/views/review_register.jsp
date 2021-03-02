@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>Insert title here</title>
-<link rel="stylesheet" href="/css/reviewRegister.css" media="screen  and (min-width:1024px)">
+<link rel="stylesheet" href="/css/reviewRegister.css" media="screen  and (min-width:400px)">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="lib/js/jquery-3.5.1.min.js"></script>
@@ -15,26 +15,26 @@
 	$(function() {
 		$(".btn_menu").click( function() {
 			console.log($(this).siblings("input").val());
-			$("input[name='menu_id']").val($(this).siblings("input").val());
-			$("#menu_id").html("선택 메뉴 : "+$(this).html())
+			$("input[name='menu_no']").val($(this).siblings("input").val());
+			$("#menu_no").html("선택 메뉴 : "+$(this).html())
 			$("#menu").css("display","inline-block");
 		});
 		
 		var menu = -1;
 		$("#menu a").mouseenter(function() {
 			for(i=0;i<=$(this).index();i++) {
-				$("#menu a").eq(i).children("img").css("background-color","white");
+				$("#menu a").eq(i).children("span").html("★");
 			}
 			for( ; i<5;i++) {
-				$("#menu a").eq(i).children("img").css("background-color","black");
+				$("#menu a").eq(i).children("span").html("☆");
 			}
 		});
 		$("#menu a").mouseleave(function() {
 			for(i=0;i<=menu;i++) {
-				$("#menu a").eq(i).children("img").css("background-color","white");
+				$("#menu a").eq(i).children("span").html("★");
 			}
 			for( ; i<5;i++) {
-				$("#menu a").eq(i).children("img").css("background-color","black");
+				$("#menu a").eq(i).children("span").html("☆");
 			}
 		});
 		$("#menu a").click(function() {
@@ -45,18 +45,18 @@
 		var price = -1;
 		$("#price a").mouseenter(function() {
 			for(i=0;i<=$(this).index();i++) {
-				$("#price a").eq(i).children("img").css("background-color","white");
+				$("#price a").eq(i).children("span").html("★");
 			}
 			for( ; i<5;i++) {
-				$("#price a").eq(i).children("img").css("background-color","black");
+				$("#price a").eq(i).children("span").html("☆");
 			}
 		});
 		$("#price a").mouseleave(function() {
 			for(i=0;i<=price;i++) {
-				$("#price a").eq(i).children("img").css("background-color","white");
+				$("#price a").eq(i).children("span").html("★");
 			}
 			for( ; i<5;i++) {
-				$("#price a").eq(i).children("img").css("background-color","black");
+				$("#price a").eq(i).children("span").html("☆");
 			}
 		});
 		$("#price a").click(function() {
@@ -67,18 +67,18 @@
 		var service = -1;
 		$("#service a").mouseenter(function() {
 			for(i=0;i<=$(this).index();i++) {
-				$("#service a").eq(i).children("img").css("background-color","white");
+				$("#service a").eq(i).children("span").html("★");
 			}
 			for( ; i<5;i++) {
-				$("#service a").eq(i).children("img").css("background-color","black");
+				$("#service a").eq(i).children("span").html("☆");
 			}
 		});
 		$("#service a").mouseleave(function() {
 			for(i=0;i<=service;i++) {
-				$("#service a").eq(i).children("img").css("background-color","white");
+				$("#service a").eq(i).children("span").html("★");
 			}
 			for( ; i<5;i++) {
-				$("#service a").eq(i).children("img").css("background-color","black");
+				$("#service a").eq(i).children("span").html("☆");
 			}
 		});
 		$("#service a").click(function() {
@@ -105,27 +105,27 @@
 					<button type="button" class="btn_menu">${menu.menu_name }</button>
 				</span>
 			</c:forEach>
-			<input type="hidden" name="menu_id">
+			<input type="hidden" name="menu_no">
 			<br><br>
-			<p id="menu_id"></p>
+			<p id="menu_no"></p>
 			<div id="menu">
 				메뉴 평가 : 
-				<span><c:forEach begin="1" end="5" var="index">
-					<a href="#none" ><img src="/img/starcheck.png"></a>
+				<span class="a"><c:forEach begin="1" end="5" var="index">
+					<a href="#none" ><span >☆</span></a>
 				</c:forEach></span>
 			</div>
 			<input type="hidden" name="review_score_menu">
 			<div id="price">
 				가격 평가 : 
-				<span><c:forEach begin="1" end="5" var="index">
-					<a href="#none"><img src="/img/starcheck.png"></a>
+				<span class="a"><c:forEach begin="1" end="5" var="index">
+					<a href="#none" ><span>☆</span></a>
 				</c:forEach></span>
 			</div>
 			<input type="hidden" name="review_score_price">
 			<div id="service">
 				서비스 평가 : 
-				<span><c:forEach begin="1" end="5" var="index">
-					<a href="#none"><img src="/img/starcheck.png"></a>
+				<span class="a"><c:forEach begin="1" end="5" var="index">
+					<a href="#none" ><span >☆</span></a>
 				</c:forEach></span>
 			</div>
 			<input type="hidden" name="review_score_service">

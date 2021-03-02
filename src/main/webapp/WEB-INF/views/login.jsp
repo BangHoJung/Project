@@ -59,7 +59,7 @@ $(function () {
 </form>
  
  <div class="click">
- <p class="member"><a  href="registerView.do">회원가입 </a></p>  <p class="Find"> <a href="#">아이디 찾기 </a>| <a href="#"> 비밀번호 찾기 </a></p>
+ <p class="member"><a  href="registerView.do" class="m" >회원가입 </a></p>  <p class="Find"> <a href="#" class="m">아이디 찾기 </a>| <a href="#" class="m"> 비밀번호 찾기 </a></p>
  </div>
  
 
