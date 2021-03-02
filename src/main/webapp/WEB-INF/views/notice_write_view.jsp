@@ -13,7 +13,7 @@
 @media (max-width:768px){
 .container{
   width: 414px; 
- }
+ } 
 }
 form{
  position: relative;
