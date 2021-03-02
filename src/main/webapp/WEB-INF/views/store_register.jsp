@@ -37,7 +37,8 @@
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
 						//document.getElementById('postcode').value = data.zonecode;
 						//document.getElementById("roadAddress").value = roadAddr;
-						document.getElementById("addr").value = data.jibunAddress;
+						//document.getElementById("addr").value = data.jibunAddress;
+						document.getElementById("addr").value = roadAddr;
 						var guideTextBox = document.getElementById("guide");
 						guideTextBox.style.display = 'block';
 					}
@@ -78,30 +79,29 @@
 				e.preventDefault();
 				return false;
 			}
-			else {
-				$.each($("input[name='menu_name']"), function(index,item) {
-					if($(item).val() == null || $(item).val() == "") {
-						alert("모든 메뉴 이름을 정확히 입력해주세요");
-						e.preventDefault();
-						break;
-					}
-				});
-				
-				$.each($("input[name='menu_price']"), function(index,item) {
-					if($(item).val() == null || $(item).val() == "") {
-						alert("모든 메뉴 가격을 정확히 입력해주세요");
-						e.preventDefault()
-						break;
-					}
-				});
-			}
+			$.each($("input[name='menu_name']"), function(index,item) {
+				if($(item).val() == null || $(item).val() == "") {
+					alert("모든 메뉴 이름을 정확히 입력해주세요");
+					e.preventDefault();
+					return false;
+				}
+			});
 			
+			$.each($("input[name='menu_price']"), function(index,item) {
+				console.log($(item).val());
+				if($(item).val() == null || $(item).val() == "") {
+					alert("모든 메뉴 가격을 정확히 입력해주세요");
+					e.preventDefault();
+					return false;
+				}
+			});
+			
+			e.preventDefault();
 			
 			
 		});
 		
 		$("#plus").click(function() {
-			console.log($("#menu_table tbody").children().siblings().first().val());
 			$("#menu_table tbody").children().first().before("<tr><td><input type=\"text\" name=\"menu_name\" placeholder=\"메뉴 이름 입력\" ></td>"
 			 + "<td><input type=\"text\" name=\"menu_price\" placeholder=\"메뉴 가격 입력\" ></td>"
 			 + "<td><input type=\"file\" name=\"menu_photo\"></td>");
