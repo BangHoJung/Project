@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../css/qna.css" media="screen and (min-width:1024px)">
 <script type="text/javascript">
 	$(function(){
@@ -19,13 +21,21 @@
 	})
 
 	</script>
+	<style type="text/css">
+		#qna_img{
+			width: 1000px;
+		}
+	</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+	<img id="qna_img" alt="" src="/img/qna_img.jpg">
 	<div id="board_container">
 		<h3>Q&A</h3>
-		<a href="qnaMypageView.do" id="myQna">내가 한 질문 보기</a>
-		<table class="board">
+		<c:if test="${sessionScope.login != null && sessionScope.login == true}">
+		<span id="myQna"><a href="qnaMypageView.do" >내가 한 질문 보기</a></span>
+		</c:if>
+		<table class="table">
 			<tr>
 				<th class="qno">글번호</th>
 				<th class="qna_title">제목</th>
@@ -42,13 +52,13 @@
 			</tr>
 		<c:if test="${dto.qna_response != null }">
 			<tr>
-				<td style="display: hidden"></td>
-				<td id="qna_answer">
+				<td style="display: hidden" class="qno"></td>
+				<td class="qna_title" id="qna_answer">
 					<a href="/qnaAnswerDetailView.do?qna_no=${dto.qna_no}">
 						└ RE : ${dto.qna_title }
 					</a>
 				</td>
-				<td>관리자</td>
+				<td class="writer">관리자</td>
 				<td>${dto.qna_response_date}</td>
 			</tr>
 		</c:if>

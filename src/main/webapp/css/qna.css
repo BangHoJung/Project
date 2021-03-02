@@ -1,66 +1,67 @@
 @charset "UTF-8";
 	
 	#board_container{ 
-		width: 800px;
+		width: 900px;
 		margin: 0 auto;
+		margin-top:50px;
+		color: #454545;
 	}
 	#board_container h3{ 
-		width: 800px;
+		width: 850px;
 		margin:0 auto;
 	}
-	.board #qna{
+	.table #qna{
 		text-align: left;
 		margin-left: 10px;
 	}
-	.board #qna_answer{
+	.table #qna_answer{
 		text-align: left;
 		padding-left: 30px;
 	}
-	.board{
+	.table{
 		clear:both;
-		width:800px;
+		width:900px;
 		margin:20px auto;
 		border-collapse: collapse;
 	}
-	.board th, .board td{
+	.table th, .table td{
 		padding: 10px;
 		text-align: center;
 		font-size: 12px;
 	}
-	.board th{
-		border-top : 1px solid gray;
-		border-bottom : 2px solid gray;
+	.table th{
+		border-bottom : 2px solid #898989;
 	}
-	.board th a{
+	.table th a{
 		color: black;
 	}
-	.board a{
+	.table a{
 		text-decoration: none;
-		color: black;
+		color:  #454545;
 	}
-	.board a:hover{
-		color: gray;
+	.table a:hover{
+		color:#b9b9b9;
 		font-weight:bold; 
 	}
-	.board td{
-		border-top : 1px solid gray;
-		border-bottom : 1px solid gray;
+	.table td{
+		border-top : 1px solid #747474;
+		border-bottom : 1px solid  #747474;
 	}
-	.board tr:last-child > td {
-		border-bottom : 2px solid black;
+	.table tr:last-child > td {
+		border-bottom : 2px solid #898989;
 	}
 	.qno{
-		width: 50px;
-		border-right: 1px solid #e8e8e8;
+		width: 70px;
+		border-right: 1px solid  #747474;
 		}
 	.qna_title{
 		width:400px;	
-		border-right: 1px solid #e8e8e8;
+		border-right: 1px solid  #747474;
 		
 	}
 	.writer{
 		width:150px;	
-		border-right: 1px solid #e8e8e8;
+		border-right: 1px solid  #747474;
 	}
 	.date{
 		width:200px;
@@ -70,7 +71,7 @@
 		text-align: center;
 	}
 	.page_bar a:link,.page_bar a:visited {
-		color:black;
+		color: #454545;
 		text-decoration: none;
 		font-size : 12px;
 		margin-left: 10px;
@@ -78,21 +79,29 @@
 	}
 	.page_bar a:hover{
 		font-weight: bold;
-		color:red;
+		color:#b9b9b9;
 	}
 	.btn_writer{
 		position:absolute;
+		font-weight:bold;
 		right:0px;
 	}
-	#myQna{
+	#myQna {
 		float:right;
 		background-color: none;
-		border: 1px solid #e8e8e8;
-		border-radius: 5px;
+		border: none;
 		margin:5px;
 		text-decoration: none;
+	}
+	#myQna a:link,#myQna a:visited{
 		font-weight: bold;
 		font-size: 15px;
-		color: black;
+		
+		color: #454545;
+	}
+	#myQna a:hover{
+		text-decoration: none;
+		font-weight: bold;
+		color:#b9b9b9;
 	}
 	
