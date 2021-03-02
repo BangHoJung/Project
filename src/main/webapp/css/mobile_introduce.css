@@ -1,0 +1,23 @@
+@charset "UTF-8";
+	*{
+		margin:0;
+		padding:0;
+	}
+	
+	.introduce_container{
+		margin: 0 auto;
+		font-size: 12px;
+		border: 1px solid #e8e8e8;
+		padding: 20px;
+		box-sizing: border-box;
+		margin-bottom:50px;
+		color:   #454545;
+	}
+	#introduce_title{
+		padding-left:30px;
+		color:   #454545;
+	}
+	#introduce_img{
+		margin-bottom: 50px;
+	}
+	

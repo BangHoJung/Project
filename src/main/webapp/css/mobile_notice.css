@@ -1,0 +1,26 @@
+@charset "UTF-8";
+	*{
+		margin:0;
+		padding:0;
+	}
+	
+	.notice_container h4{
+		margin-left:30px;
+		color:   #454545;
+	}
+	.notice_container {
+		font-size: 10px;
+		box-sizing: border-box;
+		margin-bottom:50px;
+		color:   #454545;
+	}
+	.notice_container table{
+		margin-left:20px;
+		border: 1px solid #e8e8e8
+	}
+	.notice_container td{
+		height:50px;
+		padding:10px;
+		font-size:12px;
+		border-bottom: 1px solid #e8e8e8
+	}

@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../css/nav.css" media="screen and (min-width:768px)">
+<link rel="stylesheet" href="../css/mobile_introduce.css" media="screen and (max-width:767px)">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 <script type="text/javascript">
 $(function(){
 	$("#random").click(function(){
@@ -15,16 +17,11 @@ $(function(){
 	})
 })
 </script>
-<style type="text/css">
-	#introduce_img{
-		width: 1000px;
-	}
-</style>
 </head>
 
 <body>
-	<jsp:include page="header.jsp"></jsp:include>
-	<img id="introduce_img" alt="" src="/img/introduce_img.jpg">
+	<jsp:include page="mobile_header.jsp"></jsp:include>
+	<img id="introduce_img" alt="" src="/img/introduce_img.jpg" class="col-xs-12">
 	<h3 id="introduce_title">Taste Factory를 소개 합니다!</h3><br>
 	<div class="introduce_container">
 		<p>
@@ -37,6 +34,6 @@ $(function(){
 			 당신이 기대하는 가장 정확하고 신뢰하는 맛집을 지금 Taste Factory에서 확인하세요!!
 		</p>
 	</div>
-	<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="mobile_footer.jsp"></jsp:include>
 </body>
 </html>

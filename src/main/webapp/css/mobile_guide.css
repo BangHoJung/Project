@@ -1,0 +1,25 @@
+@charset "UTF-8";
+	*{
+		margin:0;
+		padding:0;
+	}
+	
+	#guide_container{
+		padding-left:30px;
+		margin-top: 50px;
+		color:   #454545;
+	}
+	#guide_container h2{
+		margin:10px;
+		padding: 2px;
+	}
+	#guide_container p{
+		font-size: 12px;
+		margin:10px;
+	}
+	#guide_container hr{
+		margin:30px;
+	}
+	#guide_container img{
+		margin:0 auto;	
+	}

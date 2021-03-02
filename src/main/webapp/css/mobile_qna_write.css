@@ -1,0 +1,64 @@
+@charset "UTF-8";
+	.qna_write_container  h3{
+		margin-left:30px;
+		margin-bottom:20px;
+		margin-top: 50px;
+	}
+	.qna_write_container  table {
+		border: 1px solid #e8e8e8;
+		margin: 0 auto;
+	}
+	.qna_write_container {
+		margin:20px auto;
+		border-collapse: collapse;
+		font-size: 12px;
+		color:   #454545;
+	}
+	#inputTable th{
+		height:30px;
+		border-collapse: collapse;
+		font-weight: bold;
+		padding-left:10px;
+	}
+	.qna_write_container tr{
+		margin: 20px;
+		border-collapse: collapse;
+		height: 50px;
+	}
+	.qna_write_container  td{
+		padding-left:10px;
+		width:400px;
+		border-collapse: collapse;
+	}
+	.qna_write_container  textarea{
+		height:100px;
+		resize: none;		
+		border: 1px solid #e8e8e8;
+		margin-bottom: 10px;
+	}
+	.qna_write_container input{
+		border:none;
+		height: 30px;
+		border-bottom: 1px solid #e8e8e8;
+	}
+	#btnTable{
+		border: none;
+		margin: 0 auto;
+		margin-top:10px;
+		padding:0;
+	}
+	.btn{
+		width:100px;
+		height:30px;
+		float:right;
+		background-color: #e8e8e8;
+		font-weight:normal;
+		color : black;
+	}
+	.btn:hover{
+		background-color: gray;
+		color:white;
+	}
+	#btnRow{
+		height: 30px;
+	}
