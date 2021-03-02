@@ -112,7 +112,38 @@
 			$("#menu_table tbody").children().siblings().first().remove();
 		});
 		
+		$(document).on("change","input[name=\"photo\"]", function() {
+			var ext = $(this).val().split('.').pop().toLowerCase();
+			// if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+			if($.inArray(ext, ['png','jpg','jpeg','jfif']) == -1) {
+		  	     alert("이미지 형식의 파일('png','jpg','jpeg','jfif')만 등록가능합니다");
+		  	     $(this).val(""); // input file 파일명을 다시 지워준다.
+		  	     return;
+		 	  }
+		});
+		
+		
+		$(document).on("change","input[name=\"menu_photo\"]", function() {
+			var ext = $(this).val().split('.').pop().toLowerCase();
+			var name = $(this).val().split('\\').pop().split('.')[0];
+			var txt = $(this).parent().siblings().children("input[name='menu_name']").val();
+			// if($.inArray(ext, ['gif','png','jpg','jpeg','doc','docx','xls','xlsx','hwp']) == -1) {
+			if($.inArray(ext, ['png','jpg','jpeg','jfif']) == -1) {
+		  	     alert("이미지 형식의 파일('png','jpg','jpeg','jfif')만 등록가능합니다");
+		  	     $(this).val(""); // input file 파일명을 다시 지워준다.
+		  	     return;
+		 	  }
+			if(name != txt) {
+				alert("메뉴이름과 동일한 파일명의 이미지를 등록해주세요");
+				 $(this).val(""); // input file 파일명을 다시 지워준다.
+				 return;
+			}
+		});
+		
+		
 	});
+
+	
 </script>
 </head>
 <body>
@@ -128,7 +159,7 @@
 					<table class="must">
 						<tr>
 							<th>식당 이름</th>
-							<td><input type="text" name="name" placeholder="식당 상호명을 입력해주세요" oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"></td>
+							<td><input type="text" name="name" placeholder="식당 상호명을 입력해주세요"></td>
 						</tr>
 						<tr>
 							<th>식당 대표 전화번호</th>
@@ -159,7 +190,9 @@
 						</tr>
 						<tr>
 							<th>식당 대표사진</th>
-							<td><input type="file" name="photo"></td>
+							<td>
+								<input type="file" name="photo"><br>
+							</td>
 						</tr>
 					</table>
 					<h2>식당 상세 정보(선택)</h2>
@@ -197,7 +230,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td><input type="text" name="menu_name" placeholder="메뉴 이름 입력" oninput="this.value = this.value.replace(/[^ㄱ-ㅎㅏ-ㅣ가-힣]/g, '').replace(/(\..*)\./g, '$1');"></td>
+								<td><input type="text" name="menu_name" placeholder="메뉴 이름 입력" ></td>
 								<td><input type="text" name="menu_price" placeholder="메뉴 가격 입력" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"></td>
 								<td><input type="file" name="menu_photo"></td>
 							</tr>
