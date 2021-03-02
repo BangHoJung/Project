@@ -8,6 +8,8 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/qna.css" media="screen and (min-width:1024px)">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -16,13 +18,26 @@
 			}
 		
 	});
+	$(function(){
+		$("#random").click(function(){
+			alert('추천 메뉴는 ooo입니다');
+		})
+		
+	})
 </script>
+<style type="text/css">
+		#qna_img{
+			width: 1000px;
+		}
+	</style>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+	<img id="qna_img" alt="" src="/img/qna_img.jpg">
 	<div id="board_container">
-		<h3>1:1문의하기</h3>
-		<table class="board">
+	
+		<h3>내가 한 질문</h3>
+		<table class="table">
 			<tr>
 				<th class="qno">글번호</th>
 				<th class="qna_title">제목</th>

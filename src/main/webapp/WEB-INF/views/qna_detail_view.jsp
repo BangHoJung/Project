@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../css/qna_detail.css" media="screen and (min-width:1024px)">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script type="text/javascript">
 	$(function(){
 		if(${requestScope.QnAupdateSuccess == true}){alert("수정 성공!!");}
@@ -63,6 +65,7 @@
 					<c:if test="${sessionScope.id == requestScope.qna.qna_member_id}">
 					<a href="/qnaUpdateView.do?qna_no=${requestScope.qna.qna_no}" class="btn">수정</a>
 					<a href="/qnaDeleteAction.do?qna_no=${requestScope.qna.qna_no }" class="btn">삭제</a>
+					<a href="qnaView.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">목록보기</a>
 					</c:if>
 				</td>
 			</tr>

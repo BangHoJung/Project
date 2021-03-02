@@ -8,6 +8,8 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../css/qna_update.css" media="screen and (min-width:1024px)">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <script type="text/javascript">
 	$(function(){
 		$("#random").click(function(){
@@ -19,10 +21,10 @@
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
 	<div class="qna_update_container">
-		<h3>Q&A 수정</h3>
+		<h3>Q&A수정</h3>
 		<form action="qnaUpdateAction.do" method="post">
 			<input type="hidden" name="qna_no" value="${requestScope.qna.qna_no }">
-			<table>
+			<table id="inputTable">
 				<tr>
 					<th>제목</th>
 					<td><input type="text" name="qna_title" value="${ requestScope.qna.qna_title }"></td>
@@ -36,13 +38,16 @@
 				<tr>
 					<th style="vertical-align: top;">내용</th><td><textarea name="qna_content" >${ requestScope.qna.qna_content }</textarea></td>
 				</tr>
-				<tr>
+				</table>
+				<table id="btnTable">
+				<tr id="btnRow">
 					<th><a href="qnaView.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">취소</a></th>
-					<td style="text-align: right;">
+					<td>
 						<button class="btn" type="submit">수정</button>
 					</td>
 				</tr>
-			</table>
+				</table>
+				
 		</form>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>

@@ -15,10 +15,13 @@
 		padding: 20px;
 		box-sizing: border-box;
 		margin-bottom:50px;
+		color:   #454545;
 	}
 	#introduce_title{
 		width: 600px;
 		margin: 0 auto;
+		margin-top:50px;
+		color:   #454545;
 	}
 	.notice_container{
 		width: 1000px;
@@ -44,6 +47,7 @@
 		width:600px;
 		margin:0 auto;
 		margin-top: 50px;
+		color:   #454545;
 	}
 	#guide_container h2{
 		margin:10px;
