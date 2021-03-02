@@ -6,12 +6,10 @@
  }
  
  .container {
- 	margin: 0 auto;
  	text-align:center;
- 	width:900px;
  	font-size:large;
  	margin-top:20px;
- 	padding:50px;
+ 	padding: 30px 0px;
  }
  
  #layout {

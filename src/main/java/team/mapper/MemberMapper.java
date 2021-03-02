@@ -77,4 +77,6 @@ public interface MemberMapper {
 	public int adminCanselReportReview(String review_id);
 
 	public int sendMessage(MessageDTO message);
+
+	public int updateMemberGrade(HashMap<String, Object> map);
 }
