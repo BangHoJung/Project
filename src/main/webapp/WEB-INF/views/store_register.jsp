@@ -164,9 +164,10 @@
 						<tr>
 							<th>식당 대표 전화번호</th>
 							<td>
-								<input type="text" name="tel1" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> - 
+								<!-- <input type="text" name="tel1" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> - 
 								<input type="text" name="tel2" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> -
-								<input type="text" name="tel3" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+								<input type="text" name="tel3" class="tel" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"> -->
+								<input type="text" name="tel" class="tel">
 							</td>
 						</tr>
 						<tr>
@@ -208,12 +209,13 @@
 						<tr>
 							<th>카테고리</th>
 							<td>
-								<select name="category">
+								<!-- <select name="category">
 									<option value="카테고리">카테고리</option>
 									<option value="한식">한식</option>
 									<option value="중식">중식</option>
 									<option value="일식">일식</option>
-								</select>
+								</select> -->
+								<input type="text" name="category" placeholder="카테고리 입력">
 							</td>
 						</tr>
 					</table>

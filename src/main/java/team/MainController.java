@@ -424,7 +424,8 @@ public class MainController {
 		String member_id = (String) session.getAttribute("id");
 //		String member_id = "admin";
 		String name = request.getParameter("name");
-		String tel = request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
+//		String tel = request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
+		String tel = request.getParameter("tel");
 		String addr = request.getParameter("addr");
 		String license = request.getParameter("license");
 		MultipartFile mf = mqRequest.getFile("file");
@@ -432,7 +433,7 @@ public class MainController {
 		if(time == null) time = " ";
 		String introduce = request.getParameter("introduce");
 		if(introduce == null) introduce = " ";
-		String category = request.getParameter("category");
+		String category = "#"+request.getParameter("category");
 		String store_id = name + "_" + license;
 		MultipartFile photo = mqRequest.getFile("photo");
 		
@@ -499,7 +500,6 @@ public class MainController {
 			String[] fileName = originalFileName.trim().split("[.]");
 			System.out.println("length : " + fileName.length);
 			System.out.println("이름 : " + fileName[0] + " , 자료형  : " + fileName[1]);
-			if(!fileName[1].trim().toLowerCase().equals("jpg") && !fileName[1].trim().toLowerCase().equals("png")) continue;
 			
 			File parentPath = new File(path);
 			if(!parentPath.exists()) parentPath.mkdirs();
