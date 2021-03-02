@@ -51,6 +51,7 @@ public class MainController {
 	}
 	@RequestMapping("storedetailView.do")
 	public String storeview(HttpServletRequest request) {
+/*
 		String store_id = request.getParameter("store_id");
 		System.out.println(store_id);
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
@@ -62,7 +63,7 @@ public class MainController {
 		request.setAttribute("menuList", menuList);
 		request.setAttribute("dto", dto);
 		System.out.println(dto.getStore_name());
-		
+	*/	
 		
 		
 		return "store_detail_view";
@@ -70,14 +71,15 @@ public class MainController {
 	
 	@RequestMapping("/")
 	public String main(HttpServletRequest request) {
-// 		StoreDTO dto = storeService.selectStoreDTO("한번해보자구_111111");
-// 		request.setAttribute("dto",dto);
-// 		System.out.println(dto.getStore_name());
-// 		System.out.println(dto.getStore_id());
-// 		System.out.println(dto.getStore_photo());
 		
+ 	//	StoreDTO dto = storeService.selectStoreDTO("테스트_2121");
+ 	//	request.setAttribute("dto",dto);
+ 	//	System.out.println(dto.getStore_name());
+	//	System.out.println(dto.getStore_id());
+ 	//	System.out.println(dto.getStore_photo());
 		
 		return "main";
+	
 	
 	}
 	@RequestMapping("/myPageView.do")
