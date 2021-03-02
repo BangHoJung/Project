@@ -50,9 +50,6 @@
 						<th>사업자등록증</th>
 						<td><p><a href="file_download.do?writer=${dto.store_id}&fileName=${dto.store_file}">${dto.store_file}</a></p></td>
 					</tr>
-				</table>
-				<h2>식당 상세 정보(선택)</h2>
-				<table class="add">
 					<tr>
 						<th>식당 대표 사진</th>
 						<td>
@@ -60,6 +57,10 @@
 							<span><img src="image_load.do?writer=${dto.store_id }&fileName=${dto.store_photo}"></span></p>
 						</td>
 					</tr>
+				</table>
+				<h2>식당 상세 정보(선택)</h2>
+				<table class="add">
+					
 					<tr>
 						<th>식당 영업시간</th>
 						<td><pre>${dto.store_time }</pre></td>
@@ -70,7 +71,7 @@
 					</tr>
 					<tr>
 						<th>카테고리</th>
-						<td><p>${dto.category_name}</p></td>
+						<td><p>${dto.store_category}</p></td>
 					</tr>
 				</table>
 			</div>
