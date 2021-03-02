@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,8 +26,8 @@
 					<tr>
 						<th>작성자</th>
 						<td>
-							<input type="hidden" name="ad_store_id" value="${sessionScope.ad_store_id }">
-							${sessionScope.ad_store_id }			
+							<input type="hidden" name="ad_store_id" value="${sessionScope.advertisement.ad_store_id }">
+							${sessionScope.advertisement.ad_store_id }		
 						</td>
 					</tr>
 					<tr id="content">

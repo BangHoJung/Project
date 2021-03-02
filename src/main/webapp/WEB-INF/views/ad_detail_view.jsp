@@ -25,21 +25,21 @@
 					<tr>
 						<th>작성자</th>
 						<td>
-							${requestScope.ad_store_id}			
+							${requestScope.advertisement.ad_store_id}			
 						</td>
 					</tr>
 					<tr>
 						<td>
 						<c:choose>
-							<c:when test="${requestSope.ad_statuss==1}">승인</c:when>
-							<c:otherwise>미승인</c:otherwise>
+							<c:when test="${requestSope.advertisement.ad_status==0}">미승인</c:when>
+							<c:otherwise>승인</c:otherwise>
 						</c:choose>
 						</td>
 					</tr>
 					<tr id="content">
 						<th style="vertical-align: top;">내용</th>
 						<td>
-							${requestScope.ad_comment }
+							${requestScope.advertisement.ad_content }
 						</td>
 					</tr>
 					
@@ -47,15 +47,12 @@
 					
 					
 					<tr>
-						<th><a href="javascript:history.back();" class="btn">목록보기</a></th>
+						<th><a href="AdListView.do" class="btn">목록보기</a></th>
 						<td style="text-align: right;">
-						<c:if test="${sessionScope.id == requestScope.ad_store_id}">
+						<c:if test="${sessionScope.id == requestScope.advertisement.ad_store_id}">
 							<a href="#" class="btn">수정</a>
-							<a href="deleteAd.do?bno=${requestScope.ad_bno }" class="btn">삭제</a>
+							<a href="deleteAd.do?bno=${requestScope.advertisement.ad_no }" class="btn">삭제</a>
 						</c:if>
-							<a href="#" class="btn">이전글</a>
-							<a href="#" class="btn">다음글</a>
-							
 						</td>
 					</tr>
 				</table>

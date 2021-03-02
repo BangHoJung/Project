@@ -7,6 +7,10 @@ public class AdDTO {
 	private String ad_content;
 	
 	
+	public AdDTO() {
+		super();
+	}
+
 	public AdDTO(int ad_no, String ad_store_id, int ad_status, String ad_content) {
 		super();
 		this.ad_no = ad_no;

@@ -799,12 +799,13 @@ public class MainController {
 	public String adView(HttpServletRequest request) {
 		//게시글 하나 읽음
 		//1. request에서 게시글 번호 읽어옴
-		int ad_no = 0;
+		int ad_no;
 		if(request.getParameter("ad_no") != null)
 			ad_no = Integer.parseInt(request.getParameter("ad_no"));
 		else
 			ad_no = (int)request.getAttribute("ad_no");
-		//1-1. 해당 게시글 조회수 증가
+		System.out.println(ad_no);
+		// 해당 게시글 조회수 증가
 		adService.addCount(ad_no);
 		//2. DB 해당 게시글 정보 읽어옴
 		AdDTO dto = adService.selectAd(ad_no);
@@ -815,7 +816,7 @@ public class MainController {
 		
 		return "ad_detail_view";
 	}
-   
+
    @RequestMapping("/AdWriteView.do")
 	public String adWriteView() {
 		return "ad_write_view";
@@ -825,7 +826,7 @@ public class MainController {
 	public String adWriteAction(HttpServletRequest request) {
 		int ad_no = adService.newAd_no();
 		String ad_store_id = request.getParameter("ad_store_id");
-		int ad_status = Integer.parseInt(request.getParameter("ad_status"));
+		int ad_status = 0;
 		String ad_content = request.getParameter("ad_content");
 		adService.insertAd(new AdDTO(ad_no, ad_store_id, ad_status, ad_content));
 		AdDTO dto = adService.selectAd(ad_no);
