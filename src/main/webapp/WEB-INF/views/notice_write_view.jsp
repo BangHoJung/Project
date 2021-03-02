@@ -9,7 +9,32 @@
 <title>공지사항 작성</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-</head>
+<style>
+@media (max-width:768px){
+.container{
+  width: 414px; 
+ }
+}
+form{
+ position: relative;
+}
+.table tr th{
+ width: 10%;
+}
+.notice_title{
+ width: 100%;
+ }
+.content{
+ width: 100%;
+ height: 500px;
+}
+.btn{
+ background-color: #FA0050;
+ color: white;
+ position: absolute;
+ right: 0;
+}
+</style>
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script>
 $(function () {
@@ -37,6 +62,7 @@ $("#btn_notice_write").click(function() {
  });
 });
 </script>
+</head>
 <body>
 <c:if test="${sessionScope.grade==2}">
 <jsp:include page="/templete/mypage_header.jsp"></jsp:include>
@@ -44,13 +70,13 @@ $("#btn_notice_write").click(function() {
 <jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
 <div class="container">
 <form id="notice_write_frm" method="get">
- <table class="table talbe bordered">
+ <table class="table table bordered">
     <tr>
       <th>
        제목
       </th>
       <td>
-        <input type="text" name="title" id="title">
+        <input class="notice_title" type="text" name="title" id="title">
       </td>
     </tr>
     <tr>
@@ -58,11 +84,11 @@ $("#btn_notice_write").click(function() {
        내용
       </th>
        <td>
-          <textarea rows="30" cols="100" name="content" id="content" style="resize: none;"></textarea>
+          <textarea class="content" name="content" id="content" style="resize: none;"></textarea>
       </td>
     </tr>
  </table>
- <button id="btn_notice_write" type="button">작성하기</button>
+ <button id="btn_notice_write" type="button" class="btn">작성하기</button>
  </form>
 </div>
 </div>

@@ -10,6 +10,12 @@
 <title>상세 신고내용</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<style>
+.btn{
+ background-color: #FA0050;
+ color: white;
+}
+</style>
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script>
 $(function () {
@@ -81,7 +87,7 @@ if(${requestScope.error==true}){alert("예상치 못한 오류가 발생했습�
 <b>아이디</b>&ensp;${requestScope.report.review_member_id}<br>
 <hr>
 <div style="white-space:pre-wrap;" class="content_box">
-<img alt="" style="width: 100%" src="review_image_load.do?review_store_id=${requestScope.report.review_store_id}&review_member_id=${requestScope.report.review_member_id}&fileName=${requestScope.report.review_photo}">
+<img alt="" style="width: 50%" src="review_image_load.do?review_store_id=${requestScope.report.review_store_id}&review_member_id=${requestScope.report.review_member_id}&fileName=${requestScope.report.review_photo}">
 <c:out value="${requestScope.report.review_content}"/>
 </div>
 <hr>

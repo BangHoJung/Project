@@ -8,10 +8,38 @@
 <title>비밀번호 변경하기</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<style>
+
+ #pass_update_frm{
+  margin-top: 20%;
+  width: 275px;
+  position: relative;
+ }
+  .container input{
+   padding-bottom: 5px;
+  }
+ .container span{
+  display: inline-block;
+  margin-right: 10px;
+  font-size: 1vw;
+ }
+ .btn{
+  background-color: #FA0050;
+  color: white;
+  padding: 4px 12px;
+  position: absolute;
+  right: 0;
+ }
+</style>
 </head>
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script>
 $(function () {
+	$("#passCheck").keydown(function(e) {
+		if(e.keyCode==13){
+			$("#btn_pass_update_check").click();
+		}
+	});
 	$("#pass").keyup(function() {
 		var length = $("#pass").val().trim().length
 		if(length<6){
@@ -66,11 +94,11 @@ $(function () {
 <div class="container">
   <form id="pass_update_frm" method="post">
     <input type="hidden" value="${sessionScope.id}" name="id" readonly>
-    새 비밀번호<input type="password" name="pass" maxlength="20" id="pass">
+    새 비밀번호&ensp;&ensp;&ensp;<input type="password" name="pass" maxlength="20" id="pass">
     <p id="new_pass_form_check"></p> 
-    비밀번호 확인<input type="password" name="passCheck" maxlength="20" id="passCheck">
+    비밀번호 확인&ensp;<input type="password" name="passCheck" maxlength="20" id="passCheck">
     <p id="new_pass_check_form_check"></p> 
-    <button type="button" id="btn_pass_update">확인</button>
+   <button class="btn" type="button" id="btn_pass_update">확인</button>
   </form>
 </div>
 </div>
