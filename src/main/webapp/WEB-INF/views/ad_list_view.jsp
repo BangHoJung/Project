@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>광고 신청 목록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../css/ad_list_view.css">
+<!-- <link rel="stylesheet" href="../css/ad_list_view.css"> -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <style type="text/css">
@@ -19,6 +19,14 @@
 	table{
 		width:700px;
 		padding: 20px;
+		border: 1px solid black; 
+	}
+	tr{
+		height: 50px;
+	}
+	th, td{
+		width: 150px;
+		height: 50px;
 		border: 1px solid black; 
 	}
 </style>
@@ -35,16 +43,23 @@
 			<tr>
 				<th>글번호</th>
 				<th>작성자</th>
+				<th>내용</th>
+				<th>승인여부</th>
 			</tr>
-			<c:if test="${requestScope.list ==null}">
-				<script>
-					location.href="AdListView.do?pageNo=1";
-				</script>
-			</c:if>
-			<c:forEach var="dto" items="${sessionScope.list }">
-				<td>${dto.ad_no}</td>
-				<td>${dto.ad_store_id}</td>
-			</c:forEach>
+			<tr>
+	<!--		<c:if test="${requestScope.list ==null}">
+					<script>
+						location.href="AdListView.do?pageNo=1";
+					</script>
+				</c:if>  -->
+				<c:forEach var="dto" items="${list }">
+					<td class="ad_no">${dto.ad_no}</td>
+					<td class="ad_store_id">${dto.ad_store_id}</td>
+					<td class="ad_content"><a href="AdView.do?ad_no=${dto.ad_no}">
+						${dto.ad_content }</a></td>
+					<td class="ad_status">${dto.ad_status }</td>
+				</c:forEach>
+			</tr>
 			<tr>
 			<td colspan="7">
 					<div class="page_bar">
@@ -59,7 +74,7 @@
 						<c:if test="${pagging.nextPageGroup }">
 							<a href="AdListView.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
 						</c:if>
-						<a href="AdWriteView.do" class="btn_writer" >글쓰기</a>
+						<a href="AdWriteView.do" class="btn_writer" style="text-align: right;">글쓰기</a>
 					</div>
 			</tr>
 		</table>
