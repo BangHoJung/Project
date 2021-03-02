@@ -513,6 +513,7 @@ public class MainController {
 				e.printStackTrace();
 			}
 		}
+		memberService.updateMemberGrade(member_id,1);
 		
 		return "main";
 	}
@@ -613,13 +614,11 @@ public class MainController {
 			memberService.registerReview(new ReviewDTO(review_id, review_member_id, review_store_id, review_content, review_score_service, review_score_price, review_menu_no, review_score_menu, photoFile.getName()));
 			return "main";
 		} catch(Exception e) {
-			if(e.getMessage().equals("exist")) {
-				try {
-					response.setContentType("text/html;charset=utf-8");
-					response.getWriter().write(("<script>alert('이미 후기를 등록한 메뉴입니다.다른메뉴를 선택해주세요');history.back();</script>"));
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+			try {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("<script>alert('이미 후기를 등록한 메뉴입니다.다른메뉴를 선택해주세요');history.back();</script>");
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
 			return null;
 		}

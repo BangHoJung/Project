@@ -194,5 +194,13 @@ public class MemberService {
 	public int sendMessage(MessageDTO message) {
 		return mapper.sendMessage(message);
 	}
+
+	public int updateMemberGrade(String member_id, int grade) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	    map.put("member_id",member_id);
+	    map.put("grade",grade);
+		return mapper.updateMemberGrade(map);
+		
+	}
 	
 }
