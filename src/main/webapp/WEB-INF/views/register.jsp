@@ -246,10 +246,9 @@ $(function () {
 			<p id="tel_form_check"></p>
 			<span>주소</span><br><input type="text" id="postcode" placeholder="우편번호" readonly>
 			<input type="button" onclick="getPostcode()"value="우편번호 찾기" class="btn" id="getPost"><br> 
-			<input type="text" name="roadAddress" id="roadAddress" class="roadAddress" placeholder="도로명주소" size="60"><br>
+			<input type="text" name="roadAddress" id="roadAddress" class="roadAddress" placeholder="도로명주소" size="60" readonly><br>
 			<input type="hidden" id="jibunAddress" placeholder="지번주소" size="60"> 
 			<span id="guide" style="color: #999; display: none"></span> 
-			<input type="text" name="detailAddress" id="detailAddress" class="detailAddress" placeholder="상세주소" size="60"><br>
 			<input type="hidden" id="extraAddress" placeholder="참고항목"size="60"> 
 			<input type="hidden" id="engAddress" placeholder="영문주소" size="60"><br> 
 				<b><span>선호하는 음식 카테고리</span></b><br>

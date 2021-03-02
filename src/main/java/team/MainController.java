@@ -18,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.servlet.view.RedirectView;
 
 import team.dto.AdDTO;
 import team.dto.MemberAddressDTO;
@@ -327,7 +326,7 @@ public class MainController {
 	public String registerView() {
 		return "register";
 	}
-	
+	//2021-02-29 수정
 	@RequestMapping("/registerAction.do")
 	public String registerAction(HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
@@ -341,7 +340,6 @@ public class MainController {
 		 tel += request.getParameter("tel3");
 		 System.out.println(tel);
 		 String address = request.getParameter("roadAddress");
-		 address +=" "+request.getParameter("detailAddress");
 		 System.out.println(address);
          String category="";
          String [] arr = request.getParameterValues("category");
