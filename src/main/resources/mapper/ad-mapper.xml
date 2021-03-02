@@ -5,16 +5,15 @@
 <mapper namespace="team.mapper.AdMapper">
 	<select id="selectAdList" parameterType="int" resultType="team.dto.AdDTO">
 		select * from 
-		(select ceil(rownum / 10) as pagenum, AD_NO, ADT_STORE_ID
-		from advertisement order by AD_NO desc) 
+		(select ceil(rownum / 10) as pagenum, AD_NO, AD_STORE_ID from advertisement order by AD_NO desc) 
 		where pagenum = #{page}
 	</select>
 	<select id="selectCount" resultType="int">
 		select count(*) from advertisement
 	</select>
-<!-- 	<update id="addCount" parameterType="int">
+	<update id="addCount" parameterType="int">
 		update advertisement set AD_NO = AD_NO+1 where ad_no = #{ad_no}
-	</update>	 -->
+	</update>	
 	<select id="selectAd" parameterType="int" resultType="team.dto.AdDTO">
 		select * from advertisement where AD_NO = #{ad_no}
 	</select>
@@ -22,6 +21,7 @@
 		select ad_no_seq.nextval from dual
 	</select>
 	<insert id="insertAd" parameterType="team.dto.AdDTO">
-		insert into advertisement(AD_NO,ad_store_id,ad_status,ad_content) values(#{ad_no},#{ad_store_id},#{ad_status},#{ad_comment})
+		insert into advertisement(AD_NO,ad_store_id,ad_status,ad_content) 
+		values(#{ad_no},#{ad_store_id},#{ad_status},#{ad_content})
 	</insert>
 </mapper>
