@@ -10,6 +10,15 @@
 <title>신고확인 리스트</title>
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<style>
+.message_items a{
+	color: black;
+	text-decoration: none;
+}
+.page_bar{
+	text-align: center;
+}
+</style>
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script>
  $(function() {
@@ -32,7 +41,6 @@
  </c:if>
     <c:forEach var="list" items="${requestScope.report}">
         <tr class="message_items">
-           
            <td><a href="reviewReportDetailView.do?review_id=${list.review_id}&pageNo=${page.currentPage}">신고된 ${list.review_member_id}님의 리뷰</a></td>
         </tr>
     </c:forEach>

@@ -1190,9 +1190,8 @@ public String adminCanselReportReview(HttpServletRequest request,HttpServletResp
 	String review_id=request.getParameter("review_id");
 	int pageNo = Integer.parseInt(request.getParameter("pageNo"));
 	String review_store_id=request.getParameter("review_store_id");
-	System.out.println(review_store_id);
-	String [] arr = review_store_id.split("_");
-	String message_member_id=arr[0];
+	StoreDTO dto=storeService.selectStoreDTO(review_store_id);
+	String message_member_id=dto.getStore_member_id();
 	System.out.println(message_member_id);
 	String message_title="신고하신 리뷰는 운영방침을 위반하지않아 삭제처리는 불가합니다.";
 	String message_content="신고하신 리뷰를 저희가 자세히 검토한 결과\n운영방침을 위반하지않아 삭제처리를 하지 않는것으로 결정했습니다.\n궁금하신 사항이 있으시면 QnA게시판에 글쓰기를 통해 문의해주세요\n"
@@ -1241,7 +1240,7 @@ public String adminCanselReportReview(HttpServletRequest request,HttpServletResp
 		String type = fileName.substring(fileName.lastIndexOf(".")+1);
 		
 		response.setContentType("image/"+type);
-		File path = new File("C:\\fileupload\\"+review_store_id+"\\"+review_member_id+"\\"+fileName);
+		File path = new File("C:\\fileupload\\"+review_member_id+"\\"+review_store_id+"\\"+fileName);
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ServletOutputStream sos = response.getOutputStream();
