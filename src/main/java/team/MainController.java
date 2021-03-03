@@ -68,6 +68,21 @@ public class MainController {
 	
 	@RequestMapping("/")
 	public String main(HttpServletRequest request) {
+		List<StoreDTO> monthScoreList = storeService.selectStoreListBestScore(30);
+		List<StoreDTO> weekScoreList = storeService.selectStoreListBestScore(7);
+		
+		List<StoreDTO> monthReviewCountList = storeService.selectStoreListBestReviewCount(30);
+		List<StoreDTO> weekReviewCountList = storeService.selectStoreListBestReviewCount(7);
+		
+		System.out.println(monthScoreList);
+		System.out.println(weekScoreList);
+		System.out.println(monthReviewCountList);
+		System.out.println(weekReviewCountList);
+		
+		request.setAttribute("monthScoreList", monthScoreList);
+		request.setAttribute("weekScoreList", weekScoreList);
+		request.setAttribute("monthReviewCountList", monthReviewCountList);
+		request.setAttribute("weekReviewCountList", weekReviewCountList);
 		
 		
  		StoreDTO dto = storeService.selectStoreDTO("곰타코_1");
@@ -541,7 +556,7 @@ public class MainController {
 		String content="식당 등록 신청 건에 대하여 승인요청이 완료되었습니다.마이페이지에서 메뉴 등록 신청서를 작성해주시기 바랍니다.\n";
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		// 식당 등록 신청한 사용자에게 승인결과 전송
-//		memberService.sendMessage(dto.getStore_member_id(),title,content);
+		memberService.sendMessage(new MessageDTO(dto.getStore_member_id(),title,content));
 		int count = storeService.updateStoreCode(store_id,1);
 		
 		return "main";
@@ -554,7 +569,7 @@ public class MainController {
 		String content="식당 등록 신청 건에 대하여 승인요청이 거절되었습니다.\n자세한 내용을 원하시면 문의사항에 등록해주시기 바랍니다.";
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		// 식당 등록 신청한 사용자에게 승인결과 전송
-//		memberService.sendMessage(dto.getStore_member_id(),title,content);
+		memberService.sendMessage(new MessageDTO(dto.getStore_member_id(),title,content));
 		int count = storeService.deleteStoreDTO(store_id);
 		count = storeService.deleteMenu(store_id);
 		

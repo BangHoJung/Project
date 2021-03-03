@@ -74,4 +74,12 @@ public class StoreService {
 	public int deleteMenu(String store_id) {
 		return storeMapper.deleteMenu(store_id);
 	}
+
+	public List<StoreDTO> selectStoreListBestScore(int day) {
+		return storeMapper.selectStoreListBestScore(day);
+	}
+	
+	public List<StoreDTO> selectStoreListBestReviewCount(int day) {
+		return storeMapper.selectStoreListBestReviewCount(day);
+	}
 }
