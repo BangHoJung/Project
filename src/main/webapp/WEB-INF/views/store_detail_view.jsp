@@ -115,7 +115,8 @@ width: 100px;
 }
 .menu{
 padding: 2%;
-width: 100%;
+width: 200px;
+height: 150px;
 }
 .menulist{
 display:flex;
@@ -124,7 +125,15 @@ padding:0px;
 width: 300px;
 left: 20%;
 }
+.addr, .tel, .menue, .Food, .time{
+width: 100px;
 
+}
+.Sum{
+display: flex;
+flex-direction: row;
+margin: 10px 0px;
+}
 </style>
 </head>
 <body>
@@ -144,114 +153,63 @@ left: 20%;
 </div>
 
 </div>
-<div class="row">
+<div class="row" style="width:1000px;">
 <div class="col-md-12" style="text-align: right;">
 
-  <span style="color:#FFE400; font-size: 30px;" > ★ </span> 
+  <span style="color:#FA0050; font-size: 30px;" > ★ </span> 
   <span style="font-size: 25px;">4.5점</span>   <span style="font-size: 25px;"> ${requestScope.dto.store_name}</span>
 
 </div>
  </div>
  
-<div class="row midbody" style="margin: 2% 0px;background-color:#F6F6F6 ; border-radius: 4px; display: flex; justify-content: center; text-align: center;">
-<div class="col-md-12 main" style="padding: 2%;">
-<table>
-<tr>
-<th>
- 주소
- </th>
- <td colspan="2">
-  	${requestScope.dto.store_addr}
- </td>
- </tr>
- 
- <tr>
- <th>
- 전화번호 
- </th>	
- <td colspan="2">
- ${requestScope.dto.store_tel}
- </td>
- </tr>
- <tr>
- <th>
- 음식  종류	
- </th>
- <td colspan="2">  ${requestScope.dto.store_category}</td>
- 
- </tr>
- 
- <tr>
- <th>
- 주차 
- </th>
- <td colspan="2">
- 	무료주차 가능  
-</td>
- </tr>
- <tr>
- <th>
- 영업시간
-  	</th>
-  	<td colspan="2">
-  	 ${requestScope.dto.store_time}
-</td>
- </tr>
- 
-<tr>
-<th>
- 휴일
- </th>
- <td>
- 	토, 일 
-</td>
- </tr>
+<div class="row midbody" style="margin: 2% 0px;background-color:#F6F6F6 ; border-radius: 4px;  ">
+<div class="col-md-12 main" style="padding: 2%;  ">
 
- <tr>
- <th>
- 메뉴 
- </th>
+<div class="Sum">
+ <div class="addr">주소 </div><div>${requestScope.dto.store_addr}</div>
+</div>
+
+
+<div class="Sum">
+<div class="tel">전화번호</div> 
+ <div> ${requestScope.dto.store_tel}</div>
+</div>
+<div class="Sum">
+<div class="Food"> 음식  종류</div>	
+<div>
+${requestScope.dto.store_category}
+ </div>
+ </div>
+ <div class="Sum">
+ <div class="time"> 영업시간</div>
+  <div> ${requestScope.dto.store_time}</div>
+</div>
+<div class="Sum">
+<div class="menue"> 메뉴</div> 
+<div>
  <c:forEach var="menu" items="${requestScope.menuList}">
-<td>
-  ${menu.menu_name}    
-</td>
+<div>  ${menu.menu_name}   
+ ---------------------------------------------------------------------------------------------------------------------------------------------
+  ${menu.menu_price}</div>
+<br>
  </c:forEach>
- 
-<c:forEach var="menu" items="${requestScope.menuList}">
-<td>
-  ${menu.menu_price}    
-</td>
- </c:forEach>
+ </div>
+</div>
 
-</tr>
-<tr>
- <th>
-
- </th>
-<td>
-해물 로스
-</td>
-<td>
-fdsfsdffsd
-</td>
-
-</tr>
-
-</table>
 </div>
 </div>
 
-<div class="row midbody">
+<div class="row midbody" style="width:1000px;">
 <div class="col-md-12 menulist">
+
 <c:forEach var="menu" items="${menuList}">
-						<img src="menu_image_load.do?writer=${dto.store_id}&fileName=${menu.menu_photo}" class="menu">
-			</c:forEach>
-
+<img src="image_load.do?writer=${dto.store_id}&fileName=${menu.menu_photo}&divide=menu" class="menu" onerror="this.src='img/img_null.png'">
+</c:forEach>
 
 </div>
 </div>
 
-<div class="row midbody" style="margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px; display: ">
+<div class="row midbody" style="margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px;">
 <div class="col-md-12" >
 
 
@@ -262,11 +220,11 @@ fdsfsdffsd
 
 
 <div class="row  midbody" style="margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px; display:flex; align-items: center;">
-  <div class="col-md-4 main" style="font-size: 20px; font-weight: bold;padding: 1%; " ><p style="margin: 0px;">리뷰</p></div>
-  <div class="col-md-4 col-md-offset-4 "  style="text-align: right;"> <span> 전체보기 좋아요보기 </span> <button src="reviewRegisterView.do?store_id=${dto.store_id}" style=" background-color:  #FA0050; color: white; border: none; padding: 1%; border-radius: 5px;"> 리뷰쓰기</button></div>
+  <div class="col-md-4 main" style="font-size: 20px; font-weight: bold;padding: 1%; " ><p style="margin: 0px;">리뷰</p></div>  <!--  store_id=${dto.store_id}-->
+  <div class="col-md-4 col-md-offset-4 "  style="text-align: right;"> <span> 전체보기 | 좋아요보기 </span> <a href="reviewRegisterView.do?store_id=${dto.store_id}" style=" background-color:  #FA0050; color: white; width:100px; border: none; padding: 1%; border-radius: 5px;"> 리뷰쓰기</a></div>
 </div>
 
-<div class="row main " style="margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px; display:flex; align-items: center; padding: 1%;">
+<div class="row main " style="margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;">
 <div class="col-md-12 main" style="text-align: right; "> 
 <p > 날짜 너주세여  </p>
 <div class="col-md-2 main" style=" text-align: center;">
