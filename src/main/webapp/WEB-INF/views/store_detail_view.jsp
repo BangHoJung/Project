@@ -50,9 +50,121 @@
                 }
            
 		});
+	    	$("#btn_parking").click(function() {
+			
+	    	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+	    	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+	    	var mapContainerParking = document.getElementById('map_parking'), // 지도를 표시할 div 
+	    	    mapOption = {
+	    	        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+	    	        level: 3 // 지도의 확대 레벨
+	    	    };  
+
+	    	// 지도를 생성합니다    
+	    	var map_parking = new kakao.maps.Map(mapContainerParking, mapOption); 
+
+	    	// 장소 검색 객체를 생성합니다
+	    	var ps = new kakao.maps.services.Places(); 
+
+	    	// 키워드로 장소를 검색합니다
+	    	ps.keywordSearch('${dto.store_addr} 주차장', placesSearchCB); 
+
+	    // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+     function placesSearchCB (data, status, pagination) {
+          if (status === kakao.maps.services.Status.OK) {
+
+           // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+           // LatLngBounds 객체에 좌표를 추가합니다
+           var bounds = new kakao.maps.LatLngBounds();
+
+          for (var i=0; i<data.length; i++) {
+            displayMarker(data[i]);    
+            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+          }       
+ 
+        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+        map_parking.setBounds(bounds);
+       } 
+      }
+
+   // 지도에 마커를 표시하는 함수입니다
+   function displayMarker(place) {
+	    
+    // 마커를 생성하고 지도에 표시합니다
+   	 var marker = new kakao.maps.Marker({
+        map: map_parking,
+        position: new kakao.maps.LatLng(place.y, place.x) 
+    	});
+
+    // 마커에 클릭이벤트를 등록합니다
+    	kakao.maps.event.addListener(marker, 'click', function() {
+        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+        infowindow.open(map_parking, marker);
+   		 });
+   	}
+	   
+});
+	    	$("#btn_cafe").click(function() {
+		    	//새로운거
+		    	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+		    	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+
+		    	var mapContainerParking = document.getElementById('map_parking'), // 지도를 표시할 div 
+		    	    mapOption = {
+		    	        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+		    	        level: 3 // 지도의 확대 레벨
+		    	    };  
+
+		    	// 지도를 생성합니다    
+		    	var map_parking = new kakao.maps.Map(mapContainerParking, mapOption); 
+
+		    	// 장소 검색 객체를 생성합니다
+		    	var ps = new kakao.maps.services.Places(); 
+
+		    	// 키워드로 장소를 검색합니다
+		    	ps.keywordSearch('${dto.store_addr} 카페', placesSearchCB); 
+
+		    // 키워드 검색 완료 시 호출되는 콜백함수 입니다
+	     function placesSearchCB (data, status, pagination) {
+	          if (status === kakao.maps.services.Status.OK) {
+
+	           // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+	           // LatLngBounds 객체에 좌표를 추가합니다
+	           var bounds = new kakao.maps.LatLngBounds();
+
+	          for (var i=0; i<data.length; i++) {
+	            displayMarker(data[i]);    
+	            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+	          }       
+	 
+	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+	        map_parking.setBounds(bounds);
+	       } 
+	      }
+
+	   // 지도에 마커를 표시하는 함수입니다
+	   function displayMarker(place) {
+		    
+	    // 마커를 생성하고 지도에 표시합니다
+	   	 var marker = new kakao.maps.Marker({
+	        map: map_parking,
+	        position: new kakao.maps.LatLng(place.y, place.x) 
+	    	});
+
+	    // 마커에 클릭이벤트를 등록합니다
+	    	kakao.maps.event.addListener(marker, 'click', function() {
+	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+	        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+	        infowindow.open(map_parking, marker);
+	   		 });
+	   	}
+		   
+	});
+	
 	});
     
-
 /*
     function sample5_execDaumPostcode() {
         new daum.Postcode({
@@ -143,7 +255,7 @@ margin: 10px 0px;
 
 <div class="row midbody">
 <div class="col-md-4 main ">
-<img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}" class="img">
+<img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}&divide=store" class="img">
 </div>
 <div class="col-md-4 main  ">
 <img alt="" src="img/bakery/bakery2.jpg" class="img">
@@ -162,7 +274,7 @@ margin: 10px 0px;
 </div>
  </div>
  
-<div class="row midbody" style="margin: 2% 0px;background-color:#F6F6F6 ; border-radius: 4px;  ">
+<div class="row midbody" style="margin: 2% 0px;background-color:#F6F6F6 ; border-radius: 4px; ">
 <div class="col-md-12 main" style="padding: 2%;  ">
 
 <div class="Sum">
@@ -189,7 +301,7 @@ ${requestScope.dto.store_category}
 <div>
  <c:forEach var="menu" items="${requestScope.menuList}">
 <div>  ${menu.menu_name}   
- ---------------------------------------------------------------------------------------------------------------------------------------------
+ ---------------------------------------------------------------------------------------------------------------------------------------
   ${menu.menu_price}</div>
 <br>
  </c:forEach>
@@ -232,7 +344,31 @@ ${requestScope.dto.store_category}
 <p>닉네임</p>
 </div>
 <div class="col-md-9 col-md-offset-1" style="border: 1px solid #EAEAEA; text-align: left;">
-<p>맛있습니다</p>
+
+
+<table>
+<c:forEach var="review" items="${reviewList}">
+
+ <tr>
+  
+  <td >
+  <c:if test="${sessionScope.id==requestScope.dto.store_member_id}"> 43554<button>신고하기</button> </c:if>
+   ${review.review_member_id} </td>
+  
+ </tr>
+
+ <tr>
+   <td>댓글내용</td>
+   <td></td>
+   <td>
+   <c:if test="${review.review_photo != null}">
+   <img src="review_image_load.do?review_member_id=${review.review_member_id}&review_store_id=${review.review_store_id}&fileName=${review.review_photo}">
+   </c:if>
+   ${review.review_content}
+   </td>
+ </tr>
+</c:forEach>
+</table>
 </div>
 </div>
 </div>
@@ -241,7 +377,8 @@ ${requestScope.dto.store_category}
 
 <div class="row midbody">
 <div class="col-md-12 main">
-주변카페,주차장
+<button type="button" id="btn_parking">주차장</button><button type="button" id="btn_cafe">카페</button>
+<div id="map_parking" style="width:100%;height:350px;"></div>
 </div>
 </div>
 

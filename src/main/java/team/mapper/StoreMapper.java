@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import team.dto.ReviewDTO;
 import team.dto.StoreDTO;
 import team.dto.StoreMenuDTO;
 
@@ -36,5 +37,7 @@ public interface StoreMapper {
 	List<StoreDTO> selectStoreListBestScore(int day);
 
 	List<StoreDTO> selectStoreListBestReviewCount(int day);
+	
+	List<ReviewDTO> selectStoreReviewList(String store_id);
 	
 }

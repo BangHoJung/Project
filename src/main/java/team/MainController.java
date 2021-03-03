@@ -54,6 +54,13 @@ public class MainController {
 		String store_id = request.getParameter("store_id");
 		System.out.println(store_id);
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
+		List<ReviewDTO> reviewList = storeService.selectStoreReviewList(store_id);
+	    for(int i=0;i<reviewList.size();i++) {
+	    	System.out.println(reviewList.get(i).toString());
+	      
+	    }
+		
+		
 		
 		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
 		System.out.println(menuList.toString());
@@ -61,6 +68,7 @@ public class MainController {
 		System.out.println(store_tel);
 		request.setAttribute("menuList", menuList);
 		request.setAttribute("dto", dto);
+		request.setAttribute("reviewList",reviewList);
 		System.out.println(dto.getStore_name());
 		
 		return "store_detail_view";
@@ -73,7 +81,6 @@ public class MainController {
 		
 		List<StoreDTO> monthReviewCountList = storeService.selectStoreListBestReviewCount(30);
 		List<StoreDTO> weekReviewCountList = storeService.selectStoreListBestReviewCount(7);
-		
 		System.out.println(monthScoreList);
 		System.out.println(weekScoreList);
 		System.out.println(monthReviewCountList);

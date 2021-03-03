@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import team.dto.ReviewDTO;
 import team.dto.StoreDTO;
 import team.dto.StoreMenuDTO;
 import team.mapper.StoreMapper;
@@ -74,7 +75,9 @@ public class StoreService {
 	public int deleteMenu(String store_id) {
 		return storeMapper.deleteMenu(store_id);
 	}
-
+public List<ReviewDTO> selectStoreReviewList(String store_id) {
+		return storeMapper.selectStoreReviewList(store_id);
+}
 	public List<StoreDTO> selectStoreListBestScore(int day) {
 		return storeMapper.selectStoreListBestScore(day);
 	}
