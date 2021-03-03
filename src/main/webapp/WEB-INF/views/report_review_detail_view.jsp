@@ -26,7 +26,7 @@ if(${requestScope.error==true}){alert("예상치 못한 오류가 발생했습�
 	});
 	 $("#btn_delete").click(function() {       
 	         if(confirm("정보를 삭제하시겠습니까?")==true){
-                 var data="review_id=${requestScope.report.review_id}&pageNo=${requestScope.pageNo}&review_member_id=${requestScope.report.review_member_id}";              
+                 var data="review_no=${requestScope.report.review_no}&pageNo=${requestScope.pageNo}&review_member_id=${requestScope.report.review_member_id}";              
 	        	 $.ajax({
             	  url : "adminDeleteReportReview.do",
             	  data : data,
@@ -51,7 +51,7 @@ if(${requestScope.error==true}){alert("예상치 못한 오류가 발생했습�
 		 });
 	 $("#btn_cansel").click(function() {
 		 if(confirm("신고를 철회하시겠습니까?")==true){
-			  var data="review_id=${requestScope.report.review_id}&pageNo=${requestScope.pageNo}&review_store_id=${requestScope.report.review_store_id}";              
+			  var data="review_no=${requestScope.report.review_no}&pageNo=${requestScope.pageNo}&review_store_id=${requestScope.report.review_store_id}";              
 	        	 $.ajax({
          	  url : "adminCanselReportReview.do",
          	  data : data,

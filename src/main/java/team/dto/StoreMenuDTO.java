@@ -9,6 +9,7 @@ public class StoreMenuDTO {
 	private String menu_name;
 	private int menu_price;
 	private String menu_photo;
+	private double menu_score;
 	
 	
 	public StoreMenuDTO() {
@@ -31,7 +32,20 @@ public class StoreMenuDTO {
 		this.menu_price = menu_price;
 		this.menu_photo = menu_photo;
 	}
+	
+	
 
+	public StoreMenuDTO(int menu_no, String menu_store_id, String menu_name, int menu_price, String menu_photo,
+			double menu_score) {
+		super();
+		this.menu_no = menu_no;
+		this.menu_store_id = menu_store_id;
+		this.menu_name = menu_name;
+		this.menu_price = menu_price;
+		this.menu_photo = menu_photo;
+		this.menu_score = menu_score;
+	}
+	
 	public int getMenu_id() {
 		return menu_no;
 	}

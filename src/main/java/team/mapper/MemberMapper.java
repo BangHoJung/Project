@@ -70,11 +70,11 @@ public interface MemberMapper {
 
 	public int adminSelectReportCount();
 
-	public ReviewDTO adminSelectReport(String review_id);
+	public ReviewDTO adminSelectReport(int review_no);
 
-	public int adminDeleteReportReview(String review_id);
+	public int adminDeleteReportReview(int review_no);
 
-	public int adminCanselReportReview(String review_id);
+	public int adminCanselReportReview(int review_no);
 
 	public int sendMessage(MessageDTO message);
 

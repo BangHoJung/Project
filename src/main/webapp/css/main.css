@@ -40,6 +40,17 @@
 		color: gray;
 	}
 	
+	#theme > a {
+		float:right;
+		font-size:20px;
+		text-decoration: none;
+	}
+	
+	#theme > a:hover {
+		font-size:22px;
+		color:#fa0050;
+	}
+	
 	.slider {
 		margin-bottom: 30px;
 	}
@@ -57,4 +68,8 @@
 	.bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
 		bottom: 20px;
 		width: 100%;
+	}
+	
+	.figure {
+		margin-bottom:40px;
 	}

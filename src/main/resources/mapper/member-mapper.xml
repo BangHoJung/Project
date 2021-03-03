@@ -76,19 +76,19 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	  update notice set notice_title=#{notice_title},notice_content=#{notice_content},notice_date=sysdate where notice_no=#{notice_no}
 	</update>
 	<select id="adminSelectReportList" parameterType="int" resultType="review">
-	  select review_id,review_member_id,review_store_id,review_content,review_date,review_score_service,review_score_price,review_score_menu,review_photo,review_report from (select ceil(rownum/10) as page,review_id,review_member_id,review_store_id,review_content,review_date,review_score_service,review_score_price,review_score_menu,review_photo,review_report from (select * from review where review_report=1 order by review_date desc)) where page=#{pageNo}
+	  select review_no,review_member_id,review_store_id,review_content,review_date,review_score_service,review_score_price,review_score_menu,review_photo,review_report from (select ceil(rownum/10) as page,review_no,review_member_id,review_store_id,review_content,review_date,review_score_service,review_score_price,review_score_menu,review_photo,review_report from (select * from review where review_report=1 order by review_date desc)) where page=#{pageNo}
 	</select>
 	<select id="adminSelectReportCount" resultType="int" >
 	 select count(*) from review where review_report=1
 	</select>
 	<select id="adminSelectReport" parameterType="String" resultType="review">
-	 select review_id,review_member_id,review_store_id,review_content,review_photo from review where review_id=#{review_id}
+	 select review_no,review_member_id,review_store_id,review_content,review_photo from review where review_no=#{review_no}
 	</select>
 	<delete id="adminDeleteReportReview" parameterType="String">
-	delete from review where review_id=#{review_id}
+	delete from review where review_no=#{review_no}
 	</delete>
 	<update id="adminCanselReportReview" parameterType="String">
-	  update review set review_report=0 where review_id=#{review_id}
+	  update review set review_report=0 where review_no=#{review_no}
 	</update>
 	<insert id="sendMessage" parameterType="team.dto.MessageDTO">
 	 insert into message values (message_no_seq.nextval,#{message_member_id},#{message_title},#{message_content},sysdate,0)
@@ -97,6 +97,6 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	 	UPDATE member SET member_grade = #{grade} WHERE member_id = #{member_id}
 	 </update>
 	<insert id="registerReview" parameterType="review">
-		INSERT INTO review(review_id,review_member_id,review_store_id,review_content,review_score_service,review_score_price,review_menu_no,review_score_menu,review_photo) VALUES(#{review_id},#{review_member_id},#{review_store_id},#{review_content},#{review_score_service},#{review_score_price},#{review_menu_no},#{review_score_menu},#{review_photo})
+		INSERT INTO review(review_no,review_member_id,review_store_id,review_content,review_score_service,review_score_price,review_menu_no,review_score_menu,review_photo) VALUES(REVIEW_NO_SEQ.NEXTVAL,#{review_member_id},#{review_store_id},#{review_content},#{review_score_service},#{review_score_price},#{review_menu_no},#{review_score_menu},#{review_photo})
 	</insert>
 </mapper>
