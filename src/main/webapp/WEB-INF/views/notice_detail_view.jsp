@@ -63,7 +63,7 @@
 $(function () {
 	if(${requestScope.Error}){alert("오류가 발생했습니다");history.back();}
 	$("#btn_update_notice").click(function() {
- location.href="adminNoticeUpdateView.do?notice_no=${requestScope.notice.notice_no}&notice_title=${requestScope.notice.notice_title}&notice_content=${requestScope.notice.notice_content}&pageNo=${requestScope.pageNo}";
+ location.href="adminNoticeUpdateView.do?notice_no=${requestScope.notice.notice_no}&pageNo=${requestScope.pageNo}";
 	});
 	$("#btn_delete").click(function() {
 		var data = $("#notice_delete_frm").serialize();
