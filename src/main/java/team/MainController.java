@@ -70,11 +70,11 @@ public class MainController {
 	public String main(HttpServletRequest request) {
 		
 		
- 	//	StoreDTO dto = storeService.selectStoreDTO("비밀_1");
- 	//	request.setAttribute("dto",dto);
- 	//	System.out.println(dto.getStore_name());
-	//	System.out.println(dto.getStore_id());
- 	//	System.out.println(dto.getStore_photo());
+ 		StoreDTO dto = storeService.selectStoreDTO("곰타코_1");
+ 		request.setAttribute("dto",dto);
+ 		System.out.println(dto.getStore_name());
+		System.out.println(dto.getStore_id());
+ 		System.out.println(dto.getStore_photo());
 		
 		return "main";
 	
@@ -817,7 +817,7 @@ public class MainController {
 			ad_no = (int)request.getAttribute("ad_no");
 		System.out.println(ad_no);
 		// 해당 게시글 조회수 증가
-		adService.addCount(ad_no);
+		//adService.addCount(ad_no);
 		//2. DB 해당 게시글 정보 읽어옴
 		AdDTO dto = adService.selectAd(ad_no);
 				// 첨부파일 로드 부분 필요
@@ -829,7 +829,12 @@ public class MainController {
 	}
 
    @RequestMapping("/AdWriteView.do")
-	public String adWriteView() {
+	public String adWriteView(HttpServletRequest request) {
+	   
+	   List<StoreDTO> list = storeService.selectStoreListCode(0);
+	   request.setAttribute("storeList", list);
+	   
+	   
 		return "ad_write_view";
 	}
    
@@ -841,8 +846,8 @@ public class MainController {
 		String ad_content = request.getParameter("ad_content");
 		adService.insertAd(new AdDTO(ad_no, ad_store_id, ad_status, ad_content));
 		AdDTO dto = adService.selectAd(ad_no);
-		//request.setAttribute("ad", dto);
-		request.setAttribute("ad_no", ad_no);
+		request.setAttribute("ad", dto);
+		//request.setAttribute("ad_no", ad_no);
 		
 					//파일 첨부기능 작성 필요 
 		
@@ -1244,6 +1249,20 @@ public String adminCanselReportReview(HttpServletRequest request,HttpServletResp
 	}
 	return null;
 }
+
+@RequestMapping("/searchDetailView.do")
+public String searchDetailView(HttpServletRequest request) {
+	String search = request.getParameter("search");
+	String addr = "서울 용산구";
+	System.out.println("search : " + search);
+	List<StoreDTO> menuList = storeService.selectStoreListDetail(search,addr);
+	request.setAttribute("menuList", menuList);
+	
+//	List<StoreDTO> storeList = storeService.selectStore
+	
+	return "search_detail_view";
+}
+
 @RequestMapping("review_image_load.do")
 	public String reviewImageLoad(HttpServletRequest request, HttpServletResponse response) {
 		String review_store_id = request.getParameter("review_store_id");
@@ -1343,18 +1362,7 @@ public String mbQnaWrite() {
 	return "mobile_qna_write";
 }
 
-	@RequestMapping("/searchDetailView.do")
-	public String searchDetailView(HttpServletRequest request) {
-		String search = request.getParameter("search");
-		String addr = "서울 용산구";
-		System.out.println("search : " + search);
-		List<StoreDTO> menuList = storeService.selectStoreListDetail(search,addr);
-		request.setAttribute("menuList", menuList);
-		
-//		List<StoreDTO> storeList = storeService.selectStore
-		
-		return "search_detail_view";
-	}
+
 	
 } 
 	   

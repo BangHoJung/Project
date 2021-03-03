@@ -25,13 +25,13 @@
 					<tr>
 						<th>작성자</th>
 						<td>
-							${requestScope.advertisement.ad_store_id}			
+							${requestScope.ad.ad_store_id}			
 						</td>
 					</tr>
 					<tr>
 						<td>
 						<c:choose>
-							<c:when test="${requestSope.advertisement.ad_status==0}">미승인</c:when>
+							<c:when test="${requestSope.ad.ad_status==0}">미승인</c:when>
 							<c:otherwise>승인</c:otherwise>
 						</c:choose>
 						</td>
@@ -39,22 +39,22 @@
 					<tr id="content">
 						<th style="vertical-align: top;">내용</th>
 						<td>
-							${requestScope.advertisement.ad_content }
+							${requestScope.ad.ad_content }
 						</td>
 					</tr>
 					
 					<!-- 첨부파일 view 기능 추가 -->
 					
 					
-					<tr>
+					<%-- <tr>
 						<th><a href="AdListView.do" class="btn">목록보기</a></th>
 						<td style="text-align: right;">
-						<c:if test="${sessionScope.id == requestScope.advertisement.ad_store_id}">
+						<c:if test="${sessionScope.id == requestScope.ad.ad_store_id}">
 							<a href="#" class="btn">수정</a>
 							<a href="deleteAd.do?bno=${requestScope.advertisement.ad_no }" class="btn">삭제</a>
 						</c:if>
 						</td>
-					</tr>
+					</tr> --%>
 				</table>
 			</div>
 	</div>
