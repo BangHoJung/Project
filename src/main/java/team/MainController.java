@@ -76,13 +76,27 @@ public class MainController {
 	
 	@RequestMapping("/")
 	public String main(HttpServletRequest request) {
+		List<StoreDTO> monthScoreList = storeService.selectStoreListBestScore(30);
+		List<StoreDTO> weekScoreList = storeService.selectStoreListBestScore(7);
+		
+		List<StoreDTO> monthReviewCountList = storeService.selectStoreListBestReviewCount(30);
+		List<StoreDTO> weekReviewCountList = storeService.selectStoreListBestReviewCount(7);
+		System.out.println(monthScoreList);
+		System.out.println(weekScoreList);
+		System.out.println(monthReviewCountList);
+		System.out.println(weekReviewCountList);
+		
+		request.setAttribute("monthScoreList", monthScoreList);
+		request.setAttribute("weekScoreList", weekScoreList);
+		request.setAttribute("monthReviewCountList", monthReviewCountList);
+		request.setAttribute("weekReviewCountList", weekReviewCountList);
 		
 		
- 	//	StoreDTO dto = storeService.selectStoreDTO("만돈_1");
-    //	request.setAttribute("dto",dto);
- 	//	System.out.println(dto.getStore_name());
-	//	System.out.println(dto.getStore_id());
- 	//	System.out.println(dto.getStore_photo());
+ 		StoreDTO dto = storeService.selectStoreDTO("곰타코_1");
+ 		request.setAttribute("dto",dto);
+ 		System.out.println(dto.getStore_name());
+		System.out.println(dto.getStore_id());
+ 		System.out.println(dto.getStore_photo());
 		
 		return "main";
 	
@@ -549,7 +563,7 @@ public class MainController {
 		String content="식당 등록 신청 건에 대하여 승인요청이 완료되었습니다.마이페이지에서 메뉴 등록 신청서를 작성해주시기 바랍니다.\n";
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		// 식당 등록 신청한 사용자에게 승인결과 전송
-//		memberService.sendMessage(dto.getStore_member_id(),title,content);
+		memberService.sendMessage(new MessageDTO(dto.getStore_member_id(),title,content));
 		int count = storeService.updateStoreCode(store_id,1);
 		
 		return "main";
@@ -562,7 +576,7 @@ public class MainController {
 		String content="식당 등록 신청 건에 대하여 승인요청이 거절되었습니다.\n자세한 내용을 원하시면 문의사항에 등록해주시기 바랍니다.";
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		// 식당 등록 신청한 사용자에게 승인결과 전송
-//		memberService.sendMessage(dto.getStore_member_id(),title,content);
+		memberService.sendMessage(new MessageDTO(dto.getStore_member_id(),title,content));
 		int count = storeService.deleteStoreDTO(store_id);
 		count = storeService.deleteMenu(store_id);
 		
@@ -825,7 +839,7 @@ public class MainController {
 			ad_no = (int)request.getAttribute("ad_no");
 		System.out.println(ad_no);
 		// 해당 게시글 조회수 증가
-		adService.addCount(ad_no);
+		//adService.addCount(ad_no);
 		//2. DB 해당 게시글 정보 읽어옴
 		AdDTO dto = adService.selectAd(ad_no);
 				// 첨부파일 로드 부분 필요
@@ -837,7 +851,12 @@ public class MainController {
 	}
 
    @RequestMapping("/AdWriteView.do")
-	public String adWriteView() {
+	public String adWriteView(HttpServletRequest request) {
+	   
+	   List<StoreDTO> list = storeService.selectStoreListCode(0);
+	   request.setAttribute("storeList", list);
+	   
+	   
 		return "ad_write_view";
 	}
    
@@ -849,8 +868,8 @@ public class MainController {
 		String ad_content = request.getParameter("ad_content");
 		adService.insertAd(new AdDTO(ad_no, ad_store_id, ad_status, ad_content));
 		AdDTO dto = adService.selectAd(ad_no);
-		//request.setAttribute("ad", dto);
-		request.setAttribute("ad_no", ad_no);
+		request.setAttribute("ad", dto);
+		//request.setAttribute("ad_no", ad_no);
 		
 					//파일 첨부기능 작성 필요 
 		
@@ -1252,6 +1271,20 @@ public String adminCanselReportReview(HttpServletRequest request,HttpServletResp
 	}
 	return null;
 }
+
+@RequestMapping("/searchDetailView.do")
+public String searchDetailView(HttpServletRequest request) {
+	String search = request.getParameter("search");
+	String addr = "서울 용산구";
+	System.out.println("search : " + search);
+	List<StoreDTO> menuList = storeService.selectStoreListDetail(search,addr);
+	request.setAttribute("menuList", menuList);
+	
+//	List<StoreDTO> storeList = storeService.selectStore
+	
+	return "search_detail_view";
+}
+
 @RequestMapping("review_image_load.do")
 	public String reviewImageLoad(HttpServletRequest request, HttpServletResponse response) {
 		String review_store_id = request.getParameter("review_store_id");
@@ -1351,18 +1384,7 @@ public String mbQnaWrite() {
 	return "mobile_qna_write";
 }
 
-	@RequestMapping("/searchDetailView.do")
-	public String searchDetailView(HttpServletRequest request) {
-		String search = request.getParameter("search");
-		String addr = "서울 용산구";
-		System.out.println("search : " + search);
-		List<StoreDTO> menuList = storeService.selectStoreListDetail(search,addr);
-		request.setAttribute("menuList", menuList);
-		
-//		List<StoreDTO> storeList = storeService.selectStore
-		
-		return "search_detail_view";
-	}
+
 	
 } 
 	   

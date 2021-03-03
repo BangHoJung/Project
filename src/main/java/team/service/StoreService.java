@@ -76,7 +76,13 @@ public class StoreService {
 		return storeMapper.deleteMenu(store_id);
 	}
 public List<ReviewDTO> selectStoreReviewList(String store_id) {
-		
 		return storeMapper.selectStoreReviewList(store_id);
+}
+	public List<StoreDTO> selectStoreListBestScore(int day) {
+		return storeMapper.selectStoreListBestScore(day);
+	}
+	
+	public List<StoreDTO> selectStoreListBestReviewCount(int day) {
+		return storeMapper.selectStoreListBestReviewCount(day);
 	}
 }

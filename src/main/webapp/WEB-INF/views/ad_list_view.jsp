@@ -42,7 +42,7 @@
 		<table>
 			<tr>
 				<th>글번호</th>
-				<th>작성자</th>
+				<th>신청식당</th>
 				<th>내용</th>
 				<th>승인여부</th>
 			</tr>
@@ -55,8 +55,9 @@
 				<tr>
 					<td class="ad_no">${dto.ad_no}</td>
 					<td class="ad_store_id">${dto.ad_store_id}</td>
-					<td class="ad_content"><a href="AdView.do?ad_no=${dto.ad_no}">
-						${dto.ad_content }</a></td>
+					<td class="ad_content">
+						<a href="AdView.do?ad_no=${dto.ad_no}">${dto.ad_content }</a>
+					</td>
 					<td class="ad_status">${dto.ad_status }</td>
 				</tr>
 			</c:forEach>
@@ -74,7 +75,7 @@
 						<c:if test="${pagging.nextPageGroup }">
 							<a href="AdListView.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
 						</c:if>
-						<a href="AdWriteView.do" class="btn_writer" style="text-align: right;">글쓰기</a>
+						<!-- <a href="AdWriteView.do" class="btn_writer" style="text-align: right;">글쓰기</a> -->
 					</div>
 			</tr>
 		</table>
