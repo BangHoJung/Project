@@ -26,8 +26,18 @@
 					<tr>
 						<th>작성자</th>
 						<td>
-							<input type="hidden" name="ad_store_id" value="${sessionScope.ad_store_id }">
-							${sessionScope.ad_store_id }		
+							<%-- <input type="hidden" name="ad_store_id" value="${sessionScope.ad_store_id }"> --%>
+							${sessionScope.id }		
+						</td>
+					</tr>
+					<tr>
+						<th>식당 선택</th>
+						<td>
+							<select name="ad_store_id">
+								<c:forEach var="dto" items="${storeList }">
+									<option value="${dto.store_id }">${dto.store_id }</option>
+								</c:forEach>
+							</select>	
 						</td>
 					</tr>
 					<tr id="content">
