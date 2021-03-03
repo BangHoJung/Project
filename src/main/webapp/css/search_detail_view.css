@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+* {
+	margin:0;
+	padding:0;
+}
+
+img {
+	width:60px;
+	height: 60px;
+}
+
+.container {
+	padding:40px;
+}
+
+a:visited,a:link {
+	color:black;
+	font-size:15px;
+	text-decoration: none;
+}
+
+a:hover{
+	text-decoration: none;
+	font-style: none;
+	
+}
+
+a:active {
+	text-decoration: none;
+}
+
+label:visited,label:link {
+	color:black;
+	font-size:15px;
+	text-decoration: none;
+}
+
+label:hover{
+	text-decoration: none;
+	font-style: none;
+	
+}
+
+label:active {
+	text-decoration: none;
+}
+
+div > span {
+	display: none;
+}

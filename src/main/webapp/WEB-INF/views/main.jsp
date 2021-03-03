@@ -22,6 +22,9 @@
 		$("#random").click(function(){
 			alert('추천 메뉴는 ooo입니다');
 		})
+		$("#btn_search").click(function() {
+			location.href="searchDetailView.do?search="+$("input[name='search']").val();
+		});
 	})
 </script>
 </head>

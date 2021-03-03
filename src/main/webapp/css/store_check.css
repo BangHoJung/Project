@@ -96,8 +96,10 @@
  	display: none;
  }
  
- .add img {
- 	width:200px;
- 	height: 150px;
+img {
+ 	width:250px;
+ 	height: 200px;
+ 	margin:10px;
+ 	margin-left:20px;
  }
  
