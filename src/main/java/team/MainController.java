@@ -63,14 +63,14 @@ public class MainController {
 		request.setAttribute("dto", dto);
 		System.out.println(dto.getStore_name());
 		
-		
 		return "store_detail_view";
 	}
 	
 	@RequestMapping("/")
 	public String main(HttpServletRequest request) {
 		
- 	//	StoreDTO dto = storeService.selectStoreDTO("테스트_2121");
+		
+ 	//	StoreDTO dto = storeService.selectStoreDTO("비밀_1");
  	//	request.setAttribute("dto",dto);
  	//	System.out.println(dto.getStore_name());
 	//	System.out.println(dto.getStore_id());
@@ -717,6 +717,8 @@ public class MainController {
 		String fileName = request.getParameter("fileName");
 		String writer = request.getParameter("writer");
 		//다운로드할 파일 전체 경로
+		
+		
 		String path = "C:\\fileupload\\"+writer+"\\"+fileName;
 		File file = new File(path);
 		FileInputStream fis = new FileInputStream(file);
@@ -753,7 +755,17 @@ public class MainController {
 		String type = fileName.substring(fileName.lastIndexOf(".")+1);
 		
 		response.setContentType("image/"+type);
-		File path = new File("C:\\fileupload\\"+writer+"\\"+fileName);
+   String divide = request.getParameter("divide");
+		
+		response.setContentType("image/jpeg");
+		File path = null;
+		if(divide.equals("menu")) {
+			path = new File("C:\\fileupload\\"+writer+"\\menu\\"+fileName);
+		}else if(divide.equals("store")) {
+			path = new File("C:\\fileupload\\"+writer+"\\"+fileName);
+		}
+		
+	//	File path = new File("C:\\fileupload\\"+writer+"\\"+fileName);
 		try {
 			FileInputStream fis = new FileInputStream(path);
 			ServletOutputStream sos = response.getOutputStream();
