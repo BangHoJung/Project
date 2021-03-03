@@ -57,15 +57,15 @@
 				<th>
 					<c:if test="${sessionScope.grade == '2'}">
 					<c:if test="${requestSope.qna.qna_response == null}">
-					<a href="/qnaAnswerView.do?qna_no=${requestScope.qna.qna_no }" class="btn">답변하기</a>
+					<a href="/mbQnaAnswerView.do?qna_no=${requestScope.qna.qna_no }" class="btn">답변하기</a>
 					</c:if>
 					</c:if>
 				</th>
 				<td style="text-align: right;">
 					<c:if test="${sessionScope.id == requestScope.qna.qna_member_id}">
-					<a href="/qnaUpdateView.do?qna_no=${requestScope.qna.qna_no}" class="btn">수정</a>
-					<a href="/qnaDeleteAction.do?qna_no=${requestScope.qna.qna_no }" class="btn">삭제</a>
-					<a href="qnaView.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">목록보기</a>
+					<a href="/mbQnaUpdateView.do?qna_no=${requestScope.qna.qna_no}" class="btn">수정</a>
+					<a href="/mbQnaDeleteAction.do?qna_no=${requestScope.qna.qna_no }" class="btn">삭제</a>
+					<a href="mbQnaView.do?pageNo=${requestScope.pageNo == null ? 1 : requestScope.pageNo }" class="btn">목록보기</a>
 					</c:if>
 				</td>
 			</tr>
