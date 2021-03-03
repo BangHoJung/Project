@@ -12,30 +12,27 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <link rel="stylesheet" href="../css/mobile_qna.css" media="screen and (max-width:767px)">
 <script type="text/javascript">
-	$(function(){
-		if(${requestScope.deleteAction == true}){
-			alert("삭제 성공!!");
-			}
-		$("#random").click(function(){
-			alert('추천 메뉴는 ooo입니다');
-		})
+$(function(){
+	if(${requestScope.deleteAction == true}){
+		alert("삭제 성공!!");
+		}
+	$("#random").click(function(){
+		alert('추천 메뉴는 ooo입니다');
 	})
+})
 
-	</script>
+</script>
 </head>
 <body>
-	<jsp:include page="mobile_header.jsp"></jsp:include>
+<jsp:include page="mobile_header.jsp"></jsp:include>
 	<div class="row">
 	<img id="qna_img" alt="" src="/img/qna_img.jpg" class="col-xs-12">
 	</div>
 	<div id="board_container">
-		<h3>Q&A</h3>
-		<c:if test="${sessionScope.login != null && sessionScope.login == true}">
-		<span id="myQna"><a href="mbQnaMypageView.do" >내가 한 질문 보기</a></span>
-		</c:if>
+		<h3>내가 한 질문</h3>
 		<div class="col-xs-12">
 		<table class="table">
-			<tr >
+			<tr>
 				<th class="qno">글번호</th>
 				<th class="qna_title">제목</th>
 				<th class="writer">작성자</th>
@@ -63,13 +60,13 @@
 				<td colspan="7">
 					<div class="page_bar">
 						<c:if test="${pagging.previousPageGroup }">
-							<a href="mbQnaView.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
+							<a href="mbQnaMypageView.do?pageNo=${pagging.startPageOfPageGroup - 1 }">◀</a>
 						</c:if>
 						<c:forEach var="i" begin="${pagging.startPageOfPageGroup}" end="${pagging.endPageOfPageGroup}">
-							<a href="mbQnaView.do?pageNo=${i }">${ i}</a>
+							<a href="mbQnaMypageView.do?pageNo=${i }">${ i}</a>
 						</c:forEach>
 						<c:if test="${pagging.nextPageGroup }">
-							<a href="mbQnaView.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
+							<a href="mbQnaMypageView.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
 						</c:if>
 						<a href="/mbQnaWrite.do" class="btn_writer">글쓰기</a>
 					</div>
