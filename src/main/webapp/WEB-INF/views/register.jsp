@@ -88,9 +88,20 @@
 			async:false,
 			success:function(d){
 				console.log(d);
-				alert(d);
 				var result=d.toString();
-				if(result=="중복된 아이디입니다."){$("#id").val("");}
+				if(result=="중복된 아이디입니다."){
+					$("#id").val("");
+					$("#id_form_check").css("color", "red");
+					$("#id_form_check").html("중복된 아이디입니다");
+				}
+				else if(result=='아이디는 4글자 이상으로 작성해주세요.'){
+					$("#id_form_check").css("color", "red");
+					$("#id_form_check").html("아이디는 4글자 이상으로 작성해주세요");
+				}
+				else{
+					$("#id_form_check").css("color", "blue");
+					$("#id_form_check").html("사용가능한 아이디입니다");
+				}
 				$("#prev_id").val(id);
 				if(prevID == id){
 				count++;
@@ -188,19 +199,19 @@ $(function () {
 	$("#btn_register").click(function() {
 	 var prevID=$("input:text[name=prev_id]").val()
 	 var id=$("input:text[name=id]").val();
-		if($("#id").val().trim().length == 0){alert("아이디를 입력해주세요");$("#id").focus();return false;};
-		if($("#id").val().trim().length < 4){alert("아이디는 4글자이상 입력해주세요");$("#id").focus();return false;};
-		if($("#pass").val().trim().length == 0){alert("암호를 입력해주세요");$("#pass").focus();return false;};
-		if($("#pass").val().trim().length < 6){alert("암호는 6글자이상 입력해주세요");$("#pass").focus();return false;};
-		if($("#name").val().trim().length == 0){alert("이름을 입력해주세요");$("#name").focus();return false;};
-		if($("#tel1").val().trim().length == 0){alert("연락처를 입력해주세요");$("#tel1").focus();return false;};
-		if($("#tel1").val().trim().length<2){alert("전화번호 형식에 맞는 연락처를 입력해주세요                     예)031-388-8474 010-1111-1111");$("#tel1").focus();return false;}
-		if($("#tel2").val().trim().length == 0){alert("연락처를 입력해주세요");$("#tel2").focus();return false;};
-		if($("#tel2").val().trim().length<3){alert("전화번호 형식에 맞는 연락처를 입력해주세요                     예)031-388-8474 010-1111-1111");$("#tel2").focus();return false;}
-		if($("#tel3").val().trim().length == 0){alert("연락처를 입력해주세요");$("#tel3").focus();return false;};
-		if($("#tel3").val().trim().length<4){alert("전화번호 형식에 맞는 연락처를 입력해주세요                     예)031-388-8474 010-1111-1111");$("#tel3").focus();return false;}
-		if($("#postcode").val().length == 0){alert("주소는 필수항목입니다.");$("#getPost").click();return false;};
-		if($("input:checkbox[name=category]:checked").length==0){alert("카테고리는 최소 한개는 선택해야됩니다.");return false;};	
+		if($("#id").val().trim().length == 0){$("#id").focus();return false;};
+		if($("#id").val().trim().length < 4){$("#id").focus();return false;};
+		if($("#pass").val().trim().length == 0){$("#pass").focus();return false;};
+		if($("#pass").val().trim().length < 6){$("#pass").focus();return false;};
+		if($("#name").val().trim().length == 0){$("#name").focus();return false;};
+		if($("#tel1").val().trim().length == 0){$("#tel1").focus();return false;};
+		if($("#tel1").val().trim().length<2){$("#tel1").focus();return false;}
+		if($("#tel2").val().trim().length == 0){$("#tel2").focus();return false;};
+		if($("#tel2").val().trim().length<3){$("#tel2").focus();return false;}
+		if($("#tel3").val().trim().length == 0){$("#tel3").focus();return false;};
+		if($("#tel3").val().trim().length<4){$("#tel3").focus();return false;}
+		if($("#postcode").val().length == 0){$("#getPost").click();return false;};
+		if($("input:checkbox[name=category]:checked").length==0){return false;};	
 		if(!(id == prevID)){alert("아이디 중복체크는 필수로 해야됩니다.");return false;}
 		var data=$("#frm_register").serialize();
 		$.ajax({
@@ -246,12 +257,12 @@ $(function () {
 			<p id="tel_form_check"></p>
 			<span>주소</span><br><input type="text" id="postcode" placeholder="우편번호" readonly>
 			<input type="button" onclick="getPostcode()"value="우편번호 찾기" class="btn" id="getPost"><br> 
-			<input type="text" name="roadAddress" id="roadAddress" class="roadAddress" placeholder="도로명주소" size="60" readonly><br>
+			<input type="text" name="roadAddress" id="roadAddress" class="roadAddress" placeholder="주소는 필수 항목입니다" size="60" readonly><br>
 			<input type="hidden" id="jibunAddress" placeholder="지번주소" size="60"> 
 			<span id="guide" style="color: #999; display: none"></span> 
 			<input type="hidden" id="extraAddress" placeholder="참고항목"size="60"> 
 			<input type="hidden" id="engAddress" placeholder="영문주소" size="60"><br> 
-				<b><span>선호하는 음식 카테고리</span></b><br>
+				<b><span>선호하는 음식 카테고리</span></b>(필수 항목!!)<br>
 				 ※ 카테고리는 최대 3개까지 선택 가능합니다<br><br>
 				<input type="checkbox" name="category" value="#한식"><span class="category">한식</span>
 				<input type="checkbox" name="category" value="#양식"><span class="category">양식</span>
