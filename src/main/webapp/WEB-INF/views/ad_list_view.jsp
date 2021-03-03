@@ -46,20 +46,20 @@
 				<th>내용</th>
 				<th>승인여부</th>
 			</tr>
-			<tr>
 	<!--		<c:if test="${requestScope.list ==null}">
 					<script>
 						location.href="AdListView.do?pageNo=1";
 					</script>
 				</c:if>  -->
-				<c:forEach var="dto" items="${list }">
+			<c:forEach var="dto" items="${list }">
+				<tr>
 					<td class="ad_no">${dto.ad_no}</td>
 					<td class="ad_store_id">${dto.ad_store_id}</td>
 					<td class="ad_content"><a href="AdView.do?ad_no=${dto.ad_no}">
 						${dto.ad_content }</a></td>
 					<td class="ad_status">${dto.ad_status }</td>
-				</c:forEach>
-			</tr>
+				</tr>
+			</c:forEach>
 			<tr>
 			<td colspan="7">
 					<div class="page_bar">
