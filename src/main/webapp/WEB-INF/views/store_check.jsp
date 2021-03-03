@@ -53,8 +53,8 @@
 					<tr>
 						<th>식당 대표 사진</th>
 						<td>
-							<p><a href="#none">${dto.store_photo} 이미지 보기</a>
-							<span><img src="image_load.do?writer=${dto.store_id }&fileName=${dto.store_photo}"></span></p>
+							<%-- <p><a href="#none">${dto.store_photo} 이미지 보기</a> --%>
+							<span><img src="image_load.do?writer=${dto.store_id }&fileName=${dto.store_photo}&divide=store"></span></p>
 						</td>
 					</tr>
 				</table>

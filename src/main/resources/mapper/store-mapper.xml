@@ -25,15 +25,23 @@
 	<select id="selectStoreMenuList" parameterType="String" resultType="menu">
 		SELECT * FROM store_menu WHERE menu_store_id = #{store_id}
 	</select>
+	<select id="selectStoreListDetail" parameterType="HashMap" resultType="store">
+		 select d.*, (SELECT COUNT(*) FROM review WHERE review_store_id = d.store_id) review_count from (select distinct menu_store_id from (select b.* from 
+ (select store_id from store where store_addr LIKE #{addr} and store_code=0) a,store_menu b 
+ where a.store_id=b.menu_store_id) where menu_name like #{search})c,store d where c.menu_store_id=d.store_id
+	</select>
 	
 	<update id="updateStoreCode" parameterType="HashMap">
 		UPDATE store SET store_code=#{store_code} WHERE store_id=#{store_id}
 	</update>
-	<update id="updateMenuPhoto">
+	<update id="updateMenuPhoto" parameterType="HashMap">
 		UPDATE store_menu SET menu_photo = #{menu_photo} WHERE menu_store_id=#{store_id} AND menu_name = #{menu_name}
 	</update>
 	
 	<delete id="deleteStoreDTO" parameterType="String">
 		DELETE FROM store WHERE store_id=#{store_id}
+	</delete>
+	<delete id="deleteMenu" parameterType="String">
+		DELETE FROM store_menu WHERE menu_store_id = #{store_id}
 	</delete>
 </mapper>
