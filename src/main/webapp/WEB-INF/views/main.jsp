@@ -40,7 +40,7 @@
 				<div class="figure">
 				<figure>
 					<figcaption>
-					<a href="storedetailView.do?store_id=${requestScope.dto.store_id}"><img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}" class="img"></a>
+					<a href="storeDetailView.do?store_id=${requestScope.dto.store_id}"><img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}&divide=store" class="img"></a>
 					<p>${requestScope.dto.store_name}</p>
 					
 					</figcaption>
