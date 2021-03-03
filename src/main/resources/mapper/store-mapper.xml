@@ -44,4 +44,7 @@
 	<delete id="deleteMenu" parameterType="String">
 		DELETE FROM store_menu WHERE menu_store_id = #{store_id}
 	</delete>
+	<select id="selectStoreReviewList" parameterType="String" resultType="review">
+	select * from review where review_store_id=#{store_id}
+	</select>
 </mapper>

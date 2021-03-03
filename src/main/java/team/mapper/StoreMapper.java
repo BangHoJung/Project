@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import team.dto.ReviewDTO;
 import team.dto.StoreDTO;
 import team.dto.StoreMenuDTO;
 
@@ -32,5 +33,7 @@ public interface StoreMapper {
 	List<StoreDTO> selectStoreListDetail(HashMap<String, Object> map);
 
 	int deleteMenu(String store_id);
+	
+	List<ReviewDTO> selectStoreReviewList(String store_id);
 	
 }
