@@ -28,5 +28,9 @@ public interface StoreMapper {
 	int updateMenuPhoto(HashMap<String, Object> map);
 
 	List<StoreMenuDTO> selectStoreMenuList(String store_id);
+
+	List<StoreDTO> selectStoreListDetail(HashMap<String, Object> map);
+
+	int deleteMenu(String store_id);
 	
 }

@@ -49,9 +49,8 @@ public class MainController {
 		this.qnaService = qnaService;
 		this.adService = adService;
 	}
-	@RequestMapping("storedetailView.do")
+	@RequestMapping("storeDetailView.do")
 	public String storeview(HttpServletRequest request) {
-/*
 		String store_id = request.getParameter("store_id");
 		System.out.println(store_id);
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
@@ -63,7 +62,6 @@ public class MainController {
 		request.setAttribute("menuList", menuList);
 		request.setAttribute("dto", dto);
 		System.out.println(dto.getStore_name());
-	*/	
 		
 		
 		return "store_detail_view";
@@ -213,92 +211,21 @@ public class MainController {
 			
 		return "qna_detail_view";
 	}
-	@RequestMapping("/mbQnaUpdateView.do")
-	public String mbQnaUpdate(HttpServletRequest request) {
-		int qna_no = Integer.parseInt(request.getParameter("qna_no"));
-		QnaDTO dto = qnaService.selectQna(qna_no);
-		request.setAttribute("qna_no", qna_no);
-		request.setAttribute("qna", dto);
-		System.out.println("qna_no : "+qna_no);
-		return "mobile_qna_update";
+	@RequestMapping("/qnaWrite.do")
+	public String qnaWrite() {
+		return "qna_write";
 	}
-	@RequestMapping("/mbQnaUpdateAction.do")
-	public String mbQnaUpdateAction(HttpServletRequest request) {
-		int qna_no= Integer.parseInt(request.getParameter("qna_no"));
+	@RequestMapping("/qnaWriteAction.do")
+	public String boardWriteAction(HttpServletRequest request) {
+		int qna_no = qnaService.newQno();
+		String qna_member_id= request.getParameter("qna_member_id");
 		String qna_title = request.getParameter("qna_title");
-		String qna_content= request.getParameter("qna_content");
-		int count = qnaService.updateQna(new QnaDTO(qna_no,qna_title,qna_content));
+		String qna_content = request.getParameter("qna_content");
+		qnaService.insertQna(new QnaDTO(qna_no, qna_member_id,qna_title,qna_content));
 		QnaDTO dto = qnaService.selectQna(qna_no);
 		request.setAttribute("qna", dto);
-		if(count != 0) {
-			System.out.println("수정 성공");
-			request.setAttribute("QnAupdateSuccess",true);
-		}
-		else {
-			System.out.println("수정 실패");
-			request.setAttribute("QnAupdateSuccess",false);
-		}
-		
-		return "mobile_qna_detail_view";
-	}
-	@RequestMapping("/mbQnaMypageView.do")
-	public String mbQnaMypageView(HttpServletRequest request, HttpSession session) {
-		int page=1; int pageOfContentCount =20;
-		if(request.getParameter("pageNo") != null)
-			page = Integer.parseInt(request.getParameter("pageNo"));
-		String id = (String) session.getAttribute("id");
-		List<QnaDTO> list = qnaService.selectMypageQnaList(page, id);
-		int count = qnaService.selectMypageCount(id);
-		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
-		request.setAttribute("list", list);
-		request.setAttribute("pagging", vo);
-		return "mobile_qna_mypage_view";
-	}
-	@RequestMapping("/mbQnaAnswerView.do")
-	public String mbQnaAnswerView(HttpServletRequest request) {
-		int qna_no=Integer.parseInt(request.getParameter("qna_no"));
-		QnaDTO dto = qnaService.selectQna(qna_no);
-		request.setAttribute("qna", dto);
-		return "mobile_qna_answer";
-	}
-	@RequestMapping("/mbQnaAnswerDetailView.do")
-	public String mbQnaAnswerDetailView(HttpServletRequest request) {
-		int qna_no=Integer.parseInt(request.getParameter("qna_no"));
-		QnaDTO dto = qnaService.selectQna(qna_no);
-		request.setAttribute("qna", dto);
-		return "mobile_qna_answer_detail_view";
-	}
-	@RequestMapping("/mbQnaAnswerAction.do")
-	public String mbQnaAnswerAction(HttpServletRequest request) {
-		int qna_no=Integer.parseInt(request.getParameter("qna_no"));
-		String qna_response = request.getParameter("qna_response");
-		qnaService.qnaAnswer(new QnaDTO(qna_no,qna_response));
-		QnaDTO dto = qnaService.selectQna(qna_no);
-		int page =1;
-		int pageOfContentCount = 20;
-		int count = qnaService.selectCount();
-		List<QnaDTO> list = qnaService.selectQnaList(page);
-		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
-		request.setAttribute("pagging", vo);
-		request.setAttribute("list", list);
-		request.setAttribute("qna", dto);
-		return "mobile_qna";
-	}
-	@RequestMapping("/mbQnaDeleteAction.do")
-	public String mbQnaDeleteAction(HttpServletRequest request) {
-		int qna_no= Integer.parseInt(request.getParameter("qna_no"));
-		int page =1;
-		int pageOfContentCount = 20;
-		int count = qnaService.selectCount();
-		int act =qnaService.deleteQna(qna_no); 
-		if(act != 0) {
-			request.setAttribute("deleteAction", true);
-		}
-		List<QnaDTO> list = qnaService.selectQnaList(page);
-		PaggingVO vo = new PaggingVO(count, page,pageOfContentCount);
-		request.setAttribute("pagging", vo);
-		request.setAttribute("list", list);
-		return "mobile_qna";
+		request.setAttribute("qno", qna_no);
+		return "qna_detail_view";
 	}
 	@RequestMapping("/qnaDeleteAction.do")
 	public String qnaDeleteAction(HttpServletRequest request) {
@@ -345,22 +272,6 @@ public class MainController {
 		request.setAttribute("list", list);
 		request.setAttribute("qna", dto);
 		return "qna";
-	}
-	@RequestMapping("/qnaWrite.do")
-	public String qnaWrite() {
-		return "qna_write";
-	}
-	@RequestMapping("/qnaWriteAction.do")
-	public String boardWriteAction(HttpServletRequest request) {
-		int qna_no = qnaService.newQno();
-		String qna_member_id= request.getParameter("qna_member_id");
-		String qna_title = request.getParameter("qna_title");
-		String qna_content = request.getParameter("qna_content");
-		qnaService.insertQna(new QnaDTO(qna_no, qna_member_id,qna_title,qna_content));
-		QnaDTO dto = qnaService.selectQna(qna_no);
-		request.setAttribute("qna", dto);
-		request.setAttribute("qno", qna_no);
-		return "qna_detail_view";
 	}
 	@RequestMapping("/qnaMypageView.do")
 	public String qnaMypageView(HttpServletRequest request, HttpSession session) {
@@ -509,10 +420,8 @@ public class MainController {
 	@RequestMapping("/storeRegisterAction.do")
 	public String storeRegisterAction(HttpServletRequest request,MultipartHttpServletRequest mqRequest,HttpSession session) {
 		String member_id = (String) session.getAttribute("id");
-//		String member_id = "admin";
 		String name = request.getParameter("name");
-//		String tel = request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
-		String tel = request.getParameter("tel");
+		String tel = request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
 		String addr = request.getParameter("addr");
 		String license = request.getParameter("license");
 		MultipartFile mf = mqRequest.getFile("file");
@@ -520,7 +429,7 @@ public class MainController {
 		if(time == null) time = " ";
 		String introduce = request.getParameter("introduce");
 		if(introduce == null) introduce = " ";
-		String category = "#"+request.getParameter("category");
+		String category = request.getParameter("category");
 		String store_id = name + "_" + license;
 		MultipartFile photo = mqRequest.getFile("photo");
 		
@@ -587,6 +496,7 @@ public class MainController {
 			String[] fileName = originalFileName.trim().split("[.]");
 			System.out.println("length : " + fileName.length);
 			System.out.println("이름 : " + fileName[0] + " , 자료형  : " + fileName[1]);
+			if(!fileName[1].trim().toLowerCase().equals("jpg") && !fileName[1].trim().toLowerCase().equals("png")) continue;
 			
 			File parentPath = new File(path);
 			if(!parentPath.exists()) parentPath.mkdirs();
@@ -646,6 +556,7 @@ public class MainController {
 		// 식당 등록 신청한 사용자에게 승인결과 전송
 //		memberService.sendMessage(dto.getStore_member_id(),title,content);
 		int count = storeService.deleteStoreDTO(store_id);
+		count = storeService.deleteMenu(store_id);
 		
 		return "store_check";
   }
@@ -857,9 +768,9 @@ public class MainController {
 			sos.close();
 			fis.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return null;
 	}
@@ -1419,5 +1330,19 @@ public String mbQnaDetailView(HttpServletRequest request) {
 public String mbQnaWrite() {
 	return "mobile_qna_write";
 }
+
+	@RequestMapping("/searchDetailView.do")
+	public String searchDetailView(HttpServletRequest request) {
+		String search = request.getParameter("search");
+		String addr = "서울 용산구";
+		System.out.println("search : " + search);
+		List<StoreDTO> menuList = storeService.selectStoreListDetail(search,addr);
+		request.setAttribute("menuList", menuList);
+		
+//		List<StoreDTO> storeList = storeService.selectStore
+		
+		return "search_detail_view";
+	}
+	
 } 
 	   
