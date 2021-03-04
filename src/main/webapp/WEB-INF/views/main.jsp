@@ -23,7 +23,14 @@
 			alert('추천 메뉴는 ooo입니다');
 		})
 		$("#btn_search").click(function() {
-			location.href="searchDetailView.do?search="+$("input[name='search']").val();
+			var addr;
+			if(${sessionScope.login == null} || ${sessionScope.login == false}) {
+				addr = "";
+			}
+			else {
+				addr = "${sessionScope.address}";
+			}
+			location.href="searchDetailView.do?addr="+addr+"&search="+$("input[name='search']").val();
 		});
 	});
 </script>
@@ -54,7 +61,7 @@
 			<h4>월간 리뷰수 베스트!</h4> <a href="bestStoreListView.do?type=month_review">더보기</a> <br>
 			<div class="figure">
 				<c:forEach var="dto" items="${monthReviewCountList}" begin="0" end="3">
-					<figure >
+					<figure>
 						<figcaption>
 							<a href="storeDetailView.do?store_id=${dto.store_id}"><img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}&divide=store" class="img"></a>
 							<p id="store_name">${dto.store_name}</p>
@@ -66,7 +73,7 @@
 			</div>
 		</div>
 		<div id="theme">
-			<h4>주간 별점 베스트!</h4> <a href="#none">더보기</a> <br>
+			<h4>주간 별점 베스트!</h4> <a href="bestStoreListView.do?type=week_score">더보기</a> <br>
 			<div class="figure">
 				<c:forEach var="dto" items="${weekScoreList}" begin="0" end="3">
 					<figure>
@@ -81,7 +88,7 @@
 			</div>
 		</div>
 		<div id="theme">
-			<h4>주간 리뷰수 베스트!</h4> <a href="#none">더보기</a> <br>
+			<h4>주간 리뷰수 베스트!</h4> <a href="bestStoreListView.do?type=week_review">더보기</a> <br>
 			<div class="figure">
 				<c:forEach var="dto" items="${weekReviewCountList}" begin="0" end="3">
 					<figure>
@@ -94,7 +101,6 @@
 					</figure>
 				</c:forEach>
 			</div>
-			
 		</div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
