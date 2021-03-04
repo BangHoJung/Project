@@ -7,31 +7,19 @@
 <meta charset="UTF-8">
 <title>광고 신청 목록</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<!-- <link rel="stylesheet" href="../css/ad_list_view.css"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/ad_list_view.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<style type="text/css">
-	.container{
-		width: 780px;
-		margin: 0 auto;
-		padding:0;
-	}
-	table{
-		width:700px;
-		padding: 20px;
-		border: 1px solid black; 
-	}
-	tr{
-		height: 50px;
-	}
-	th, td{
-		width: 150px;
-		height: 50px;
-		border: 1px solid black; 
-	}
-</style>
 </head>
 <body>
+
+	<c:if test="${sessionScope.login == null  || sessionScope.grade != 2 }">		
+				<script>
+					alert("권한이 없습니다.");
+					location.href="/";
+				</script>
+	</c:if>
 	
 	<jsp:include page="/templete/mypage_header.jsp"></jsp:include>
 
@@ -58,7 +46,12 @@
 					<td class="ad_content">
 						<a href="AdView.do?ad_no=${dto.ad_no}">${dto.ad_content }</a>
 					</td>
-					<td class="ad_status">${dto.ad_status }</td>
+					<td class="ad_status">		<!--  status가 0인데도 otherwise 출력  -->
+						<c:choose>			
+							<c:when test="${requestScope.ad_status != 0}">완료</c:when>
+							<c:otherwise>확인 안함</c:otherwise>		
+						</c:choose>
+					</td>
 				</tr>
 			</c:forEach>
 			<tr>
@@ -75,8 +68,10 @@
 						<c:if test="${pagging.nextPageGroup }">
 							<a href="AdListView.do?pageNo=${pagging.endPageOfPageGroup + 1 }">▶</a>
 						</c:if>
-						<!-- <a href="AdWriteView.do" class="btn_writer" style="text-align: right;">글쓰기</a> -->
+						<a href="AdWriteView.do" class="btn_writer" style="text-align: right;">글쓰기</a>
+										<!-- 페이지 완성 후 삭제! -->
 					</div>
+			</td>
 			</tr>
 		</table>
 		</div>

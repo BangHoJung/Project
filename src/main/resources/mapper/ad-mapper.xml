@@ -5,7 +5,7 @@
 <mapper namespace="team.mapper.AdMapper">
 	<select id="selectAdList" parameterType="int" resultType="team.dto.AdDTO">
 		select * from 
-		(select ceil(rownum / 10) as pagenum, AD_NO, AD_STORE_ID from advertisement order by AD_NO desc) 
+		(select ceil(rownum / 10) as pagenum, AD_NO, AD_STORE_ID, AD_CONTENT from advertisement order by AD_NO desc) 
 		where pagenum = #{page}
 	</select>
 	<select id="selectCount" resultType="int">
