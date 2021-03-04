@@ -17,7 +17,7 @@ public class StoreDTO {
 	private String store_file;
 	private String store_photo;
 	private int store_count;
-	private int review_count;
+	private double review;
 	
 	public StoreDTO() {
 		super();
@@ -63,7 +63,7 @@ public class StoreDTO {
 	//search_detail_view  데이터 획득 (+ 리뷰수)
 	public StoreDTO(String store_id, String store_name, String store_addr, String store_license, String store_member_id,
 			String store_time, String store_introduce, String store_tel, String store_category, int store_code,
-			String store_file, String store_photo, int store_count, int review_count) {
+			String store_file, String store_photo, int store_count, double review) {
 		super();
 		this.store_id = store_id;
 		this.store_name = store_name;
@@ -78,15 +78,15 @@ public class StoreDTO {
 		this.store_file = store_file;
 		this.store_photo = store_photo;
 		this.store_count = store_count;
-		this.review_count = review_count;
+		this.review = review;
 	}
 
-	public int getReview_count() {
-		return review_count;
+	public double getReview() {
+		return review;
 	}
 
-	public void setReview_count(int review_count) {
-		this.review_count = review_count;
+	public void setReview(double review) {
+		this.review = review;
 	}
 
 	public String getStore_id() {
