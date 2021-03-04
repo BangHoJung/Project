@@ -40,4 +40,6 @@ public interface StoreMapper {
 	
 	List<ReviewDTO> selectStoreReviewList(String store_id);
 	
+	List<ReviewDTO> selectStoreReviewListMore(HashMap<String, Object> map);
+
 }

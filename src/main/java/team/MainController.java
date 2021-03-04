@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -73,7 +75,41 @@ public class MainController {
 		
 		return "store_detail_view";
 	}
-	
+	@RequestMapping("/selectStoreReviewListMore.do")
+	public String selectStoreReviewListMore(HttpServletRequest request,HttpServletResponse response) {
+		String store_id=request.getParameter("store_id");
+		System.out.println(store_id);
+		int no=Integer.parseInt(request.getParameter("no"));
+		System.out.println(no);
+		List<ReviewDTO> list =storeService.selectStoreReviewListMore(store_id,no);
+		JSONObject obj = new JSONObject();
+		if(list != null) {
+			try {
+				JSONArray result = new JSONArray();
+				for(int i=0;i<list.size();i++) {
+				JSONObject json = new JSONObject();
+				json.put("review_id",list.get(i).getReview_id());
+				json.put("review_member_id",list.get(i).getReview_member_id());
+				json.put("review_store_id",list.get(i).getReview_store_id());
+				json.put("review_content",list.get(i).getReview_id());
+				json.put("review_date",list.get(i).getReview_date());
+				json.put("review_score_service",list.get(i).getReview_score_service());
+				json.put("review_score_price",list.get(i).getReview_score_price());
+				json.put("review_menu_no",list.get(i).getReview_menu_no());
+				json.put("review_score_menu",list.get(i).getReview_score_menu());
+				json.put("review_photo",list.get(i).getReview_photo());
+				json.put("review_report",list.get(i).getReview_report());				
+				result.put(json);
+				}
+				obj.put("result", result);
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write(obj.toString());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
 	@RequestMapping("/")
 	public String main(HttpServletRequest request) {
 		List<StoreDTO> monthScoreList = storeService.selectStoreListBestScore(30);
