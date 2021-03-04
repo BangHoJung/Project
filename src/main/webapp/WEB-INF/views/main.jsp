@@ -28,7 +28,10 @@
 				addr = "";
 			}
 			else {
-				addr = "${sessionScope.address}";
+				var temp = "${sessionScope.address}";
+				var temp2 = temp.split("구");
+				console.log(temp2);
+				addr = temp2[0] + "구";
 			}
 			location.href="searchDetailView.do?addr="+addr+"&search="+$("input[name='search']").val();
 		});

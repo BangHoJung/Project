@@ -31,7 +31,7 @@
 			<img src="image_load.do?writer=${dto.store_id }&fileName=${dto.store_photo}&divide=store"><br>
 			<p>${dto.store_id }</p>
 			<p>${dto.store_addr }</p>
-			<p>조회수 : ${dto.store_count }  , 리뷰수 : ${dto.review_count }</p>
+			<p>조회수 : ${dto.store_count }  ,<%--  리뷰수 : ${dto.review_count } --%></p>
 		</div></a></label>
 		<br><hr>
 	</c:forEach>
