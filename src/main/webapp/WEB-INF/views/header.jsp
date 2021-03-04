@@ -151,7 +151,7 @@
 		<div id="login">
 			<a href="/" id="logo"><img src="/img/mainlogo2.png"></a>
 			<div class="search">
-				<input type="text" name="search" placeholder="찾고싶은 식당이나 지역을 검색하세요." ><button>검색</button>
+				<input type="text"  name="search" placeholder="찾고싶은 식당이나 지역을 검색하세요." ><button id="btn_search">검색</button>
 			</div>
 			<div class="right">
 				<c:if test="${sessionScope.login != null && sessionScope.login == true}">
