@@ -48,13 +48,13 @@
 		UPDATE store_menu SET menu_photo = #{menu_photo} WHERE menu_store_id=#{store_id} AND menu_name = #{menu_name}
 	</update>
 	
-	<delete id="deleteStoreDTO" parameterType="String">
+	<delete id="deleteStoreDTO" parameterType="int">
 		DELETE FROM store WHERE store_id=#{store_id}
 	</delete>
-	<delete id="deleteMenu" parameterType="String">
+	<delete id="deleteMenu" parameterType="int">
 		DELETE FROM store_menu WHERE menu_store_id = #{store_id}
 	</delete>
-	<select id="selectStoreReviewList" parameterType="String" resultType="review">
+	<select id="selectStoreReviewList" parameterType="int" resultType="review">
 	select a.* from(select * from review r where review_store_id=#{store_id} order by review_date desc) a where rownum &lt;=5
 	</select>
 	<select id="selectStoreReviewListMore" parameterType="map" resultType="review">
