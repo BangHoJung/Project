@@ -22,7 +22,7 @@
 .search_result{
 	margin:0 auto;
 	width: 700px;
-	margin-left:250px;
+	margin-left:150px;
 }
 
 .search_detail img {
@@ -31,8 +31,7 @@
 	float:left;
 	margin-right:20px;
 }
-.search_store_detail{
-}
+
 a:visited,a:link {
 	color:gray;
 	font-size:12px;
@@ -44,6 +43,11 @@ a:visited,a:link {
 }
 #result_addr{
 	font-size:10px;
+	display: inline-block;
+}
+#result_category{
+	text-align: right;
+	margin-right: 10px;
 }
 .search_result a:hover{
 	text-decoration: none;
