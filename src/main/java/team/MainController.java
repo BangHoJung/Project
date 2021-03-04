@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -1322,8 +1324,16 @@ public String adminCanselReportReview(HttpServletRequest request,HttpServletResp
 @RequestMapping("/searchDetailView.do")
 public String searchDetailView(HttpServletRequest request) {
 	String search = request.getParameter("search");
-	String addr = request.getParameter("addr");
-	System.out.println("search : " + search);
+	String addr = null;
+	try {
+		//addr = URLEncoder.encode(request.getParameter("addr"),"UTF-8");
+		addr = URLDecoder.decode(request.getParameter("addr"),"UTF-8");
+	} catch (UnsupportedEncodingException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	System.out.println("search : " + search + " , addr : " + addr);
 	List<StoreDTO> menuList = storeService.selectStoreListDetail(search,addr);
 	request.setAttribute("menuList", menuList);
 	

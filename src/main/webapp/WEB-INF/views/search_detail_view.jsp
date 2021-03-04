@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +36,11 @@
 			<img src="image_load.do?writer=${dto.store_id }&fileName=${dto.store_photo}&divide=store"><br>
 			<p>${dto.store_id }</p>
 			<p>${dto.store_addr }</p>
-			<p>조회수 : ${dto.store_count }  , 리뷰수 : ${dto.review_count }</p>
+			<p>조회수 : ${dto.store_count }  
+				리뷰수 : <fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10} " /> ${review_count }
+				리뷰 별점 : <fmt:formatNumber  value="${dto.review%10}" pattern=".0" />
+				
+			<%-- 리뷰수 : ${dto.review } --%></p>
 		</div></a></label>
 		<br><hr>
 		</c:forEach>
