@@ -600,7 +600,17 @@ public class MainController {
   }
 	
 	@RequestMapping("reviewRegisterView.do")
-	public String reviewRegisterView(HttpServletRequest request) {
+	public String reviewRegisterView(HttpSession session, HttpServletRequest request, HttpServletResponse response) {
+		if(session.getAttribute("login") == null || (boolean)session.getAttribute("login") == false) {
+			try {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("<script>alert('로그인 후 이용해주세요');history.back();</script>");
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		String store_id = request.getParameter("store_id");
 		
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
@@ -659,6 +669,28 @@ public class MainController {
 //			}
 //			return null;
 //		}
+	}
+	
+	@RequestMapping("bestStoreListView.do")
+	public String bestStoreListView(HttpServletRequest request) {
+		String type = request.getParameter("type");
+		List<StoreDTO> list = null;
+		if(type.equals("month_score")) {
+			list = storeService.selectStoreListBestScore(30);
+		}
+		else if(type.equals("month_review")) {
+			list = storeService.selectStoreListBestReviewCount(30);
+		}
+		else if(type.equals("week_score")) {
+			list = storeService.selectStoreListBestScore(7);
+		}
+		else {
+			list = storeService.selectStoreListBestReviewCount(7);
+		}
+		
+		request.setAttribute("list", list);
+		
+		return "best_store_list_view";
 	}
 	
 	
@@ -1290,8 +1322,7 @@ public String adminCanselReportReview(HttpServletRequest request,HttpServletResp
 @RequestMapping("/searchDetailView.do")
 public String searchDetailView(HttpServletRequest request) {
 	String search = request.getParameter("search");
-//	String addr = request.getParameter("addr");
-	String addr = "서울 용산구";
+	String addr = request.getParameter("addr");
 	System.out.println("search : " + search);
 	List<StoreDTO> menuList = storeService.selectStoreListDetail(search,addr);
 	request.setAttribute("menuList", menuList);
