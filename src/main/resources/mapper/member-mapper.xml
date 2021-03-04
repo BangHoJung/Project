@@ -81,13 +81,13 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	<select id="adminSelectReportCount" resultType="int" >
 	 select count(*) from review where review_report=1
 	</select>
-	<select id="adminSelectReport" parameterType="String" resultType="review">
+	<select id="adminSelectReport" parameterType="int" resultType="review">
 	 select review_no,review_member_id,review_store_id,review_content,review_photo from review where review_no=#{review_no}
 	</select>
-	<delete id="adminDeleteReportReview" parameterType="String">
+	<delete id="adminDeleteReportReview" parameterType="int">
 	delete from review where review_no=#{review_no}
 	</delete>
-	<update id="adminCanselReportReview" parameterType="String">
+	<update id="adminCanselReportReview" parameterType="int">
 	  update review set review_report=0 where review_no=#{review_no}
 	</update>
 	<insert id="sendMessage" parameterType="team.dto.MessageDTO">

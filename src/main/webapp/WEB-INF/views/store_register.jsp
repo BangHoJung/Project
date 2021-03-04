@@ -87,8 +87,7 @@
 		});
 		
 		$("#plus").click(function() {
-			$("#menu_table tbody").children().first().before("<tr><td><input type=\"text\" 
-			 + "name=\"menu_name\" placeholder=\"메뉴 이름 입력\" ></td>"
+			$("#menu_table tbody").children().first().before("<tr><td><input type=\"text\" name=\"menu_name\" placeholder=\"메뉴 이름 입력\" ></td>"
 			 + "<td><input type=\"text\" name=\"menu_price\" placeholder=\"메뉴 가격 입력\" ></td>"
 			 + "<td><input type=\"file\" name=\"menu_photo\"></td>");
 			

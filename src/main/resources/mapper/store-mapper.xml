@@ -26,12 +26,15 @@
 		SELECT * FROM store_menu WHERE menu_store_id = #{store_id}
 	</select>
 	<select id="selectStoreListDetail" parameterType="HashMap" resultType="store">
-		  select d.*, (SELECT TRUNC(NVL(AVG(s)/3+COUNT(s)*10,0),1) FROM (SELECT review_score_service+review_score_price+review_score_menu s,review.* FROM review) r WHERE r.review_store_id = d.store_id) review from (select distinct menu_store_id from (select b.* from 
- (select store_id from store where store_addr LIKE  #{addr} and store_code=1) a,store_menu b 
- where a.store_id=b.menu_store_id) where menu_name like #{search})c,store d where c.menu_store_id=d.store_id
+		  select d.*, (SELECT TRUNC(NVL(AVG(s)/3+COUNT(s)*10,0),1) FROM (SELECT review_score_service+review_score_price+review_score_menu s,review.* FROM review) r 
+		  WHERE r.review_store_id = d.store_id) review from (select distinct menu_store_id from (select b.* from 
+ 		(select store_id from store where store_addr LIKE  #{addr} and store_code=1) a,store_menu b 
+ 		where a.store_id=b.menu_store_id) where menu_name like #{search})c,store d where c.menu_store_id=d.store_id
 	</select>
 	<select id="selectStoreListBestScore" parameterType="int" resultType="store">
-		<![CDATA[ SELECT s.* FROM store s,(SELECT ROWNUM, review_store_id,avg FROM( SELECT review_store_id,AVG(review_score_service+review_score_price+review_score_menu)/3 avg FROM review WHERE floor(SYSDATE - review_date) < ${day} GROUP BY review_store_id ORDER BY avg DESC)) re WHERE s.store_id = re.review_store_id AND s.store_code=1]]>
+		<![CDATA[ SELECT s.* FROM store s,(SELECT ROWNUM, review_store_id,avg FROM 
+		( SELECT review_store_id,AVG(review_score_service+review_score_price+review_score_menu)/3 avg FROM review WHERE floor(SYSDATE - review_date) < ${day} 
+		GROUP BY review_store_id ORDER BY avg DESC)) re WHERE s.store_id = re.review_store_id AND s.store_code=1]]>
 	</select>
 	<select id="selectStoreListBestReviewCount" parameterType="int" resultType="store">
 		<![CDATA[ SELECT * FROM  store WHERE store_code=1 AND store_id IN (SELECT review_store_id FROM (SELECT ROWNUM,re.* FROM 
