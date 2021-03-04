@@ -4,26 +4,52 @@
 	margin:0;
 	padding:0;
 }
-
-img {
-	width:60px;
-	height: 60px;
+.container{
+	width: 1000px;
+}
+#food_search{
+	margin-top:20px;
+	width: 1000px;	
+}
+.container hr{
+	margin:0 auto;
+	width: 800px;
+	color: #e8e8e8;
+}
+.search_detail{
+	margin-top:100px;
+}
+.search_result{
+	margin:0 auto;
+	width: 700px;
+	margin-left:250px;
 }
 
-.container {
-	padding:40px;
+.search_detail img {
+	width:200px;
+	height: 200px;
+	float:left;
+	margin-right:20px;
 }
-
+.search_store_detail{
+}
 a:visited,a:link {
-	color:black;
-	font-size:15px;
+	color:gray;
+	font-size:12px;
 	text-decoration: none;
 }
-
-a:hover{
+#result_name{
+	font-size: 20px;
+	font-weight: bold;
+}
+#result_addr{
+	font-size:10px;
+}
+.search_result a:hover{
 	text-decoration: none;
 	font-style: none;
-	
+	color:gray;
+	filter:blur(1px);
 }
 
 a:active {
@@ -39,13 +65,15 @@ label:visited,label:link {
 label:hover{
 	text-decoration: none;
 	font-style: none;
-	
 }
 
 label:active {
 	text-decoration: none;
 }
 
-div > span {
-	display: none;
+.search_result hr {
+	margin:0 auto;
+	margin:20px 0;
+	width: 500px;
+	color: gray;
 }
