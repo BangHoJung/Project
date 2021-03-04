@@ -11,43 +11,66 @@
 	}
 	.img{
 	width: 100%;
+	height: 150px;
 	}
 	.slider img{
 		width:500px;
 		height: 300px;
 	}
+	body h4{
+		font-weight: bold;
+	}
 	#theme {
 		box-sizing: border-box;
 		width: 1000px;
-		margin-bottom: 30px;
 		color: gray;
+		background-color: #f2f2f2;
+		height: 350px;
+		padding: 10px;
+		margin-bottom: 20px;
 		
 	}
 	
 	#theme div {
 		width: 1000px;
-		float: left;
-		border: 1px solid gray;
+		float:left;
 	}
 	
 	#theme figure {
-		float: left;
-		width: 150px;
-		height: 250px;
-		margin: 40px;
-		text-align: center;
-		border: 1px solid gray;
+		float:left;
+		margin:13px;
+		width: 220px;
+		height: 200px;
+		color: gray;
+		margin-bottom: 20px;
+	}
+	#theme figure img{
+		height: 180px;
+	}
+	#theme figure img:hover{
+		filter:blur(0.8px);
+	}
+	#theme #store_name{
+		font-size:13px;
+		margin-top:10px;
+		margin-left:5px;
+		font-weight: bold;
+	}
+	#theme p{
+		margin-left:5px;
+		font-size:12px;
+	}
+	#theme > a {
+		float:right;
+		font-size:15px;
+		text-decoration: none;
+		margin-right:10px;
 		color: gray;
 	}
 	
-	#theme > a {
-		float:right;
-		font-size:20px;
-		text-decoration: none;
-	}
-	
 	#theme > a:hover {
-		font-size:22px;
+		margin-right:10px;
+		font-size:15px;
 		color:#fa0050;
 	}
 	
