@@ -162,6 +162,30 @@
 	   	}
 		   
 	});
+	    	var count=1;
+	        var text="";
+	        $("#btn_more_review_info").click(function() {
+	        	text="<table>";
+	        	count++;
+	        	var data="store_id=${requestScope.dto.store_id}&no="+count;
+	        	$.ajax({
+	        		url:"selectStoreReviewListMore.do",
+	        		data : data,
+	        		method: "get",
+	        		success:function(d){
+	        			console.log(d);
+	        			var result=JSON.parse(d);
+	        			console.log(result);
+	        			var arr=result.result;
+	        			for(i=0;i<arr.length;i++){
+	        				text +="<tr><td>"+arr[i].review_id+"</td></tr>";
+	        			    text +="<tr><td><img src='review_image_load.do?review_member_id="+arr[i].review_member_id+"&review_store_id="+arr[i].review_store_id+"&fileName="+arr[i].review_photo+"'></td></tr>"
+	        			}
+	        		text += "</table>";
+	        		$("#review_container_box").html(text);
+	        		}
+	        	});
+	        });
 	
 	});
     
@@ -344,7 +368,7 @@ ${requestScope.dto.store_category}
 <p>닉네임</p>
 </div>
 <div class="col-md-9 col-md-offset-1" style="border: 1px solid #EAEAEA; text-align: left;">
-
+<div id="review_container_box">
 
 <table>
 <c:forEach var="review" items="${reviewList}">
@@ -370,6 +394,8 @@ ${requestScope.dto.store_category}
 </c:forEach>
 </table>
 </div>
+</div>
+<button id="btn_more_review_info" type="button">더보기</button>
 </div>
 </div>
 

@@ -85,4 +85,10 @@ public List<ReviewDTO> selectStoreReviewList(String store_id) {
 	public List<StoreDTO> selectStoreListBestReviewCount(int day) {
 		return storeMapper.selectStoreListBestReviewCount(day);
 	}
+	public List<ReviewDTO> selectStoreReviewListMore(String store_id, int no) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("store_id", store_id);
+		map.put("no", no);
+		return storeMapper.selectStoreReviewListMore(map);
+	}
 }
