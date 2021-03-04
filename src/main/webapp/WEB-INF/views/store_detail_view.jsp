@@ -165,7 +165,7 @@
 	    	var count=1;
 	        var text="";
 	        $("#btn_more_review_info").click(function() {
-	      
+	      text = "<div>";
 	        	count++;
 	        	var data="store_id=${requestScope.dto.store_id}&no="+count;
 	        	$.ajax({
@@ -179,7 +179,7 @@
 	        			var arr=result.result;
 	        			for(i=0;i<arr.length;i++){
 	        				text +="<div class='row main' style='margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;'><div class='col-md-12 main' style='text-align: right;'>" 
-
+                              text += "<input type='hidden'  value='"+arr[i].review_no+"'>"
 	        					text+="<p>"+ arr[i].review_date
 
 	        					if(${sessionScope.id==requestScope.dto.store_member_id}){ 
@@ -190,18 +190,42 @@
 	        					text+="<div class='col-md-2 main' style=' text-align: center; display: flex; flex-direction: column;'><p style='font-weight: bold; font-size: 20px; border: 1px solid gray;' >"
 	        					text +=arr[i].review_member_id+"</p></div><div class='col-md-10' style='border: 1px solid #EAEAEA; text-align: left;'>"
 
-	        					if(${review.review_photo != null}){
-	        					 text +="<img src='review_image_load.do?review_member_id=${review.review_member_id}&review_store_id=${review.review_store_id}&fileName=${review.review_photo}'  class='reviewimg' >"
-	        					}
+	        					if( arr[i].review_photo != null){
+	        						 text +="<img src='review_image_load.do?review_member_id="+arr[i].review_member_id+"&review_store_id="+arr[i].review_store_id+"&fileName="+arr[i].review_photo+"'  class='reviewimg' >"
+	        						}
 	        					text+="<br><span style='white-space: pre-wrap;'>"
 	        					text+=arr[i].review_content+"</span></div></div></div>"
 	        			}
+	        		text += "</div>";
 	        		
 	        		$("#review_container_box").html(text);
 	        		}
 	        	});
+	        
 	        });
-	
+	        $(document).on("click",".btn_report",function(){
+	        if(confirm("신고하겠습니까?")){ 
+	        	var review_no = $(this).parent().parent().find("input").val();
+	        	var data = "review_no="+review_no;
+	        	
+	        
+	        	$.ajax({
+	        	url:"businessReportAction.do",
+	        	data: data,
+	        	method:"get",
+	        	success:function(d){
+	            console.log(d);
+	        	
+	            
+	        	}
+	        	
+	        	
+	        	
+	        })
+	        }
+	        	
+				
+			});
 	});
     
 /*
@@ -387,6 +411,7 @@ ${requestScope.dto.store_category}
 <div class="row main " style="margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;">
 
 <div class="col-md-12 main" style="text-align: right; "> 
+<input type="hidden"  value="${review.review_no}">
 <p> ${review.review_date}<c:if test="${sessionScope.id==requestScope.dto.store_member_id}"> | <button style="border: none; background-color: #F6F6F6;" class="btn_report" type="button" >신고하기</button></c:if></p>
 <div class="col-md-2 main" style=" text-align: center; display: flex; flex-direction: column;">
 

@@ -80,6 +80,17 @@ public class MainController {
 		
 		return "store_detail_view";
 	}
+	
+	@RequestMapping("/businessReportAction.do")
+	public String businessReportAction(HttpServletRequest request,HttpServletResponse response) {
+		int review_no = Integer.parseInt(request.getParameter("review_no"));
+		System.out.println(review_no);
+		
+		
+		return null;
+	}
+	
+	
 	@RequestMapping("/selectStoreReviewListMore.do")
 	public String selectStoreReviewListMore(HttpServletRequest request,HttpServletResponse response) {
 		String store_id=request.getParameter("store_id");
