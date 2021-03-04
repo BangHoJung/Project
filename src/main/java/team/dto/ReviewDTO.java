@@ -4,7 +4,7 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("review")
 public class ReviewDTO {
-	private String review_id;
+	private int review_no;
 	private String review_member_id;
 	private String review_store_id;
 	private String review_content;
@@ -21,11 +21,11 @@ public class ReviewDTO {
 	}
 
 	//테이블 전체데이터 생성자
-	public ReviewDTO(String review_id, String review_member_id, String review_store_id, String review_content,
+	public ReviewDTO(int review_no, String review_member_id, String review_store_id, String review_content,
 			String review_date, int review_score_service, int review_score_price, int review_menu_no,
 			int review_score_menu, String review_photo, int review_report) {
 		super();
-		this.review_id = review_id;
+		this.review_no = review_no;
 		this.review_member_id = review_member_id;
 		this.review_store_id = review_store_id;
 		this.review_content = review_content;
@@ -38,12 +38,11 @@ public class ReviewDTO {
 		this.review_report = review_report;
 	}
 	
-	// REVIEW 데이터 입력 생성자(DATE,REPORT 제외)
-	public ReviewDTO(String review_id, String review_member_id, String review_store_id, String review_content,
+	// REVIEW 데이터 입력 생성자(NO,DATE,REPORT 제외)
+	public ReviewDTO(String review_member_id, String review_store_id, String review_content,
 			int review_score_service, int review_score_price, int review_menu_no, int review_score_menu,
 			String review_photo) {
 		super();
-		this.review_id = review_id;
 		this.review_member_id = review_member_id;
 		this.review_store_id = review_store_id;
 		this.review_content = review_content;
@@ -54,22 +53,22 @@ public class ReviewDTO {
 		this.review_photo = review_photo;
 	}
 	  //리뷰 신고데이터 생성자
-		public ReviewDTO(String review_id, String review_member_id, String review_store_id, String review_content,
+		public ReviewDTO(int review_no, String review_member_id, String review_store_id, String review_content,
 				String review_photo) {
 			super();
-			this.review_id = review_id;
+			this.review_no = review_no;
 			this.review_member_id = review_member_id;
 			this.review_store_id = review_store_id;
 			this.review_content = review_content;
 			this.review_photo = review_photo;
 		}
 
-	public String getReview_id() {
-		return review_id;
+	public int getReview_no() {
+		return review_no;
 	}
 
-	public void setReview_id(String review_id) {
-		this.review_id = review_id;
+	public void setReview_no(int review_no) {
+		this.review_no = review_no;
 	}
 
 	public String getReview_member_id() {
@@ -154,7 +153,7 @@ public class ReviewDTO {
 
 	@Override
 	public String toString() {
-		return "ReviewDTO [review_id=" + review_id + ", review_member_id=" + review_member_id + ", review_store_id="
+		return "ReviewDTO [review_id=" + review_no + ", review_member_id=" + review_member_id + ", review_store_id="
 				+ review_store_id + ", review_content=" + review_content + ", review_date=" + review_date
 				+ ", review_score_service=" + review_score_service + ", review_score_price=" + review_score_price
 				+ ", review_menu_no=" + review_menu_no + ", review_score_menu=" + review_score_menu + ", review_photo="

@@ -31,11 +31,11 @@
  where a.store_id=b.menu_store_id) where menu_name like #{search})c,store d where c.menu_store_id=d.store_id
 	</select>
 	<select id="selectStoreListBestScore" parameterType="int" resultType="store">
-		<![CDATA[ SELECT s.* FROM store s,(SELECT ROWNUM, review_store_id,avg FROM( SELECT review_store_id,AVG(review_score_service+review_score_price+review_score_menu)/3 avg FROM review WHERE floor(SYSDATE - review_date) < ${day} GROUP BY review_store_id ORDER BY avg DESC)) re WHERE s.store_id = re.review_store_id AND ROWNUM <=4 ]]>
+		<![CDATA[ SELECT s.* FROM store s,(SELECT ROWNUM, review_store_id,avg FROM( SELECT review_store_id,AVG(review_score_service+review_score_price+review_score_menu)/3 avg FROM review WHERE floor(SYSDATE - review_date) < ${day} GROUP BY review_store_id ORDER BY avg DESC)) re WHERE s.store_id = re.review_store_id]]>
 	</select>
 	<select id="selectStoreListBestReviewCount" parameterType="int" resultType="store">
 		<![CDATA[ SELECT * FROM  store WHERE store_id IN (SELECT review_store_id FROM (SELECT ROWNUM,re.* FROM 
-		(SELECT review_store_id,COUNT(*) c FROM review WHERE floor(SYSDATE - review_date) < #{day} GROUP BY review_store_id ORDER BY c DESC)re)WHERE ROWNUM <=4) ]]>
+		(SELECT review_store_id,COUNT(*) c FROM review WHERE floor(SYSDATE - review_date) < #{day} GROUP BY review_store_id ORDER BY c DESC)re)) ]]>
 	</select>
 	
 	<update id="updateStoreCode" parameterType="HashMap">

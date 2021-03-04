@@ -50,8 +50,11 @@ public class MainController {
 		this.adService = adService;
 	}
 	@RequestMapping("storeDetailView.do")
-	public String storeview(HttpServletRequest request) {
+	public String storeDetailView(HttpServletRequest request) {
 		String store_id = request.getParameter("store_id");
+		if(store_id == null) {
+			store_id = (String)request.getAttribute("store_id");
+		}
 		System.out.println(store_id);
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		List<ReviewDTO> reviewList = storeService.selectStoreReviewList(store_id);
@@ -90,13 +93,6 @@ public class MainController {
 		request.setAttribute("weekScoreList", weekScoreList);
 		request.setAttribute("monthReviewCountList", monthReviewCountList);
 		request.setAttribute("weekReviewCountList", weekReviewCountList);
-		
-		
- 		StoreDTO dto = storeService.selectStoreDTO("곰타코_1");
- 		request.setAttribute("dto",dto);
- 		System.out.println(dto.getStore_name());
-		System.out.println(dto.getStore_id());
- 		System.out.println(dto.getStore_photo());
 		
 		return "main";
 	
@@ -330,7 +326,7 @@ public class MainController {
 			session.setAttribute("grade",dto.getMember_grade());
 			session.setAttribute("category",dto.getMember_category());
 			System.out.println("로그인 성공");
-			return "main";
+			return main(request);
 		}
 		}catch (NullPointerException e) {
 			session.setAttribute("login", false);
@@ -339,9 +335,9 @@ public class MainController {
 		return "login";
 	}
 	@RequestMapping("/logout.do")
-	public String logOut(HttpSession session) {
+	public String logOut(HttpSession session,HttpServletRequest request) {
 		session.invalidate();
-		return "main";
+		return main(request);
 	}
     
 	@RequestMapping("/registerView.do")
@@ -462,12 +458,8 @@ public class MainController {
 		try {
 			String originalFileName = mf.getOriginalFilename();
 			long fileSize = mf.getSize();
-			System.out.println("originalFileName : " + originalFileName);
-			System.out.println("fileSize : " + fileSize);
 			File parentPath = new File(path);
 			if(!parentPath.exists()) parentPath.mkdirs();
-			
-			//파일 업로드
 			pathFile = new File(path + originalFileName);
 			mf.transferTo(pathFile);
 		} catch(Exception e) {
@@ -482,12 +474,8 @@ public class MainController {
 				photoFile = new File("");
 			}
 			else {
-				System.out.println("photoFileName : " + photoFileName);
-				System.out.println("fileSize : " + fileSize);
 				File parentPath = new File(path);
 				if(!parentPath.exists()) parentPath.mkdirs();
-				
-				//파일 업로드
 				photoFile = new File(path + photoFileName);
 				photo.transferTo(photoFile);
 			}
@@ -495,7 +483,8 @@ public class MainController {
 			e.printStackTrace();
 		}
 		System.out.println("photoFile : " + photoFile.getName());
-		int count = storeService.registerStore(new StoreDTO(store_id, name, addr, license, member_id, time, introduce, tel, category,0,pathFile.getName(),photoFile.getName(),0));
+		int count = storeService.registerStore(new StoreDTO(store_id, name, addr, license, member_id, time, 
+				introduce, tel, category,0,pathFile.getName(),photoFile.getName(),0));
 		
 		String[] names = request.getParameterValues("menu_name");
 		String[] prices =  request.getParameterValues("menu_price");
@@ -512,31 +501,22 @@ public class MainController {
 			long fileSize = mf2.getSize();
 			if(fileSize == 0) continue;
 			String originalFileName = mf2.getOriginalFilename();
-			System.out.println("originalFileName : " + originalFileName);
-			System.out.println("fileSize : " + fileSize);
-			
 			String[] fileName = originalFileName.trim().split("[.]");
-			System.out.println("length : " + fileName.length);
-			System.out.println("이름 : " + fileName[0] + " , 자료형  : " + fileName[1]);
-			if(!fileName[1].trim().toLowerCase().equals("jpg") && !fileName[1].trim().toLowerCase().equals("png")) continue;
 			
 			File parentPath = new File(path);
 			if(!parentPath.exists()) parentPath.mkdirs();
-			
-			//파일 업로드
 			String menu_name = fileName[0].trim();
 			count = storeService.updateMenuPhoto(store_id,menu_name,originalFileName);
 			pathFile = new File(path + originalFileName);
 			try {
 				mf2.transferTo(pathFile);
 			} catch (IllegalStateException | IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		memberService.updateMemberGrade(member_id,1);
 		
-		return "main";
+		return main(request);
 	}
 	
 	@RequestMapping("storeCheckListView.do")
@@ -566,7 +546,7 @@ public class MainController {
 		memberService.sendMessage(new MessageDTO(dto.getStore_member_id(),title,content));
 		int count = storeService.updateStoreCode(store_id,1);
 		
-		return "main";
+		return main(request);
 	}
 	
 	@RequestMapping("storeCheckReject.do")
@@ -584,9 +564,8 @@ public class MainController {
   }
 	
 	@RequestMapping("reviewRegisterView.do")
-	public String reviewRegisterView(HttpServletRequest request, HttpSession session) {
+	public String reviewRegisterView(HttpServletRequest request) {
 		String store_id = request.getParameter("store_id");
-//		String store_id = "식당하하_222";
 		
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
@@ -607,7 +586,6 @@ public class MainController {
 		int review_score_price = Integer.parseInt(request.getParameter("review_score_price"))+1;
 		int review_score_service = Integer.parseInt(request.getParameter("review_score_service"))+1;
 		MultipartFile photo = mqrequest.getFile("photo");
-		String review_id = review_member_id+"_"+review_menu_no;
 		System.out.println(review_score_menu+ "," +review_score_price + "," +review_score_service);
 		
 		String path = "C:\\fileupload\\"+review_member_id+"\\"+review_store_id+"\\";
@@ -632,18 +610,19 @@ public class MainController {
 			e.printStackTrace();
 		}
 		System.out.println("photoFile : " + photoFile.getName());
-		try {
-			memberService.registerReview(new ReviewDTO(review_id, review_member_id, review_store_id, review_content, review_score_service, review_score_price, review_menu_no, review_score_menu, photoFile.getName()));
-			return "main";
-		} catch(Exception e) {
-			try {
-				response.setContentType("text/html;charset=utf-8");
-				response.getWriter().write("<script>alert('이미 후기를 등록한 메뉴입니다.다른메뉴를 선택해주세요');history.back();</script>");
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			return null;
-		}
+//		try {
+			memberService.registerReview(new ReviewDTO(review_member_id, review_store_id, review_content, review_score_service, review_score_price, review_menu_no, review_score_menu, photoFile.getName()));
+			request.setAttribute("store_id", review_store_id);
+			return storeDetailView(request);
+//		} catch(Exception e) {
+//			try {
+//				response.setContentType("text/html;charset=utf-8");
+//				response.getWriter().write("<script>alert('이미 후기를 등록한 메뉴입니다.다른메뉴를 선택해주세요');history.back();</script>");
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}
+//			return null;
+//		}
 	}
 	
 	
@@ -777,7 +756,7 @@ public class MainController {
 		String type = fileName.substring(fileName.lastIndexOf(".")+1);
 		
 		response.setContentType("image/"+type);
-   String divide = request.getParameter("divide");
+		String divide = request.getParameter("divide");
 		
 		response.setContentType("image/jpeg");
 		File path = null;
@@ -1164,11 +1143,11 @@ public String adminReportReviewListView(HttpServletRequest request) {
 }
 @RequestMapping("/reviewReportDetailView.do")
 public String reviewReportDetailView(HttpServletRequest request) {
-	String review_id=request.getParameter("review_id");
-	System.out.println(review_id);
+	int review_no= Integer.parseInt(request.getParameter("review_no"));
+	System.out.println(review_no);
 	int pageNo = Integer.parseInt(request.getParameter("pageNo"));
 	System.out.println(pageNo);
-	ReviewDTO dto = memberService.adminSelectReport(review_id);
+	ReviewDTO dto = memberService.adminSelectReport(review_no);
 	if (dto !=null) {
 		request.setAttribute("error", false);
 		request.setAttribute("report", dto);
@@ -1182,14 +1161,14 @@ public String reviewReportDetailView(HttpServletRequest request) {
 }
 @RequestMapping("adminDeleteReportReview.do")
 public String adminDeleteReportReview(HttpServletRequest request,HttpServletResponse response) {
-	String review_id=request.getParameter("review_id");
+	int review_no= Integer.parseInt(request.getParameter("review_no"));
 	String message_member_id=request.getParameter("review_member_id");
 	int pageNo = Integer.parseInt(request.getParameter("pageNo"));
-	String message_title=review_id+"리뷰는 운영방침을 위반하여 삭제처리를 진행했습니다..";
+	String message_title=review_no+"리뷰는 운영방침을 위반하여 삭제처리를 진행했습니다..";
 	String message_content="해당 리뷰를 저희가 자세히 검토한 결과\n운영방침을 위반하는 글을 작성하셔서 삭제처리를 하는 것으로 결정했습니다.\n욕설이나 일방적인 비난은 삼가해주시길 바랍니다\n궁금하신 사항이 있으시면 QnA게시판에 글쓰기를 통해 문의해주세요\n"
 			+ "저희 어플을 사용해주셔서 감사합니다~♡";
 	MessageDTO message = new MessageDTO(message_member_id, message_title, message_content);
-	int count=memberService.adminDeleteReportReview(review_id);
+	int count=memberService.adminDeleteReportReview(review_no);
 	if(count !=0) {
 		try {
 			System.out.println("삭제 성공");
@@ -1226,7 +1205,7 @@ public String adminDeleteReportReview(HttpServletRequest request,HttpServletResp
 }
 @RequestMapping("/adminCanselReportReview.do")
 public String adminCanselReportReview(HttpServletRequest request,HttpServletResponse response) {
-	String review_id=request.getParameter("review_id");
+	int review_no= Integer.parseInt(request.getParameter("review_no"));
 	int pageNo = Integer.parseInt(request.getParameter("pageNo"));
 	String review_store_id=request.getParameter("review_store_id");
 	StoreDTO dto=storeService.selectStoreDTO(review_store_id);
@@ -1236,7 +1215,7 @@ public String adminCanselReportReview(HttpServletRequest request,HttpServletResp
 	String message_content="신고하신 리뷰를 저희가 자세히 검토한 결과\n운영방침을 위반하지않아 삭제처리를 하지 않는것으로 결정했습니다.\n궁금하신 사항이 있으시면 QnA게시판에 글쓰기를 통해 문의해주세요\n"
 			+ "저희 어플을 사용해주셔서 감사합니다~♡";
 	MessageDTO message = new MessageDTO( message_member_id, message_title, message_content);
-	int count=memberService.adminCanselReportReview(review_id);
+	int count=memberService.adminCanselReportReview(review_no);
 	if(count !=0) {
 		try {
 			System.out.println("신고 철회 성공");
@@ -1275,6 +1254,7 @@ public String adminCanselReportReview(HttpServletRequest request,HttpServletResp
 @RequestMapping("/searchDetailView.do")
 public String searchDetailView(HttpServletRequest request) {
 	String search = request.getParameter("search");
+//	String addr = request.getParameter("addr");
 	String addr = "서울 용산구";
 	System.out.println("search : " + search);
 	List<StoreDTO> menuList = storeService.selectStoreListDetail(search,addr);

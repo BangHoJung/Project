@@ -41,7 +41,7 @@
  </c:if>
     <c:forEach var="list" items="${requestScope.report}">
         <tr class="message_items">
-           <td><a href="reviewReportDetailView.do?review_id=${list.review_id}&pageNo=${page.currentPage}">신고된 ${list.review_member_id}님의 리뷰</a></td>
+           <td><a href="reviewReportDetailView.do?review_no=${list.review_no}&pageNo=${page.currentPage}">신고된 ${list.review_member_id}님의 리뷰</a></td>
         </tr>
     </c:forEach>
     </tbody>

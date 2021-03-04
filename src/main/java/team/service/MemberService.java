@@ -144,15 +144,8 @@ public class MemberService {
 	public NoticeDTO selectNotice(int notice_no) {
 		return mapper.selectNotice(notice_no);
 	}
-	public int registerReview(ReviewDTO reviewDTO) throws Exception {
-		int count = mapper.registerReview(reviewDTO);
-		if(count == 0) {
-			System.out.println("exist");
-			throw new Exception("exist");
-		}
-		else {
-			return count;
-		}
+	public int registerReview(ReviewDTO reviewDTO) {
+		return mapper.registerReview(reviewDTO);
 	}
 	//2021-02-28 추가
 	public int selectNoticeCount() {
@@ -179,16 +172,16 @@ public class MemberService {
 		return mapper.adminSelectReportCount();
 	}
 
-	public ReviewDTO adminSelectReport(String review_id) {
-		return mapper.adminSelectReport(review_id);
+	public ReviewDTO adminSelectReport(int review_no) {
+		return mapper.adminSelectReport(review_no);
 	}
 
-	public int adminDeleteReportReview(String review_id) {
-		return mapper.adminDeleteReportReview(review_id);
+	public int adminDeleteReportReview(int review_no) {
+		return mapper.adminDeleteReportReview(review_no);
 	}
 
-	public int adminCanselReportReview(String review_id) {
-		return mapper.adminCanselReportReview(review_id);
+	public int adminCanselReportReview(int review_no) {
+		return mapper.adminCanselReportReview(review_no);
 	}
 
 	public int sendMessage(MessageDTO message) {

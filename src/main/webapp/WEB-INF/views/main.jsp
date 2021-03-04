@@ -25,7 +25,7 @@
 		$("#btn_search").click(function() {
 			location.href="searchDetailView.do?search="+$("input[name='search']").val();
 		});
-	})
+	});
 </script>
 </head>
 <body>
@@ -36,9 +36,17 @@
 		    <div><img src="https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_960_720.jpg"></div>
   		</div>
 		<div id="theme">
-			<h3>월간 베스트!</h3><br>
-				<div class="figure">
-				<figure>
+			<h3>월간 별점 베스트!</h3> <a href="bestStoreListView.do?type=month_score">더보기</a> <br>
+			<div class="figure">
+				<c:forEach var="dto" items="${monthScoreList}" begin="0" end="4" >
+					<figure>
+						<figcaption>
+							<a href="storeDetailView.do?store_id=${dto.store_id}"><img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}&divide=store" class="img"></a>
+							<p>${dto.store_name}</p>
+						</figcaption>
+					</figure>
+				</c:forEach>
+				<%-- <figure>
 					<figcaption>
 					<a href="storeDetailView.do?store_id=${requestScope.dto.store_id}"><img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}&divide=store" class="img"></a>
 					<p>${requestScope.dto.store_name}</p>
@@ -59,9 +67,42 @@
 					<figcaption>
 					figure
 					</figcaption>
-				</figure>
-				</div>
-			<h3>주간 베스트!</h3><br>
+				</figure> --%>
+			</div>
+			<h3>월간 리뷰수 베스트!</h3> <a href="bestStoreListView.do?type=month_review">더보기</a> <br>
+			<div class="figure">
+				<c:forEach var="dto" items="${monthReviewCountList}" begin="0" end="4">
+					<figure>
+						<figcaption>
+							<a href="storeDetailView.do?store_id=${dto.store_id}"><img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}&divide=store" class="img"></a>
+							<p>${dto.store_name}</p>
+						</figcaption>
+					</figure>
+				</c:forEach>
+			</div>
+			<h3>주간 별점 베스트!</h3> <a href="#none">더보기</a> <br>
+			<div class="figure">
+				<c:forEach var="dto" items="${weekScoreList}" begin="0" end="4">
+					<figure>
+						<figcaption>
+							<a href="storeDetailView.do?store_id=${dto.store_id}"><img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}&divide=store" class="img"></a>
+							<p>${dto.store_name}</p>
+						</figcaption>
+					</figure>
+				</c:forEach>
+			</div>
+			<h3>주간 리뷰수 베스트!</h3> <a href="#none">더보기</a> <br>
+			<div class="figure">
+				<c:forEach var="dto" items="${weekReviewCountList}" begin="0" end="4">
+					<figure>
+						<figcaption>
+							<a href="storeDetailView.do?store_id=${dto.store_id}"><img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}&divide=store" class="img"></a>
+							<p>${dto.store_name}</p>
+						</figcaption>
+					</figure>
+				</c:forEach>
+			</div>
+			<!-- <h3>주간 베스트!</h3><br>
 				<div class="figure">
 				<figure>
 					<figcaption>
@@ -98,7 +139,7 @@
 					<figcaption>
 					</figcaption>
 				</figure>
-				</div>
+				</div> -->
 		</div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
