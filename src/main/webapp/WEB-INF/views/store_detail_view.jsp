@@ -312,7 +312,7 @@ width: 30%;
 <div class="col-md-12" style="text-align: right;">
 
   <span style="color:#FA0050; font-size: 30px;" > ★ </span> 
-  <span style="font-size: 25px;">4.5점</span>   <span style="font-size: 25px;"> ${requestScope.dto.store_name}</span>
+  <span style="font-size: 25px;"><%-- ${requestScope.dto.review_score} --%>5</span>   <span style="font-size: 25px;"> ${requestScope.dto.store_name}</span>
 
 </div>
  </div>
