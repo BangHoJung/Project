@@ -91,10 +91,10 @@ public class MainController {
 				JSONArray result = new JSONArray();
 				for(int i=0;i<list.size();i++) {
 				JSONObject json = new JSONObject();
-				json.put("review_id",list.get(i).getReview_id());
+				json.put("review_no",list.get(i).getReview_no());
 				json.put("review_member_id",list.get(i).getReview_member_id());
 				json.put("review_store_id",list.get(i).getReview_store_id());
-				json.put("review_content",list.get(i).getReview_id());
+				json.put("review_content",list.get(i).getReview_content());
 				json.put("review_date",list.get(i).getReview_date());
 				json.put("review_score_service",list.get(i).getReview_score_service());
 				json.put("review_score_price",list.get(i).getReview_score_price());
