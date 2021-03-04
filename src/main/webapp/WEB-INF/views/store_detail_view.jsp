@@ -178,7 +178,7 @@
 	        			console.log(result);
 	        			var arr=result.result;
 	        			for(i=0;i<arr.length;i++){
-	        				text +="<tr><td>"+arr[i].review_id+"</td></tr>";
+	        				text +="<tr><td>"+arr[i].review_no+"</td></tr>";
 	        			    text +="<tr><td><img src='review_image_load.do?review_member_id="+arr[i].review_member_id+"&review_store_id="+arr[i].review_store_id+"&fileName="+arr[i].review_photo+"'></td></tr>"
 	        			}
 	        		text += "</table>";
