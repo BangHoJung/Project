@@ -133,6 +133,7 @@ public class MainController {
 		
 		List<StoreDTO> monthReviewCountList = storeService.selectStoreListBestReviewCount(30);
 		List<StoreDTO> weekReviewCountList = storeService.selectStoreListBestReviewCount(7);
+		
 		System.out.println(monthScoreList);
 		System.out.println(weekScoreList);
 		System.out.println(monthReviewCountList);
