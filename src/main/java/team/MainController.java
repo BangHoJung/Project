@@ -861,7 +861,7 @@ public class MainController {
    @RequestMapping("/AdListView.do")
 	public String adList(HttpServletRequest request) {
 		int page = 1;
-		int pageOfContentCount =10;
+		int pageOfContentCount = 10;
 		//페이지 셋팅
 		if(request.getParameter("pageNo") != null)
 			page = Integer.parseInt(request.getParameter("pageNo"));
@@ -884,11 +884,11 @@ public class MainController {
 			ad_no = Integer.parseInt(request.getParameter("ad_no"));
 		else
 			ad_no = (int)request.getAttribute("ad_no");
-		System.out.println(ad_no);
 		// 해당 게시글 조회수 증가
 		//adService.addCount(ad_no);
 		//2. DB 해당 게시글 정보 읽어옴
 		AdDTO dto = adService.selectAd(ad_no);
+		System.out.println(dto);
 				// 첨부파일 로드 부분 필요
 		//3. request에 BoardDTO 저장
 		request.setAttribute("ad", dto);
@@ -911,14 +911,15 @@ public class MainController {
 	public String adWriteAction(HttpServletRequest request) {
 		int ad_no = adService.newAd_no();
 		String ad_store_id = request.getParameter("ad_store_id");
-		int ad_status = 0;
+		int ad_status = 0;			// 추후 detail_view에서 버튼으로 변경가능하게
 		String ad_content = request.getParameter("ad_content");
 		adService.insertAd(new AdDTO(ad_no, ad_store_id, ad_status, ad_content));
 		AdDTO dto = adService.selectAd(ad_no);
 		request.setAttribute("ad", dto);
-		//request.setAttribute("ad_no", ad_no);
 		
 					//파일 첨부기능 작성 필요 
+					
+					// 뒤로가기 기능 막기 (게시글 중복작성)
 		
 		return "ad_detail_view";
 	}

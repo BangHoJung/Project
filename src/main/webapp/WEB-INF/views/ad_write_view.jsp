@@ -6,13 +6,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>광고 신청</title>
+<title>광고 신청 내역</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/ad_write_view.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 </head>
 <body>
+
+	<c:if test="${sessionScope.login == null  || sessionScope.grade == 0 }">		
+				<script>
+					alert("권한이 없습니다.");
+					location.href="/";
+				</script>
+	</c:if>
+
 	
 	<jsp:include page="/templete/mypage_header.jsp"></jsp:include>
 
@@ -26,7 +35,6 @@
 					<tr>
 						<th>작성자</th>
 						<td>
-							<%-- <input type="hidden" name="ad_store_id" value="${sessionScope.ad_store_id }"> --%>
 							${sessionScope.id }		
 						</td>
 					</tr>
@@ -63,7 +71,7 @@
 				</table>
 			</form>
 		</div>	
-		
+	</div>
 	
 	<jsp:include page="footer.jsp"></jsp:include>
 	

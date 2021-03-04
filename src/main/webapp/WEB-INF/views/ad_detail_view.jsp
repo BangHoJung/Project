@@ -5,13 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> </title>
+<title>광고 신청 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="../css/ad_detail_view.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 </head>
 <body>
+
+	<c:if test="${sessionScope.login == null  || sessionScope.grade == 0 }">		
+				<script>
+					alert("권한이 없습니다.");
+					location.href="/";
+				</script>
+	</c:if>
 
 	<jsp:include page="/templete/mypage_header.jsp"></jsp:include>
 
@@ -29,10 +37,11 @@
 						</td>
 					</tr>
 					<tr>
-						<td>
-						<c:choose>
-							<c:when test="${requestSope.ad.ad_status==0}">미승인</c:when>
-							<c:otherwise>승인</c:otherwise>
+						<th>승인</th>
+						<td>	<!-- 버튼 승인->미승인 전환필요 / status가 0인데도 otherwise 출력  -->
+						<c:choose>			
+							<c:when test="${requestScope.ad_status != 0}">완료</c:when>
+							<c:otherwise>확인안함</c:otherwise>		
 						</c:choose>
 						</td>
 					</tr>
