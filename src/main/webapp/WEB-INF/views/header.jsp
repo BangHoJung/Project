@@ -144,6 +144,26 @@
 		margin-right:10px;
 	}
 </style>
+<script type="text/javascript">
+$(function(){
+	$("#random").click(function(){
+		alert('추천 메뉴는 ooo입니다');
+	})
+	$("#btn_search").click(function() {
+		var addr;
+		if(${sessionScope.login == null} || ${sessionScope.login == false}) {
+			addr = "";
+		}
+		else {
+			var temp = "${sessionScope.address}";
+			var temp2 = temp.split("구");
+			console.log(temp2);
+			addr = temp2[0] + "구";
+		}
+		location.href="searchDetailView.do?addr="+addr+"&search="+$("input[name='search']").val();
+	});
+});
+</script>
 </head>
 <body>
 	<div id="header_box"></div>

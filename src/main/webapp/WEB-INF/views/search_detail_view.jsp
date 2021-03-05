@@ -38,16 +38,16 @@
 			<img src="image_load.do?writer=${dto.store_id }&fileName=${dto.store_photo}&divide=store"><br>
 			<div class="search_store_detail">
 			<p id="result_name">${dto.store_name }</p>
-			<p id="result_addr">${dto.store_addr }</p>
+			<p id="result_addr">${dto.store_addr }</p><p id="result_addr">&nbsp|&nbsp${dto.store_time}</p>
+			<p id="result_intro">${dto.store_introduce }</p>
 			<p>조회수 : ${dto.store_count }  
 				리뷰수 : <fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10} " /> ${review_count }
 				리뷰 별점 : <fmt:formatNumber  value="${dto.review%10}" pattern=".0" />
-			<p>${dto.store_time}</p><br><br>
-			<p>${dto.store_category}</p>
+			<p id="result_category">${dto.store_category}</p>
 			</div>
 			<%-- 리뷰수 : ${dto.review } --%>
 		</a>
-		<br><hr>
+		<hr>
 		</c:forEach>
 		</div>
 	</div>
