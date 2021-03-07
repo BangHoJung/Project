@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -316,6 +317,8 @@ width: 30%;
 </style>
 </head>
 <body>
+<fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10} " /> 
+
 <jsp:include page="header.jsp"></jsp:include>
 <form action="">
 <div class="container body">
@@ -335,8 +338,9 @@ width: 30%;
 <div class="row" style="width:1000px;">
 <div class="col-md-12" style="text-align: right;">
 
+  <span style="font-size: 25px;"> ${requestScope.dto.store_name}</span>
   <span style="color:#FA0050; font-size: 30px;" > ★ </span> 
-  <span style="font-size: 25px;"><%-- ${requestScope.dto.review_score} --%>5</span>   <span style="font-size: 25px;"> ${requestScope.dto.store_name}</span>
+  <span style="font-size: 25px;"><fmt:formatNumber  value="${dto.review%10}" pattern=".0" /> (${review_count})</span>   
 
 </div>
  </div>
@@ -400,7 +404,7 @@ ${requestScope.dto.store_category}
 
 <div class="row  midbody" style="margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px; display:flex; align-items: center;">
 
- <div class="col-md-4 main" style="font-size: 20px; font-weight: bold;padding: 1%; " ><p style="margin: 0px;">리뷰</p></div>  <!--  store_id=${dto.store_id}-->
+ <div class="col-md-4 main" style="font-size: 20px; font-weight: bold;padding: 1%; " ><p style="margin: 0px;">리뷰 (${review_count }건 평가 )</p></div>
   <div class="col-md-4 col-md-offset-4 "  style="text-align: right;"> <span> 전체보기 | 좋아요보기 </span> <a href="reviewRegisterView.do?store_id=${dto.store_id}" style=" background-color:  #FA0050; color: white; width:100px; border: none; padding: 1%; border-radius: 5px;"> 리뷰쓰기</a></div>
 </div>
 
