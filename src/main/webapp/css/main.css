@@ -76,11 +76,13 @@
 	
 	.slider {
 		margin-bottom: 30px;
+		width: 950px;
+		background-color: white !important;
 	}
 	
 	.slider img {
 		width: 100%;
-		height: 500px;
+		height: 1500px;
 	}
 	
 	.bx-wrapper {
@@ -91,6 +93,7 @@
 		display: none;
 	}
 	.bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto {
+		display:none;
 		bottom: 20px;
 		width: 100%;
 	}
