@@ -52,7 +52,7 @@
            
 		});
 	    	$("#btn_parking").click(function() {
-	    		$(this).next().slideToggle().siblings("map_cafe").slideUp();
+	    		//$(this).next().slideToggle().siblings("map_cafe").slideUp();
 	    	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 	    	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -346,21 +346,22 @@ width:100%;
 padding: 1%;
 border-radius: 10px 10px 0 0;
 }
-.btn_cafe{
-background-color: #FAED7D;
-}
-.btn_parking{
-border-right: none;
-background-color: #6B66FF;
-}
 
+table{
+width: 100%;
+}
+table, th, td, tr{
+border: none;
+background-color: #F6F6F6;
+text-align: center;
+}
 </style>
 </head>
 <body>
 
 <jsp:include page="header.jsp"></jsp:include>
 <form action="">
-<div class="container-fluid">
+<div class="container">
 
 <div class="row midbody">
 <div class="col-md-4 main ">
@@ -408,14 +409,26 @@ ${requestScope.dto.store_category}
   <div> ${requestScope.dto.store_time}</div>
 </div>
 <div class="Sum">
-<div class="menu"> 메뉴</div> 
-<div>
+<div class="menue"> 메뉴</div> 
+
+<div   style="width: 100%;">
+<table>
  <c:forEach var="menu" items="${requestScope.menuList}">
-<div>  ${menu.menu_name}   
- ---------------------------------------------------------------------------------------------------------------------------------------
-  ${menu.menu_price}</div>
-<br>
+<tr>
+<th colspan="2">
+  ${menu.menu_name}   
+    </th>
+  <td>
+    ----------------------------------------------------------------------------------------
+  </td>
+  <td colspan="2">
+  ${menu.menu_price}
+    </td>
+    </tr>
+  
+
  </c:forEach>
+  </table>
  </div>
 </div>
 
