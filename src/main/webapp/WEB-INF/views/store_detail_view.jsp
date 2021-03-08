@@ -357,7 +357,6 @@ background-color: #6B66FF;
 </style>
 </head>
 <body>
-<fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10} " /> 
 
 <jsp:include page="header.jsp"></jsp:include>
 <form action="">
@@ -380,6 +379,7 @@ background-color: #6B66FF;
 
   <span style="font-size: 25px;"> ${requestScope.dto.store_name}</span>
   <span style="color:#FA0050; font-size: 30px;" > ★ </span> 
+  <fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10} " /> 
   <span style="font-size: 25px;"><fmt:formatNumber  value="${dto.review%10}" pattern=".0" /> (${review_count})</span>   
 
 </div>
@@ -408,7 +408,7 @@ ${requestScope.dto.store_category}
   <div> ${requestScope.dto.store_time}</div>
 </div>
 <div class="Sum">
-<div class="menue"> 메뉴</div> 
+<div class="menu"> 메뉴</div> 
 <div>
  <c:forEach var="menu" items="${requestScope.menuList}">
 <div>  ${menu.menu_name}   

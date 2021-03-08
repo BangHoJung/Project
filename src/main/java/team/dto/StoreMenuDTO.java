@@ -33,8 +33,7 @@ public class StoreMenuDTO {
 		this.menu_photo = menu_photo;
 	}
 	
-	
-
+	// 메뉴 정보 + 메뉴별점(DB)
 	public StoreMenuDTO(int menu_no, String menu_store_id, String menu_name, int menu_price, String menu_photo,
 			double menu_score) {
 		super();
