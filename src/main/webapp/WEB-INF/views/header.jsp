@@ -24,18 +24,21 @@
 		background-color:#fa0050;
 	}
 	header {
+		width:1000px;
+		margin:0 auto;
 		height: 60px;
+		position: relative;
 	}
 	
 	#logo img {
 		position:absolute;
-		margin-left:30px;
+		margin-left:50px;
 		margin:10px;
 		height: 50px;
 	}
 	#login .search {
 		position:absolute;
-		margin-left: 250px;
+		margin-left: 20%;
 		margin-top: 20px;
 		height: 40px;
 		padding-left:20px;
@@ -56,6 +59,7 @@
 		border: none;
 		margin:10px;
 		font-size: 12px;
+		float:left;
 	}
 	
 	#login .search button {
@@ -65,6 +69,7 @@
 		border: none;
 		color: gray;
 		font-size:12px;
+		float:right;
 	}
 	#login .search button:hover {
 		background-color: #fa0050;
