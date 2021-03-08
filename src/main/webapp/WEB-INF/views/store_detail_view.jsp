@@ -51,7 +51,7 @@
            
 		});
 	    	$("#btn_parking").click(function() {
-			
+	    		$(this).next().slideToggle().siblings("map_cafe").slideUp();
 	    	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 	    	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -107,18 +107,19 @@
 	   
 });
 	    	$("#btn_cafe").click(function() {
+	    		$(this).next().slideToggle().siblings("map_cafe").slideUp();
 		    	//새로운거
 		    	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 		    	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
-		    	var mapContainerParking = document.getElementById('map_parking'), // 지도를 표시할 div 
+		    	var mapContainercafe = document.getElementById('map_cafe'), // 지도를 표시할 div 
 		    	    mapOption = {
 		    	        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
 		    	        level: 3 // 지도의 확대 레벨
 		    	    };  
 
 		    	// 지도를 생성합니다    
-		    	var map_parking = new kakao.maps.Map(mapContainerParking, mapOption); 
+		    	var map_cafe = new kakao.maps.Map(mapContainercafe, mapOption); 
 
 		    	// 장소 검색 객체를 생성합니다
 		    	var ps = new kakao.maps.services.Places(); 
@@ -140,7 +141,7 @@
 	          }       
 	 
 	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-	        map_parking.setBounds(bounds);
+	        map_cafe.setBounds(bounds);
 	       } 
 	      }
 
@@ -149,7 +150,7 @@
 		    
 	    // 마커를 생성하고 지도에 표시합니다
 	   	 var marker = new kakao.maps.Marker({
-	        map: map_parking,
+	        map: map_cafe,
 	        position: new kakao.maps.LatLng(place.y, place.x) 
 	    	});
 
@@ -157,7 +158,7 @@
 	    	kakao.maps.event.addListener(marker, 'click', function() {
 	        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
 	        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
-	        infowindow.open(map_parking, marker);
+	        infowindow.open(map_cafe, marker);
 	   		 });
 	   	}
 		   
@@ -165,7 +166,7 @@
 	    	var count=1;
 	        var text="";
 	        $("#btn_more_review_info").click(function() {
-	      text = "<div>";
+	            text = "<div>";
 	        	count++;
 	        	var data="store_id=${requestScope.dto.store_id}&no="+count;
 	        	$.ajax({
@@ -178,23 +179,24 @@
 	        			console.log(result);
 	        			var arr=result.result;
 	        			for(i=0;i<arr.length;i++){
-	        				text +="<div class='row main' style='margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;'><div class='col-md-12 main' style='text-align: right;'>" 
+	        				text +="<div class='row main' style='background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;'><div class='col-md-12 main' style='  text-align: right;' >" 
                               text += "<input type='hidden'  value='"+arr[i].review_no+"'>"
 	        					text+="<p>"+ arr[i].review_date
 
 	        					if(${sessionScope.id==requestScope.dto.store_member_id}){ 
-	        					text +=" | <button style='border: none; background-color: #F6F6F6;' class='btn_report' type='button' >신고하기</button>"
-	        					}
+	        					text +=" | <button style='border: none; background-color: #F6F6F6;'class='btn_report' type='button' >신고하기</button>"
+	        					
 
-	        					text +="</p>"
-	        					text+="<div class='col-md-2 main' style=' text-align: center; display: flex; flex-direction: column;'><p style='font-weight: bold; font-size: 20px; border: 1px solid gray;' >"
-	        					text +=arr[i].review_member_id+"</p></div><div class='col-md-10' style='border: 1px solid #EAEAEA; text-align: left;'>"
+	        					text +=" </p> "
+	        					}
+	        					text+=" <div class='col-md-2 main' style=' text-align: center; display: flex; flex-direction: column;'><p style='font-weight: bold; font-size: 20px; border: 1px solid gray;' >"
+	        					text +=arr[i].review_member_id+"</p></div><div class='col-md-10' style='border: 1px solid #EAEAEA; display:flex; align-content: center; text-align: left;'>"
 
 	        					if( arr[i].review_photo != null){
 	        						 text +="<img src='review_image_load.do?review_member_id="+arr[i].review_member_id+"&review_store_id="+arr[i].review_store_id+"&fileName="+arr[i].review_photo+"'  class='reviewimg' >"
 	        						}
 	        					text+="<br><span style='white-space: pre-wrap;'>"
-	        					text+=arr[i].review_content+"</span></div></div></div>"
+	        					text+="<p>"+arr[i].review_content+"</p></span></div></div></div>"
 	        			}
 	        		text += "</div>";
 	        		
@@ -217,16 +219,22 @@
 	            console.log(d);
 	        	
 	            
-	        	}
+	          	}
 	        	
 	        	
 	        	
-	        })
-	        }
-	        	
-				
-			});
-	});
+		        })
+		        }
+		        	
+					
+				});
+	        
+	    	$(".btn_total").click(function() {
+	    		$(this).next().slideToggle().siblings(".totalmap").slideUp();
+	    		//$("#btn_parking").click(function() {
+		  });  		//$(this).next().slideToggle().siblings("map_cafe").slideUp();
+		});
+	
     
 /*
     function sample5_execDaumPostcode() {
@@ -261,6 +269,10 @@
 </script>
 
 <style type="text/css">
+.container{
+ width: 1000px !important;
+
+}
 .body, .midbody{
 width: 1000px;
 
@@ -289,16 +301,13 @@ width: 300px;
 width: 100px;
 }
 .menu{
-padding: 2%;
-width: 200px;
+margin: 1% 1%;
+width: 23%;
 height: 150px;
 }
 .menulist{
 display:flex;
-flex-direction:row;
-padding:0px;
-width: 300px;
-left: 20%;
+flex-wrap: wrap; 
 }
 .addr, .tel, .menue, .Food, .time{
 width: 100px;
@@ -313,12 +322,43 @@ margin: 10px 0px;
 .reviewimg{
 width: 30%;
 }
+.see{
+border: none;
+width: 100%;
+padding: 0;
+
+}
+.seebox{
+padding: 0!important;
+}
+.surroundingsbox{
+padding: 0!important;
+}
+.surroundings{
+margin: 0;
+width: 100%;
+}
+.btn_parking, .btn_cafe{
+border: 1px solid black;
+border-bottom: none;
+width:100%;
+padding: 1%;
+border-radius: 10px 10px 0 0;
+}
+.btn_cafe{
+background-color: #FAED7D;
+}
+.btn_parking{
+border-right: none;
+background-color: #6B66FF;
+}
+
 </style>
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
 <form action="">
-<div class="container body">
+<div class="container-fluid">
 
 <div class="row midbody">
 <div class="col-md-4 main ">
@@ -341,7 +381,7 @@ width: 30%;
 </div>
  </div>
  
-<div class="row midbody" style="margin: 2% 0px;background-color:#F6F6F6 ; border-radius: 4px; ">
+<div class="row midbody" style="background-color:#F6F6F6 ; border-radius: 4px; ">
 <div class="col-md-12 main" style="padding: 2%;  ">
 
 <div class="Sum">
@@ -378,17 +418,17 @@ ${requestScope.dto.store_category}
 </div>
 </div>
 
-<div class="row midbody" style="width:1000px;">
-<div class="col-md-12 menulist">
+<div class="row" style="width: 1000px;">
+<div class="col-lg-12 menulist" >
 
 <c:forEach var="menu" items="${menuList}">
 <img src="image_load.do?writer=${dto.store_id}&fileName=${menu.menu_photo}&divide=menu" class="menu" onerror="this.src='img/img_null.png'">
 </c:forEach>
-
+<img alt="" src="img/img_null.png" class="menu">
 </div>
 </div>
 
-<div class="row midbody" style="margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px;">
+<div class="row midbody" style="background-color:#F6F6F6; border-radius: 4px;">
 <div class="col-md-12" >
 
 
@@ -398,7 +438,7 @@ ${requestScope.dto.store_category}
 
 
 
-<div class="row  midbody" style="margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px; display:flex; align-items: center;">
+<div class="row  midbody" style=" background-color:#F6F6F6; border-radius: 4px; display:flex; align-items: center;">
 
  <div class="col-md-4 main" style="font-size: 20px; font-weight: bold;padding: 1%; " ><p style="margin: 0px;">리뷰</p></div>  <!--  store_id=${dto.store_id}-->
   <div class="col-md-4 col-md-offset-4 "  style="text-align: right;"> <span> 전체보기 | 좋아요보기 </span> <a href="reviewRegisterView.do?store_id=${dto.store_id}" style=" background-color:  #FA0050; color: white; width:100px; border: none; padding: 1%; border-radius: 5px;"> 리뷰쓰기</a></div>
@@ -408,41 +448,41 @@ ${requestScope.dto.store_category}
 <div id="review_container_box">
 
 <c:forEach var="review" items="${reviewList}">
-<div class="row main " style="margin: 2% 0px; background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;">
+<div class="row main " style=" background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;">
 
-<div class="col-md-12 main" style="text-align: right; "> 
+<div class="col-md-12 main" style="text-align: right; padding: 0px; "> 
 <input type="hidden"  value="${review.review_no}">
 <p> ${review.review_date}<c:if test="${sessionScope.id==requestScope.dto.store_member_id}"> | <button style="border: none; background-color: #F6F6F6;" class="btn_report" type="button" >신고하기</button></c:if></p>
 <div class="col-md-2 main" style=" text-align: center; display: flex; flex-direction: column;">
-
 <p style="font-weight: bold; font-size: 20px; border: 1px solid gray;" >${review.review_member_id} </p>
 </div>
-<div class="col-md-10" style="border: 1px solid #EAEAEA; text-align: left;">
- 
-   <c:if test="${review.review_photo != null}">
+<div class="col-md-10" style=" padding: 0px; border: 1px solid #EAEAEA; display:flex; align-content: center;  white-space: wrap; word-break:break-all;  text-align: left;">
+<c:if test="${review.review_photo != null}">
    <img src="review_image_load.do?review_member_id=${review.review_member_id}&review_store_id=${review.review_store_id}&fileName=${review.review_photo}"  class="reviewimg" >
-   </c:if>
-   <br>
-  <span style="white-space: pre-wrap;"> ${review.review_content}</span>
+</c:if>
+<br>
+ <p > ${review.review_content}</p>
 </div>
 </div>
 </div>
 </c:forEach>
-
 </div>
-<button id="btn_more_review_info" type="button">더보기</button>
 
-
-
+<div class="row main ">
+<div class="col-md-1 col-md-offset-11 seebox">
+<button id="btn_more_review_info" type="button" class="see">더보기</button>
+</div>
+</div>
 <div class="row midbody">
 <div class="col-md-12 main">
-<button type="button" id="btn_parking">주차장</button><button type="button" id="btn_cafe">카페</button>
-<div id="map_parking" style="width:100%;height:350px;"></div>
+<button type="button" id="btn_parking" class="btn_total" style="width: 100%;">주차장</button>
+<div id="map_parking" class="totalmap" style="width:100%;height:350px; display: none;"></div>
+<button type="button" id="btn_cafe" class="btn_total" style="width: 100%;">카페</button>
+<div id="map_cafe" class="totalmap" style="width:100%;height:350px; display: none;"></div>
 </div>
 </div>
 
 </div>
-
 
 
 </form>
