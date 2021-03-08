@@ -6,6 +6,10 @@
 		margin-top:50px;
 		color: #454545;
 	}
+	.board_container{
+		width: 1000px;
+		margin: 0 auto;
+	}
 	#board_container h3{ 
 		width: 850px;
 		margin:0 auto;

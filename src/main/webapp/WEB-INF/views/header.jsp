@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="" media="screen and (min-width:768px)">
   <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
 <title>Insert title here</title>
 <style type="text/css">
 
@@ -15,18 +17,13 @@
 		margin: 0;
 		padding: 0;
 	}
-	body {
-		width: 1000px;
-		margin: 0 auto;
-		padding:0;
-	}
+	
 	#header_box{
-		width: 1000px;
-		height: 30px;
+		width:100%;
+		height: 60px;
 		background-color:#fa0050;
 	}
 	header {
-		width: 1000px;
 		height: 60px;
 	}
 	
@@ -166,7 +163,10 @@ $(function(){
 </script>
 </head>
 <body>
-	<div id="header_box"></div>
+	<div class="row">
+	<div  class="small-12 columns" id="header_box"></div>
+	</div>
+	<div class="container header_container">
 	<header>
 		<div id="login">
 			<a href="/" id="logo"><img src="/img/mainlogo2.png"></a>
@@ -193,5 +193,6 @@ $(function(){
 		</ul>
 		<button class="right" id="random">#</button>
 	</nav>
+	</div>
 </body>
 </html>
