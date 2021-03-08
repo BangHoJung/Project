@@ -17,6 +17,7 @@ $(function(){
 </script>
 <style type="text/css">
 	#introduce_img{
+		margin:0 auto;
 		width: 1000px;
 	}
 </style>
@@ -24,6 +25,7 @@ $(function(){
 
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+	<div id="introduce_container">
 	<img id="introduce_img" alt="" src="/img/introduce_img.jpg">
 	<h3 id="introduce_title">Taste Factory를 소개 합니다!</h3><br>
 	<div class="introduce_container">
@@ -36,6 +38,7 @@ $(function(){
 			내 주변의 가볼만한 맛집들을 Taste Factory가 알려드려요.<br><br>
 			 당신이 기대하는 가장 정확하고 신뢰하는 맛집을 지금 Taste Factory에서 확인하세요!!
 		</p>
+	</div>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

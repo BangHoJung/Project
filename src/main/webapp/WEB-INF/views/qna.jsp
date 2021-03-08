@@ -23,12 +23,14 @@
 	</script>
 	<style type="text/css">
 		#qna_img{
+			maring:0 auto;
 			width: 1000px;
 		}
 	</style>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+	<div class="board_container">
 	<img id="qna_img" alt="" src="/img/qna_img.jpg">
 	<div id="board_container">
 		<h3>Q&A</h3>
@@ -80,6 +82,7 @@
 				</td>
 			</tr>
 		</table>
+	</div>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>

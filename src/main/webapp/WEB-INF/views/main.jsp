@@ -40,10 +40,11 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+	<div class="main_container">
 		<div class="slider">
-		    <div><img src="https://cdn.pixabay.com/photo/2017/01/31/09/30/raspberry-2023404_960_720.jpg"></div>
-		    <div><img src="https://cdn.pixabay.com/photo/2017/11/16/18/51/kagyana-2955466_960_720.jpg"></div>
-		    <div><img src="https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_960_720.jpg"></div>
+		    <div><img class="slider_img" src="https://cdn.pixabay.com/photo/2017/01/31/09/30/raspberry-2023404_960_720.jpg"></div>
+		    <div><img class="slider_img" src="https://cdn.pixabay.com/photo/2017/11/16/18/51/kagyana-2955466_960_720.jpg"></div>
+		    <div><img class="slider_img" src="https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_960_720.jpg"></div>
   		</div>
 		<div id="theme">
 			<h4>월간 별점 베스트!</h4> <a href="bestStoreListView.do?type=month_score">더보기</a> <br>
@@ -105,6 +106,7 @@
 				</c:forEach>
 			</div>
 		</div>
+	</div>
 <jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
