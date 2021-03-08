@@ -42,4 +42,8 @@ public interface StoreMapper {
 	
 	List<ReviewDTO> selectStoreReviewListMore(HashMap<String, Object> map);
 
+	int updateStoreCount(String store_id);
+
+	StoreDTO selectStoreDTODetail(String store_id);
+
 }

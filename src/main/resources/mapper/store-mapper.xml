@@ -25,6 +25,10 @@
 	<select id="selectStoreMenuList" parameterType="String" resultType="menu">
 		SELECT * FROM store_menu WHERE menu_store_id = #{store_id}
 	</select>
+	<select id="selectStoreDTODetail" parameterType="String" resultType="store">
+		SELECT st.*, (SELECT TRUNC(NVL(AVG(s)/3+COUNT(s)*10,0),1) FROM (SELECT review_score_service+review_score_price+review_score_menu s,review.* FROM review) r 
+		  WHERE r.review_store_id = st.store_id) review FROM store st WHERE store_id=#{store_id}
+	</select>
 	<select id="selectStoreListDetail" parameterType="HashMap" resultType="store">
 		  select d.*, (SELECT TRUNC(NVL(AVG(s)/3+COUNT(s)*10,0),1) FROM (SELECT review_score_service+review_score_price+review_score_menu s,review.* FROM review) r 
 		  WHERE r.review_store_id = d.store_id) review from (select distinct menu_store_id from (select b.* from 
@@ -46,6 +50,9 @@
 	</update>
 	<update id="updateMenuPhoto" parameterType="HashMap">
 		UPDATE store_menu SET menu_photo = #{menu_photo} WHERE menu_store_id=#{store_id} AND menu_name = #{menu_name}
+	</update>
+	<update id="updateStoreCount" parameterType="String">
+		UPDATE store SET store_count = store_count+1 WHERE store_id=#{store_id}		
 	</update>
 	
 	<delete id="deleteStoreDTO" parameterType="String">

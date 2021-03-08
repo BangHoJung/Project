@@ -91,4 +91,13 @@ public List<ReviewDTO> selectStoreReviewList(String store_id) {
 		map.put("no", no);
 		return storeMapper.selectStoreReviewListMore(map);
 	}
+
+	public int updateStoreCount(String store_id) {
+		return storeMapper.updateStoreCount(store_id);
+		
+	}
+
+	public StoreDTO selectStoreDetailDTO(String store_id) {
+		return storeMapper.selectStoreDTODetail(store_id);
+	}
 }

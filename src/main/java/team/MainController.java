@@ -60,23 +60,21 @@ public class MainController {
 			store_id = (String)request.getAttribute("store_id");
 		}
 		System.out.println(store_id);
-		StoreDTO dto = storeService.selectStoreDTO(store_id);
+		StoreDTO dto = storeService.selectStoreDetailDTO(store_id);
 		List<ReviewDTO> reviewList = storeService.selectStoreReviewList(store_id);
 	    for(int i=0;i<reviewList.size();i++) {
 	    	System.out.println(reviewList.get(i).toString());
 	      
 	    }
 		
-		
-		
 		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
 		System.out.println(menuList.toString());
-		String store_tel = request.getParameter("store_tel");
-		System.out.println(store_tel);
 		request.setAttribute("menuList", menuList);
 		request.setAttribute("dto", dto);
 		request.setAttribute("reviewList",reviewList);
 		System.out.println(dto.getStore_name());
+		
+		int count = storeService.updateStoreCount(store_id);
 		
 		return "store_detail_view";
 	}
@@ -130,7 +128,6 @@ public class MainController {
 	public String main(HttpServletRequest request) {
 		List<StoreDTO> monthScoreList = storeService.selectStoreListBestScore(30);
 		List<StoreDTO> weekScoreList = storeService.selectStoreListBestScore(7);
-		
 		List<StoreDTO> monthReviewCountList = storeService.selectStoreListBestReviewCount(30);
 		List<StoreDTO> weekReviewCountList = storeService.selectStoreListBestReviewCount(7);
 		
@@ -481,12 +478,32 @@ public class MainController {
 	
 	
 	@RequestMapping("/storeRegisterView.do")
-	public String storeRegisterView() {
+	public String storeRegisterView(HttpServletResponse response, HttpSession session) {
+		if(session.getAttribute("login") == null || (boolean)session.getAttribute("login") == false) {
+			try {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("<script>alert('로그인 후 이용해주세요');history.back();</script>");
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		return "store_register";
 	}
 	
 	@RequestMapping("/storeRegisterAction.do")
-	public String storeRegisterAction(HttpServletRequest request,MultipartHttpServletRequest mqRequest,HttpSession session) {
+	public String storeRegisterAction(HttpServletRequest request,MultipartHttpServletRequest mqRequest,HttpServletResponse response, HttpSession session) {
+		if(session.getAttribute("login") == null || (boolean)session.getAttribute("login") == false) {
+			try {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("<script>alert('로그인 세션이 종료되었습니다');location.href='"+request.getContextPath()+"/main.jsp';</script>");
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		String member_id = (String) session.getAttribute("id");
 		String name = request.getParameter("name");
 		String tel = request.getParameter("tel1")+"-"+request.getParameter("tel2")+"-"+request.getParameter("tel3");
@@ -570,14 +587,36 @@ public class MainController {
 	}
 	
 	@RequestMapping("storeCheckListView.do")
-	public String storeCheckListView(HttpServletRequest request, HttpSession session) {
+	public String storeCheckListView(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		if(session.getAttribute("login") == null || (boolean)session.getAttribute("login") == false || (int)session.getAttribute("grade") !=2) {
+			try {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("<script>alert('관리자만 이용할 수 있는 기능입니다.');history.back();</script>");
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		List<StoreDTO> list = storeService.selectStoreListCode(0);
 		request.setAttribute("list", list);
 		return "store_check_list";
 	}
 	
 	@RequestMapping("storeCheckView.do")
-	public String storeCheckView(HttpServletRequest request, HttpServletResponse response) {
+	public String storeCheckView(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+		if(session.getAttribute("login") == null || (boolean)session.getAttribute("login") == false || (int)session.getAttribute("grade") !=2) {
+			try {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("<script>alert('관리자만 이용할 수 있는 기능입니다.');history.back();</script>");
+				return null;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		String store_id = request.getParameter("store_id");
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		System.out.println(dto.toString());
@@ -670,19 +709,9 @@ public class MainController {
 			e.printStackTrace();
 		}
 		System.out.println("photoFile : " + photoFile.getName());
-//		try {
 			memberService.registerReview(new ReviewDTO(review_member_id, review_store_id, review_content, review_score_service, review_score_price, review_menu_no, review_score_menu, photoFile.getName()));
 			request.setAttribute("store_id", review_store_id);
 			return storeDetailView(request);
-//		} catch(Exception e) {
-//			try {
-//				response.setContentType("text/html;charset=utf-8");
-//				response.getWriter().write("<script>alert('이미 후기를 등록한 메뉴입니다.다른메뉴를 선택해주세요');history.back();</script>");
-//			} catch (IOException e1) {
-//				e1.printStackTrace();
-//			}
-//			return null;
-//		}
 	}
 	
 	@RequestMapping("bestStoreListView.do")
