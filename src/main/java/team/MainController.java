@@ -66,7 +66,7 @@ public class MainController {
 	    	System.out.println(reviewList.get(i).toString());
 	      
 	    }
-		
+//		List<StoreMenuDTO> menuList = storeService.selectStoreMenuDetailList(store_id);
 		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
 		System.out.println(menuList.toString());
 		request.setAttribute("menuList", menuList);
