@@ -25,29 +25,28 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<img alt="" src="../img/food_search.png" id="food_search">
 	<div class="container">
-	<div class="search_detail">
-	<div class="search_result">
-		<c:forEach var="dto" items="${list }">
-		<a href=""storeDetailView.do?store_id=${dto.store_id }">
-			<img src="image_load.do?writer=${dto.store_id }&fileName=${dto.store_photo}&divide=store"><br>
-			<div class="search_store_detail">
-			<p id="result_name">${dto.store_name }</p>
-			<p id="result_addr">${dto.store_addr }</p><p id="result_addr">&nbsp|&nbsp${dto.store_time}</p>
-			<p id="result_intro">${dto.store_introduce }</p>
-			<p>조회수 : ${dto.store_count }  
-				리뷰수 : <fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10} " /> ${review_count }
-				리뷰 별점 : <fmt:formatNumber  value="${dto.review%10}" pattern=".0" />
-			<p id="result_category">${dto.store_category}</p>
+		<img alt="" src="../img/food_search.png" id="food_search">
+		<div class="search_detail">
+			<div class="search_result">
+				<c:forEach var="dto" items="${list }">
+					<a href="storeDetailView.do?store_id=${dto.store_id }">
+						<img src="image_load.do?writer=${dto.store_id }&fileName=${dto.store_photo}&divide=store"><br>
+						<div class="search_store_detail">
+							<p id="result_name">${dto.store_name }</p>
+							<p id="result_addr">${dto.store_addr }</p><p id="result_addr">&nbsp|&nbsp${dto.store_time}</p>
+							<p id="result_intro">${dto.store_introduce }</p>
+							<p>조회수 : ${dto.store_count }  
+							리뷰수 : <fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10} " /> ${review_count }
+							리뷰 별점 : <fmt:formatNumber  value="${dto.review%10}" pattern=".0" />
+							<p id="result_category">${dto.store_category}</p>
+						</div>
+					</a>
+					<hr>
+				</c:forEach>
+			</div>
 		</div>
-		</a>
-		<hr>
-	</c:forEach>
 	</div>
-	</div>
-	</div>
-	
 	
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
