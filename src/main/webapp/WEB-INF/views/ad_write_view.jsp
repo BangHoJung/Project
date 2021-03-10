@@ -35,6 +35,7 @@
 					<tr>
 						<th>작성자</th>
 						<td>
+							<input type="hidden" name="member_id" value="${sessionScope.id }">
 							${sessionScope.id }		
 						</td>
 					</tr>
