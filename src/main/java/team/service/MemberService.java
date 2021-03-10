@@ -20,6 +20,9 @@ public class MemberService {
 	public MemberService(MemberMapper mapper) {
 		this.mapper = mapper;
 	}
+	public List<WishlistDTO> selectWishlist(String member_id) {
+		return mapper.selectWishlist(member_id);
+	}
 
 	public MemberDTO loginMember(String id, String pass) {
        System.out.println("Serivce id: "+id);
