@@ -10,6 +10,7 @@ import team.dto.MemberDTO;
 import team.dto.MessageDTO;
 import team.dto.NoticeDTO;
 import team.dto.ReviewDTO;
+import team.dto.WishDTO;
 import team.mapper.MemberMapper;
 
 @Service
@@ -194,6 +195,28 @@ public class MemberService {
 	    map.put("grade",grade);
 		return mapper.updateMemberGrade(map);
 		
+	}
+	public WishDTO selectWishOne(String store_id, String member_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id",member_id);
+		map.put("store_id",store_id);
+		return mapper.selectWishOne(map);
+	}
+	public int businessReportAction(int review_no) {
+		return mapper.businessReportAction(review_no);
+	}
+	public int insertWishList(String member_id, String store_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	    map.put("member_id",member_id);
+	    map.put("store_id",store_id);
+		return mapper.insertWishList(map);
+	}
+
+	public int deleteWishList(String member_id, String store_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	    map.put("member_id",member_id);
+	    map.put("store_id",store_id);
+		return mapper.deleteWishList(map);
 	}
 	
 }

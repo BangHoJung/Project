@@ -99,4 +99,16 @@ select message_no,message_member_id,message_title,message_content,message_date,m
 	<insert id="registerReview" parameterType="review">
 		INSERT INTO review(review_no,review_member_id,review_store_id,review_content,review_score_service,review_score_price,review_menu_no,review_score_menu,review_photo) VALUES(REVIEW_NO_SEQ.NEXTVAL,#{review_member_id},#{review_store_id},#{review_content},#{review_score_service},#{review_score_price},#{review_menu_no},#{review_score_menu},#{review_photo})
 	</insert>
+	<select id="selectWishOne" parameterType="map" resultType="team.dto.WishDTO">
+   select * FROM  wish_list where wish_list_store_id =#{store_id} and wish_list_member_id = #{member_id,jdbcType=VARCHAR}
+   </select>
+	<update id="businessReportAction" parameterType="int">
+   update review set review_report=1 where review_no=#{review_no}
+   </update>
+	<insert id="insertWishList" parameterType="map">
+	  insert into wish_list values (#{member_id},#{store_id})
+	</insert>
+	<delete id="deleteWishList" parameterType="map">
+	 delete from wish_list where wish_list_member_id=#{member_id} and wish_list_store_id=#{store_id}
+	</delete>
 </mapper>

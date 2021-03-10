@@ -23,7 +23,7 @@
 		SELECT * FROM store WHERE store_code = #{store_code}
 	</select>
 	<select id="selectStoreMenuList" parameterType="String" resultType="menu">
-		SELECT * FROM store_menu WHERE menu_store_id = #{store_id}
+		select a.*,menu_score from store_menu a,(select trunc(avg(review_score_menu),1) as menu_score,menu_no from review,store_menu where review_menu_no=menu_no and review_store_id=#{store_id} group by menu_no) b where menu_store_id=#{store_id} and a.menu_no=b.menu_no
 	</select>
 	<select id="selectStoreDTODetail" parameterType="String" resultType="store">
 		SELECT st.*, (SELECT TRUNC(NVL(AVG(s)/3+COUNT(s)*10,0),1) FROM (SELECT review_score_service+review_score_price+review_score_menu s,review.* FROM review) r 

@@ -32,6 +32,7 @@ import team.dto.QnaDTO;
 import team.dto.ReviewDTO;
 import team.dto.StoreDTO;
 import team.dto.StoreMenuDTO;
+import team.dto.WishDTO;
 import team.service.AdService;
 import team.service.MemberService;
 import team.service.QnaService;
@@ -54,37 +55,107 @@ public class MainController {
 		this.adService = adService;
 	}
 	@RequestMapping("storeDetailView.do")
-	public String storeDetailView(HttpServletRequest request) {
-		String store_id = request.getParameter("store_id");
-		if(store_id == null) {
-			store_id = (String)request.getAttribute("store_id");
-		}
-		System.out.println(store_id);
-		StoreDTO dto = storeService.selectStoreDetailDTO(store_id);
-		List<ReviewDTO> reviewList = storeService.selectStoreReviewList(store_id);
-	    for(int i=0;i<reviewList.size();i++) {
-	    	System.out.println(reviewList.get(i).toString());
+	   public String storeDetailView(HttpServletRequest request) {
+	      String store_id = request.getParameter("store_id");
+	      if(store_id == null) {
+	         store_id = (String)request.getAttribute("store_id");
+	      }
+	      System.out.println(store_id);
+	      String member_id = (String)request.getSession().getAttribute("id");
+	      StoreDTO dto = storeService.selectStoreDetailDTO(store_id);
+	      List<ReviewDTO> reviewList = storeService.selectStoreReviewList(store_id);
+	       for(int i=0;i<reviewList.size();i++) {
+	          System.out.println(reviewList.get(i).toString());
+	         
+	       }
+//	      List<StoreMenuDTO> menuList = storeService.selectStoreMenuDetailList(store_id);
+	      WishDTO wish =  memberService.selectWishOne(store_id,member_id);
+	      List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
+	      System.out.println(menuList.toString());
+	      request.setAttribute("menuList", menuList);
+	      request.setAttribute("dto", dto);
+	      request.setAttribute("reviewList",reviewList);
+	      request.setAttribute("wish", wish);
+	      System.out.println(dto.getStore_name());
 	      
-	    }
-//		List<StoreMenuDTO> menuList = storeService.selectStoreMenuDetailList(store_id);
-		List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
-		System.out.println(menuList.toString());
-		request.setAttribute("menuList", menuList);
-		request.setAttribute("dto", dto);
-		request.setAttribute("reviewList",reviewList);
-		System.out.println(dto.getStore_name());
-		
-		int count = storeService.updateStoreCount(store_id);
-		
-		return "store_detail_view";
-	}
+	      storeService.updateStoreCount(store_id);
+	      
+	      return "store_detail_view";
+	   }
 	
 	@RequestMapping("/businessReportAction.do")
-	public String businessReportAction(HttpServletRequest request,HttpServletResponse response) {
-		int review_no = Integer.parseInt(request.getParameter("review_no"));
-		System.out.println(review_no);
-		
-		
+	   public String businessReportAction(HttpServletRequest request,HttpServletResponse response) {
+	      int review_no = Integer.parseInt(request.getParameter("review_no"));
+	      System.out.println(review_no);
+	      int count=memberService.businessReportAction(review_no);
+	      if(count !=0) {
+	         try {
+	            System.out.println("신고 성공");
+	            response.setContentType("text/html;charset=utf-8");
+	            response.getWriter().write("true");
+	         } catch (IOException e) {
+	            e.printStackTrace();
+	         }
+	      }
+	      else {
+	         try {
+	            System.out.println("신고실패");
+	            response.setContentType("text/html;charset=utf-8");
+	            response.getWriter().write("false");
+	         } catch (IOException e) {
+	            e.printStackTrace();
+	         }
+	      }
+	      return null;
+	   }
+	@RequestMapping("/insertWishList.do")
+	public String insertWishList(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
+    String store_id=request.getParameter("store_id");
+    System.out.println(store_id);
+	   String member_id=(String)session.getAttribute("id");
+	   System.out.println(member_id);
+	   int count=memberService.insertWishList(member_id,store_id);
+	   if(count !=0) {
+		   try {
+			System.out.println("위시리스트 추가 성공");
+			response.getWriter().write("true");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	   }
+	   else {
+		   try {
+			System.out.println("위시리스트 추가 실패");
+			response.getWriter().write("false");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	   }
+		return null;
+	}
+	@RequestMapping("/deleteWishList.do")
+	public String deleteWishList(HttpServletRequest request,HttpServletResponse response,HttpSession session) {
+    String store_id=request.getParameter("store_id");
+    System.out.println(store_id);
+	   String member_id=(String)session.getAttribute("id");
+	   System.out.println(member_id);
+	   int count=memberService.deleteWishList(member_id,store_id);
+	   if(count !=0) {
+		   try {
+			System.out.println("위시리스트 삭제 성공");
+			response.getWriter().write("true");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	   }
+	   else {
+		   try {
+			System.out.println("위시리스트 삭제 실패");
+			response.getWriter().write("false");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	   }
 		return null;
 	}
 	
