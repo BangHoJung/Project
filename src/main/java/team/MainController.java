@@ -1490,16 +1490,14 @@ public String searchDetailView(HttpServletRequest request) {
 		}
 		return null;
 	}
-
+@RequestMapping("/wishlistView.do")
+	public String wishListView(HttpServletRequest request) {
+	String member_id = (String) request.getAttribute("member_id");
+	List<WishDTO> list = memberService.selectWishlist(member_id);
+	request.setAttribute("list", list);
+	return "wishlist_view";
+}
 	
-	/*
-	 * @RequestMapping("/wishlistView.do") public String
-	 * wishListView(HttpServletRequest request) { String member_id = (String)
-	 * request.getAttribute("member_id"); List<WishlistDTO> list =
-	 * memberService.selectWishlist(member_id); request.setAttribute("list", list);
-	 * return "wishlist_view"; }
-	 */
-
 @RequestMapping("/mb")
 public String mobileMain() {
 	return "mobile_main";

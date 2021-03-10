@@ -20,6 +20,9 @@ public class MemberService {
 	public MemberService(MemberMapper mapper) {
 		this.mapper = mapper;
 	}
+	public List<WishDTO> selectWishlist(String member_id) {
+		return mapper.selectWishlist(member_id);
+	}
 
 	/*
 	 * public List<WishlistDTO> selectWishlist(String member_id) { return
