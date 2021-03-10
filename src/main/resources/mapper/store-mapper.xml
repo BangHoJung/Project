@@ -23,6 +23,9 @@
 		SELECT * FROM store WHERE store_code = #{store_code}
 	</select>
 	<select id="selectStoreMenuList" parameterType="String" resultType="menu">
+		select * from store_menu where menu_store_id=#{store_id}
+	</select>
+	<select id="selectStoreMenuListWtihReview" parameterType="String" resultType="menu">
 		select a.*,menu_score from store_menu a,(select trunc(avg(review_score_menu),1) as menu_score,menu_no from review,store_menu where review_menu_no=menu_no and review_store_id=#{store_id} group by menu_no) b where menu_store_id=#{store_id} and a.menu_no=b.menu_no
 	</select>
 	<select id="selectStoreDTODetail" parameterType="String" resultType="store">

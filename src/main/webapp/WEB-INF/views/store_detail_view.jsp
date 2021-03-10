@@ -406,9 +406,9 @@ button:focus{
     </div>
     <div class="col-md-6">
   <span style="font-size: 25px;"> ${requestScope.dto.store_name}</span>&ensp;&ensp;
-  <span style="color:#FA0050; font-size: 25px;" > ★</span><span style="font-size: 20px; color:#FA0050;">&ensp;<fmt:formatNumber  value="${dto.review%10}" pattern=".0" /></span> 
-  &ensp;<fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10}"/> 
-  <span style="font-size: 15px;">(${review_count})</span><c:if test="${sessionScope.login==true}"><c:choose><c:when test="${requestScope.wish == null}"><button id="btn_wish" type="button" class="wish" value="🤍white">🤍</button></c:when><c:otherwise><button id="btn_wish" type="button" class="wish" value="❤️red">❤️</button></c:otherwise></c:choose></c:if><br><br>   
+  <c:if test="${dto.review !=0}"><span style="color:#FA0050; font-size: 25px;" > ★</span><span style="font-size: 20px; color:#FA0050;">&ensp;<fmt:formatNumber  value="${dto.review%10}" pattern=".0" /></span> 
+  &ensp;<fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10}"/>
+  <span style="font-size: 15px;">(${review_count})</span></c:if><c:if test="${sessionScope.login==true}"><c:choose><c:when test="${requestScope.wish == null}"><button id="btn_wish" type="button" class="wish" value="🤍white">🤍</button></c:when><c:otherwise><button id="btn_wish" type="button" class="wish" value="❤️red">❤️</button></c:otherwise></c:choose></c:if><br><br>   
   <span class="subject_items">주소</span><br>&ensp;${requestScope.dto.store_addr}<br>
   <span class="subject_items">전화번호</span><br>&ensp;${requestScope.dto.store_tel}<br>
   <span class="subject_items">음식  종류</span><br>&ensp;${requestScope.dto.store_category}<br>
@@ -429,7 +429,7 @@ button:focus{
    			 ----------------------------------------------------------------------------------------
   			</td>
   			<td>
-  			${menu.menu_price}&ensp;&ensp; <span style="color:#FA0050;">★&ensp;&ensp;${menu.menu_score}</span>
+  			${menu.menu_price}&ensp;&ensp;<c:if test="${menu.menu_score != 0}"><span style="color:#FA0050;">★&ensp;&ensp;${menu.menu_score}</span></c:if>
     		</td>
    	   </tr>
      </c:forEach>
@@ -486,7 +486,7 @@ button:focus{
 
 <div class="row">
 <div class="col-md-1 col-md-offset-11 btn_more_info_box">
-<button id="btn_more_review_info" type="button" class="btn_more_info">더보기</button>
+<c:if test="${dto.review/10 >= 6}"><button id="btn_more_review_info" type="button" class="btn_more_info">더보기</button></c:if>
 </div>
 </div>
 <div class="row">

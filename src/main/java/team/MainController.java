@@ -69,9 +69,15 @@ public class MainController {
 	         
 	       }
 //	      List<StoreMenuDTO> menuList = storeService.selectStoreMenuDetailList(store_id);
-	      WishDTO wish =  memberService.selectWishOne(store_id,member_id);
-	      List<StoreMenuDTO> menuList = storeService.selectStoreMenuList(store_id);
+	       List<StoreMenuDTO> menuList = null;
+	       if(dto.getReview()==0) {
+	    	  menuList= storeService.selectStoreMenuList(store_id);
+	      }
+	      else {
+	    	  menuList= storeService.selectStoreMenuListWtihReview(store_id);
+	      }   
 	      System.out.println(menuList.toString());
+	      WishDTO wish =  memberService.selectWishOne(store_id,member_id);
 	      request.setAttribute("menuList", menuList);
 	      request.setAttribute("dto", dto);
 	      request.setAttribute("reviewList",reviewList);
@@ -1484,13 +1490,16 @@ public String searchDetailView(HttpServletRequest request) {
 		}
 		return null;
 	}
-@RequestMapping("/wishlistView.do")
-	public String wishListView(HttpServletRequest request) {
-	String member_id = (String) request.getAttribute("member_id");
-	List<WishlistDTO> list = memberService.selectWishlist(member_id);
-	request.setAttribute("list", list);
-	return "wishlist_view";
-}
+
+	
+	/*
+	 * @RequestMapping("/wishlistView.do") public String
+	 * wishListView(HttpServletRequest request) { String member_id = (String)
+	 * request.getAttribute("member_id"); List<WishlistDTO> list =
+	 * memberService.selectWishlist(member_id); request.setAttribute("list", list);
+	 * return "wishlist_view"; }
+	 */
+
 @RequestMapping("/mb")
 public String mobileMain() {
 	return "mobile_main";

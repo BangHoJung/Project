@@ -64,6 +64,10 @@ public class StoreService {
 	public List<StoreMenuDTO> selectStoreMenuList(String store_id) {
 		return storeMapper.selectStoreMenuList(store_id);
 	}
+	public List<StoreMenuDTO> selectStoreMenuListWtihReview(String store_id) {
+		return storeMapper.selectStoreMenuListWtihReview(store_id);
+	}
+
 
 	public List<StoreDTO> selectStoreListDetail(String search,String addr) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
