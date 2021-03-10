@@ -81,5 +81,13 @@ public interface MemberMapper {
 
 	public int updateMemberGrade(HashMap<String, Object> map);
 	
-	List<WishDTO> selectWishlist(String member_id);
+  public List<WishDTO> selectWishlist(String member_id);
+  
+	public WishDTO selectWishOne(HashMap<String, Object> map);
+
+	public int insertWishList(HashMap<String, Object> map);
+
+	public int deleteWishList(HashMap<String, Object> map);
+
+	public int businessReportAction(int review_no);
 }
