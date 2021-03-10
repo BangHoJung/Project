@@ -10,7 +10,7 @@ import team.dto.MemberDTO;
 import team.dto.MessageDTO;
 import team.dto.NoticeDTO;
 import team.dto.ReviewDTO;
-import team.dto.WishlistDTO;
+import team.dto.WishDTO;
 
 @Mapper
 public interface MemberMapper {
@@ -81,5 +81,5 @@ public interface MemberMapper {
 
 	public int updateMemberGrade(HashMap<String, Object> map);
 	
-	List<WishlistDTO> selectWishlist(String member_id);
+	List<WishDTO> selectWishlist(String member_id);
 }

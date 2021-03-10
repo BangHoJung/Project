@@ -1,12 +1,15 @@
 package team.dto;
 
-public class WishlistDTO {
+public class WishDTO {
 	private String wish_list_member_id;
 	private String wish_list_store_id;
 	
 	
 	
-	public WishlistDTO(String wish_list_member_id, String wish_list_store_id) {
+
+
+
+	public WishDTO(String wish_list_member_id, String wish_list_store_id) {
 		super();
 		this.wish_list_member_id = wish_list_member_id;
 		this.wish_list_store_id = wish_list_store_id;
