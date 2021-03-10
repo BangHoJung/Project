@@ -26,6 +26,9 @@ $(function () {
 		if($("#pass").val().trim().length == 0){alert("암호를 입력해주세요"); return false;};
 		 $("#frm_login").submit();
 	});
+	$("h3").click(function() {
+		history.back();
+	});
 	
 })
 
