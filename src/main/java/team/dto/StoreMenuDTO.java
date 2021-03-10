@@ -84,11 +84,16 @@ public class StoreMenuDTO {
 	public void setMenu_photo(String menu_photo) {
 		this.menu_photo = menu_photo;
 	}
-
+	public double getMenu_score() {
+		return menu_score;
+	}
+	public void setMenu_score(double menu_score) {
+		this.menu_score = menu_score;
+	}
 	@Override
 	public String toString() {
 		return "StoreMenuDTO [menu_no=" + menu_no + ", menu_store_id=" + menu_store_id + ", menu_name=" + menu_name
-				+ ", menu_price=" + menu_price + ", menu_photo=" + menu_photo + "]";
+				+ ", menu_price=" + menu_price + ", menu_photo=" + menu_photo + ", menu_score="+menu_score+"]";
 	}
 	
 	
