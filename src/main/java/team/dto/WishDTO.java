@@ -1,7 +1,7 @@
 package team.dto;
 
 public class WishDTO {
-private String   wish_list_member_id;  
+private String   wish_list_member_id;   
 private String   wish_list_store_id;
 
 
