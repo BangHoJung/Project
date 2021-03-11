@@ -8,9 +8,6 @@
 	</insert>
 	<insert id="registerMenu" parameterType="menu">
 		INSERT INTO store_menu VALUES (MENU_NO_SEQ.NEXTVAL,#{menu_store_id},#{menu_name},#{menu_price},#{menu_photo})
-		<!-- INSERT INTO store_menu(menu_id,menu_store_id,menu_name,menu_price,menu_photo) 
-		SELECT SEQ_MENU.nextval,'시익다앙_22','메뉴다',244,'' FROM DUAL WHERE NOT EXISTS
-		(SELECT menu_id FROM store_menu WHERE menu_store_id = '시익다앙_22' AND menu_name = '메뉴다'); -->
 	</insert>
 	
 	<select id="selectStoreDTO" parameterType="String" resultType="store">
