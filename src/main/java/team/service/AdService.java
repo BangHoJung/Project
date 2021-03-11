@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import team.dto.AdDTO;
+import team.dto.StoreDTO;
 import team.mapper.AdMapper;
 
 
@@ -32,6 +33,10 @@ public class AdService {
 	
 	public AdDTO selectAd(int ad_no) {
 		return mapper.selectAd(ad_no);
+	}
+	
+	public List<StoreDTO> selectMemberStoreList(String member_id) {
+		return mapper.selectMemberStoreList(member_id);
 	}
 	
 	public int newAd_no() {

@@ -1016,13 +1016,12 @@ public class MainController {
 		
 		return "ad_detail_view";
 	}
-
+   
    @RequestMapping("/AdWriteView.do")
 	public String adWriteView(HttpServletRequest request) {
-	   
-	   List<StoreDTO> list = storeService.selectStoreListCode(0);
+	   String member_id = (String) request.getSession().getAttribute("id");
+	   List<StoreDTO> list = adService.selectMemberStoreList(member_id);
 	   request.setAttribute("storeList", list);
-	   
 	   
 		return "ad_write_view";
 	}
