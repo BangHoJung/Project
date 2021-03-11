@@ -658,7 +658,6 @@ public class MainController {
 				e.printStackTrace();
 			}
 		}
-		memberService.updateMemberGrade(member_id,1);
 		
 		return main(request);
 	}
@@ -706,11 +705,12 @@ public class MainController {
 	public String storeCheckConfirm(HttpServletRequest request, HttpSession session) {
 		String store_id = request.getParameter("store_id");
 		String title ="안녕하세요 관리자 입니다.";
-		String content="식당 등록 신청 건에 대하여 승인요청이 완료되었습니다.마이페이지에서 메뉴 등록 신청서를 작성해주시기 바랍니다.\n";
+		String content="식당 등록 신청 건에 대하여 승인요청이 완료되었습니다.\n";
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		// 식당 등록 신청한 사용자에게 승인결과 전송
 		memberService.sendMessage(new MessageDTO(dto.getStore_member_id(),title,content));
 		int count = storeService.updateStoreCode(store_id,1);
+		count = memberService.updateMemberGrade(storeService.selectStoreDTO(store_id).getStore_member_id(),1);
 		
 		return main(request);
 	}
@@ -723,8 +723,8 @@ public class MainController {
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
 		// 식당 등록 신청한 사용자에게 승인결과 전송
 		memberService.sendMessage(new MessageDTO(dto.getStore_member_id(),title,content));
-		int count = storeService.deleteStoreDTO(store_id);
-		count = storeService.deleteMenu(store_id);
+		int count = storeService.deleteMenu(store_id);
+		count = storeService.deleteStoreDTO(store_id);
 		
 		return "store_check";
   }
