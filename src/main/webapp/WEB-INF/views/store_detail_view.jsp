@@ -340,13 +340,14 @@ caption{
  font-size: 20px;
  font-weight: 500;
 }
-.menu_img_box{
-display:flex;
-flex-wrap: wrap; 
+.menu_img_items_box{
+ display:inline-block;
+ width: 22%;
+ margin: 1% 1.35%;
+ text-align: center;
 }
 .menu_img_items{
-margin: 1% 1%;
-width: 23%;
+width: 100%;
 height: 150px;
 }
 .review_img_item{
@@ -438,11 +439,10 @@ button:focus{
 </div>
 
 <div class="row">
-<div class="col-lg-12 menu_img_box" >
+<div class="col-lg-12" style="padding: 0;">
 <c:forEach var="menu" items="${menuList}">
-<img src="image_load.do?writer=${dto.store_id}&fileName=${menu.menu_photo}&divide=menu" class="menu_img_items" onerror="this.src='img/img_null.png'">
+ <div class="menu_img_items_box"><img src="image_load.do?writer=${dto.store_id}&fileName=${menu.menu_photo}&divide=menu" class="menu_img_items" onerror="this.src='img/img_null.png'">${menu.menu_name}</div>
 </c:forEach>
-<img alt="" src="img/img_null.png" class="menu_img_items">
 </div>
 </div>
 
