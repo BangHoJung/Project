@@ -1,7 +1,8 @@
 @charset "UTF-8";
 
-.container{
+.best_container{
 	width: 1000px;
+	margin: 0 auto;
 }
 #food_search{
 	margin-top:20px;

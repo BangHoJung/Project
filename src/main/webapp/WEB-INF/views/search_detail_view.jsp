@@ -29,8 +29,8 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+	<div class="search_container">
 	<img alt="" src="../img/food_search.png" id="food_search">
-	<div class="container">
 	<div class="search_detail">
 		<div class="search_result">
 		<c:forEach var="dto" items="${menuList }">
@@ -51,7 +51,7 @@
 		</c:forEach>
 		</div>
 	</div>
-		<button>더보기</button>
+		<button id="more">더보기</button>
 	</div>
 	
 	

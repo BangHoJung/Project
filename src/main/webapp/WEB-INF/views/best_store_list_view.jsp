@@ -25,7 +25,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
-	<div class="container">
+		<div class="best_container">
 		<img alt="" src="../img/food_search.png" id="food_search">
 		<div class="search_detail">
 			<div class="search_result">
@@ -46,7 +46,7 @@
 				</c:forEach>
 			</div>
 		</div>
-	</div>
+		</div>
 	
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
