@@ -52,7 +52,8 @@
            
 		});
 	    	$("#btn_parking").click(function() {
-	    		//$(this).next().slideToggle().siblings("map_cafe").slideUp();
+	   		 $("#map_parking").css("display", "block");  
+	    		$("#map_cafe").css("display", "none");
 	    	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 	    	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -105,10 +106,12 @@
         infowindow.open(map_parking, marker);
    		 });
    	}
-	   
+  
 });
 	    	$("#btn_cafe").click(function() {
-	    		$(this).next().slideToggle().siblings("map_cafe").slideUp();
+		    		$("#map_cafe").css("display", "block");
+	    		 $("#map_parking").css("display", "none");  
+	    		
 		    	//새로운거
 		    	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 		    	var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -148,11 +151,14 @@
 
 	   // 지도에 마커를 표시하는 함수입니다
 	   function displayMarker(place) {
-		    
+		   var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+		   var imageSize = new kakao.maps.Size(24, 35); 
+		   var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);    
 	    // 마커를 생성하고 지도에 표시합니다
 	   	 var marker = new kakao.maps.Marker({
 	        map: map_cafe,
-	        position: new kakao.maps.LatLng(place.y, place.x) 
+	        position: new kakao.maps.LatLng(place.y, place.x),
+	        image : markerImage // 마커 이미지 
 	    	});
 
 	    // 마커에 클릭이벤트를 등록합니다
@@ -162,7 +168,7 @@
 	        infowindow.open(map_cafe, marker);
 	   		 });
 	   	}
-		   
+		 
 	});
 	    	var count=1;
 	        var text="";
@@ -180,7 +186,7 @@
 	        			console.log(result);
 	        			var arr=result.result;
 	        			for(i=0;i<arr.length;i++){
-	        				text +="<div class='row main' style='background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;'><div class='col-md-12 main' style='  text-align: right;' >" 
+	        				text +="<div class='row' style='background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;'><div class='col-md-12' style='  text-align: right; padding: 0px;' >" 
                               text += "<input type='hidden'  value='"+arr[i].review_no+"'>"
 	        					text+="<p>"+ arr[i].review_date
 
@@ -190,14 +196,15 @@
 
 	        					text +=" </p> "
 	        					}
-	        					text+=" <div class='col-md-2 main' style=' text-align: center; display: flex; flex-direction: column;'><p style='font-weight: bold; font-size: 20px; border: 1px solid gray;' >"
-	        					text +=arr[i].review_member_id+"</p></div><div class='col-md-10' style='border: 1px solid #EAEAEA; display:flex; align-content: center; text-align: left;'>"
+	        					text+=" <div class='col-md-2' style=' text-align: center; display: flex; flex-direction: column;'><p style='font-weight: bold; font-size: 20px; border: 1px solid gray;'>"
+	        					text +=arr[i].review_member_id+"</p></div><div class='col-md-10' style='padding: 0px; border: 1px solid #EAEAEA; display:flex; align-content: center; text-align: left;'>"
 
 	        					if( arr[i].review_photo != null){
 	        						 text +="<img src='review_image_load.do?review_member_id="+arr[i].review_member_id+"&review_store_id="+arr[i].review_store_id+"&fileName="+arr[i].review_photo+"'  class='reviewimg' >"
 	        						}
-	        					text+="<br><span style='white-space: pre-wrap;'>"
-	        					text+="<p>"+arr[i].review_content+"</p></span></div></div></div>"
+	        					text+="<br>"+
+	        					"<span style='white-space: pre-wrap;'>";
+	        					text+=arr[i].review_content+"</span></div></div></div>";
 	        			}
 	        		text += "</div>";
 	        		
@@ -206,35 +213,71 @@
 	        	});
 	        
 	        });
+	        
 	        $(document).on("click",".btn_report",function(){
 	        if(confirm("신고하겠습니까?")){ 
 	        	var review_no = $(this).parent().parent().find("input").val();
 	        	var data = "review_no="+review_no;
+	            $.ajax({
+	                url:"businessReportAction.do",
+	                data: data,
+	                method:"get",
+	                success:function(d){
+	                 console.log(d);
+	                 if(d=="true"){
+	                    alert("신고 정상처리 완료했습니다");
+	                 }else{
+	                    alert("신고 정상처리 실패했습니다");                                    
+	                 }                            
+	                      }
+	               });
+		     }
+     });
+	        $("#btn_wish").click(function() {
+	        	var wish="❤️red";//빨간색 하트
+	        	var not_wish="🤍white";//흰색 하트
+	        	var val=$(this).val();
+	        	if(val == "🤍white"){
+                   var data = "store_id=${dto.store_id}";
+                   $.ajax({
+                	  url : "insertWishList.do",
+                	  data : data,
+                	  method: "post",
+                	  success:function(d){
+                		  console.log(d);
+                		  if(d=="true"){
+                			  $("#btn_wish").html("❤️");//빨간색 하트
+                			  $("#btn_wish").val(wish);
+                		  }else{
+                			 alert("위시리스트 추가 실패했습니다");
+                		  }
+                	  }
+                   });
+	        	}
+	        	if(val == "❤️red"){
+	        	     var data = "store_id=${dto.store_id}";
+	                   $.ajax({
+	                	  url : "deleteWishList.do",
+	                	  data : data,
+	                	  method: "post",
+	                	  success:function(d){
+	                		  console.log(d);
+	                		  if(d=="true"){
+	                			  $("#btn_wish").html("🤍");//흰색 하트
+	                			  $("#btn_wish").val(not_wish);
+	                		  }else{
+	                			 alert("위시리스트 삭제 실패했습니다");
+	                		  }
+	                	  }
+	                   });
+	        	}
+	        });
 	        	
-	        
-	        	$.ajax({
-	        	url:"businessReportAction.do",
-	        	data: data,
-	        	method:"get",
-	        	success:function(d){
-	            console.log(d);
-	        	
-	            
-	          	}
-	        	
-	        	
-	        	
-		        })
-		        }
+});
 		        	
 					
-				});
 	        
-	    	$(".btn_total").click(function() {
-	    		$(this).next().slideToggle().siblings(".totalmap").slideUp();
-	    		//$("#btn_parking").click(function() {
-		  });  		//$(this).next().slideToggle().siblings("map_cafe").slideUp();
-		});
+	   
 	
     
 /*
@@ -272,230 +315,186 @@
 <style type="text/css">
 .container{
  width: 1000px !important;
-
-}
-.body, .midbody{
-width: 1000px;
-
-}
-.midbody{
-margin: 20% 0px;
-}
-.body, .midbody, .main{
-padding:0px;
-margin:0px;
-/*border: 1px solid black;*/
-}
-.img{
+ }
+.store_img_item{
 width: 100%;
 margin: 0px;
 padding: 1%;
+height: 400px;
 }
-th{
-width: 90px;
-padding: 1% 0px;
+.subject_items{
+ font-size: 15px;
+ font-weight: 500;
+ color: #FA0050;
 }
-.star{
-width: 300px;
+.menu_list_box{
+background-color:#F6F6F6 ; 
+margin-top: 50px;
+text-align: center;
 }
-.pro{
-width: 100px;
+.table>tbody>tr>td, .table>tbody>tr>th , .table>tbody>tr{
+ border: none !important;
 }
-.menu{
+caption{
+ text-align: center !important;
+ font-size: 20px;
+ font-weight: 500;
+}
+.menu_img_box{
+display:flex;
+flex-wrap: wrap; 
+}
+.menu_img_items{
 margin: 1% 1%;
 width: 23%;
 height: 150px;
 }
-.menulist{
-display:flex;
-flex-wrap: wrap; 
-}
-.addr, .tel, .menue, .Food, .time{
-width: 100px;
-
-}
-.Sum{
-display: flex;
-flex-direction: row;
-margin: 10px 0px;
-}
-
-.reviewimg{
+.review_img_item{
 width: 30%;
 }
-.see{
-border: none;
-width: 100%;
-padding: 0;
-
-}
-.seebox{
-padding: 0!important;
-}
-.surroundingsbox{
-padding: 0!important;
-}
-.surroundings{
-margin: 0;
-width: 100%;
+.map_box{
+width:100%;
+height:300px;
+margin:10px 0px;
+display:none;
 }
 .btn_parking, .btn_cafe{
-border: 1px solid black;
-border-bottom: none;
 width:100%;
 padding: 1%;
-border-radius: 10px 10px 0 0;
+border-radius: 5px !important;
+font-size: 1vw;
 }
-
-table{
-width: 100%;
+.btn_parking{
+border: 1px solid #005eff;
+color: #005eff;
+font-weight: bold;
+margin-bottom: 2px; 
 }
-table, th, td, tr{
+.btn_cafe{
+border: 1px solid #ffd700;
+color: #ffd700;
+font-weight: bold;
+}
+.btn_more_info_box{
+padding: 0!important;
+}
+.btn_more_info{
 border: none;
-background-color: #F6F6F6;
-text-align: center;
+width: 100%;
+padding: 12px 12px;
+background-color: #FA0050;
+color: white;
+border-radius: 5px !important;
+margin-bottom: 50px;
 }
+.wish{
+ float: right;
+ font-size: 40px;
+}
+button:focus{ 	
+    outline:none;
+    }
 </style>
 </head>
 <body>
-
 <jsp:include page="header.jsp"></jsp:include>
 <form action="">
 <div class="container">
-
-<div class="row midbody">
-<div class="col-md-4 main ">
-<img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}&divide=store" class="img">
+<div class="row">
+    <div class="col-md-6">
+       <img src="image_load.do?writer=${dto.store_id}&fileName=${dto.store_photo}&divide=store" class="store_img_item">
+    </div>
+    <div class="col-md-6">
+  <span style="font-size: 25px;"> ${requestScope.dto.store_name}</span>&ensp;&ensp;
+  <c:if test="${dto.review !=0}"><span style="color:#FA0050; font-size: 25px;" > ★</span><span style="font-size: 20px; color:#FA0050;">&ensp;<fmt:formatNumber  value="${dto.review%10}" pattern=".0" /></span> 
+  &ensp;<fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10}"/>
+  <span style="font-size: 15px;">(${review_count})</span></c:if><c:if test="${sessionScope.login==true}"><c:choose><c:when test="${requestScope.wish == null}"><button id="btn_wish" type="button" class="wish" value="🤍white">🤍</button></c:when><c:otherwise><button id="btn_wish" type="button" class="wish" value="❤️red">❤️</button></c:otherwise></c:choose></c:if><br><br>   
+  <span class="subject_items">주소</span><br>&ensp;${requestScope.dto.store_addr}<br>
+  <span class="subject_items">전화번호</span><br>&ensp;${requestScope.dto.store_tel}<br>
+  <span class="subject_items">음식  종류</span><br>&ensp;${requestScope.dto.store_category}<br>
+  <span class="subject_items">영업시간</span><br>
+  <span style="white-space:pre-wrap; word-break:break-all;"> ${requestScope.dto.store_time}</span>
+    </div>
 </div>
-<div class="col-md-4 main  ">
-<img alt="" src="img/bakery/bakery2.jpg" class="img">
-</div>
-<div class="col-md-4 main  ">
-<img alt="" src="img/bakery/bakery3.jpg" class="img">
-</div>
-
-</div>
-<div class="row" style="width:1000px;">
-<div class="col-md-12" style="text-align: right;">
-
-  <span style="font-size: 25px;"> ${requestScope.dto.store_name}</span>
-  <span style="color:#FA0050; font-size: 30px;" > ★ </span> 
-  <fmt:parseNumber var= "review_count" integerOnly= "true" value= "${dto.review/10} " /> 
-  <span style="font-size: 25px;"><fmt:formatNumber  value="${dto.review%10}" pattern=".0" /> (${review_count})</span>   
-
-</div>
- </div>
- 
-<div class="row midbody" style="background-color:#F6F6F6 ; border-radius: 4px; ">
-<div class="col-md-12 main" style="padding: 2%;  ">
-
-<div class="Sum">
- <div class="addr">주소 </div><div>${requestScope.dto.store_addr}</div>
-</div>
-
-
-<div class="Sum">
-<div class="tel">전화번호</div> 
- <div> ${requestScope.dto.store_tel}</div>
-</div>
-<div class="Sum">
-<div class="Food"> 음식  종류</div>	
-<div>
-${requestScope.dto.store_category}
- </div>
- </div>
- <div class="Sum">
- <div class="time"> 영업시간</div>
-  <div> ${requestScope.dto.store_time}</div>
-</div>
-<div class="Sum">
-<div class="menue"> 메뉴</div> 
-
-<div   style="width: 100%;">
-<table>
- <c:forEach var="menu" items="${requestScope.menuList}">
-<tr>
-<th colspan="2">
-  ${menu.menu_name}   
-    </th>
-  <td>
-    ----------------------------------------------------------------------------------------
-  </td>
-  <td colspan="2">
-  ${menu.menu_price}
-    </td>
-    </tr>
-  
-
- </c:forEach>
-  </table>
- </div>
+<div class="row menu_list_box">
+  <div class="col-md-12" style="padding: 2%;">
+    <table class="table">
+      <caption>메&ensp;&ensp;뉴</caption>
+      <c:forEach var="menu" items="${requestScope.menuList}">
+		<tr class="active">
+			<th>
+  				${menu.menu_name} 
+    		</th>
+ 			 <td>
+   			 ----------------------------------------------------------------------------------------
+  			</td>
+  			<td>
+  			${menu.menu_price}&ensp;&ensp;<c:if test="${menu.menu_score != 0}"><span style="color:#FA0050;">★&ensp;&ensp;${menu.menu_score}</span></c:if>
+    		</td>
+   	   </tr>
+     </c:forEach>
+    </table>
+  </div>
 </div>
 
-</div>
-</div>
-
-<div class="row" style="width: 1000px;">
-<div class="col-lg-12 menulist" >
-
+<div class="row">
+<div class="col-lg-12 menu_img_box" >
 <c:forEach var="menu" items="${menuList}">
-<img src="image_load.do?writer=${dto.store_id}&fileName=${menu.menu_photo}&divide=menu" class="menu" onerror="this.src='img/img_null.png'">
+<img src="image_load.do?writer=${dto.store_id}&fileName=${menu.menu_photo}&divide=menu" class="menu_img_items" onerror="this.src='img/img_null.png'">
 </c:forEach>
-<img alt="" src="img/img_null.png" class="menu">
+<img alt="" src="img/img_null.png" class="menu_img_items">
 </div>
 </div>
 
-<div class="row midbody" style="background-color:#F6F6F6; border-radius: 4px;">
+<div class="row" style="background-color:#F6F6F6; border-radius: 4px;">
 <div class="col-md-12" >
 
 
-<div id="map" style="width:100%;height:300px;margin:10px 0px;display:none"></div>
+<div id="map" class="map_box"></div>
 </div>
 </div>
 
 
 
-<div class="row  midbody" style=" background-color:#F6F6F6; border-radius: 4px; display:flex; align-items: center;">
+<div class="row" style=" background-color:#F6F6F6; border-radius: 4px; display:flex; align-items: center;">
 
- <div class="col-md-4 main" style="font-size: 20px; font-weight: bold;padding: 1%; " ><p style="margin: 0px;">리뷰 (${review_count }건 평가 )</p></div>
-  <div class="col-md-4 col-md-offset-4 "  style="text-align: right;"> <span> 전체보기 | 좋아요보기 </span> <a href="reviewRegisterView.do?store_id=${dto.store_id}" style=" background-color:  #FA0050; color: white; width:100px; border: none; padding: 1%; border-radius: 5px;"> 리뷰쓰기</a></div>
+ <div class="col-md-4" style="font-size: 20px; font-weight: bold;padding: 1%; " ><p style="margin: 0px;">리뷰 (${review_count }건 평가 )</p></div>
+  <div class="col-md-4 col-md-offset-4 "  style="text-align: right;"><a href="reviewRegisterView.do?store_id=${dto.store_id}" style=" background-color:  #FA0050; color: white; width:100px; border: none; padding: 1%; border-radius: 5px;"> 리뷰쓰기</a></div>
 </div>
 
 <!-- 리뷰 테이블 -->
 <div id="review_container_box">
-
 <c:forEach var="review" items="${reviewList}">
-<div class="row main " style=" background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;">
-
-<div class="col-md-12 main" style="text-align: right; padding: 0px; "> 
+<div class="row" style=" background-color:#F6F6F6; border-radius: 4px; display:flex;width:1000px; align-items: center; padding: 1%;">
+<div class="col-md-12" style="text-align: right; padding: 0px; "> 
 <input type="hidden"  value="${review.review_no}">
 <p> ${review.review_date}<c:if test="${sessionScope.id==requestScope.dto.store_member_id}"> | <button style="border: none; background-color: #F6F6F6;" class="btn_report" type="button" >신고하기</button></c:if></p>
-<div class="col-md-2 main" style=" text-align: center; display: flex; flex-direction: column;">
-<p style="font-weight: bold; font-size: 20px; border: 1px solid gray;" >${review.review_member_id} </p>
+<div class="col-md-2" style=" text-align: center; display: flex; flex-direction: column;">
+<p style="font-weight: bold; font-size: 20px; border: 1px solid gray;">${review.review_member_id} </p>
 </div>
-<div class="col-md-10" style=" padding: 0px; border: 1px solid #EAEAEA; display:flex; align-content: center;  white-space: wrap; word-break:break-all;  text-align: left;">
+<div class="col-md-10" style=" padding: 0px; border: 1px solid #EAEAEA; display:flex; align-content: center; text-align: left;">
 <c:if test="${review.review_photo != null}">
-   <img src="review_image_load.do?review_member_id=${review.review_member_id}&review_store_id=${review.review_store_id}&fileName=${review.review_photo}"  class="reviewimg" >
+   <img src="review_image_load.do?review_member_id=${review.review_member_id}&review_store_id=${review.review_store_id}&fileName=${review.review_photo}"  class="review_img_item" >
 </c:if>
 <br>
- <p > ${review.review_content}</p>
+ <span style="white-space:pre-wrap; word-break:break-all;">${review.review_content}</span>
 </div>
 </div>
 </div>
 </c:forEach>
 </div>
 
-<div class="row main ">
-<div class="col-md-1 col-md-offset-11 seebox">
-<button id="btn_more_review_info" type="button" class="see">더보기</button>
+<div class="row">
+<div class="col-md-1 col-md-offset-11 btn_more_info_box">
+<c:if test="${dto.review/10 >= 6}"><button id="btn_more_review_info" type="button" class="btn_more_info">더보기</button></c:if>
 </div>
 </div>
-<div class="row midbody">
-<div class="col-md-12 main">
-<button type="button" id="btn_parking" class="btn_total" style="width: 100%;">주차장</button>
-<div id="map_parking" class="totalmap" style="width:100%;height:350px; display: none;"></div>
-<button type="button" id="btn_cafe" class="btn_total" style="width: 100%;">카페</button>
-<div id="map_cafe" class="totalmap" style="width:100%;height:350px; display: none;"></div>
+<div class="row">
+<div class="col-md-12">
+<button type="button" id="btn_parking" class="btn_parking" style="width: 100%;">${requestScope.dto.store_name} 주변 주차장</button>
+<div id="map_parking"  class="map_box"></div>
+<button type="button" id="btn_cafe" class="btn_cafe" style="width: 100%;">${requestScope.dto.store_name} 주변 카페</button>
+<div id="map_cafe"  class="map_box"></div>
 </div>
 </div>
 
