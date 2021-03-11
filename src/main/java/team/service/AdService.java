@@ -35,7 +35,7 @@ public class AdService {
 		return mapper.selectAd(ad_no);
 	}
 	
-	public List<AdDTO> selectMemberStoreList(String member_id) {
+	public List<StoreDTO> selectMemberStoreList(String member_id) {
 		return mapper.selectMemberStoreList(member_id);
 	}
 	

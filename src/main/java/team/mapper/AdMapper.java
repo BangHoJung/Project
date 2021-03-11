@@ -14,7 +14,7 @@ public interface AdMapper {
 	int selectCount();
 	void addCount(int ad_no);
 	AdDTO selectAd(int ad_no);
-	List<AdDTO> selectMemberStoreList(String member_id);
+	List<StoreDTO> selectMemberStoreList(String member_id);
 	int newAd_no();
 	int insertAd(AdDTO dto);
 }
