@@ -131,6 +131,7 @@
 </script>
 </head>
 <body>
+	
 	<jsp:include page="header.jsp"></jsp:include>
 	<form action="reviewRegisterAction.do" enctype="multipart/form-data" method="post">
 		<div class="container">

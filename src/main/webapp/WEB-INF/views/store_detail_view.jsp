@@ -398,6 +398,11 @@ button:focus{
 </style>
 </head>
 <body>
+<%-- <c:if test="${requestScope.url != 'storeDetailView'}"> 
+		<script>
+			location.href="storeDetailView.do?store_id=${requestScope.store_id}";
+		</script>
+	</c:if> --%>
 <jsp:include page="header.jsp"></jsp:include>
 <form action="">
 <div class="container">

@@ -85,7 +85,6 @@ public class MainController {
 	      System.out.println(dto.getStore_name());
 	      
 	      storeService.updateStoreCount(store_id);
-	      
 	      return "store_detail_view";
 	   }
 	
@@ -450,18 +449,17 @@ public class MainController {
 			session.setAttribute("grade",dto.getMember_grade());
 			session.setAttribute("category",dto.getMember_category());
 			System.out.println("로그인 성공");
-			return main(request);
 		}
 		}catch (NullPointerException e) {
 			session.setAttribute("login", false);
 			System.out.println("로그인 실패");
 		}
-		return "login";
+		return "redirect:/";
 	}
 	@RequestMapping("/logout.do")
 	public String logOut(HttpSession session,HttpServletRequest request) {
 		session.invalidate();
-		return main(request);
+		return "redirect:/";
 	}
     
 	@RequestMapping("/registerView.do")
@@ -659,7 +657,7 @@ public class MainController {
 			}
 		}
 		
-		return main(request);
+		return "redirect:/myPageView.do";
 	}
 	
 	@RequestMapping("storeCheckListView.do")
@@ -712,7 +710,7 @@ public class MainController {
 		int count = storeService.updateStoreCode(store_id,1);
 		count = memberService.updateMemberGrade(storeService.selectStoreDTO(store_id).getStore_member_id(),1);
 		
-		return main(request);
+		return "redirect:/myPageView.do";
 	}
 	
 	@RequestMapping("storeCheckReject.do")
@@ -726,7 +724,7 @@ public class MainController {
 		int count = storeService.deleteMenu(store_id);
 		count = storeService.deleteStoreDTO(store_id);
 		
-		return "store_check";
+		return "redirect:/myPageView.do";
   }
 	
 	@RequestMapping("reviewRegisterView.do")
@@ -788,7 +786,7 @@ public class MainController {
 		System.out.println("photoFile : " + photoFile.getName());
 			memberService.registerReview(new ReviewDTO(review_member_id, review_store_id, review_content, review_score_service, review_score_price, review_menu_no, review_score_menu, photoFile.getName()));
 			request.setAttribute("store_id", review_store_id);
-			return storeDetailView(request);
+			return "redirect:/storeDetailView.do?store_id="+getUrlEncoder(review_store_id)+"";
 	}
 	
 	@RequestMapping("bestStoreListView.do")
@@ -809,7 +807,6 @@ public class MainController {
 		}
 		
 		request.setAttribute("list", list);
-		
 		return "best_store_list_view";
 	}
 	
