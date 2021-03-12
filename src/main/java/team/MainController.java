@@ -1632,7 +1632,14 @@ public String mbQnaWrite() {
 	return "mobile_qna_write";
 }
 
-
+public String getUrlEncoder(String str) {
+	try {
+		str = URLEncoder.encode(str,"UTF-8");
+	} catch (UnsupportedEncodingException e) {
+		e.printStackTrace();
+	}
+	return str;
+}
 	
 } 
 	   
