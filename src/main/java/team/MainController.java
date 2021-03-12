@@ -1487,9 +1487,9 @@ public String searchDetailView(HttpServletRequest request) {
 		return null;
 	}
 @RequestMapping("/wishlistView.do")
-	public String wishListView(HttpServletRequest request) {
-	String member_id = (String) request.getAttribute("member_id");
-	List<WishDTO> list = memberService.selectWishlist(member_id);
+	public String wishListView(HttpServletRequest request, HttpSession session) {
+	String member_id=(String)session.getAttribute("id");
+	List<StoreDTO> list = memberService.selectWishlist(member_id);
 	request.setAttribute("list", list);
 	return "wishlist_view";
 }

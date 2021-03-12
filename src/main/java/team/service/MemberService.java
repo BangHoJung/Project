@@ -10,6 +10,7 @@ import team.dto.MemberDTO;
 import team.dto.MessageDTO;
 import team.dto.NoticeDTO;
 import team.dto.ReviewDTO;
+import team.dto.StoreDTO;
 import team.dto.WishDTO;
 import team.mapper.MemberMapper;
 
@@ -20,7 +21,7 @@ public class MemberService {
 	public MemberService(MemberMapper mapper) {
 		this.mapper = mapper;
 	}
-	public List<WishDTO> selectWishlist(String member_id) {
+	public List<StoreDTO> selectWishlist(String member_id) {
 		return mapper.selectWishlist(member_id);
 	}
 
