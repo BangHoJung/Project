@@ -152,7 +152,6 @@ public class MainController {
 				e.printStackTrace();
 			}
 	      storeService.updateStoreCount(store_id);
-	      
 	      return "store_detail_view";
 	   }
 	
@@ -528,7 +527,7 @@ public class MainController {
 	@RequestMapping("/logout.do")
 	public String logOut(HttpSession session,HttpServletRequest request) {
 		session.invalidate();
-		return main(request);
+		return "redirect:/";
 	}
     
 	@RequestMapping("/registerView.do")
@@ -726,7 +725,7 @@ public class MainController {
 			}
 		}
 		
-		return main(request);
+		return "redirect:/myPageView.do";
 	}
 	
 	@RequestMapping("storeCheckListView.do")
@@ -779,7 +778,7 @@ public class MainController {
 		int count = storeService.updateStoreCode(store_id,1);
 		count = memberService.updateMemberGrade(storeService.selectStoreDTO(store_id).getStore_member_id(),1);
 		
-		return main(request);
+		return "redirect:/myPageView.do";
 	}
 	
 	@RequestMapping("storeCheckReject.do")
@@ -793,7 +792,7 @@ public class MainController {
 		int count = storeService.deleteMenu(store_id);
 		count = storeService.deleteStoreDTO(store_id);
 		
-		return "store_check";
+		return "redirect:/myPageView.do";
   }
 	
 	@RequestMapping("reviewRegisterView.do")
@@ -855,7 +854,7 @@ public class MainController {
 		System.out.println("photoFile : " + photoFile.getName());
 			memberService.registerReview(new ReviewDTO(review_member_id, review_store_id, review_content, review_score_service, review_score_price, review_menu_no, review_score_menu, photoFile.getName()));
 			request.setAttribute("store_id", review_store_id);
-			return storeDetailView(request);
+			return "redirect:/storeDetailView.do?store_id="+getUrlEncoder(review_store_id)+"";
 	}
 	
 	@RequestMapping("bestStoreListView.do")
@@ -876,7 +875,6 @@ public class MainController {
 		}
 		
 		request.setAttribute("list", list);
-		
 		return "best_store_list_view";
 	}
 	
@@ -1557,9 +1555,9 @@ public String searchDetailView(HttpServletRequest request) {
 		return null;
 	}
 @RequestMapping("/wishlistView.do")
-	public String wishListView(HttpServletRequest request) {
-	String member_id = (String) request.getAttribute("member_id");
-	List<WishDTO> list = memberService.selectWishlist(member_id);
+	public String wishListView(HttpServletRequest request, HttpSession session) {
+	String member_id=(String)session.getAttribute("id");
+	List<StoreDTO> list = memberService.selectWishlist(member_id);
 	request.setAttribute("list", list);
 	return "wishlist_view";
 }
