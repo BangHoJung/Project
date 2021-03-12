@@ -1,11 +1,16 @@
 package team;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -27,6 +32,7 @@ import team.dto.AdDTO;
 import team.dto.MemberAddressDTO;
 import team.dto.MemberDTO;
 import team.dto.MessageDTO;
+import team.dto.NaverSearchBlogDTO;
 import team.dto.NoticeDTO;
 import team.dto.QnaDTO;
 import team.dto.ReviewDTO;
@@ -60,13 +66,12 @@ public class MainController {
 	      if(store_id == null) {
 	         store_id = (String)request.getAttribute("store_id");
 	      }
-	      System.out.println(store_id);
+	      System.out.println("여기다"+store_id);
 	      String member_id = (String)request.getSession().getAttribute("id");
 	      StoreDTO dto = storeService.selectStoreDetailDTO(store_id);
 	      List<ReviewDTO> reviewList = storeService.selectStoreReviewList(store_id);
 	       for(int i=0;i<reviewList.size();i++) {
 	          System.out.println(reviewList.get(i).toString());
-	         
 	       }
 //	      List<StoreMenuDTO> menuList = storeService.selectStoreMenuDetailList(store_id);
 	       List<StoreMenuDTO> menuList = null;
@@ -82,8 +87,70 @@ public class MainController {
 	      request.setAttribute("dto", dto);
 	      request.setAttribute("reviewList",reviewList);
 	      request.setAttribute("wish", wish);
-	      System.out.println(dto.getStore_name());
-	      
+	        //네이버 검색 api---------------------------------------------------------------
+	        JSONObject obj = new JSONObject();
+			//기존 검색하던 내용을 연동
+			String clientId = "sjc1sx65MQJH06dOyCof";
+			String clientSecret = "OHVbJcT62r";
+			String store_name=dto.getStore_name();
+			try {
+				store_name = URLEncoder.encode(store_name, "utf-8");
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+			//display 부분이 처음에 받아오는 개수 설정하는 부분임
+			String apiURL = "https://openapi.naver.com/v1/search/blog?query="+store_name+"&display=5";
+			URL url;
+			try {
+				url = new URL(apiURL);
+				HttpURLConnection con = (HttpURLConnection) url.openConnection();
+				con.setRequestMethod("GET");
+				con.setRequestProperty("X-Naver-Client-Id", clientId);
+				con.setRequestProperty("X-Naver-Client-Secret", clientSecret);
+				BufferedReader br;
+				int responseCode = con.getResponseCode();
+				obj.put("responseCode", responseCode);
+				if (responseCode == 200) { // 정상 호출
+					br = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				} else { // 에러 발생
+					System.out.println(responseCode);
+					br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+				}
+				//정상, 에러 json 데이터를 받는 부분
+				String result = "";
+				while(true) {
+					String str = br.readLine();
+					if(str==null)break;
+					result += str;
+				}
+				System.out.println(result);
+				JSONObject r = new JSONObject(result);
+				//검색결과후 진짜 필요한 부분만 뽑아낸 데이터들의 개수 ※(링크,타이틀,요약,블로거링크,작성날짜,작성자)이 합쳐서 1개임
+				int jsonArrLength = r.getJSONArray("items").length();
+				//json데이터를 jsp파일로 뽑아 낼 수 없어서  dto클래스를 생성후에 Arraylist로 넣어서 request객체에 저장후 jsp파일에서 표현할 생각임
+				ArrayList<NaverSearchBlogDTO> NaverBlogList= new ArrayList<NaverSearchBlogDTO>();
+				if (responseCode == 200) { // 정상 호출
+					//(링크,타이틀,요약,블로거링크,작성날짜,작성자)중에서 링크,타이틀,요약만 필요
+					for (int i=0;i<jsonArrLength;i++) {
+						System.out.println("블로그 검색결과 링크 "+r.getJSONArray("items").getJSONObject(i).getString("link"));
+						System.out.println("블로그 검색결과 타이틀 "+r.getJSONArray("items").getJSONObject(i).getString("title"));
+						System.out.println("블로그 검색결과 요약 "+r.getJSONArray("items").getJSONObject(i).getString("description"));
+						//리스트에 저장하는 부분
+						NaverBlogList.add(new NaverSearchBlogDTO(r.getJSONArray("items").getJSONObject(i).getString("link"), r.getJSONArray("items").getJSONObject(i).getString("title"), r.getJSONArray("items").getJSONObject(i).getString("description"))); 
+					}
+					request.setAttribute("NaverBlogList",NaverBlogList);
+				} else { // 에러 발생
+					obj.put("errorCode",r.getString("errorCode"));
+					obj.put("errorMessage",r.getString("errorMessage"));
+					System.out.println("error : " +obj.toString());
+				}
+				br.close();
+				con.disconnect();
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 	      storeService.updateStoreCount(store_id);
 	      return "store_detail_view";
 	   }
@@ -449,12 +516,13 @@ public class MainController {
 			session.setAttribute("grade",dto.getMember_grade());
 			session.setAttribute("category",dto.getMember_category());
 			System.out.println("로그인 성공");
+			return "redirect:/";
 		}
 		}catch (NullPointerException e) {
 			session.setAttribute("login", false);
 			System.out.println("로그인 실패");
 		}
-		return "redirect:/";
+		return "redirect:/loginView.do";
 	}
 	@RequestMapping("/logout.do")
 	public String logOut(HttpSession session,HttpServletRequest request) {
