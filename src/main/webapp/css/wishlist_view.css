@@ -1,0 +1,84 @@
+@charset "UTF-8";
+
+.wish_container{
+	width:1000px;
+	margin:0 auto;
+}
+#food_search{
+	margin-top:20px;
+	width: 1000px;	
+}
+.container hr{
+	margin:0 auto;
+	width: 800px;
+	color: #e8e8e8;
+}
+.wish_detail{
+	margin-top:100px;
+}
+.wish_result{
+	margin:0 auto;
+	width: 700px;
+	margin-left:150px;
+}
+
+.wish_detail img {
+	width:200px;
+	height: 200px;
+	float:left;
+	margin-right:20px;
+}
+
+.wish {
+	color:gray;
+	font-size:12px;
+	text-decoration: none;
+}
+#result_name{
+	font-size: 20px;
+	font-weight: bold;
+}
+#result_addr{
+	font-size:10px;
+	display: inline-block;
+}
+#result_category{
+	text-align: right;
+	margin-right: 10px;
+}
+.wish_result a:hover{
+	text-decoration: none;
+	font-style: none;
+	color:gray;
+	filter:blur(1px);
+}
+
+a:active {
+	text-decoration: none;
+}
+
+label:visited,label:link {
+	color:black;
+	font-size:15px;
+	text-decoration: none;
+}
+
+label:hover{
+	text-decoration: none;
+	font-style: none;
+}
+
+label:active {
+	text-decoration: none;
+}
+
+.wish_result hr {
+	margin:0 auto;
+	margin:20px 0;
+	width: 500px;
+	color: gray;
+}
+#more{
+	clear:both;
+	
+}
