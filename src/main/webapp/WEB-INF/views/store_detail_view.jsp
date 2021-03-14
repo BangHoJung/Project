@@ -393,8 +393,21 @@ margin-bottom: 50px;
  font-size: 40px;
 }
 button:focus{ 	
-    outline:none;
-    }
+   outline:none;
+ }
+.blog_link_items{
+ color: black;
+ text-decoration: none;
+}
+.blog_link_items:hover{
+ color: black;
+ text-decoration: none;  
+}
+.blog_title_items{
+ font-size: 20px;
+ color: #FA0050;
+ font-weight: 400;
+}
 </style>
 </head>
 <body>
@@ -502,7 +515,18 @@ button:focus{
 <div id="map_cafe"  class="map_box"></div>
 </div>
 </div>
-
+<br><br>
+  <div class="row">
+     <div class="col-md-12">
+     	<h3>블로그 리뷰</h3>
+     	<hr>
+     	<c:forEach var="blog" items="${requestScope.NaverBlogList}">
+     		<a class="blog_link_items" href="${blog.link}">
+     		<span class="blog_title_items">${blog.title}</span><br>
+     		${blog.description}<br></a><hr>
+     	</c:forEach>
+     </div>
+  </div>
 </div>
 
 

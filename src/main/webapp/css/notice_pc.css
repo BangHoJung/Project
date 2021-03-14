@@ -1,0 +1,20 @@
+@charset "UTF-8";
+@media (min-width: 1000px) {
+.notice_items_box{
+	width: 800px;
+	margin: 20px 10%;
+}
+}
+@media (max-width: 1000px) {
+.notice_items_box{
+	width: 600px;
+	margin: 20px 10%;
+}
+}
+.notice_items_link{
+	color: black;
+	text-decoration: none;
+}
+.page_bar{
+ text-align: center;
+}

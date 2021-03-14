@@ -1,0 +1,80 @@
+@charset "UTF-8";
+	@media (min-width: 1000px) {
+	.notice_detail_container{
+		width:800px;
+		margin:20px 10%;
+		border-collapse: collapse;
+		position: relative;
+	}
+	}
+	@media (max-width: 1000px) {
+	.notice_detail_container{
+		width: 600px;
+		margin:20px 10%;
+		border-collapse: collapse;
+		position: relative;
+	}
+	}
+	.notice_detail_container #notice_table th{
+		width:100px;
+		border:1px solid #e8e8e8;
+		font-size: 13px;
+		font-weight: bold;
+	}
+	.notice_detail_container #notice_table td{
+		font-size: 12px;
+		width:500px;
+		border:1px solid #e8e8e8;
+		padding-left: 10px;
+	}
+	.notice_detail_container tr{
+		margin: 20px;
+		height: 30px;
+	}
+	.notice_detail_container #notice_table{
+		border-collapse: collapse;
+		margin-top:20px;
+	}
+	.notice_detail_container #content{
+		height:200px;
+		width: 200px ;
+		padding-left: 20px;
+	}
+	.notice_detail_container #btn td{
+		width:500px;
+	}
+	#content{
+	 white-space: pre-wrap;
+	}
+    .btn_notice_list_view{
+     position: absolute;
+     top: 0;
+     right: 0;
+     border: none;
+     padding: 12px 12px;
+     background-color: #FA0050;
+     color: white;
+     border-radius: 5px !important;
+    }
+    .btn_update_notice{
+    position: absolute;
+    top: 100%;
+    right : 81px;
+    border: none;
+    padding: 12px 12px;
+    background-color: #FA0050;
+    color: white;
+    border-radius: 5px !important;
+    }
+    .btn_delete_notice{
+    position: absolute;
+    top: 100%;
+    right : 0;
+    border: none;
+    padding: 12px 12px;
+    background-color: #FA0050;
+    color: white;
+    border-radius: 5px !important;
+    }
+	
+	
