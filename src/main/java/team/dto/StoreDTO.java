@@ -18,6 +18,7 @@ public class StoreDTO {
 	private String store_photo;
 	private int store_count;
 	private double review;
+	private int rownum;
 	
 	public StoreDTO() {
 		super();
@@ -79,6 +80,27 @@ public class StoreDTO {
 		this.store_photo = store_photo;
 		this.store_count = store_count;
 		this.review = review;
+	}
+	
+	public StoreDTO(String store_id, String store_name, String store_addr, String store_license, String store_member_id,
+			String store_time, String store_introduce, String store_tel, String store_category, int store_code,
+			String store_file, String store_photo, int store_count, double review, int rownum) {
+		super();
+		this.store_id = store_id;
+		this.store_name = store_name;
+		this.store_addr = store_addr;
+		this.store_license = store_license;
+		this.store_member_id = store_member_id;
+		this.store_time = store_time;
+		this.store_introduce = store_introduce;
+		this.store_tel = store_tel;
+		this.store_category = store_category;
+		this.store_code = store_code;
+		this.store_file = store_file;
+		this.store_photo = store_photo;
+		this.store_count = store_count;
+		this.review = review;
+		this.rownum = rownum;
 	}
 
 	public double getReview() {

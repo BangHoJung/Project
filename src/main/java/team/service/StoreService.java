@@ -69,25 +69,32 @@ public class StoreService {
 	}
 
 
-	public List<StoreDTO> selectStoreListDetail(String search,String addr) {
+	public List<StoreDTO> selectStoreListDetail(String search,String addr, int page) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("search", "%"+search+"%");
 		map.put("addr", "%"+addr+"%");
+		map.put("page", page);
 		return storeMapper.selectStoreListDetail(map);
 	}
 
 	public int deleteMenu(String store_id) {
 		return storeMapper.deleteMenu(store_id);
 	}
-public List<ReviewDTO> selectStoreReviewList(String store_id) {
-		return storeMapper.selectStoreReviewList(store_id);
-}
-	public List<StoreDTO> selectStoreListBestScore(int day) {
-		return storeMapper.selectStoreListBestScore(day);
+	public List<ReviewDTO> selectStoreReviewList(String store_id) {
+			return storeMapper.selectStoreReviewList(store_id);
+	}
+	public List<StoreDTO> selectStoreListBestScore(int day,int page) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("day", day);
+		map.put("page", page);
+		return storeMapper.selectStoreListBestScore(map);
 	}
 	
-	public List<StoreDTO> selectStoreListBestReviewCount(int day) {
-		return storeMapper.selectStoreListBestReviewCount(day);
+	public List<StoreDTO> selectStoreListBestReviewCount(int day,int page) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("day", day);
+		map.put("page", page);
+		return storeMapper.selectStoreListBestReviewCount(map);
 	}
 	public List<ReviewDTO> selectStoreReviewListMore(String store_id, int no) {
 		HashMap<String, Object> map = new HashMap<String, Object>();

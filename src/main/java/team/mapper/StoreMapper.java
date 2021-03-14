@@ -36,9 +36,9 @@ public interface StoreMapper {
 
 	int deleteMenu(String store_id);
 
-	List<StoreDTO> selectStoreListBestScore(int day);
+	List<StoreDTO> selectStoreListBestScore(HashMap<String, Object> map);
 
-	List<StoreDTO> selectStoreListBestReviewCount(int day);
+	List<StoreDTO> selectStoreListBestReviewCount(HashMap<String, Object> map);
 	
 	List<ReviewDTO> selectStoreReviewList(String store_id);
 	
