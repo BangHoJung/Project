@@ -21,8 +21,11 @@ public class MemberService {
 	public MemberService(MemberMapper mapper) {
 		this.mapper = mapper;
 	}
-	public List<StoreDTO> selectWishlist(String member_id) {
-		return mapper.selectWishlist(member_id);
+	public List<StoreDTO> selectWishlist(String member_id,int page) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		map.put("page", page);
+		return mapper.selectWishlist(map);
 	}
 
 	public MemberDTO loginMember(String id, String pass) {

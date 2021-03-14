@@ -82,7 +82,7 @@ public interface MemberMapper {
 
 	public int updateMemberGrade(HashMap<String, Object> map);
 	
-  public List<StoreDTO> selectWishlist(String member_id);
+  public List<StoreDTO> selectWishlist(HashMap<String, Object> map);
   
 	public WishDTO selectWishOne(HashMap<String, Object> map);
 

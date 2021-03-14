@@ -269,10 +269,10 @@ public class MainController {
 	}
 	@RequestMapping("/")
 	public String main(HttpServletRequest request) {
-		List<StoreDTO> monthScoreList = storeService.selectStoreListBestScore(30);
-		List<StoreDTO> weekScoreList = storeService.selectStoreListBestScore(7);
-		List<StoreDTO> monthReviewCountList = storeService.selectStoreListBestReviewCount(30);
-		List<StoreDTO> weekReviewCountList = storeService.selectStoreListBestReviewCount(7);
+		List<StoreDTO> monthScoreList = storeService.selectStoreListBestScore(30,1);
+		List<StoreDTO> weekScoreList = storeService.selectStoreListBestScore(7,1);
+		List<StoreDTO> monthReviewCountList = storeService.selectStoreListBestReviewCount(30,1);
+		List<StoreDTO> weekReviewCountList = storeService.selectStoreListBestReviewCount(7,1);
 		
 		System.out.println(monthScoreList);
 		System.out.println(weekScoreList);
@@ -862,20 +862,76 @@ public class MainController {
 		String type = request.getParameter("type");
 		List<StoreDTO> list = null;
 		if(type.equals("month_score")) {
-			list = storeService.selectStoreListBestScore(30);
+			list = storeService.selectStoreListBestScore(30,1);
 		}
 		else if(type.equals("month_review")) {
-			list = storeService.selectStoreListBestReviewCount(30);
+			list = storeService.selectStoreListBestReviewCount(30,1);
 		}
 		else if(type.equals("week_score")) {
-			list = storeService.selectStoreListBestScore(7);
+			list = storeService.selectStoreListBestScore(7,1);
 		}
 		else {
-			list = storeService.selectStoreListBestReviewCount(7);
+			list = storeService.selectStoreListBestReviewCount(7,1);
 		}
 		
 		request.setAttribute("list", list);
+		request.setAttribute("type", type);
 		return "best_store_list_view";
+	}
+	
+	@RequestMapping("bestStoreNextList.do")
+	public void bestStoreNextList(HttpServletRequest request, HttpServletResponse response) {
+		int nextPage = Integer.parseInt(request.getParameter("nextPage"));
+		String type = request.getParameter("type");
+		
+		List<StoreDTO> list = null;
+		if(type.equals("month_score")) {
+			list = storeService.selectStoreListBestScore(30,nextPage);
+			if(storeService.selectStoreListBestScore(30,nextPage+1).size()==0) {
+				nextPage = 0;
+			}
+			else {
+				nextPage++;
+			}
+		}
+		else if(type.equals("month_review")) {
+			list = storeService.selectStoreListBestReviewCount(30,nextPage);
+			if(storeService.selectStoreListBestReviewCount(30,nextPage+1).size()==0) {
+				nextPage = 0;
+			}
+			else {
+				nextPage++;
+			}
+		}
+		else if(type.equals("week_score")) {
+			list = storeService.selectStoreListBestScore(7,nextPage);
+			if(storeService.selectStoreListBestScore(7,nextPage+1).size()==0) {
+				nextPage = 0;
+			}
+			else {
+				nextPage++;
+			}
+		}
+		else {
+			list = storeService.selectStoreListBestReviewCount(7,nextPage);
+			if(storeService.selectStoreListBestReviewCount(7,nextPage+1).size()==0) {
+				nextPage = 0;
+			}
+			else {
+				nextPage++;
+			}
+		}
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("nextPage",nextPage);
+		JSONArray jsonArray = new JSONArray(list);
+		jsonObject.put("list",jsonArray);
+		//5. writer로 출력
+		try {
+			response.setContentType("text/html;charset=utf-8");
+			response.getWriter().write(jsonObject.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -1509,7 +1565,6 @@ public String searchDetailView(HttpServletRequest request) {
 	String search = request.getParameter("search");
 	String addr = null;
 	try {
-		//addr = URLEncoder.encode(request.getParameter("addr"),"UTF-8");
 		addr = URLDecoder.decode(request.getParameter("addr"),"UTF-8");
 	} catch (UnsupportedEncodingException e) {
 		// TODO Auto-generated catch block
@@ -1517,12 +1572,41 @@ public String searchDetailView(HttpServletRequest request) {
 	}
 	
 	System.out.println("search : " + search + " , addr : " + addr);
-	List<StoreDTO> menuList = storeService.selectStoreListDetail(search,addr);
-	request.setAttribute("menuList", menuList);
-	
+	List<StoreDTO> storeList = storeService.selectStoreListDetail(search,addr,1);
+	request.setAttribute("storeList", storeList);
+	request.setAttribute("search", search);
+	request.setAttribute("addr", addr);
 //	List<StoreDTO> storeList = storeService.selectStore
 	
 	return "search_detail_view";
+}
+
+@RequestMapping("/searchDetailNextList.do")
+public void searchDetailNextList(HttpServletRequest request, HttpServletResponse response) {
+	int nextPage = Integer.parseInt(request.getParameter("nextPage"));
+	String search = request.getParameter("search");
+	String addr = request.getParameter("addr");
+	
+	List<StoreDTO> list = storeService.selectStoreListDetail(search, addr, nextPage);
+	
+	if(storeService.selectStoreListDetail(search, addr, nextPage+1).size()==0) {
+		nextPage = 0;
+	}
+	else {
+		nextPage++;
+	}
+	//4. JSON으로 변환(QnaDTO, 다음페이지 번호)
+	JSONObject jsonObject = new JSONObject();
+	jsonObject.put("nextPage",nextPage);
+	JSONArray jsonArray = new JSONArray(list);
+	jsonObject.put("list",jsonArray);
+	//5. writer로 출력
+	try {
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(jsonObject.toString());
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
 }
 
 @RequestMapping("review_image_load.do")
@@ -1557,7 +1641,7 @@ public String searchDetailView(HttpServletRequest request) {
 @RequestMapping("/wishlistView.do")
 	public String wishListView(HttpServletRequest request, HttpSession session) {
 	String member_id=(String)session.getAttribute("id");
-	List<StoreDTO> list = memberService.selectWishlist(member_id);
+	List<StoreDTO> list = memberService.selectWishlist(member_id,1);
 	request.setAttribute("list", list);
 	return "wishlist_view";
 }
