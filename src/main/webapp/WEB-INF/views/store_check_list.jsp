@@ -14,7 +14,7 @@
 
 <script type="text/javascript">
 	$(function() {
-		$("tr").click(function() {
+		$("tbody tr").click(function() { 
 			console.log($(this).children().eq(2).html());
 			var store_id = $(this).children().eq(1).html()+"_"+$(this).children().eq(2).html();
 			location.href = "storeCheckView.do?store_id="+store_id;

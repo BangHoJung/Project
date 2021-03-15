@@ -364,6 +364,7 @@ width:100%;
 padding: 1%;
 border-radius: 5px !important;
 font-size: 1vw;
+background-color: white;
 }
 .btn_parking{
 border: 1px solid #005eff;
@@ -391,6 +392,8 @@ margin-bottom: 50px;
 .wish{
  float: right;
  font-size: 40px;
+ background-color: white;
+ border-style: none;
 }
 button:focus{ 	
    outline:none;
@@ -477,7 +480,7 @@ button:focus{
 <div class="row" style=" background-color:#F6F6F6; border-radius: 4px; display:flex; align-items: center;">
 
  <div class="col-md-4" style="font-size: 20px; font-weight: bold;padding: 1%; " ><p style="margin: 0px;">리뷰 (${review_count }건 평가 )</p></div>
-  <div class="col-md-4 col-md-offset-4 "  style="text-align: right;"><a href="reviewRegisterView.do?store_id=${dto.store_id}" style=" background-color:  #FA0050; color: white; width:100px; border: none; padding: 1%; border-radius: 5px;"> 리뷰쓰기</a></div>
+  <div class="col-md-4 col-md-offset-4 "  style="text-align: right;"><a href="reviewRegisterView.do?store_id=${dto.store_id}" style=" background-color:  #FA0050; color: white; width:100px; border: none; padding: 5%; border-radius: 5px;"> 리뷰쓰기</a></div>
 </div>
 
 <!-- 리뷰 테이블 -->
@@ -521,7 +524,7 @@ button:focus{
      	<h3>블로그 리뷰</h3>
      	<hr>
      	<c:forEach var="blog" items="${requestScope.NaverBlogList}">
-     		<a class="blog_link_items" href="${blog.link}">
+     		<a class="blog_link_items" href="${blog.link}" target="blank">
      		<span class="blog_title_items">${blog.title}</span><br>
      		${blog.description}<br></a><hr>
      	</c:forEach>
