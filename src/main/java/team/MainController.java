@@ -826,7 +826,7 @@ public class MainController {
 		if(time == null) time = " ";
 		String introduce = request.getParameter("introduce");
 		if(introduce == null) introduce = " ";
-		String category = request.getParameter("category");
+		String category = "#"+request.getParameter("category");
 		String store_id = name + "_" + license;
 		MultipartFile photo = mqRequest.getFile("photo");
 		
@@ -1813,6 +1813,33 @@ public void searchDetailNextList(HttpServletRequest request, HttpServletResponse
 	List<StoreDTO> list = memberService.selectWishlist(member_id,1);
 	request.setAttribute("list", list);
 	return "wishlist_view";
+}
+
+@RequestMapping("wishListNextList.do")
+public void wishListNextList(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+	int nextPage = Integer.parseInt(request.getParameter("nextPage"));
+	String member_id = (String) session.getAttribute("id");
+	
+	List<StoreDTO> list = memberService.selectWishlist(member_id, nextPage);
+	
+	if(memberService.selectWishlist(member_id, nextPage+1).size()==0) {
+		nextPage = 0;
+	}
+	else {
+		nextPage++;
+	}
+	//4. JSON으로 변환(QnaDTO, 다음페이지 번호)
+	JSONObject jsonObject = new JSONObject();
+	jsonObject.put("nextPage",nextPage);
+	JSONArray jsonArray = new JSONArray(list);
+	jsonObject.put("list",jsonArray);
+	//5. writer로 출력
+	try {
+		response.setContentType("text/html;charset=utf-8");
+		response.getWriter().write(jsonObject.toString());
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
 }
 	
 @RequestMapping("/mb")

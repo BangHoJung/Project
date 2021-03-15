@@ -30,10 +30,10 @@
 		  WHERE r.review_store_id = st.store_id) review FROM store st WHERE store_id=#{store_id}
 	</select>
 	<select id="selectStoreListDetail" parameterType="HashMap" resultType="store">
-		 SELECT re.* FROM (select d.*, (SELECT TRUNC(NVL(AVG(s)/3+COUNT(s)*10,0),1) FROM (SELECT review_score_service+review_score_price+review_score_menu s,review.* FROM review) r 
+		 <![CDATA[ SELECT re.* FROM (select d.*, (SELECT TRUNC(NVL(AVG(s)/3+COUNT(s)*10,0),1) FROM (SELECT review_score_service+review_score_price+review_score_menu s,review.* FROM review) r 
 		  WHERE r.review_store_id = d.store_id) review, ROWNUM rn from (select distinct menu_store_id from (select b.* from 
  		(select store_id from store where store_addr LIKE  #{addr} and store_code=1) a,store_menu b 
- 		where a.store_id=b.menu_store_id) where menu_name like #{search})c,store d where c.menu_store_id=d.store_id) re WHERE rn &lt;=5*#{page}
+ 		where a.store_id=b.menu_store_id) where menu_name like #{search})c,store d where c.menu_store_id=d.store_id) re WHERE rn <=5*#{page} ]]>
 	</select>
 	<select id="selectStoreListBestScore" parameterType="HashMap" resultType="store">
 		<![CDATA[ SELECT re.* FROM (select d.*, (SELECT TRUNC(NVL(AVG(s)/3+COUNT(s)*10,0),1) FROM 
