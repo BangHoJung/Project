@@ -783,7 +783,7 @@ public class MainController {
 	
 	@RequestMapping("storeCheckReject.do")
 	public String storeCheckReject(HttpServletRequest request, HttpSession session) {
-		String store_id = storeService.selectStoreID((String)session.getAttribute("id"));
+		String store_id = request.getParameter("store_id");
 		String title ="안녕하세요 관리자 입니다.";
 		String content="식당 등록 신청 건에 대하여 승인요청이 거절되었습니다.\n자세한 내용을 원하시면 문의사항에 등록해주시기 바랍니다.";
 		StoreDTO dto = storeService.selectStoreDTO(store_id);
