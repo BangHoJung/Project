@@ -778,7 +778,7 @@ public class MainController {
 		int count = storeService.updateStoreCode(store_id,1);
 		count = memberService.updateMemberGrade(storeService.selectStoreDTO(store_id).getStore_member_id(),1);
 		
-		return "redirect:/myPageView.do";
+		return "redirect:/myPageView.do"; 
 	}
 	
 	@RequestMapping("storeCheckReject.do")
