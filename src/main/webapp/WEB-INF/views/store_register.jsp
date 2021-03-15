@@ -192,12 +192,13 @@
 						<tr>
 							<th>카테고리</th>
 							<td>
-								<select name="category">
+								<input type="text" name="category" placeholder="등록할 카테고리를 입력하세요">
+								<!-- <select name="category">
 									<option value="카테고리">카테고리</option>
 									<option value="한식">한식</option>
 									<option value="중식">중식</option>
 									<option value="일식">일식</option>
-								</select>
+								</select> -->
 							</td>
 						</tr>
 					</table>

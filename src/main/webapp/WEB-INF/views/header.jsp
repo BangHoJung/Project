@@ -141,12 +141,12 @@
 		font-weight:bold;
 		color: gray;
 		border: none;
-		margin-right:10px;
+		margin-right:10px; 
 	}
 </style>
 <script type="text/javascript">
 $(function(){
-	$("#random").click(function(){
+	/* $("#random").click(function(){
 		alert('추천 메뉴는 ooo입니다');
 		$("#popupDiv").css({
 	         "top": (($(window).height()-$("#popupDiv").outerHeight())/2+$(window).scrollTop())+"px",
@@ -164,7 +164,7 @@ $(function(){
          $("#popup_mask").css("display","none"); //팝업창 뒷배경 display none
          $("#popupDiv").css("display","none"); //팝업창 display none
          $("body").css("overflow","auto");//body 스크롤바 생성
-     });
+     }); */
 	
 	$("#btn_search").click(function() {
 		var addr;
@@ -183,9 +183,9 @@ $(function(){
 </script>
 </head>
 <body>
-	<div id="popupDiv"> <!-- 팝업창 -->
+	<!-- <div id="popupDiv"> 팝업창
         <button id="popCloseBtn">close</button>
-    </div>
+    </div> -->
 	<div class="row">
 	<div  class="small-12 columns" id="header_box"></div>
 	</div>
