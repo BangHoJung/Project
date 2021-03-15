@@ -23,26 +23,6 @@
 		margin-top:50px;
 		color:   #454545;
 	}
-	.notice_container{
-		width: 1000px;
-	}
-	.notice_container h3{
-		margin:0 auto;
-		width: 600px;
-		margin-bottom: 20px;
-	}
-	.notice_container table{
-		margin:0 auto;
-		width: 600px;
-		border: 1px solid #e8e8e8
-	}
-	.notice_container td{
-		width: 500px;
-		height:50px;
-		padding:10px;
-		font-size:12px;
-		border-bottom: 1px solid #e8e8e8
-	}
 	#guide_container{
 		width:600px;
 		margin:0 auto;
