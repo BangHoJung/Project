@@ -111,4 +111,12 @@ public class StoreService {
 	public StoreDTO selectStoreDetailDTO(String store_id) {
 		return storeMapper.selectStoreDTODetail(store_id);
 	}
+	
+	public List<StoreDTO> selectMypageStoreList(String category, String necessary_addr) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("store_category", category);
+		necessary_addr="%"+necessary_addr+"%";
+		map.put("store_addr", necessary_addr);
+		return storeMapper.selectMypageStoreList(map);
+	}
 }

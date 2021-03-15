@@ -268,11 +268,14 @@ $(function () {
 				<input type="checkbox" name="category" value="#양식"><span class="category">양식</span>
 				<input type="checkbox" name="category" value="#일식"><span class="category">일식</span>
 				<input type="checkbox" name="category" value="#중식"><span class="category">중식</span>
-				<input type="checkbox" name="category" value="#패스트푸드"><span class="category">패스트푸드</span><br>
-				<input type="checkbox" name="category" value="#찜.탕"><span class="category">찜.탕</span>
+				<input type="checkbox" name="category" value="#스페인"><span class="category">스페인</span><br>
+				<input type="checkbox" name="category" value="#베트남"><span class="category">베트남</span>
 				<input type="checkbox" name="category" value="#디저트"><span class="category">디저트</span>
-				<input type="checkbox" name="category" value="#치킨"><span class="category">치킨</span>
 				<input type="checkbox" name="category" value="#피자"><span class="category">피자</span>
+				<input type="checkbox" name="category" value="#햄버거"><span class="category">햄버거</span>
+				<input type="checkbox" name="category" value="#멕시코"><span class="category">멕시코</span><br>
+				<input type="checkbox" name="category" value="#태국"><span class="category">태국</span>
+				<input type="checkbox" name="category" value="#인도"><span class="category">인도</span>
 			<br><br><button type="button" id="btn_register" class="btn">회원가입</button>&ensp;<button type="button" id="btn_cansel" class="btn">취소</button>
 		</form>
 	</div>

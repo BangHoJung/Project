@@ -47,5 +47,8 @@ public interface StoreMapper {
 	int updateStoreCount(String store_id);
 
 	StoreDTO selectStoreDTODetail(String store_id);
+	
+	List<StoreDTO> selectMypageStoreList(HashMap<String, Object> map);
+
 
 }

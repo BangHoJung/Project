@@ -15,6 +15,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -289,8 +290,176 @@ public class MainController {
 	
 	}
 	@RequestMapping("/myPageView.do")
-	public String myPageView() {
-		return "mypage";
+	public String myPageView(HttpSession session, HttpServletRequest request) {
+		String[] address = (String[]) session.getAttribute("address").toString().split(" ");
+		String necessary_addr = "";
+		necessary_addr = address[0] + " " + address[1];
+		List<StoreDTO> firstList = null; //
+		ArrayList<StoreDTO> firstListFinal = new ArrayList<StoreDTO>();
+		List<StoreDTO> secondList = null;//
+		ArrayList<StoreDTO> secondListFinal = new ArrayList<StoreDTO>();
+		List<StoreDTO> thirdList = null; //
+		ArrayList<StoreDTO> thirdListFinal = new ArrayList<StoreDTO>();
+		String[] categoryList = (String[]) session.getAttribute("category").toString().split("#");
+        //카테고리 하나일때
+       if(categoryList.length-1==1) { 
+    	   firstList =storeService.selectMypageStoreList("#"+categoryList[1],necessary_addr);
+                  if(firstList.size() !=0) { 
+                	  if(firstList.size()>4) { 
+                		  int a[]= new int[4];
+                		  Random r = new Random(); 
+                		  for(int i=0;i<4;i++) {
+                			  a[i]=r.nextInt(firstList.size()); 
+                			  for(int j=0;j<i;j++) { 
+                				  if(a[i]==a[j]) i--;
+                				  } 
+                			  } 
+                		  for(int k=0;k<4;k++) { 
+                			  firstListFinal.add(firstList.get(a[k])); 
+                			  }
+                		  request.setAttribute("fisrtList", firstListFinal); 
+                		  } else {
+                			  request.setAttribute("fisrtList", firstList); 
+                			  } 
+                	  }else {
+                		  request.setAttribute("fisrtList", firstList); 
+                		  }
+                  request.setAttribute("fisrtcategory", "#"+categoryList[1]); 
+                  } // 
+       //카테고리 2개일때
+       else if(categoryList.length-1 ==2) { 
+    	   firstList =storeService.selectMypageStoreList("#"+categoryList[1],necessary_addr); 
+    	   //첫번째카테고리 
+    	   if(firstList.size() !=0) { 
+    		   if(firstList.size()>4) { 
+    			   int a[]= new int[4];
+    			   Random r = new Random(); 
+    			   for(int i=0;i<4;i++) {
+    				   a[i]=r.nextInt(firstList.size()); 
+    				   for(int j=0;j<i;j++) { 
+    					   if(a[i]==a[j])
+    						   i--;
+    				   		} 
+    				   } 
+    			   for(int k=0;k<4;k++) { 
+    				   firstListFinal.add(firstList.get(a[k])); 
+    				   }
+    			   request.setAttribute("fisrtList", firstListFinal); 
+    			   }else {
+    				   request.setAttribute("fisrtList", firstList); 
+    				   } 
+    		   }else {
+    			   request.setAttribute("fisrtList", firstList); 
+    		   } 
+    	   // 
+    	   //2번째 카테고리 
+    	   secondList=storeService.selectMypageStoreList("#"+categoryList[2],necessary_addr);
+           if(secondList.size() !=0) { 
+        	   if(secondList.size()>4) { 
+        		   int a[]= new int[4];
+        		   Random r = new Random(); 
+        		   for(int i=0;i<4;i++) {
+        			   a[i]=r.nextInt(secondList.size()); 
+        			   for(int j=0;j<i;j++) { 
+        				   if(a[i]==a[j]) 
+        					   i--;
+        			     } 
+        			   } 
+        		   for(int k=0;k<4;k++) { 
+        			   secondListFinal.add(secondList.get(a[k])); 
+        			   }
+        		   request.setAttribute("secondList", secondListFinal); 
+        		   }else {
+        			   request.setAttribute("secondList", secondList); 
+        		   } 
+        	   }else {
+        		   request.setAttribute("secondList", secondList); 
+        		   }
+           //
+           request.setAttribute("fisrtcategory", "#"+categoryList[1]);
+           request.setAttribute("secondcategory","#"+categoryList[2]); 
+           } 
+       		// 
+       		//카테고리 3개일때
+       		else { 
+       		//첫번째 카테고리 
+       		firstList =storeService.selectMypageStoreList("#"+categoryList[1],necessary_addr);
+       		if(firstList.size() !=0) { 
+       			if(firstList.size()>4) { 
+       				int a[]= new int[4];
+       				Random r = new Random();
+       				for(int i=0;i<4;i++) {
+       					a[i]=r.nextInt(firstList.size()); 
+       					for(int j=0;j<i;j++) { 
+       						if(a[i]==a[j]) 
+       							i--;
+       					  } 
+       					} 
+       				for(int k=0;k<4;k++) { 
+       					firstListFinal.add(firstList.get(a[k])); 
+       				 }
+       				request.setAttribute("fisrtList", firstListFinal); 
+       				}else {
+       					request.setAttribute("fisrtList", firstList); 
+       					} 
+       			}else {
+       				request.setAttribute("fisrtList", firstList); 
+       			} 
+       			// 
+       		    //2번째 카테고리 
+       		secondList=storeService.selectMypageStoreList("#"+categoryList[2],necessary_addr);
+       			if(secondList.size() !=0) { 
+       				if(secondList.size()>4) { 
+       					int a[]= new int[4];
+       					Random r = new Random();
+       					for(int i=0;i<4;i++) {
+       						a[i]=r.nextInt(secondList.size());
+       						for(int j=0;j<i;j++) { 
+       							if(a[i]==a[j])
+       								i--;
+       						  }
+       						}
+       					for(int k=0;k<4;k++) { 
+       						secondListFinal.add(secondList.get(a[k])); 
+       						}
+       					request.setAttribute("secondList", secondListFinal); 
+       					}else {
+       						request.setAttribute("secondList", secondList); 
+       						} 
+       				}else {
+       					request.setAttribute("secondList", secondList); 
+       					} 
+       			// 
+       			//3번째 카테고리 
+       			thirdList=storeService.selectMypageStoreList("#"+categoryList[3],necessary_addr);
+       			if(thirdList.size() !=0) {
+       				if(thirdList.size()>4) { 
+       					int a[]= new int[4];
+       					Random r = new Random(); 
+       					for(int i=0;i<4;i++) {
+       						a[i]=r.nextInt(thirdList.size()); 
+       						for(int j=0;j<i;j++) { 
+       							if(a[i]==a[j])
+       								i--;
+       						} 	
+       					} 
+       					for(int k=0;k<4;k++) { 
+       						thirdListFinal.add(thirdList.get(a[k])); 
+       						}
+       					request.setAttribute("thirdList", thirdListFinal); 
+       					}else {
+       						request.setAttribute("thirdList", thirdList); 
+       						} 
+       				}else {
+       					request.setAttribute("thirdList", thirdList); }
+       			//
+       			request.setAttribute("fisrtcategory", "#"+categoryList[1]);
+       			request.setAttribute("secondcategory","#"+categoryList[2]);
+       			request.setAttribute("thirdcategory", "#"+categoryList[3]); 
+       			}
+       			request.setAttribute("categoryCount",categoryList.length-1); 
+       			//
+	  return "mypage";
 	}
 	@RequestMapping("/loginView.do")
     public String loginView() {
@@ -1469,39 +1638,39 @@ public String reviewReportDetailView(HttpServletRequest request) {
 	return "report_review_detail_view";
 }
 @RequestMapping("adminDeleteReportReview.do")
-public String adminDeleteReportReview(HttpServletRequest request,HttpServletResponse response) {
-	int review_no= Integer.parseInt(request.getParameter("review_no"));
-	String message_member_id=request.getParameter("review_member_id");
+public String adminDeleteReportReview(HttpServletRequest request, HttpServletResponse response) {
+	int review_no = Integer.parseInt(request.getParameter("review_no"));
+	String message_member_id = request.getParameter("review_member_id");
+	ReviewDTO dto = memberService.adminSelectReport(review_no);
+	String[] store_name = dto.getReview_store_id().split("_");
 	int pageNo = Integer.parseInt(request.getParameter("pageNo"));
-	String message_title=review_no+"리뷰는 운영방침을 위반하여 삭제처리를 진행했습니다..";
-	String message_content="해당 리뷰를 저희가 자세히 검토한 결과\n운영방침을 위반하는 글을 작성하셔서 삭제처리를 하는 것으로 결정했습니다.\n욕설이나 일방적인 비난은 삼가해주시길 바랍니다\n궁금하신 사항이 있으시면 QnA게시판에 글쓰기를 통해 문의해주세요\n"
+	String message_title = "No." + review_no + " 리뷰는 운영방침을 위반하여 삭제처리를 진행했습니다..";
+	String message_content = message_member_id + "님이 " + store_name[0] + "가게에 쓴 리뷰 내용\n\n" + dto.getReview_content()
+			+ "\n\n\n\n해당 리뷰를 저희가 자세히 검토한 결과\n운영방침을 위반하는 글을 작성하셔서 삭제처리를 하는 것으로 결정했습니다.\n욕설이나 일방적인 비난은 삼가해주시길 바랍니다\n궁금하신 사항이 있으시면 QnA게시판에 글쓰기를 통해 문의해주세요\n"
 			+ "저희 어플을 사용해주셔서 감사합니다~♡";
 	MessageDTO message = new MessageDTO(message_member_id, message_title, message_content);
-	int count=memberService.adminDeleteReportReview(review_no);
-	if(count !=0) {
+	int count = memberService.adminDeleteReportReview(review_no);
+	if (count != 0) {
 		try {
 			System.out.println("삭제 성공");
-			int sendCount=memberService.sendMessage(message);
-			if(sendCount !=0) {
+			int sendCount = memberService.sendMessage(message);
+			if (sendCount != 0) {
 				System.out.println("쪽지 보내기 성공");
-			}
-			else {
+			} else {
 				System.out.println("쪽지 보내기 실패");
 			}
 			List<ReviewDTO> list = memberService.adminSelectReportList(pageNo);
-		    if(list.isEmpty()) {
-		    	response.setContentType("text/html;charset=utf-8");
-				response.getWriter().write("lastItem"); 
-		    }
-		    else {		    	
-			response.setContentType("text/html;charset=utf-8");
-			response.getWriter().write("true");
-		    }
+			if (list.isEmpty()) {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("lastItem");
+			} else {
+				response.setContentType("text/html;charset=utf-8");
+				response.getWriter().write("true");
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	else {
+	} else {
 		try {
 			System.out.println("삭제 실패");
 			response.setContentType("text/html;charset=utf-8");

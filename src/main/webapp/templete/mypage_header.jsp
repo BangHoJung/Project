@@ -214,16 +214,10 @@ font-size: 30% !important;
 
 <div class="pointtotal">
  <div class="point">
- <img alt="" src="img/momo.png" class="pointimg">
-  <p> 적립금</p>
  </div>
  <div class="point">
- <img alt="" src="img/momo.png" class="pointimg">
- <p> 적립금</p>
  </div>
  <div class="point">
- <img alt="" src="img/momo.png" class="pointimg">
- <p> 적립금</p>
  </div>
  </div>
 </div>

@@ -68,4 +68,7 @@
 	<select id="selectStoreReviewListMore" parameterType="HashMap" resultType="review">
 	<![CDATA[ select a.* from(select * from review r where review_store_id=#{store_id} order by review_date desc) a where rownum <=5*#{no}]]>
 	</select>
+		<select id="selectMypageStoreList" parameterType="map" resultType="store">
+	  select * from store where store_category=#{store_category} and store_addr like #{store_addr} and store_code=1
+	</select>
 </mapper>
