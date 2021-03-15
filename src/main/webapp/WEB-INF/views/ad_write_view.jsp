@@ -31,7 +31,7 @@
 		<div class="container">
 		<h2>광고신청</h2>
 			<form action="AdWriteAction.do" method="post">
-				<table>
+				<table class="table-bordered">
 					<tr>
 						<th>작성자</th>
 						<td>

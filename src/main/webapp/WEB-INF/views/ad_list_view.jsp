@@ -27,7 +27,7 @@
 	<div class="body">
 	<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
 		<div class="container">
-		<table>
+		<table class="table table-hover table-bordered">
 			<tr>
 				<th>글번호</th>
 				<th>신청식당</th>
@@ -48,8 +48,9 @@
 					</td>
 					<td class="ad_status">		<!--  status가 0인데도 otherwise 출력  -->
 						<c:choose>			
-							<c:when test="${requestScope.ad_status != 0}">완료</c:when>
-							<c:otherwise>확인 안함</c:otherwise>		
+							<c:when test="${dto.ad_status == 0}">미승인</c:when>
+							<c:when test="${dto.ad_status == 1}">승인</c:when>
+							<c:otherwise>거절</c:otherwise>	
 						</c:choose>
 					</td>
 				</tr>

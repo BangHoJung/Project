@@ -28,7 +28,7 @@
 	<jsp:include page="/templete/mypage_menu.jsp"></jsp:include>
 		<div class="container">
 		<h3>광고신청</h3>
-			<table>
+			<table class="table table-bordered">
 				<tr>
 					<tr>
 						<th>작성자</th>
@@ -40,8 +40,9 @@
 						<th>승인</th>
 						<td>	<!-- 버튼 승인->미승인 전환필요 / status가 0인데도 otherwise 출력  -->
 						<c:choose>			
-							<c:when test="${requestScope.ad_status != 0}">완료</c:when>
-							<c:otherwise>확인안함</c:otherwise>		
+							<c:when test="${dto.ad_status == 0}">미승인</c:when>
+							<c:when test="${dto.ad_status == 1}">승인</c:when>
+							<c:otherwise>거절</c:otherwise>		
 						</c:choose>
 						</td>
 					</tr>
@@ -52,18 +53,6 @@
 						</td>
 					</tr>
 					
-					<!-- 첨부파일 view 기능 추가 -->
-					
-					
-					<%-- <tr>
-						<th><a href="AdListView.do" class="btn">목록보기</a></th>
-						<td style="text-align: right;">
-						<c:if test="${sessionScope.id == requestScope.ad.ad_store_id}">
-							<a href="#" class="btn">수정</a>
-							<a href="deleteAd.do?bno=${requestScope.advertisement.ad_no }" class="btn">삭제</a>
-						</c:if>
-						</td>
-					</tr> --%>
 				</table>
 			</div>
 	</div>
