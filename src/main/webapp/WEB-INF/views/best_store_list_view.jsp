@@ -22,7 +22,8 @@
 			location.href="storeDetailView.do?store_id="+$(this).children("div").children("span").html();
 		});
 		
-		$("#more").click(function() {
+		
+		$(document).on("click","#more", function() {
 			var data = "nextPage="+nextPage+"&type=${requestScope.type}";
 			$.ajax({
 				url : "bestStoreNextList.do",
@@ -81,8 +82,8 @@
 					</c:forEach>
 				</div>
 			</div>
-			<button id="more">더보기</button>
 		</div>
+		<button id="more">더보기</button>
 	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

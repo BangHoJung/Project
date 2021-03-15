@@ -75,8 +75,6 @@ float:right;
 <li class="list"> <a href="memberUpdateView.do">회원정보 수정</a> </li>
 <li class="list"> <a href="memberPassUpdateCheckView.do">비밀번호 변경하기</a></li>
 <li class="list"><a href="storeRegisterView.do">식당 정보 등록</a></li>
-<li class="list"> <a href="memberUpdateView.do">회원정보 수정</a> </li>
-<li class="list"> <a href="#none">내 식당 정보</a></li>
 <li class="list"><a href="AdWriteView.do">광고신청</a></li>
 <li class="list"><a href="insertUpdateAddressView.do">나의 주소</a></li>
 <li class="list"><a href="userMessageView.do">쪽지함</a></li>

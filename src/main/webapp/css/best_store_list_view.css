@@ -78,3 +78,14 @@ label:active {
 	width: 500px;
 	color: gray;
 }
+
+#more {
+ 	padding:5px;
+ 	width:150px;
+ 	background-color: #fa0050;
+ 	color : white;
+ 	font-size : 20px;
+ 	border-style: none;
+ 	border-radius: 5px;
+ 	margin-left:45%;
+ }

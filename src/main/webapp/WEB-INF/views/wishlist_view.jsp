@@ -35,12 +35,22 @@
   margin-top: 20%;
  }
  
+ #more {
+ 	padding:5px;
+ 	width:150px;
+ 	background-color: #fa0050;
+ 	color : white;
+ 	font-size : 20px;
+ 	border-style: none;
+ 	border-radius: 5px;
+ }
+ 
 </style>
 <script src="lib/js/jquery-3.5.1.min.js"></script>
 <script>
 	var nextPage = 2;
 	$(function() {
-		("#more").click(function() {
+		$(document).on("click","#more", function() {
 			var data = "nextPage="+nextPage;
 			$.ajax({
 				url : "wishListNextList.do",
@@ -97,9 +107,9 @@
 				</a>
 				<hr>
 			</c:forEach>
-			<button id="more">더보기</button>
 		</div>
 	</div>
+	<button id="more">더보기</button>
   
  </div>
 </div>
