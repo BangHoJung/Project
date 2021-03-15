@@ -1,0 +1,19 @@
+@charset "UTF-8";
+.store_items_box{
+ margin: 50px;	
+}
+.store_item_box{
+	width: 22%;
+	display: inline-block;
+}
+.store_img_items{
+	width: 100%;
+	height: 300px;
+}
+.store_items_box_category{
+	color:#fa0050;
+}
+.store_list_null{
+	font-size: 1.5vw;
+	color:#fa0050;
+}

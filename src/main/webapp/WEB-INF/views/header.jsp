@@ -184,7 +184,7 @@ $(function(){
 </head>
 <body>
 	<div id="popupDiv"> <!-- 팝업창 -->
-        <button id="popCloseBtn">close</button>
+        <button id="popCloseBtn" style="display: none">close</button>
     </div>
 	<div class="row">
 	<div  class="small-12 columns" id="header_box"></div>
